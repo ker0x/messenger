@@ -1,0 +1,22 @@
+imports:
+    - php
+
+checks:
+    php:
+        code_rating: true
+        duplication: true
+
+filter:
+    excluded_paths:
+        - tests/
+tools:
+    php_mess_detector: true
+    php_cpd:
+        excluded_dirs:
+            - tests/
+    php_loc:
+        excluded_dirs:
+            - tests/
+    php_pdepend:
+        excluded_dirs:
+            2: tests/
