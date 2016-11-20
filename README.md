@@ -1,1 +1,3 @@
-# PHP library for Facebook Messenger Bot
+# PHP API for Facebook Messenger
+
+This is a WIP project.
