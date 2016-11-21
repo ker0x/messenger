@@ -139,7 +139,6 @@ class UserResponse extends AbstractResponse implements UserInterface
     {
         if (isset($response[self::LOCALE])) {
             $this->locale = $response[self::LOCALE];
-
         }
     }
 

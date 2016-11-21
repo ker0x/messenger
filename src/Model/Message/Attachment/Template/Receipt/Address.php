@@ -43,11 +43,12 @@ class Address implements \JsonSerializable
      * @param string $state
      * @param string $country
      */
-    public function __construct(string $street,
-                                string $city,
-                                string $postalCode,
-                                string $state,
-                                string $country
+    public function __construct(
+        string $street,
+        string $city,
+        string $postalCode,
+        string $state,
+        string $country
     ) {
         $this->street = $street;
         $this->city = $city;

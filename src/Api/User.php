@@ -28,7 +28,7 @@ class User extends AbstractApi implements UserInterface
     public function profile(string $userId, array $fields = null): UserResponse
     {
         $allowedFields = $this->getAllowedFields();
-        if ($fields !== null ) {
+        if ($fields !== null) {
             foreach ($fields as $field) {
                 if (!in_array($field, $allowedFields)) {
                     throw new \InvalidArgumentException($field . ' is not a valid value. $userProfileFields must only contain ' . implode(',', $allowedFields));

@@ -35,11 +35,12 @@ class AirlineCheckIn extends AbstractAirline
      * @param array $flightInfo
      * @param string $checkinUrl
      */
-    public function __construct(string $introMessage,
-                                string $locale,
-                                string $pnrNumber,
-                                array $flightInfo,
-                                string $checkinUrl
+    public function __construct(
+        string $introMessage,
+        string $locale,
+        string $pnrNumber,
+        array $flightInfo,
+        string $checkinUrl
     ) {
         parent::__construct($locale);
 

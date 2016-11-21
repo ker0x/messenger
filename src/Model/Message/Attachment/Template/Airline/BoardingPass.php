@@ -74,14 +74,14 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     protected $flightInfo;
 
 
-    public function __construct(string $passengerName,
-                                string $pnrNumber,
-                                string $logoImageUrl,
-                                string $code,
-                                string $aboveBarcodeImageUrl,
-                                FlightInfo $flightInfo
-    )
-    {
+    public function __construct(
+        string $passengerName,
+        string $pnrNumber,
+        string $logoImageUrl,
+        string $code,
+        string $aboveBarcodeImageUrl,
+        FlightInfo $flightInfo
+    ) {
         $this->passengerName = $passengerName;
         $this->pnrNumber = $pnrNumber;
         $this->logoImageUrl = $logoImageUrl;

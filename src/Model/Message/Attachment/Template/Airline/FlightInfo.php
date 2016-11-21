@@ -32,10 +32,11 @@ class FlightInfo implements \JsonSerializable
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport $arrivalAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
      */
-    public function __construct(string $flightNumber,
-                                Airport $departureAirport,
-                                Airport $arrivalAirport,
-                                FlightSchedule $flightSchedule
+    public function __construct(
+        string $flightNumber,
+        Airport $departureAirport,
+        Airport $arrivalAirport,
+        FlightSchedule $flightSchedule
     ) {
         $this->flightNumber = $flightNumber;
         $this->departureAirport = $departureAirport;

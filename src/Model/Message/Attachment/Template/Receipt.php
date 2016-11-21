@@ -68,12 +68,13 @@ class Receipt extends Template
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement[] $elements
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary $summary
      */
-    public function __construct(string $recipientName,
-                                string $orderNumber,
-                                string $currency,
-                                string $paymentMethod,
-                                array $elements,
-                                Summary $summary
+    public function __construct(
+        string $recipientName,
+        string $orderNumber,
+        string $currency,
+        string $paymentMethod,
+        array $elements,
+        Summary $summary
     ) {
         parent::__construct();
 

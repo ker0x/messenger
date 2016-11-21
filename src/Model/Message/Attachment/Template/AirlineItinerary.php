@@ -68,14 +68,15 @@ class AirlineItinerary extends AbstractAirline
      * @param float $totalPrice
      * @param string $currency
      */
-    public function __construct(string $introMessage,
-                                string $locale,
-                                string $pnrNumber,
-                                array $passengerInfo,
-                                array $flightInfo,
-                                array $passengerSegmentInfo,
-                                float $totalPrice,
-                                string $currency
+    public function __construct(
+        string $introMessage,
+        string $locale,
+        string $pnrNumber,
+        array $passengerInfo,
+        array $flightInfo,
+        array $passengerSegmentInfo,
+        float $totalPrice,
+        string $currency
     ) {
         parent::__construct($locale);
 

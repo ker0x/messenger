@@ -1,7 +1,6 @@
 <?php
 namespace Kerox\Messenger\Model\Common\Buttons\Payment;
 
-
 class PaymentSummary implements \JsonSerializable
 {
 
@@ -52,13 +51,13 @@ class PaymentSummary implements \JsonSerializable
      * @param array $requestedUserInfo
      * @param PriceList[] $priceList
      */
-    public function __construct(string $currency,
-                                string $paymentType,
-                                string $merchantName,
-                                array $requestedUserInfo,
-                                array $priceList
-    )
-    {
+    public function __construct(
+        string $currency,
+        string $paymentType,
+        string $merchantName,
+        array $requestedUserInfo,
+        array $priceList
+    ) {
         $this->isValidPaymentType($paymentType);
         $this->isValidRequestedUserInfo($requestedUserInfo);
 

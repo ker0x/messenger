@@ -35,13 +35,14 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
      * @param string $travelClass
      */
-    public function __construct(string $connectionId,
-                                string $segmentId,
-                                string $flightNumber,
-                                Airport $departureAirport,
-                                Airport $arrivalAirport,
-                                FlightSchedule $flightSchedule,
-                                string $travelClass
+    public function __construct(
+        string $connectionId,
+        string $segmentId,
+        string $flightNumber,
+        Airport $departureAirport,
+        Airport $arrivalAirport,
+        FlightSchedule $flightSchedule,
+        string $travelClass
     ) {
         parent::__construct($flightNumber, $departureAirport, $arrivalAirport, $flightSchedule);
 
