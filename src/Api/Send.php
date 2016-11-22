@@ -2,8 +2,8 @@
 namespace Kerox\Messenger\Api;
 
 use GuzzleHttp\Client;
+use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment;
-use Kerox\Messenger\Model\Message\Message;
 use Kerox\Messenger\Request\SendRequest;
 use Kerox\Messenger\Response\SendResponse;
 
@@ -65,7 +65,7 @@ class Send extends AbstractApi
 
     /**
      * @param $message
-     * @return Message
+     * @return \Kerox\Messenger\Model\Message
      * @throws \InvalidArgumentException
      */
     private function isValidMessage($message): Message

@@ -52,7 +52,7 @@ class DomainWhitelist extends ThreadSettings implements ActionTypeInterface
     {
         $allowedActionType = $this->getAllowedActionType();
         if (!in_array($actionType, $allowedActionType)) {
-            throw new \InvalidArgumentException('$actionType must be either ' . implode(',', $allowedActionType));
+            throw new \InvalidArgumentException('$actionType must be either ' . implode(', ', $allowedActionType));
         }
     }
 

@@ -101,7 +101,7 @@ class PaymentSummary implements \JsonSerializable
     {
         $allowedPaymentType = $this->getAllowedPaymentType();
         if (!in_array($paymentType, $allowedPaymentType)) {
-            throw new \InvalidArgumentException('$paymentType must be either ' . implode(',', $allowedPaymentType));
+            throw new \InvalidArgumentException('$paymentType must be either ' . implode(', ', $allowedPaymentType));
         }
     }
 

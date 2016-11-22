@@ -46,10 +46,13 @@ class ButtonTest extends AbstractTestCase
                 new PriceList('Taxes', '2.47'),
             ]
         );
-        $paymentSummary->isTestPayment(true);
+        $paymentSummary
+            ->isTestPayment(true)
+            ->addPriceList('Shipment', '3');
+
         $buttonPayment = new Payment('DEVELOPER_DEFINED_PAYLOAD', $paymentSummary);
 
-        $this->assertJsonStringEqualsJsonString('{"type":"payment","title":"buy","payload":"DEVELOPER_DEFINED_PAYLOAD","payment_summary":{"currency":"USD","payment_type":"FIXED_AMOUNT","is_test_payment":true,"merchant_name":"Peter\'s Apparel","requested_user_info":["shipping_address","contact_name","contact_phone","contact_email"],"price_list":[{"label":"Subtotal","amount":"29.99"},{"label":"Taxes","amount":"2.47"}]}}', json_encode($buttonPayment));
+        $this->assertJsonStringEqualsJsonString('{"type":"payment","title":"buy","payload":"DEVELOPER_DEFINED_PAYLOAD","payment_summary":{"currency":"USD","payment_type":"FIXED_AMOUNT","is_test_payment":true,"merchant_name":"Peter\'s Apparel","requested_user_info":["shipping_address","contact_name","contact_phone","contact_email"],"price_list":[{"label":"Subtotal","amount":"29.99"},{"label":"Taxes","amount":"2.47"},{"label":"Shipment","amount":"3"}]}}', json_encode($buttonPayment));
     }
 
     public function testButtonPhoneNumber()

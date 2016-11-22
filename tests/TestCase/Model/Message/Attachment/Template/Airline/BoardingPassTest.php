@@ -27,9 +27,22 @@ class BoardingPassTest extends AbstractTestCase
         $this->boardingPass = new BoardingPass('Smith Nicolas', 'CG4X7U', 'https://www.example.com/en/logo.png', 'M1SMITH NICOLAS  CG4X7U nawouehgawgnapwi3jfa0wfh', 'https://www.example.com/en/PLAT.png', $flightInfo);
     }
 
+    public function testWithBarCode()
+    {
+        $departureAirport = (new Airport('JFK', 'New York'))->setTerminal('T1')->setGate('D57');
+        $arrivalAirport = new Airport('AMS', 'Amsterdam');
+        $flightSchedule = (new FlightSchedule('2016-01-02T19:05'))->setArrivalTime('2016-01-05T17:30');
+
+        $flightInfo = new FlightInfo('KL0642', $departureAirport, $arrivalAirport, $flightSchedule);
+
+        $boardingPass = new BoardingPass('Smith Nicolas', 'CG4X7U', 'https://www.example.com/en/logo.png', 'https://www.example.com/barcode.jpg', 'https://www.example.com/en/PLAT.png', $flightInfo);
+        $this->assertJsonStringEqualsJsonString('{"passenger_name":"Smith Nicolas","pnr_number":"CG4X7U","logo_image_url":"https://www.example.com/en/logo.png","barcode_image_url":"https://www.example.com/barcode.jpg","above_bar_code_image_url":"https://www.example.com/en/PLAT.png","flight_info":{"flight_number":"KL0642","departure_airport":{"airport_code":"JFK","city":"New York","terminal":"T1","gate":"D57"},"arrival_airport":{"airport_code":"AMS","city":"Amsterdam"},"flight_schedule":{"departure_time":"2016-01-02T19:05","arrival_time":"2016-01-05T17:30"}}}', json_encode($boardingPass));
+    }
+
     public function testTravelClass()
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('$travelClass must be either economy, business, first_class');
         $this->boardingPass->setTravelClass('second_class');
 
     }

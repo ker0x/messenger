@@ -29,7 +29,7 @@ class WebUrl extends AbstractButtons
     protected $messengerExtension;
 
     /**
-     * @var null|bool
+     * @var null|string
      */
     protected $fallbackUrl;
 

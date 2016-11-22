@@ -14,8 +14,8 @@ class ThreadSettings implements \JsonSerializable
     const TYPE_ACCOUNT_LINKING = 'account_linking';
     const TYPE_PAYMENT = 'payment';
 
-    const STATE_EXISTING_THREAD = 'existing_thread';
     const STATE_NEW_THREAD = 'new_thread';
+    const STATE_EXISTING_THREAD = 'existing_thread';
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class ThreadSettings implements \JsonSerializable
     {
         $allowedState = $this->getAllowedState();
         if (!in_array($state, $allowedState)) {
-            throw new \InvalidArgumentException('$state must be either ' . implode(', '), $allowedState);
+            throw new \InvalidArgumentException('$state must be either ' . implode(', ', $allowedState));
         }
     }
 

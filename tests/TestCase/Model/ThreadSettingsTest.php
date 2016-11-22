@@ -3,6 +3,7 @@ namespace Kerox\Messenger\Test\TestCase\Model;
 
 use Kerox\Messenger\Model\Common\Buttons\Postback;
 use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\ThreadSettings;
 use Kerox\Messenger\Model\ThreadSettings\AccountLinking;
 use Kerox\Messenger\Model\ThreadSettings\DomainWhitelist;
 use Kerox\Messenger\Model\ThreadSettings\Greeting;
@@ -12,6 +13,13 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ThreadSettingsTest extends AbstractTestCase
 {
+
+    public function testInvalidState()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$state must be either new_thread, existing_thread');
+        $threadSettings = new ThreadSettings(ThreadSettings::TYPE_CALL_TO_ACTIONS, 'old_thread');
+    }
 
     public function testAccountLinking()
     {

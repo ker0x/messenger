@@ -73,7 +73,7 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
         if (!in_array($travelClass, $allowedTravelClass)) {
-            throw new \InvalidArgumentException('Allowed values for $travelClass are: ' . implode(', ', $allowedTravelClass));
+            throw new \InvalidArgumentException('$travelClass must be either ' . implode(', ', $allowedTravelClass));
         }
     }
 

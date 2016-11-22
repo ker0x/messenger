@@ -65,7 +65,7 @@ class AirlineItinerary extends AbstractAirline
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerInfo[] $passengerInfo
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\ExtendedFlightInfo[] $flightInfo
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo[] $passengerSegmentInfo
-     * @param float $totalPrice
+     * @param string $totalPrice
      * @param string $currency
      */
     public function __construct(
@@ -75,7 +75,7 @@ class AirlineItinerary extends AbstractAirline
         array $passengerInfo,
         array $flightInfo,
         array $passengerSegmentInfo,
-        float $totalPrice,
+        string $totalPrice,
         string $currency
     ) {
         parent::__construct($locale);
@@ -85,18 +85,18 @@ class AirlineItinerary extends AbstractAirline
         $this->passengerInfo = $passengerInfo;
         $this->flightInfo = $flightInfo;
         $this->passengerSegmentInfo = $passengerSegmentInfo;
-        $this->totalPrice = (string)$totalPrice;
+        $this->totalPrice = $totalPrice;
         $this->currency = $currency;
     }
 
     /**
      * @param string $title
-     * @param float $amount
+     * @param string $amount
      * @param string $currency
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItinerary
      * @internal param array|null $priceInfo
      */
-    public function addPriceInfo(string $title, float $amount, string $currency = null): AirlineItinerary
+    public function addPriceInfo(string $title, string $amount, string $currency = null): AirlineItinerary
     {
         if ($currency !== null) {
             $this->isValidCurrency($currency);
@@ -115,23 +115,23 @@ class AirlineItinerary extends AbstractAirline
     }
 
     /**
-     * @param float $basePrice
+     * @param string $basePrice
      * @return AirlineItinerary
      */
-    public function setBasePrice(float $basePrice): AirlineItinerary
+    public function setBasePrice(string $basePrice): AirlineItinerary
     {
-        $this->basePrice = (string)$basePrice;
+        $this->basePrice = $basePrice;
 
         return $this;
     }
 
     /**
-     * @param float $tax
+     * @param string $tax
      * @return AirlineItinerary
      */
-    public function setTax(float $tax): AirlineItinerary
+    public function setTax(string $tax): AirlineItinerary
     {
-        $this->tax = (string)$tax;
+        $this->tax = $tax;
 
         return $this;
     }
