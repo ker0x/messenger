@@ -1,8 +1,6 @@
 <?php
 namespace Kerox\Messenger\Request;
 
-use Kerox\Messenger\Message\Message;
-
 class SendRequest extends AbstractRequest
 {
 
@@ -12,7 +10,7 @@ class SendRequest extends AbstractRequest
     protected $recipient;
 
     /**
-     * @var null|string|Message
+     * @var null|string|\Kerox\Messenger\Model\Message
      */
     protected $message;
 

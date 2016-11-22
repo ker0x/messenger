@@ -44,6 +44,7 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * UserProfileResponse constructor.
+     *
      * @param \Psr\Http\Message\ResponseInterface $response
      */
     public function __construct(ResponseInterface $response)

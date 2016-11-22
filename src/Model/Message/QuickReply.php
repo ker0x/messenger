@@ -101,7 +101,7 @@ class QuickReply implements \JsonSerializable
      */
     private function checkContentType()
     {
-        if ($this->contentType !== 'text') {
+        if ($this->contentType === self::CONTENT_TYPE_LOCATION) {
             throw new \Exception('Content type is set to location');
         }
     }

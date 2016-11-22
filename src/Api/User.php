@@ -31,7 +31,7 @@ class User extends AbstractApi implements UserInterface
         if ($fields !== null) {
             foreach ($fields as $field) {
                 if (!in_array($field, $allowedFields)) {
-                    throw new \InvalidArgumentException($field . ' is not a valid value. $userProfileFields must only contain ' . implode(',', $allowedFields));
+                    throw new \InvalidArgumentException($field . ' is not a valid value. $userProfileFields must only contain ' . implode(', ', $allowedFields));
                 }
             }
         } else {

@@ -37,17 +37,17 @@ class AirlineItinerary extends AbstractAirline
     protected $priceInfo = [];
 
     /**
-     * @var null|float
+     * @var null|string
      */
     protected $basePrice;
 
     /**
-     * @var null|float
+     * @var null|string
      */
     protected $tax;
 
     /**
-     * @var float
+     * @var string
      */
     protected $totalPrice;
 
