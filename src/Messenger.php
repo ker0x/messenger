@@ -74,6 +74,7 @@ class Messenger
      */
     private function getApiInstance(string $className)
     {
-        return new $className($this->pageToken, $this->client);
+        $class = __NAMESPACE__ . '\\Api\\' . $className;
+        return new $class($this->pageToken, $this->client);
     }
 }

@@ -75,6 +75,6 @@ class SendRequest extends AbstractRequest
      */
     protected function buildQuery(): array
     {
-        parent::buildQuery();
+        return parent::buildQuery();
     }
 }
