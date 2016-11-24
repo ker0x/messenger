@@ -17,7 +17,7 @@ class MessengerTest extends AbstractTestCase
 
     public function setUp()
     {
-        $this->messenger = new Messenger('abcd1234');
+        $this->messenger = new Messenger('4321dcba', 'abcd1234');
     }
 
     public function testGetInstanceOfApi()
@@ -25,6 +25,11 @@ class MessengerTest extends AbstractTestCase
         $this->assertInstanceOf(Send::class, $this->messenger->send());
         $this->assertInstanceOf(Thread::class, $this->messenger->thread());
         $this->assertInstanceOf(User::class, $this->messenger->user());
+    }
+
+    public function testGetWebhookApi()
+    {
+        $this->assertInstanceOf(Webhook::class, $this->messenger->webhook('abvd1234', '4321dcba'));
         $this->assertInstanceOf(Webhook::class, $this->messenger->webhook());
     }
 

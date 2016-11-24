@@ -24,6 +24,26 @@ class Messenger
     protected $client;
 
     /**
+     * @var \Kerox\Messenger\Api\Send
+     */
+    protected $sendApi;
+
+    /**
+     * @var \Kerox\Messenger\Api\Webhook
+     */
+    protected $webhookApi;
+
+    /**
+     * @var \Kerox\Messenger\Api\User
+     */
+    protected $userApi;
+
+    /**
+     * @var \Kerox\Messenger\Api\Thread
+     */
+    protected $threadApi;
+
+    /**
      * Messenger constructor.
      *
      * @param string $pageToken
@@ -41,15 +61,25 @@ class Messenger
      */
     public function send(): Send
     {
-        return $this->getApiInstance('Send');
+        if ($this->sendApi === null) {
+            $this->sendApi = $this->getApiInstance('Send');
+        }
+
+        return $this->sendApi;
     }
 
     /**
+     * @param string $appSecret
+     * @param string $verifyToken
      * @return \Kerox\Messenger\Api\Webhook
      */
-    public function webhook(): Webhook
+    public function webhook(string $appSecret = null, string $verifyToken = null): Webhook
     {
-        return $this->getApiInstance('Webhook');
+        if ($this->webhookApi === null && $appSecret !== null && $verifyToken !== null) {
+            $this->webhookApi = new Webhook($appSecret, $verifyToken, $this->pageToken, $this->client);
+        }
+
+        return $this->webhookApi;
     }
 
     /**
@@ -57,7 +87,11 @@ class Messenger
      */
     public function user(): User
     {
-        return $this->getApiInstance('User');
+        if ($this->userApi === null) {
+            $this->userApi = $this->getApiInstance('User');
+        }
+
+        return $this->userApi;
     }
 
     /**
@@ -65,7 +99,11 @@ class Messenger
      */
     public function thread(): Thread
     {
-        return $this->getApiInstance('Thread');
+        if ($this->threadApi === null) {
+            $this->threadApi = $this->getApiInstance('Thread');
+        }
+
+        return $this->threadApi;
     }
 
     /**
@@ -75,6 +113,7 @@ class Messenger
     private function getApiInstance(string $className)
     {
         $class = __NAMESPACE__ . '\\Api\\' . $className;
+
         return new $class($this->pageToken, $this->client);
     }
 }
