@@ -1,7 +1,6 @@
 <?php
 namespace Kerox\Messenger;
 
-use GuzzleHttp\Client;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
@@ -14,14 +13,19 @@ class Messenger
     const API_VERSION = 'v2.6';
 
     /**
-     * var string
+     * @var string
      */
-    protected $pageToken;
+    protected $appSecret;
 
     /**
-     * @var \GuzzleHttp\Client
+     * @var string
      */
-    protected $client;
+    protected $verifyToken;
+
+    /**
+     * @var string
+     */
+    protected $pageToken;
 
     /**
      * @var \Kerox\Messenger\Api\Send
@@ -46,14 +50,15 @@ class Messenger
     /**
      * Messenger constructor.
      *
+     * @param string $appSecret
+     * @param string $verifyToken
      * @param string $pageToken
      */
-    public function __construct(string $pageToken)
+    public function __construct(string $appSecret, string $verifyToken, string $pageToken)
     {
+        $this->appSecret = $appSecret;
+        $this->verifyToken = $verifyToken;
         $this->pageToken = $pageToken;
-        $this->client = new Client([
-            'base_uri' => self::API_URL . self::API_VERSION,
-        ]);
     }
 
     /**
@@ -62,21 +67,19 @@ class Messenger
     public function send(): Send
     {
         if ($this->sendApi === null) {
-            $this->sendApi = $this->getApiInstance('Send');
+            $this->sendApi = new Send($this->pageToken);
         }
 
         return $this->sendApi;
     }
 
     /**
-     * @param string $appSecret
-     * @param string $verifyToken
      * @return \Kerox\Messenger\Api\Webhook
      */
-    public function webhook(string $appSecret = null, string $verifyToken = null): Webhook
+    public function webhook(): Webhook
     {
-        if ($this->webhookApi === null && $appSecret !== null && $verifyToken !== null) {
-            $this->webhookApi = new Webhook($appSecret, $verifyToken, $this->pageToken, $this->client);
+        if ($this->webhookApi === null) {
+            $this->webhookApi = new Webhook($this->appSecret, $this->verifyToken, $this->pageToken);
         }
 
         return $this->webhookApi;
@@ -88,7 +91,7 @@ class Messenger
     public function user(): User
     {
         if ($this->userApi === null) {
-            $this->userApi = $this->getApiInstance('User');
+            $this->userApi = new User($this->pageToken);
         }
 
         return $this->userApi;
@@ -100,20 +103,9 @@ class Messenger
     public function thread(): Thread
     {
         if ($this->threadApi === null) {
-            $this->threadApi = $this->getApiInstance('Thread');
+            $this->threadApi = new Thread($this->pageToken);
         }
 
         return $this->threadApi;
-    }
-
-    /**
-     * @param string $className
-     * @return mixed
-     */
-    private function getApiInstance(string $className)
-    {
-        $class = __NAMESPACE__ . '\\Api\\' . $className;
-
-        return new $class($this->pageToken, $this->client);
     }
 }

@@ -33,6 +33,28 @@ class ReceiptElement extends AbstractElement
     }
 
     /**
+     * @param string $subtitle
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
+     */
+    public function setSubtitle(string $subtitle): ReceiptElement
+    {
+        parent::setSubtitle($subtitle);
+
+        return $this;
+    }
+
+    /**
+     * @param string $imageUrl
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
+     */
+    public function setImageUrl(string $imageUrl): ReceiptElement
+    {
+        parent::setImageUrl($imageUrl);
+
+        return $this;
+    }
+
+    /**
      * @param int $quantity
      * @return ReceiptElement
      */

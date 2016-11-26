@@ -27,6 +27,28 @@ class ListeElement extends AbstractElement
     }
 
     /**
+     * @param string $subtitle
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
+     */
+    public function setSubtitle(string $subtitle): ListeElement
+    {
+        parent::setSubtitle($subtitle);
+
+        return $this;
+    }
+
+    /**
+     * @param string $imageUrl
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
+     */
+    public function setImageUrl(string $imageUrl): ListeElement
+    {
+        parent::setImageUrl($imageUrl);
+
+        return $this;
+    }
+
+    /**
      * @param \Kerox\Messenger\Model\Common\Buttons\WebUrl $defaultAction
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
      */

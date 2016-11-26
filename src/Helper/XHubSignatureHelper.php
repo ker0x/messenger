@@ -23,7 +23,7 @@ class XHubSignatureHelper
      * @param string $secret
      * @return string
      */
-    public static function compute(string $algorithm, string $content, string $secret): string
+    private function compute(string $algorithm, string $content, string $secret): string
     {
         return hash_hmac($algorithm, $content, $secret);
     }

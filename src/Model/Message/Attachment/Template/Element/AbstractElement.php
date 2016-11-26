@@ -37,26 +37,22 @@ abstract class AbstractElement implements \JsonSerializable, ElementInterface
 
     /**
      * @param mixed $subtitle
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\AbstractElement
+     * @return void
      */
-    public function setSubtitle(string $subtitle): AbstractElement
+    public function setSubtitle(string $subtitle)
     {
         $this->isValidString($subtitle, 80);
         $this->subtitle = $subtitle;
-
-        return $this;
     }
 
     /**
      * @param mixed $imageUrl
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\AbstractElement
+     * @return void
      */
-    public function setImageUrl(string $imageUrl): AbstractElement
+    public function setImageUrl(string $imageUrl)
     {
         $this->isValidUrl($imageUrl);
         $this->imageUrl = $imageUrl;
-
-        return $this;
     }
 
     /**

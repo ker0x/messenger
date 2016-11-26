@@ -6,6 +6,9 @@ use GuzzleHttp\Client;
 abstract class AbstractApi
 {
 
+    const API_URL = 'https://graph.facebook.com/';
+    const API_VERSION = 'v2.6';
+
     /**
      * @var string
      */
@@ -20,11 +23,12 @@ abstract class AbstractApi
      * AbstractApi constructor.
      *
      * @param string $pageToken
-     * @param \GuzzleHttp\Client $client
      */
-    public function __construct(string $pageToken, Client $client)
+    public function __construct(string $pageToken)
     {
         $this->pageToken = $pageToken;
-        $this->client = $client;
+        $this->client = new Client([
+            'base_uri' => self::API_URL . self::API_VERSION,
+        ]);
     }
 }

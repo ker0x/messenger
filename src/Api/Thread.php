@@ -13,18 +13,17 @@ class Thread extends AbstractApi
      * ThreadSettings constructor.
      *
      * @param string $pageToken
-     * @param \GuzzleHttp\Client $client
      */
-    public function __construct($pageToken, Client $client)
+    public function __construct($pageToken)
     {
-        parent::__construct($pageToken, $client);
+        parent::__construct($pageToken);
     }
 
     /**
      * @param \Kerox\Messenger\Model\ThreadSettings $threadSettings
      * @return \Kerox\Messenger\Response\ThreadResponse
      */
-    public function add(ThreadSettings $threadSettings): ThreadResponse
+    public function addSetting(ThreadSettings $threadSettings): ThreadResponse
     {
         $request = new ThreadRequest($this->pageToken, $threadSettings);
         $response = $this->client->post('/me/thread_settings', $request->build());
@@ -37,7 +36,7 @@ class Thread extends AbstractApi
      * @param string $state
      * @return void
      */
-    public function delete(string $type, string $state = null)
+    public function deleteSetting(string $type, string $state = null)
     {
         $this->isValidThreadSettingType($type);
 
