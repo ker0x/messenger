@@ -16,12 +16,11 @@ class DeliveryEvent extends AbstractCallbackEvent
      *
      * @param string $senderId
      * @param string $recipientId
-     * @param int $timestamp
      * @param \Kerox\Messenger\Model\Callback\Delivery $delivery
      */
-    public function __construct(string $senderId, string $recipientId, int $timestamp, Delivery $delivery)
+    public function __construct(string $senderId, string $recipientId, Delivery $delivery)
     {
-        parent::__construct($senderId, $recipientId, $timestamp);
+        parent::__construct($senderId, $recipientId);
 
         $this->delivery = $delivery;
     }

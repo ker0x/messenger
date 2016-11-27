@@ -14,12 +14,11 @@ class RawEvent extends AbstractCallbackEvent
      *
      * @param string $senderId
      * @param string $recipientId
-     * @param int $timestamp
      * @param array $raw
      */
-    public function __construct(string $senderId, string $recipientId, int $timestamp, array $raw)
+    public function __construct(string $senderId, string $recipientId, array $raw)
     {
-        parent::__construct($senderId, $recipientId, $timestamp);
+        parent::__construct($senderId, $recipientId);
 
         $this->raw = $raw;
     }

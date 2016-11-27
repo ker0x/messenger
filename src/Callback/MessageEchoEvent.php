@@ -7,6 +7,11 @@ class MessageEchoEvent extends AbstractCallbackEvent
 {
 
     /**
+     * @var int
+     */
+    protected $timestamp;
+
+    /**
      * @var \Kerox\Messenger\Model\Callback\MessageEcho
      */
     protected $messageEcho;
@@ -21,9 +26,18 @@ class MessageEchoEvent extends AbstractCallbackEvent
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, MessageEcho $messageEcho)
     {
-        parent::__construct($senderId, $recipientId, $timestamp);
+        parent::__construct($senderId, $recipientId);
 
+        $this->timestamp = $timestamp;
         $this->messageEcho = $messageEcho;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimestamp(): int
+    {
+        return $this->timestamp;
     }
 
     /**

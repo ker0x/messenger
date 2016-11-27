@@ -7,6 +7,11 @@ class OptinEvent extends AbstractCallbackEvent
 {
 
     /**
+     * @var int
+     */
+    protected $timestamp;
+
+    /**
      * @var \Kerox\Messenger\Model\Callback\Optin
      */
     protected $optin;
@@ -21,9 +26,18 @@ class OptinEvent extends AbstractCallbackEvent
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Optin $optin)
     {
-        parent::__construct($senderId, $recipientId, $timestamp);
+        parent::__construct($senderId, $recipientId);
 
+        $this->timestamp = $timestamp;
         $this->optin = $optin;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimestamp(): int
+    {
+        return $this->timestamp;
     }
 
     /**

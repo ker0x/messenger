@@ -15,22 +15,15 @@ abstract class AbstractCallbackEvent
     protected $recipientId;
 
     /**
-     * @var int
-     */
-    protected $timestamp;
-
-    /**
      * AbstractCallbackEvent constructor.
      *
      * @param string $senderId
      * @param string $recipientId
-     * @param int $timestamp
      */
-    public function __construct(string $senderId, string $recipientId, int $timestamp)
+    public function __construct(string $senderId, string $recipientId)
     {
         $this->senderId = $senderId;
         $this->recipientId = $recipientId;
-        $this->timestamp = $timestamp;
     }
 
     /**
@@ -47,13 +40,5 @@ abstract class AbstractCallbackEvent
     public function getRecipientId(): string
     {
         return $this->recipientId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTimestamp(): int
-    {
-        return $this->timestamp;
     }
 }

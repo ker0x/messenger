@@ -7,6 +7,11 @@ class AccountLinkingEvent extends AbstractCallbackEvent
 {
 
     /**
+     * @var int
+     */
+    protected $timestamp;
+
+    /**
      * @var \Kerox\Messenger\Model\Callback\AccountLinking
      */
     protected $accountLinking;
@@ -19,11 +24,20 @@ class AccountLinkingEvent extends AbstractCallbackEvent
      * @param int $timestamp
      * @param \Kerox\Messenger\Model\Callback\AccountLinking $accountLinking
      */
-    public function __construct($senderId, $recipientId, $timestamp, AccountLinking $accountLinking)
+    public function __construct(string $senderId, string $recipientId, int $timestamp, AccountLinking $accountLinking)
     {
-        parent::__construct($senderId, $recipientId, $timestamp);
+        parent::__construct($senderId, $recipientId);
 
+        $this->timestamp = $timestamp;
         $this->accountLinking = $accountLinking;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimestamp(): int
+    {
+        return $this->timestamp;
     }
 
     /**

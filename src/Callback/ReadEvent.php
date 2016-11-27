@@ -7,6 +7,11 @@ class ReadEvent extends AbstractCallbackEvent
 {
 
     /**
+     * @var int
+     */
+    protected $timestamp;
+
+    /**
      * @var \Kerox\Messenger\Model\Callback\Read
      */
     protected $read;
@@ -21,9 +26,18 @@ class ReadEvent extends AbstractCallbackEvent
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Read $read)
     {
-        parent::__construct($senderId, $recipientId, $timestamp);
+        parent::__construct($senderId, $recipientId);
 
+        $this->timestamp = $timestamp;
         $this->read = $read;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimestamp(): int
+    {
+        return $this->timestamp;
     }
 
     /**

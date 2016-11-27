@@ -57,10 +57,9 @@ class CallbackEventFactory
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
-        $timestamp = $payload['timestamp'];
-        unset($payload['sender'], $payload['recipient'], $payload['timestamp']);
+        unset($payload['sender'], $payload['recipient']);
 
-        return new RawEvent($senderId, $recipientId, $timestamp, $payload);
+        return new RawEvent($senderId, $recipientId, $payload);
     }
 
     /**
@@ -72,7 +71,7 @@ class CallbackEventFactory
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
         $timestamp = $payload['timestamp'];
-        $messageEcho = MessageEcho::create($payload);
+        $messageEcho = MessageEcho::create($payload['message']);
 
         return new MessageEchoEvent($senderId, $recipientId, $timestamp, $messageEcho);
     }
@@ -86,7 +85,7 @@ class CallbackEventFactory
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
         $timestamp = $payload['timestamp'];
-        $message = Message::create($payload);
+        $message = Message::create($payload['message']);
 
         return new MessageEvent($senderId, $recipientId, $timestamp, $message);
     }
@@ -100,7 +99,7 @@ class CallbackEventFactory
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
         $timestamp = $payload['timestamp'];
-        $postback = Postback::create($payload);
+        $postback = Postback::create($payload['postback']);
 
         return new PostbackEvent($senderId, $recipientId, $timestamp, $postback);
     }
@@ -114,7 +113,7 @@ class CallbackEventFactory
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
         $timestamp = $payload['timestamp'];
-        $optin = Optin::create($payload);
+        $optin = Optin::create($payload['optin']);
 
         return new OptinEvent($senderId, $recipientId, $timestamp, $optin);
     }
@@ -128,7 +127,7 @@ class CallbackEventFactory
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
         $timestamp = $payload['timestamp'];
-        $accountLinking = AccountLinking::create($payload);
+        $accountLinking = AccountLinking::create($payload['account_linking']);
 
         return new AccountLinkingEvent($senderId, $recipientId, $timestamp, $accountLinking);
     }
@@ -141,10 +140,9 @@ class CallbackEventFactory
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
-        $timestamp = $payload['timestamp'];
-        $delivery = Delivery::create($payload);
+        $delivery = Delivery::create($payload['delivery']);
 
-        return new DeliveryEvent($senderId, $recipientId, $timestamp, $delivery);
+        return new DeliveryEvent($senderId, $recipientId, $delivery);
     }
 
     /**
@@ -156,7 +154,7 @@ class CallbackEventFactory
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
         $timestamp = $payload['timestamp'];
-        $read = Read::create($payload);
+        $read = Read::create($payload['read']);
 
         return new ReadEvent($senderId, $recipientId, $timestamp, $read);
     }

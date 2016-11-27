@@ -10,7 +10,7 @@ class Postback
     protected $payload;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Callback\Messaging\Referral
+     * @var null|\Kerox\Messenger\Model\Callback\Referral
      */
     protected $referral;
 
@@ -18,7 +18,7 @@ class Postback
      * Postback constructor.
      *
      * @param string $payload
-     * @param \Kerox\Messenger\Model\Callback\Messaging\Referral $referral
+     * @param \Kerox\Messenger\Model\Callback\Referral $referral
      */
     public function __construct(string $payload, Referral $referral = null)
     {
@@ -35,7 +35,7 @@ class Postback
     }
 
     /**
-     * @return null|\Kerox\Messenger\Model\Callback\Messaging\Referral
+     * @return null|\Kerox\Messenger\Model\Callback\Referral
      */
     public function getReferral()
     {
