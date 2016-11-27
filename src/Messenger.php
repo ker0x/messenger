@@ -1,7 +1,6 @@
 <?php
 namespace Kerox\Messenger;
 
-use GuzzleHttp\Client;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
@@ -14,26 +13,52 @@ class Messenger
     const API_VERSION = 'v2.6';
 
     /**
-     * var string
+     * @var string
+     */
+    protected $appSecret;
+
+    /**
+     * @var string
+     */
+    protected $verifyToken;
+
+    /**
+     * @var string
      */
     protected $pageToken;
 
     /**
-     * @var \GuzzleHttp\Client
+     * @var \Kerox\Messenger\Api\Send
      */
-    protected $client;
+    protected $sendApi;
+
+    /**
+     * @var \Kerox\Messenger\Api\Webhook
+     */
+    protected $webhookApi;
+
+    /**
+     * @var \Kerox\Messenger\Api\User
+     */
+    protected $userApi;
+
+    /**
+     * @var \Kerox\Messenger\Api\Thread
+     */
+    protected $threadApi;
 
     /**
      * Messenger constructor.
      *
+     * @param string $appSecret
+     * @param string $verifyToken
      * @param string $pageToken
      */
-    public function __construct(string $pageToken)
+    public function __construct(string $appSecret, string $verifyToken, string $pageToken)
     {
+        $this->appSecret = $appSecret;
+        $this->verifyToken = $verifyToken;
         $this->pageToken = $pageToken;
-        $this->client = new Client([
-            'base_uri' => self::API_URL . self::API_VERSION,
-        ]);
     }
 
     /**
@@ -41,7 +66,11 @@ class Messenger
      */
     public function send(): Send
     {
-        return $this->getApiInstance('Send');
+        if ($this->sendApi === null) {
+            $this->sendApi = new Send($this->pageToken);
+        }
+
+        return $this->sendApi;
     }
 
     /**
@@ -49,7 +78,11 @@ class Messenger
      */
     public function webhook(): Webhook
     {
-        return $this->getApiInstance('Webhook');
+        if ($this->webhookApi === null) {
+            $this->webhookApi = new Webhook($this->appSecret, $this->verifyToken, $this->pageToken);
+        }
+
+        return $this->webhookApi;
     }
 
     /**
@@ -57,7 +90,11 @@ class Messenger
      */
     public function user(): User
     {
-        return $this->getApiInstance('User');
+        if ($this->userApi === null) {
+            $this->userApi = new User($this->pageToken);
+        }
+
+        return $this->userApi;
     }
 
     /**
@@ -65,16 +102,10 @@ class Messenger
      */
     public function thread(): Thread
     {
-        return $this->getApiInstance('Thread');
-    }
+        if ($this->threadApi === null) {
+            $this->threadApi = new Thread($this->pageToken);
+        }
 
-    /**
-     * @param string $className
-     * @return mixed
-     */
-    private function getApiInstance(string $className)
-    {
-        $class = __NAMESPACE__ . '\\Api\\' . $className;
-        return new $class($this->pageToken, $this->client);
+        return $this->threadApi;
     }
 }

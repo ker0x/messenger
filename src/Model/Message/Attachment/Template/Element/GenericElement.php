@@ -25,6 +25,28 @@ class GenericElement extends AbstractElement
     }
 
     /**
+     * @param string $subtitle
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
+     */
+    public function setSubtitle(string $subtitle): GenericElement
+    {
+        parent::setSubtitle($subtitle);
+
+        return $this;
+    }
+
+    /**
+     * @param string $imageUrl
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
+     */
+    public function setImageUrl(string $imageUrl): GenericElement
+    {
+        parent::setImageUrl($imageUrl);
+
+        return $this;
+    }
+
+    /**
      * @param mixed $itemUrl
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */

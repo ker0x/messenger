@@ -22,11 +22,10 @@ class Send extends AbstractApi
      * Send constructor.
      *
      * @param string $pageToken
-     * @param \GuzzleHttp\Client $client
      */
-    public function __construct(string $pageToken, Client $client)
+    public function __construct(string $pageToken)
     {
-        parent::__construct($pageToken, $client);
+        parent::__construct($pageToken);
     }
 
     /**
@@ -35,7 +34,7 @@ class Send extends AbstractApi
      * @param string $notificationType
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function message(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
+    public function sendMessage(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
     {
         $message = $this->isValidMessage($message);
         $this->isValidNotificationType($notificationType);
@@ -52,7 +51,7 @@ class Send extends AbstractApi
      * @param string $notificationType
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function action(string $recipient, string $action, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
+    public function sendAction(string $recipient, string $action, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
     {
         $this->isValidAction($action);
         $this->isValidNotificationType($notificationType);

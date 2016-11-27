@@ -13,11 +13,10 @@ class User extends AbstractApi implements UserInterface
      * Send constructor.
      *
      * @param string $pageToken
-     * @param \GuzzleHttp\Client $client
      */
-    public function __construct(string $pageToken, Client $client)
+    public function __construct(string $pageToken)
     {
-        parent::__construct($pageToken, $client);
+        parent::__construct($pageToken);
     }
 
     /**
@@ -25,7 +24,7 @@ class User extends AbstractApi implements UserInterface
      * @param array|null $fields
      * @return \Kerox\Messenger\Response\UserResponse
      */
-    public function profile(string $userId, array $fields = null): UserResponse
+    public function getProfile(string $userId, array $fields = null): UserResponse
     {
         $allowedFields = $this->getAllowedFields();
         if ($fields !== null) {
