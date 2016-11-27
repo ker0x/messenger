@@ -16,7 +16,7 @@ class Message implements \JsonSerializable
     /**
      * @var string
      */
-    protected $type = self::TYPE_TEXT;
+    protected $type;
 
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment|string
@@ -42,8 +42,11 @@ class Message implements \JsonSerializable
     {
         if (is_string($message)) {
             $this->isValidString($message, 320);
+            $this->type = self::TYPE_TEXT;
         } elseif ($message instanceof Attachment) {
             $this->type = self::TYPE_ATTACHMENT;
+        } else {
+            throw new \InvalidArgumentException('$message must be a string or an instance of Attachment.');
         }
 
         $this->message = $message;
