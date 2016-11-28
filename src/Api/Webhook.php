@@ -94,7 +94,7 @@ class Webhook extends AbstractApi
      */
     public function isValidCallback(): bool
     {
-        if ($this->isValidHubSignature()) {
+        if (!$this->isValidHubSignature()) {
             return false;
         }
 
