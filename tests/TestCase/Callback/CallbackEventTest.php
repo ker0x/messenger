@@ -22,77 +22,77 @@ class CalbbackEventTest extends AbstractTestCase
 
     public function testCallbackMessageEvent()
     {
-        $stub = $this->createMock(Message::class);
-        $event = new MessageEvent('sender_id', 'recipient_id', 123456, $stub);
+        $mockedMessage = $this->createMock(Message::class);
+        $event = new MessageEvent('sender_id', 'recipient_id', 123456, $mockedMessage);
 
         $this->assertEquals('sender_id', $event->getSenderId());
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
-        $this->assertEquals($stub, $event->getMessage());
+        $this->assertEquals($mockedMessage, $event->getMessage());
     }
 
     public function testCallbackMessageEchoEvent()
     {
-        $stub = $this->createMock(MessageEcho::class);
-        $event = new MessageEchoEvent('sender_id', 'recipient_id', 123456, $stub);
+        $mockedMessageEcho = $this->createMock(MessageEcho::class);
+        $event = new MessageEchoEvent('sender_id', 'recipient_id', 123456, $mockedMessageEcho);
 
         $this->assertEquals('sender_id', $event->getSenderId());
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
-        $this->assertEquals($stub, $event->getMessageEcho());
+        $this->assertEquals($mockedMessageEcho, $event->getMessageEcho());
     }
 
     public function testCallbackReadEvent()
     {
-        $stub = $this->createMock(Read::class);
-        $event = new ReadEvent('sender_id', 'recipient_id', 123456, $stub);
+        $mockedRead = $this->createMock(Read::class);
+        $event = new ReadEvent('sender_id', 'recipient_id', 123456, $mockedRead);
 
         $this->assertEquals('sender_id', $event->getSenderId());
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
-        $this->assertEquals($stub, $event->getRead());
+        $this->assertEquals($mockedRead, $event->getRead());
     }
 
     public function testCallbackDeliveryEvent()
     {
-        $stub = $this->createMock(Delivery::class);
-        $event = new DeliveryEvent('sender_id', 'recipient_id', $stub);
+        $mockedDelivery = $this->createMock(Delivery::class);
+        $event = new DeliveryEvent('sender_id', 'recipient_id', $mockedDelivery);
 
         $this->assertEquals('sender_id', $event->getSenderId());
         $this->assertEquals('recipient_id', $event->getRecipientId());
-        $this->assertEquals($stub, $event->getDelivery());
+        $this->assertEquals($mockedDelivery, $event->getDelivery());
     }
 
     public function testCallbackPostbackEvent()
     {
-        $stub = $this->createMock(Postback::class);
-        $event = new PostbackEvent('sender_id', 'recipient_id', 123456, $stub);
+        $mockedPostback = $this->createMock(Postback::class);
+        $event = new PostbackEvent('sender_id', 'recipient_id', 123456, $mockedPostback);
 
         $this->assertEquals('sender_id', $event->getSenderId());
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
-        $this->assertEquals($stub, $event->getPostback());
+        $this->assertEquals($mockedPostback, $event->getPostback());
     }
 
     public function testCallbackOptinEvent()
     {
-        $stub = $this->createMock(Optin::class);
-        $event = new OptinEvent('sender_id', 'recipient_id', 123456, $stub);
+        $mockedOptin = $this->createMock(Optin::class);
+        $event = new OptinEvent('sender_id', 'recipient_id', 123456, $mockedOptin);
 
         $this->assertEquals('sender_id', $event->getSenderId());
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
-        $this->assertEquals($stub, $event->getOptin());
+        $this->assertEquals($mockedOptin, $event->getOptin());
     }
 
     public function testCallbackAccountLinkingEvent()
     {
-        $stub = $this->createMock(AccountLinking::class);
-        $event = new AccountLinkingEvent('sender_id', 'recipient_id', 123456, $stub);
+        $mockedAccountLinking = $this->createMock(AccountLinking::class);
+        $event = new AccountLinkingEvent('sender_id', 'recipient_id', 123456, $mockedAccountLinking);
 
         $this->assertEquals('sender_id', $event->getSenderId());
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
-        $this->assertEquals($stub, $event->getAccountLinking());
+        $this->assertEquals($mockedAccountLinking, $event->getAccountLinking());
     }
 }

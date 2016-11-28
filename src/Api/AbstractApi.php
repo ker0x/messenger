@@ -2,6 +2,7 @@
 namespace Kerox\Messenger\Api;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 abstract class AbstractApi
 {
@@ -23,12 +24,11 @@ abstract class AbstractApi
      * AbstractApi constructor.
      *
      * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
      */
-    public function __construct(string $pageToken)
+    public function __construct(string $pageToken, ClientInterface $client)
     {
         $this->pageToken = $pageToken;
-        $this->client = new Client([
-            'base_uri' => self::API_URL . self::API_VERSION,
-        ]);
+        $this->client = $client;
     }
 }

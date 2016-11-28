@@ -10,9 +10,7 @@ class ThreadResponseTest extends AbstractTestCase
 
     public function testThreadResponse()
     {
-        $body = '{
-          "result": "Successfully added new_thread\'s CTAs"
-        } ';
+        $body = file_get_contents(__DIR__ . '/../../Mocks/ThreadResponse/result.json');
 
         $response = new Response(200, [], $body);
         $threadResponse = new ThreadResponse($response);

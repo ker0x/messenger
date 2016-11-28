@@ -1,0 +1,7 @@
+{
+  "type": "file",
+  "payload": {
+    "url": "https://petersapparel.com/bin/receipt.pdf",
+    "is_reusable": true
+  }
+}

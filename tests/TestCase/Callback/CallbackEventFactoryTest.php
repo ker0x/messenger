@@ -8,6 +8,7 @@ use Kerox\Messenger\Callback\MessageEchoEvent;
 use Kerox\Messenger\Callback\MessageEvent;
 use Kerox\Messenger\Callback\OptinEvent;
 use Kerox\Messenger\Callback\PostbackEvent;
+use Kerox\Messenger\Callback\RawEvent;
 use Kerox\Messenger\Callback\ReadEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\Delivery;
@@ -20,6 +21,30 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class CallbackEventFactoryTest extends AbstractTestCase
 {
+
+    public function testRawEvent()
+    {
+        $raw = '{
+          "sender":{
+            "id":"USER_ID"
+          },
+          "recipient":{
+            "id":"PAGE_ID"
+          },
+          "timestamp":1458692752478,
+          "speech":{
+            "mid":"mid.1457764197618:41d102a3e1ae206a38",
+            "seq":73
+          }
+        }';
+
+        $array = json_decode($raw, true);
+
+        $expectedEvent = new RawEvent('USER_ID', 'PAGE_ID', ['timestamp' => 1458692752478, 'speech' => ['mid' => 'mid.1457764197618:41d102a3e1ae206a38', 'seq' => 73]]);
+        $event = CallbackEventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+    }
 
     public function testMessageEvent()
     {

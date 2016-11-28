@@ -10,9 +10,7 @@ class WebhookResponseTest extends AbstractTestCase
 
     public function testWebhookResponse()
     {
-        $body = '{
-          "success": true
-        }';
+        $body = file_get_contents(__DIR__ . '/../../Mocks/WebhookResponse/success.json');
 
         $response = new Response(200, [], $body);
         $webhookResponse = new WebhookResponse($response);

@@ -1,6 +1,8 @@
 <?php
 namespace Kerox\Messenger;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
@@ -28,6 +30,11 @@ class Messenger
     protected $pageToken;
 
     /**
+     * @var \GuzzleHttp\ClientInterface
+     */
+    protected $client;
+
+    /**
      * @var \Kerox\Messenger\Api\Send
      */
     protected $sendApi;
@@ -53,12 +60,20 @@ class Messenger
      * @param string $appSecret
      * @param string $verifyToken
      * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
      */
-    public function __construct(string $appSecret, string $verifyToken, string $pageToken)
+    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client = null)
     {
         $this->appSecret = $appSecret;
         $this->verifyToken = $verifyToken;
         $this->pageToken = $pageToken;
+
+        if ($client === null) {
+            $client = new Client([
+                'base_uri' => self::API_URL . self::API_VERSION,
+            ]);
+        }
+        $this->client = $client;
     }
 
     /**
@@ -67,7 +82,7 @@ class Messenger
     public function send(): Send
     {
         if ($this->sendApi === null) {
-            $this->sendApi = new Send($this->pageToken);
+            $this->sendApi = new Send($this->pageToken, $this->client);
         }
 
         return $this->sendApi;
@@ -79,7 +94,7 @@ class Messenger
     public function webhook(): Webhook
     {
         if ($this->webhookApi === null) {
-            $this->webhookApi = new Webhook($this->appSecret, $this->verifyToken, $this->pageToken);
+            $this->webhookApi = new Webhook($this->appSecret, $this->verifyToken, $this->pageToken, $this->client);
         }
 
         return $this->webhookApi;
@@ -91,7 +106,7 @@ class Messenger
     public function user(): User
     {
         if ($this->userApi === null) {
-            $this->userApi = new User($this->pageToken);
+            $this->userApi = new User($this->pageToken, $this->client);
         }
 
         return $this->userApi;
@@ -103,7 +118,7 @@ class Messenger
     public function thread(): Thread
     {
         if ($this->threadApi === null) {
-            $this->threadApi = new Thread($this->pageToken);
+            $this->threadApi = new Thread($this->pageToken, $this->client);
         }
 
         return $this->threadApi;

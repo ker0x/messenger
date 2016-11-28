@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
@@ -19,13 +19,14 @@ class Send extends AbstractApi
     const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
 
     /**
-     * Send constructor.
+     * SendResponse constructor.
      *
      * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
      */
-    public function __construct(string $pageToken)
+    public function __construct(string $pageToken, ClientInterface $client)
     {
-        parent::__construct($pageToken);
+        parent::__construct($pageToken, $client);
     }
 
     /**

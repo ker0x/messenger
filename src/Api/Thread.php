@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Model\ThreadSettings;
 use Kerox\Messenger\Request\ThreadRequest;
 use Kerox\Messenger\Response\ThreadResponse;
@@ -13,10 +13,11 @@ class Thread extends AbstractApi
      * ThreadSettings constructor.
      *
      * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
      */
-    public function __construct($pageToken)
+    public function __construct($pageToken, ClientInterface $client)
     {
-        parent::__construct($pageToken);
+        parent::__construct($pageToken, $client);
     }
 
     /**
