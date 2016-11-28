@@ -1,6 +1,8 @@
 <?php
 namespace Kerox\Messenger\Api;
 
+use Guzzle\Http\Message\RequestInterface;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\ServerRequest;
 use Kerox\Messenger\Helper\XHubSignatureHelper;
 use Kerox\Messenger\Model\Callback\Entry;
@@ -41,14 +43,16 @@ class Webhook extends AbstractApi
      * @param string $appSecret
      * @param string $verifyToken
      * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
+     * @param \Guzzle\Http\Message\RequestInterface $request
      */
-    public function __construct(string $appSecret, string $verifyToken, string $pageToken)
+    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, RequestInterface $request = null)
     {
-        parent::__construct($pageToken);
+        parent::__construct($pageToken, $client);
 
         $this->appSecret = $appSecret;
         $this->verifyToken = $verifyToken;
-        $this->request = ServerRequest::fromGlobals();
+        $this->request = $request ?: ServerRequest::fromGlobals();
     }
 
     /**

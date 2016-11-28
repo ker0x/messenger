@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Request\UserRequest;
 use Kerox\Messenger\Response\UserResponse;
 use Kerox\Messenger\UserInterface;
@@ -10,13 +10,14 @@ class User extends AbstractApi implements UserInterface
 {
 
     /**
-     * Send constructor.
+     * SendResponse constructor.
      *
      * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
      */
-    public function __construct(string $pageToken)
+    public function __construct(string $pageToken, ClientInterface $client)
     {
-        parent::__construct($pageToken);
+        parent::__construct($pageToken, $client);
     }
 
     /**

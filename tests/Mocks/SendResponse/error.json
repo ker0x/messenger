@@ -1,0 +1,9 @@
+{
+  "error": {
+    "message": "Invalid OAuth access token.",
+    "type": "OAuthException",
+    "code": 190,
+    "error_subcode": 1234567,
+    "fbtrace_id": "BLBz/WZt8dN"
+  }
+}

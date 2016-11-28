@@ -1,0 +1,4 @@
+{
+  "setting_type": "account_linking",
+  "account_linking_url": "https://www.example.com/oauth?response_type=code&client_id=1234567890&scope=basic"
+}

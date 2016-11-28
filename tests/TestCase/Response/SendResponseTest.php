@@ -10,10 +10,7 @@ class SendResponseTest extends AbstractTestCase
 
     public function testResponse()
     {
-        $body = '{
-          "recipient_id": "1008372609250235",
-          "message_id": "mid.1456970487936:c34767dfe57ee6e339"
-        }';
+        $body = file_get_contents(__DIR__ . '/../../Mocks/SendResponse/basic.json');
 
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
@@ -30,11 +27,7 @@ class SendResponseTest extends AbstractTestCase
 
     public function testResponseWithAttachmentId()
     {
-        $body = '{
-          "recipient_id": "1008372609250235",
-          "message_id": "mid.1456970487936:c34767dfe57ee6e339",
-          "attachment_id": "1745504518999123"
-        }';
+        $body = file_get_contents(__DIR__ . '/../../Mocks/SendResponse/attachment.json');
 
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
@@ -51,15 +44,7 @@ class SendResponseTest extends AbstractTestCase
 
     public function testResponseWithError()
     {
-        $body = '{
-          "error": {
-            "message": "Invalid OAuth access token.",
-            "type": "OAuthException",
-            "code": 190,
-            "error_subcode": 1234567,
-            "fbtrace_id": "BLBz/WZt8dN"
-          }
-        }';
+        $body = file_get_contents(__DIR__ . '/../../Mocks/SendResponse/error.json');
 
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
