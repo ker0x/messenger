@@ -99,8 +99,8 @@ class Send extends AbstractApi
     {
         return [
             self::NOTIFICATION_TYPE_REGULAR,
-            self::NOTIFICATION_TYPE_NO_PUSH,
             self::NOTIFICATION_TYPE_SILENT_PUSH,
+            self::NOTIFICATION_TYPE_NO_PUSH,
         ];
     }
 
