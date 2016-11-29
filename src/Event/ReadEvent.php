@@ -1,9 +1,9 @@
 <?php
-namespace Kerox\Messenger\Callback;
+namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Read;
 
-class ReadEvent extends AbstractCallbackEvent
+class ReadEvent extends AbstractEvent
 {
 
     /**

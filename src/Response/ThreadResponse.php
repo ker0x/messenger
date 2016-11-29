@@ -14,7 +14,7 @@ class ThreadResponse extends AbstractResponse
     protected $result;
 
     /**
-     * ThreadResponse constructor.
+     * Thread constructor.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
      */

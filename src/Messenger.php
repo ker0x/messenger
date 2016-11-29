@@ -7,6 +7,7 @@ use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Api\Webhook;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Messenger
 {
@@ -89,12 +90,13 @@ class Messenger
     }
 
     /**
+     * @param \Psr\Http\Message\ServerRequestInterface $request
      * @return \Kerox\Messenger\Api\Webhook
      */
-    public function webhook(): Webhook
+    public function webhook(ServerRequestInterface $request = null): Webhook
     {
         if ($this->webhookApi === null) {
-            $this->webhookApi = new Webhook($this->appSecret, $this->verifyToken, $this->pageToken, $this->client);
+            $this->webhookApi = new Webhook($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
         }
 
         return $this->webhookApi;

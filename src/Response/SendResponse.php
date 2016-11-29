@@ -58,7 +58,7 @@ class SendResponse extends AbstractResponse
     protected $errorFbtraceId;
 
     /**
-     * SendResponse constructor.
+     * Send constructor.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
      */

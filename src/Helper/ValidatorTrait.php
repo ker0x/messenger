@@ -1,5 +1,5 @@
 <?php
-namespace Kerox\Messenger;
+namespace Kerox\Messenger\Helper;
 
 use InvalidArgumentException;
 

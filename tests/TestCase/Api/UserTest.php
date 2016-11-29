@@ -19,7 +19,7 @@ class UserTest extends AbstractTestCase
 
     public function setUp()
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/UserResponse/user.json');
+        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/User/user.json');
         $mockedResponse = new MockHandler([
             new Response(200, [], $bodyResponse),
         ]);

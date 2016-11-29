@@ -1,9 +1,9 @@
 <?php
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
-use Kerox\Messenger\ValidatorTrait;
+use Kerox\Messenger\Helper\ValidatorTrait;
 
-abstract class AbstractElement implements \JsonSerializable, ElementInterface
+abstract class AbstractElement implements \JsonSerializable
 {
 
     use ValidatorTrait;

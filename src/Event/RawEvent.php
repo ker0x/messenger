@@ -1,7 +1,7 @@
 <?php
-namespace Kerox\Messenger\Callback;
+namespace Kerox\Messenger\Event;
 
-class RawEvent extends AbstractCallbackEvent
+class RawEvent extends AbstractEvent
 {
 
     /**

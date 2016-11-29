@@ -10,7 +10,7 @@ class UserResponseTest extends AbstractTestCase
 
     public function testUserResponse()
     {
-        $body = file_get_contents(__DIR__ . '/../../Mocks/UserResponse/user.json');
+        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/User/user.json');
 
         $response = new Response(200, [], $body);
         $userResponse = new UserResponse($response);

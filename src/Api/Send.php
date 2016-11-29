@@ -19,7 +19,7 @@ class Send extends AbstractApi
     const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
 
     /**
-     * SendResponse constructor.
+     * Send constructor.
      *
      * @param string $pageToken
      * @param \GuzzleHttp\ClientInterface $client

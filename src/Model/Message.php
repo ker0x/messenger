@@ -3,7 +3,7 @@ namespace Kerox\Messenger\Model;
 
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Model\Message\QuickReply;
-use Kerox\Messenger\ValidatorTrait;
+use Kerox\Messenger\Helper\ValidatorTrait;
 
 class Message implements \JsonSerializable
 {

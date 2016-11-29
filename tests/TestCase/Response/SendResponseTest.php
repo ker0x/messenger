@@ -10,7 +10,7 @@ class SendResponseTest extends AbstractTestCase
 
     public function testResponse()
     {
-        $body = file_get_contents(__DIR__ . '/../../Mocks/SendResponse/basic.json');
+        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/basic.json');
 
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
@@ -27,7 +27,7 @@ class SendResponseTest extends AbstractTestCase
 
     public function testResponseWithAttachmentId()
     {
-        $body = file_get_contents(__DIR__ . '/../../Mocks/SendResponse/attachment.json');
+        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/attachment.json');
 
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
@@ -44,7 +44,7 @@ class SendResponseTest extends AbstractTestCase
 
     public function testResponseWithError()
     {
-        $body = file_get_contents(__DIR__ . '/../../Mocks/SendResponse/error.json');
+        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/error.json');
 
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);

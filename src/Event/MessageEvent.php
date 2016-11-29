@@ -1,9 +1,9 @@
 <?php
-namespace Kerox\Messenger\Callback;
+namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Message;
 
-class MessageEvent extends AbstractCallbackEvent
+class MessageEvent extends AbstractEvent
 {
 
     /**

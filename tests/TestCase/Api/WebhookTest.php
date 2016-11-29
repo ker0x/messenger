@@ -7,7 +7,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use Kerox\Messenger\Api\Webhook;
-use Kerox\Messenger\Callback\MessageEvent;
+use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Response\WebhookResponse;
@@ -36,7 +36,7 @@ class WebhookTest extends AbstractTestCase
 
         $request = new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
 
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/WebhookResponse/success.json');
+        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Webhook/success.json');
         $mockedResponse = new MockHandler([
             new Response(200, [], $bodyResponse),
         ]);

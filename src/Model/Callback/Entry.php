@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Model\Callback;
 
-use Kerox\Messenger\Callback\CallbackEventFactory;
+use Kerox\Messenger\Event\EventFactory;
 
 class Entry
 {
@@ -67,7 +67,7 @@ class Entry
     {
         $events = [];
         foreach ($entry['messaging'] as $event) {
-            $events[] = CallbackEventFactory::create($event);
+            $events[] = EventFactory::create($event);
         }
 
         return new static($entry['id'], $entry['time'], $events);

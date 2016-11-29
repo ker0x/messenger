@@ -1,5 +1,5 @@
 <?php
-namespace Kerox\Messenger\Callback;
+namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\Delivery;
@@ -9,14 +9,14 @@ use Kerox\Messenger\Model\Callback\Optin;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\Read;
 
-class CallbackEventFactory
+class EventFactory
 {
 
     /**
      * @param array $payload
-     * @return \Kerox\Messenger\Callback\AbstractCallbackEvent
+     * @return \Kerox\Messenger\Event\AbstractEvent
      */
-    public static function create(array $payload): AbstractCallbackEvent
+    public static function create(array $payload): AbstractEvent
     {
         if (isset($payload['message'])) {
             if (isset($payload['message']['is_echo'])) {
@@ -51,7 +51,7 @@ class CallbackEventFactory
 
     /**
      * @param array $payload
-     * @return \Kerox\Messenger\Callback\RawEvent
+     * @return \Kerox\Messenger\Event\RawEvent
      */
     public static function createRawEvent(array $payload): RawEvent
     {
@@ -64,7 +64,7 @@ class CallbackEventFactory
 
     /**
      * @param array $payload
-     * @return \Kerox\Messenger\Callback\MessageEchoEvent
+     * @return \Kerox\Messenger\Event\MessageEchoEvent
      */
     public static function createMessageEchoEvent(array $payload): MessageEchoEvent
     {
@@ -78,7 +78,7 @@ class CallbackEventFactory
 
     /**
      * @param array $payload
-     * @return \Kerox\Messenger\Callback\MessageEvent
+     * @return \Kerox\Messenger\Event\MessageEvent
      */
     public static function createMessageEvent(array $payload): MessageEvent
     {
@@ -92,7 +92,7 @@ class CallbackEventFactory
 
     /**
      * @param array $payload
-     * @return \Kerox\Messenger\Callback\PostbackEvent
+     * @return \Kerox\Messenger\Event\PostbackEvent
      */
     public static function createPostbackEvent(array $payload): PostbackEvent
     {
@@ -106,7 +106,7 @@ class CallbackEventFactory
 
     /**
      * @param array $payload
-     * @return \Kerox\Messenger\Callback\OptinEvent
+     * @return \Kerox\Messenger\Event\OptinEvent
      */
     public static function createOptinEvent(array $payload): OptinEvent
     {
@@ -120,7 +120,7 @@ class CallbackEventFactory
 
     /**
      * @param $payload
-     * @return \Kerox\Messenger\Callback\AccountLinkingEvent
+     * @return \Kerox\Messenger\Event\AccountLinkingEvent
      */
     public static function createAcountLinkingEvent($payload): AccountLinkingEvent
     {
@@ -134,7 +134,7 @@ class CallbackEventFactory
 
     /**
      * @param $payload
-     * @return \Kerox\Messenger\Callback\DeliveryEvent
+     * @return \Kerox\Messenger\Event\DeliveryEvent
      */
     public static function createDeliveryEvent($payload): DeliveryEvent
     {
@@ -147,7 +147,7 @@ class CallbackEventFactory
 
     /**
      * @param $payload
-     * @return \Kerox\Messenger\Callback\ReadEvent
+     * @return \Kerox\Messenger\Event\ReadEvent
      */
     public static function createReadEvent($payload): ReadEvent
     {

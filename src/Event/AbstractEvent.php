@@ -1,7 +1,7 @@
 <?php
-namespace Kerox\Messenger\Callback;
+namespace Kerox\Messenger\Event;
 
-abstract class AbstractCallbackEvent
+abstract class AbstractEvent
 {
 
     /**

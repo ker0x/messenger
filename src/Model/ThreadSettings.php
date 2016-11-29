@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Model;
 
-use Kerox\Messenger\ValidatorTrait;
+use Kerox\Messenger\Helper\ValidatorTrait;
 
 class ThreadSettings implements \JsonSerializable
 {

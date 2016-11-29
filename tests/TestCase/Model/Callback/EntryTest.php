@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Model\Callback;
 
-use Kerox\Messenger\Callback\MessageEvent;
+use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
