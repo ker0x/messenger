@@ -6,6 +6,8 @@ use Kerox\Messenger\Model\Callback\Message;
 class MessageEvent extends AbstractEvent
 {
 
+    const NAME = 'message';
+
     /**
      * @var int
      */

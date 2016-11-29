@@ -6,6 +6,8 @@ use Kerox\Messenger\Model\Callback\Optin;
 class OptinEvent extends AbstractEvent
 {
 
+    const NAME = 'optin';
+
     /**
      * @var int
      */

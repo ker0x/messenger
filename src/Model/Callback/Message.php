@@ -77,6 +77,14 @@ class Message
     }
 
     /**
+     * @return bool
+     */
+    public function hasText(): bool
+    {
+        return !empty($this->text);
+    }
+
+    /**
      * @return null|string
      */
     public function getQuickReply()
@@ -85,11 +93,27 @@ class Message
     }
 
     /**
+     * @return bool
+     */
+    public function hasQuickReply(): bool
+    {
+        return !empty($this->quickReply);
+    }
+
+    /**
      * @return array
      */
     public function getAttachments(): array
     {
         return $this->attachments;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAttachments(): bool
+    {
+        return !empty($this->attachments);
     }
 
     /**

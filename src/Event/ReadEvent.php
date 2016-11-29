@@ -6,6 +6,8 @@ use Kerox\Messenger\Model\Callback\Read;
 class ReadEvent extends AbstractEvent
 {
 
+    const NAME = 'read';
+
     /**
      * @var int
      */

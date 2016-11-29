@@ -6,6 +6,8 @@ use Kerox\Messenger\Model\Callback\Delivery;
 class DeliveryEvent extends AbstractEvent
 {
 
+    const NAME = 'delivery';
+
     /**
      * @var \Kerox\Messenger\Model\Callback\Delivery
      */
