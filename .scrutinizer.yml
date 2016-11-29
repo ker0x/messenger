@@ -22,6 +22,9 @@ tools:
             2: tests/
 
 build:
+    environment:
+        php:
+            version: 7.0
     tests:
         override:
             -
