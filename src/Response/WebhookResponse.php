@@ -14,7 +14,7 @@ class WebhookResponse extends AbstractResponse
     protected $success;
 
     /**
-     * WebhookResponse constructor.
+     * Webhook constructor.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
      */

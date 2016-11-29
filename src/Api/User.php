@@ -10,7 +10,7 @@ class User extends AbstractApi implements UserInterface
 {
 
     /**
-     * SendResponse constructor.
+     * Send constructor.
      *
      * @param string $pageToken
      * @param \GuzzleHttp\ClientInterface $client

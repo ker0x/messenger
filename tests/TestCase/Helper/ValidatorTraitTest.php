@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase;
 
-use Kerox\Messenger\ValidatorTrait;
+use Kerox\Messenger\Helper\ValidatorTrait;
 
 class TestValidatorTrait extends AbstractTestCase
 {

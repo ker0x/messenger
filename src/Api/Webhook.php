@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\ServerRequest;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Request\WebhookRequest;
 use Kerox\Messenger\Response\WebhookResponse;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Webhook extends AbstractApi
 {
@@ -43,9 +43,9 @@ class Webhook extends AbstractApi
      * @param string $verifyToken
      * @param string $pageToken
      * @param \GuzzleHttp\ClientInterface $client
-     * @param \Psr\Http\Message\RequestInterface $request
+     * @param \Psr\Http\Message\ServerRequestInterface $request
      */
-    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, RequestInterface $request = null)
+    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ServerRequestInterface $request = null)
     {
         parent::__construct($pageToken, $client);
 

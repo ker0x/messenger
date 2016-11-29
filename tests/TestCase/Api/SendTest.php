@@ -25,7 +25,7 @@ class SendTest extends AbstractTestCase
 
     public function setUp()
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/SendResponse/basic.json');
+        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/basic.json');
         $mockedResponse = new MockHandler([
             new Response(200, [], $bodyResponse),
         ]);

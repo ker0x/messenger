@@ -1,13 +1,13 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Callback;
 
-use Kerox\Messenger\Callback\AccountLinkingEvent;
-use Kerox\Messenger\Callback\DeliveryEvent;
-use Kerox\Messenger\Callback\MessageEchoEvent;
-use Kerox\Messenger\Callback\MessageEvent;
-use Kerox\Messenger\Callback\OptinEvent;
-use Kerox\Messenger\Callback\PostbackEvent;
-use Kerox\Messenger\Callback\ReadEvent;
+use Kerox\Messenger\Event\AccountLinkingEvent;
+use Kerox\Messenger\Event\DeliveryEvent;
+use Kerox\Messenger\Event\MessageEchoEvent;
+use Kerox\Messenger\Event\MessageEvent;
+use Kerox\Messenger\Event\OptinEvent;
+use Kerox\Messenger\Event\PostbackEvent;
+use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;

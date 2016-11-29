@@ -1,9 +1,9 @@
 <?php
-namespace Kerox\Messenger\Callback;
+namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Optin;
 
-class OptinEvent extends AbstractCallbackEvent
+class OptinEvent extends AbstractEvent
 {
 
     /**

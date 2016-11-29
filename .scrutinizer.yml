@@ -20,3 +20,15 @@ tools:
     php_pdepend:
         excluded_dirs:
             2: tests/
+
+build:
+    environment:
+        php:
+            version: 7.0.8
+    tests:
+        override:
+            -
+                command: 'phpunit --coverage-clover=clover.xml'
+                coverage:
+                    file: 'clover.xml'
+                    format: 'clover'

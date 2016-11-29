@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
-use Kerox\Messenger\ValidatorTrait;
+use Kerox\Messenger\Helper\ValidatorTrait;
 
 class BoardingPass implements \JsonSerializable, TravelClassInterface
 {

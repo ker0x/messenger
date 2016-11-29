@@ -1,9 +1,9 @@
 <?php
-namespace Kerox\Messenger\Callback;
+namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\AccountLinking;
 
-class AccountLinkingEvent extends AbstractCallbackEvent
+class AccountLinkingEvent extends AbstractEvent
 {
 
     /**

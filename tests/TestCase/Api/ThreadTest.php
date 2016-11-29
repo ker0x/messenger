@@ -20,7 +20,7 @@ class ThreadTest extends AbstractTestCase
 
     public function setUp()
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/ThreadResponse/result.json');
+        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Thread/result.json');
         $mockedResponse = new MockHandler([
             new Response(200, [], $bodyResponse),
         ]);

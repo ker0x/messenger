@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Model\Message;
 
-use Kerox\Messenger\ValidatorTrait;
+use Kerox\Messenger\Helper\ValidatorTrait;
 
 class QuickReply implements \JsonSerializable
 {

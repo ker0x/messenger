@@ -10,7 +10,7 @@ class ThreadResponseTest extends AbstractTestCase
 
     public function testThreadResponse()
     {
-        $body = file_get_contents(__DIR__ . '/../../Mocks/ThreadResponse/result.json');
+        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Thread/result.json');
 
         $response = new Response(200, [], $body);
         $threadResponse = new ThreadResponse($response);
