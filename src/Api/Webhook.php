@@ -1,13 +1,12 @@
 <?php
 namespace Kerox\Messenger\Api;
 
-use Guzzle\Http\Message\RequestInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\ServerRequest;
-use Kerox\Messenger\Helper\XHubSignatureHelper;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Request\WebhookRequest;
 use Kerox\Messenger\Response\WebhookResponse;
+use Psr\Http\Message\RequestInterface;
 
 class Webhook extends AbstractApi
 {
@@ -44,7 +43,7 @@ class Webhook extends AbstractApi
      * @param string $verifyToken
      * @param string $pageToken
      * @param \GuzzleHttp\ClientInterface $client
-     * @param \Guzzle\Http\Message\RequestInterface $request
+     * @param \Psr\Http\Message\RequestInterface $request
      */
     public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, RequestInterface $request = null)
     {
@@ -116,7 +115,7 @@ class Webhook extends AbstractApi
      */
     public function getDecodedBody(): array
     {
-        if (is_null($this->decodedBody)) {
+        if ($this->decodedBody === null) {
             $decodedBody = json_decode($this->request->getBody(), true);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 throw new \Exception('Error while parsing the request body');
@@ -144,18 +143,18 @@ class Webhook extends AbstractApi
         $events = [];
         foreach ($this->getHydratedEntries() as $hydratedEntry) {
             /** @var \Kerox\Messenger\Model\Callback\Entry $hydratedEntry */
-            $events[] += $hydratedEntry->getEvents();
+            $events = array_merge($events, $hydratedEntry->getEvents());
         }
 
         return $events;
     }
 
     /**
-     * @return array|\Kerox\Messenger\Model\Callback\Entry[]
+     * @return \Kerox\Messenger\Model\Callback\Entry[]
      */
     private function getHydratedEntries(): array
     {
-        if (is_null($this->hydratedEntries)) {
+        if ($this->hydratedEntries === null) {
             $decodedBody = $this->getDecodedBody();
 
             $hydrated = [];
@@ -181,6 +180,8 @@ class Webhook extends AbstractApi
             return false;
         }
 
-        return XHubSignatureHelper::validate($content, $this->appSecret, $headers[0]);
+        list($algorithm, $hash) = explode('=', $headers[0]);
+
+        return hash_equals(hash_hmac($algorithm, $content, $this->appSecret), $hash);
     }
 }
