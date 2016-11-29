@@ -27,6 +27,11 @@ class Webhook extends AbstractApi
     protected $request;
 
     /**
+     * @var string
+     */
+    protected $body;
+
+    /**
      * @var array
      */
     protected $decodedBody;
@@ -110,15 +115,27 @@ class Webhook extends AbstractApi
     }
 
     /**
+     * @return string
+     */
+    public function getBody(): string
+    {
+        if ($this->body === null) {
+            $this->body = (string)$this->request->getBody();
+        }
+
+        return $this->body;
+    }
+
+    /**
      * @return array
      * @throws \Exception
      */
     public function getDecodedBody(): array
     {
         if ($this->decodedBody === null) {
-            $decodedBody = json_decode($this->request->getBody(), true);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new \Exception('Error while parsing the request body');
+            $decodedBody = json_decode($this->getBody(), true);
+            if (json_last_error() !== JSON_ERROR_NONE || $decodedBody === null) {
+                $decodedBody = [];
             }
 
             $this->decodedBody = $decodedBody;
@@ -174,7 +191,7 @@ class Webhook extends AbstractApi
     private function isValidHubSignature(): bool
     {
         $headers = $this->request->getHeader('X-Hub-Signature');
-        $content = $this->request->getBody();
+        $content = $this->getBody();
 
         if (empty($headers)) {
             return false;
