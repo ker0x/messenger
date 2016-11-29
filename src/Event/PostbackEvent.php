@@ -6,6 +6,8 @@ use Kerox\Messenger\Model\Callback\Postback;
 class PostbackEvent extends AbstractEvent
 {
 
+    const NAME = 'postback';
+
     /**
      * @var int
      */

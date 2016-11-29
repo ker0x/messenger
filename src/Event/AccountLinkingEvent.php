@@ -6,6 +6,8 @@ use Kerox\Messenger\Model\Callback\AccountLinking;
 class AccountLinkingEvent extends AbstractEvent
 {
 
+    const NAME = 'account_linking';
+
     /**
      * @var int
      */

@@ -16,5 +16,8 @@ class MessageTest extends AbstractTestCase
         $this->assertEquals('hello, world!', $message->getText());
         $this->assertEquals('DEVELOPER_DEFINED_PAYLOAD', $message->getQuickReply());
         $this->assertEquals([['type' => 'image', 'payload' => ['url' => 'IMAGE_URL']]], $message->getAttachments());
+        $this->assertTrue($message->hasText());
+        $this->assertTrue($message->hasQuickReply());
+        $this->assertTrue($message->hasAttachments());
     }
 }

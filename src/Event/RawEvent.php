@@ -4,6 +4,8 @@ namespace Kerox\Messenger\Event;
 class RawEvent extends AbstractEvent
 {
 
+    const NAME = 'raw';
+
     /**
      * @var array
      */
