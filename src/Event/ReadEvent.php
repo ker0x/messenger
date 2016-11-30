@@ -49,4 +49,12 @@ class ReadEvent extends AbstractEvent
     {
         return $this->read;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
 }

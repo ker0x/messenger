@@ -32,4 +32,12 @@ class RawEvent extends AbstractEvent
     {
         return $this->raw;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
 }

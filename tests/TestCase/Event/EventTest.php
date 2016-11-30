@@ -17,10 +17,10 @@ use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
-class CalbbackEventTest extends AbstractTestCase
+class EventTest extends AbstractTestCase
 {
 
-    public function testCallbackMessageEvent()
+    public function testMessageEvent()
     {
         $mockedMessage = $this->createMock(Message::class);
         $event = new MessageEvent('sender_id', 'recipient_id', 123456, $mockedMessage);
@@ -29,9 +29,10 @@ class CalbbackEventTest extends AbstractTestCase
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedMessage, $event->getMessage());
+        $this->assertEquals('message', $event->getName());
     }
 
-    public function testCallbackMessageEchoEvent()
+    public function testMessageEchoEvent()
     {
         $mockedMessageEcho = $this->createMock(MessageEcho::class);
         $event = new MessageEchoEvent('sender_id', 'recipient_id', 123456, $mockedMessageEcho);
@@ -40,9 +41,10 @@ class CalbbackEventTest extends AbstractTestCase
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedMessageEcho, $event->getMessageEcho());
+        $this->assertEquals('message_echo', $event->getName());
     }
 
-    public function testCallbackReadEvent()
+    public function testReadEvent()
     {
         $mockedRead = $this->createMock(Read::class);
         $event = new ReadEvent('sender_id', 'recipient_id', 123456, $mockedRead);
@@ -51,9 +53,10 @@ class CalbbackEventTest extends AbstractTestCase
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedRead, $event->getRead());
+        $this->assertEquals('read', $event->getName());
     }
 
-    public function testCallbackDeliveryEvent()
+    public function testDeliveryEvent()
     {
         $mockedDelivery = $this->createMock(Delivery::class);
         $event = new DeliveryEvent('sender_id', 'recipient_id', $mockedDelivery);
@@ -61,9 +64,10 @@ class CalbbackEventTest extends AbstractTestCase
         $this->assertEquals('sender_id', $event->getSenderId());
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals($mockedDelivery, $event->getDelivery());
+        $this->assertEquals('delivery', $event->getName());
     }
 
-    public function testCallbackPostbackEvent()
+    public function testPostbackEvent()
     {
         $mockedPostback = $this->createMock(Postback::class);
         $event = new PostbackEvent('sender_id', 'recipient_id', 123456, $mockedPostback);
@@ -72,9 +76,10 @@ class CalbbackEventTest extends AbstractTestCase
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedPostback, $event->getPostback());
+        $this->assertEquals('postback', $event->getName());
     }
 
-    public function testCallbackOptinEvent()
+    public function testOptinEvent()
     {
         $mockedOptin = $this->createMock(Optin::class);
         $event = new OptinEvent('sender_id', 'recipient_id', 123456, $mockedOptin);
@@ -83,9 +88,10 @@ class CalbbackEventTest extends AbstractTestCase
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedOptin, $event->getOptin());
+        $this->assertEquals('optin', $event->getName());
     }
 
-    public function testCallbackAccountLinkingEvent()
+    public function testAccountLinkingEvent()
     {
         $mockedAccountLinking = $this->createMock(AccountLinking::class);
         $event = new AccountLinkingEvent('sender_id', 'recipient_id', 123456, $mockedAccountLinking);
@@ -94,5 +100,6 @@ class CalbbackEventTest extends AbstractTestCase
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedAccountLinking, $event->getAccountLinking());
+        $this->assertEquals('account_linking', $event->getName());
     }
 }

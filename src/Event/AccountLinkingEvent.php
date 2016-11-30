@@ -49,4 +49,12 @@ class AccountLinkingEvent extends AbstractEvent
     {
         return $this->accountLinking;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
 }
