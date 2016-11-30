@@ -41,4 +41,9 @@ abstract class AbstractEvent
     {
         return $this->recipientId;
     }
+
+    /**
+     * @return string
+     */
+    abstract public function getName(): string;
 }

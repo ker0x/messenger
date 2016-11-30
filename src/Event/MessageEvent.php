@@ -57,4 +57,12 @@ class MessageEvent extends AbstractEvent
     {
         return self::NAME;
     }
+
+    /**
+     * @return bool
+     */
+    public function isQuickReply(): bool
+    {
+        return $this->message->hasQuickReply();
+    }
 }
