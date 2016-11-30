@@ -49,4 +49,12 @@ class PostbackEvent extends AbstractEvent
     {
         return $this->postback;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
 }

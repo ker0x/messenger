@@ -49,4 +49,12 @@ class OptinEvent extends AbstractEvent
     {
         return $this->optin;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
 }

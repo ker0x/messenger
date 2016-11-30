@@ -34,4 +34,12 @@ class DeliveryEvent extends AbstractEvent
     {
         return $this->delivery;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
 }

@@ -49,4 +49,12 @@ class MessageEchoEvent extends AbstractEvent
     {
         return $this->messageEcho;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return self::NAME;
+    }
 }
