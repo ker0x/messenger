@@ -6,9 +6,6 @@ use GuzzleHttp\ClientInterface;
 abstract class AbstractApi
 {
 
-    const API_URL = 'https://graph.facebook.com/';
-    const API_VERSION = 'v2.6';
-
     /**
      * @var string
      */

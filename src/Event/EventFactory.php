@@ -6,6 +6,7 @@ use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
+use Kerox\Messenger\Model\Callback\Payment;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\Read;
 
@@ -44,6 +45,10 @@ class EventFactory
 
         if (isset($payload['read'])) {
             return self::createReadEvent($payload);
+        }
+
+        if (isset($payload['payment'])) {
+            return self::createPaymentEvent($payload);
         }
 
         return self::createRawEvent($payload);
@@ -122,7 +127,7 @@ class EventFactory
      * @param $payload
      * @return \Kerox\Messenger\Event\AccountLinkingEvent
      */
-    public static function createAcountLinkingEvent($payload): AccountLinkingEvent
+    public static function createAcountLinkingEvent(array $payload): AccountLinkingEvent
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
@@ -136,7 +141,7 @@ class EventFactory
      * @param $payload
      * @return \Kerox\Messenger\Event\DeliveryEvent
      */
-    public static function createDeliveryEvent($payload): DeliveryEvent
+    public static function createDeliveryEvent(array $payload): DeliveryEvent
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
@@ -157,5 +162,15 @@ class EventFactory
         $read = Read::create($payload['read']);
 
         return new ReadEvent($senderId, $recipientId, $timestamp, $read);
+    }
+
+    public static function createPaymentEvent(array $payload)
+    {
+        $senderId = $payload['sender']['id'];
+        $recipientId = $payload['recipient']['id'];
+        $timestamp = $payload['timestamp'];
+        $payment = Payment::create($payload['payment']);
+
+        return new PaymentEvent($senderId, $recipientId, $timestamp, $payment);
     }
 }

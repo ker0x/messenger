@@ -7,6 +7,7 @@ use Kerox\Messenger\Event\DeliveryEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
 use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Event\OptinEvent;
+use Kerox\Messenger\Event\PaymentEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\RawEvent;
 use Kerox\Messenger\Event\ReadEvent;
@@ -15,6 +16,7 @@ use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
+use Kerox\Messenger\Model\Callback\Payment;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
@@ -105,6 +107,17 @@ class EventFactoryTest extends AbstractTestCase
         $array = json_decode($json, true);
 
         $expectedEvent = new ReadEvent('USER_ID', 'PAGE_ID', 1458668856463, Read::create($array['read']));
+        $event = EventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+    }
+
+    public function testPaymentEvent()
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Event/payment.json');
+        $array = json_decode($json, true);
+
+        $expectedEvent = new PaymentEvent('USER_ID', 'PAGE_ID', 1473208792799, Payment::create($array['payment']));
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
