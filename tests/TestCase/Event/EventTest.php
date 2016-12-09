@@ -6,6 +6,7 @@ use Kerox\Messenger\Event\DeliveryEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
 use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Event\OptinEvent;
+use Kerox\Messenger\Event\PaymentEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
@@ -13,6 +14,7 @@ use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
+use Kerox\Messenger\Model\Callback\Payment;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
@@ -101,5 +103,17 @@ class EventTest extends AbstractTestCase
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedAccountLinking, $event->getAccountLinking());
         $this->assertEquals('account_linking', $event->getName());
+    }
+
+    public function testPaymentEvent()
+    {
+        $mockedPayment = $this->createMock(Payment::class);
+        $event = new PaymentEvent('sender_id', 'recipient_id', 123456, $mockedPayment);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedPayment, $event->getPayment());
+        $this->assertEquals('payment', $event->getName());
     }
 }
