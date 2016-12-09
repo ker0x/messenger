@@ -1,8 +1,8 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Model;
 
+use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
-use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Address;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
