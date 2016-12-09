@@ -1,6 +1,7 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment;
 
+use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Common\Buttons\Postback;
 use Kerox\Messenger\Model\Common\Buttons\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
@@ -21,7 +22,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Generic;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Liste;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
-use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Address;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;

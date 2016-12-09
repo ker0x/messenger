@@ -1,6 +1,7 @@
 <?php
 namespace Kerox\Messenger\Event;
 
+use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
@@ -13,42 +14,31 @@ use Kerox\Messenger\Model\Callback\Read;
 class EventFactory
 {
 
+    use UtilityTrait;
+
+    const EVENTS = [
+        'message',
+        'postback',
+        'optin',
+        'account_linking',
+        'delivery',
+        'read',
+        'payment',
+    ];
+
     /**
      * @param array $payload
      * @return \Kerox\Messenger\Event\AbstractEvent
      */
     public static function create(array $payload): AbstractEvent
     {
-        if (isset($payload['message'])) {
-            if (isset($payload['message']['is_echo'])) {
-                return self::createMessageEchoEvent($payload);
+        foreach ($payload as $key => $value) {
+            if (in_array($key, self::EVENTS)) {
+                $eventName = UtilityTrait::camelize($key);
+                $functionName = 'create' . $eventName . 'Event';
+
+                return self::$functionName($payload);
             }
-
-            return self::createMessageEvent($payload);
-        }
-
-        if (isset($payload['postback'])) {
-            return self::createPostbackEvent($payload);
-        }
-
-        if (isset($payload['optin'])) {
-            return self::createOptinEvent($payload);
-        }
-
-        if (isset($payload['account_linking'])) {
-            return self::createAcountLinkingEvent($payload);
-        }
-
-        if (isset($payload['delivery'])) {
-            return self::createDeliveryEvent($payload);
-        }
-
-        if (isset($payload['read'])) {
-            return self::createReadEvent($payload);
-        }
-
-        if (isset($payload['payment'])) {
-            return self::createPaymentEvent($payload);
         }
 
         return self::createRawEvent($payload);
@@ -69,28 +59,20 @@ class EventFactory
 
     /**
      * @param array $payload
-     * @return \Kerox\Messenger\Event\MessageEchoEvent
+     * @return \Kerox\Messenger\Event\MessageEvent|\Kerox\Messenger\Event\MessageEchoEvent
      */
-    public static function createMessageEchoEvent(array $payload): MessageEchoEvent
+    public static function createMessageEvent(array $payload)
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
         $timestamp = $payload['timestamp'];
-        $messageEcho = MessageEcho::create($payload['message']);
 
-        return new MessageEchoEvent($senderId, $recipientId, $timestamp, $messageEcho);
-    }
-
-    /**
-     * @param array $payload
-     * @return \Kerox\Messenger\Event\MessageEvent
-     */
-    public static function createMessageEvent(array $payload): MessageEvent
-    {
-        $senderId = $payload['sender']['id'];
-        $recipientId = $payload['recipient']['id'];
-        $timestamp = $payload['timestamp'];
         $message = Message::create($payload['message']);
+        if (isset($payload['message']['is_echo'])) {
+            $message = MessageEcho::create($payload['message']);
+
+            return new MessageEchoEvent($senderId, $recipientId, $timestamp, $message);
+        }
 
         return new MessageEvent($senderId, $recipientId, $timestamp, $message);
     }
@@ -127,7 +109,7 @@ class EventFactory
      * @param $payload
      * @return \Kerox\Messenger\Event\AccountLinkingEvent
      */
-    public static function createAcountLinkingEvent(array $payload): AccountLinkingEvent
+    public static function createAccountLinkingEvent(array $payload): AccountLinkingEvent
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

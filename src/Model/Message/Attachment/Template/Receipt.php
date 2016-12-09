@@ -1,8 +1,8 @@
 <?php
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
+use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Message\Attachment\Template;
-use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Address;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 
 class Receipt extends Template
@@ -44,7 +44,7 @@ class Receipt extends Template
     protected $elements;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Address
+     * @var null|\Kerox\Messenger\Model\Common\Address
      */
     protected $address;
 
@@ -112,7 +112,7 @@ class Receipt extends Template
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Address $address
+     * @param \Kerox\Messenger\Model\Common\Address $address
      * @return Receipt
      */
     public function setAddress(Address $address): Receipt
