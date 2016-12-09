@@ -9,7 +9,7 @@ class Image extends File
     /**
      * @var array
      */
-    protected $allowedExtension = ['jpg', 'png', 'gif'];
+    protected $allowedExtensions = ['jpg', 'png', 'gif'];
 
     /**
      * Image constructor.
@@ -19,7 +19,7 @@ class Image extends File
      */
     public function __construct(string $url, bool $reusable = null)
     {
-        $this->isValidExtension($url, $this->allowedExtension);
+        $this->isValidExtension($url, $this->allowedExtensions);
 
         parent::__construct($url, $reusable, Attachment::TYPE_IMAGE);
     }
