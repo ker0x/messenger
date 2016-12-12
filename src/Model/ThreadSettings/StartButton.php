@@ -31,7 +31,9 @@ class StartButton extends ThreadSettings
         $json = parent::jsonSerialize();
         $json += [
             'call_to_actions' => [
-                'payload' => $this->payload,
+                [
+                    'payload' => $this->payload,
+                ],
             ],
         ];
 

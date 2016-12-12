@@ -9,6 +9,7 @@ use Kerox\Messenger\Model\ThreadSettings\DomainWhitelist;
 use Kerox\Messenger\Model\ThreadSettings\Greeting;
 use Kerox\Messenger\Model\ThreadSettings\Menu;
 use Kerox\Messenger\Model\ThreadSettings\Payment;
+use Kerox\Messenger\Model\ThreadSettings\StartButton;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ThreadSettingsTest extends AbstractTestCase
@@ -19,6 +20,14 @@ class ThreadSettingsTest extends AbstractTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$state must be either new_thread, existing_thread');
         $threadSettings = new ThreadSettings(ThreadSettings::TYPE_CALL_TO_ACTIONS, 'old_thread');
+    }
+
+    public function testStartButton()
+    {
+        $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ThreadSettings/start_button.json');
+        $startButton = new StartButton('USER_DEFINED_PAYLOAD');
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($startButton));
     }
 
     public function testAccountLinking()
