@@ -32,7 +32,7 @@ class EventFactory
      */
     public static function create(array $payload): AbstractEvent
     {
-        foreach ($payload as $key => $value) {
+        foreach (array_keys($payload) as $key) {
             if (in_array($key, self::EVENTS)) {
                 $eventName = UtilityTrait::camelize($key);
                 $functionName = 'create' . $eventName . 'Event';
