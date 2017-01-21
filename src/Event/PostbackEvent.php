@@ -57,4 +57,18 @@ class PostbackEvent extends AbstractEvent
     {
         return self::NAME;
     }
+
+    /**
+     * @param array $payload
+     * @return \Kerox\Messenger\Event\PostbackEvent
+     */
+    public static function create(array $payload): PostbackEvent
+    {
+        $senderId = $payload['sender']['id'];
+        $recipientId = $payload['recipient']['id'];
+        $timestamp = $payload['timestamp'];
+        $postback = Postback::create($payload['postback']);
+
+        return new static($senderId, $recipientId, $timestamp, $postback);
+    }
 }

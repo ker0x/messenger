@@ -42,4 +42,17 @@ class DeliveryEvent extends AbstractEvent
     {
         return self::NAME;
     }
+
+    /**
+     * @param $payload
+     * @return \Kerox\Messenger\Event\DeliveryEvent
+     */
+    public static function create(array $payload): DeliveryEvent
+    {
+        $senderId = $payload['sender']['id'];
+        $recipientId = $payload['recipient']['id'];
+        $delivery = Delivery::create($payload['delivery']);
+
+        return new static($senderId, $recipientId, $delivery);
+    }
 }
