@@ -162,6 +162,10 @@ class EventFactory
         return new PaymentEvent($senderId, $recipientId, $timestamp, $payment);
     }
 
+    /**
+     * @param array $payload
+     * @return \Kerox\Messenger\Event\CheckoutUpdateEvent
+     */
     public static function createCheckoutUpdateEvent(array $payload)
     {
         $senderId = $payload['sender']['id'];
