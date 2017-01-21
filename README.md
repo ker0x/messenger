@@ -40,7 +40,7 @@ To be able to send messages to an user, you need to configure a webhook in your 
 Once your webhook is configured, you need to validate the callback URL
 
 ```php
-if ($messenger->webhook()->isValidToken()) {
+if (!$messenger->webhook()->isValidToken()) {
     // Display an error
 }
 

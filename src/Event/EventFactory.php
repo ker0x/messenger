@@ -3,6 +3,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Model\Callback\AccountLinking;
+use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
@@ -24,6 +25,7 @@ class EventFactory
         'delivery',
         'read',
         'payment',
+        'checkout_update',
     ];
 
     /**
@@ -146,7 +148,11 @@ class EventFactory
         return new ReadEvent($senderId, $recipientId, $timestamp, $read);
     }
 
-    public static function createPaymentEvent(array $payload)
+    /**
+     * @param array $payload
+     * @return \Kerox\Messenger\Event\PaymentEvent
+     */
+    public static function createPaymentEvent(array $payload): PaymentEvent
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
@@ -154,5 +160,15 @@ class EventFactory
         $payment = Payment::create($payload['payment']);
 
         return new PaymentEvent($senderId, $recipientId, $timestamp, $payment);
+    }
+
+    public static function createCheckoutUpdateEvent(array $payload)
+    {
+        $senderId = $payload['sender']['id'];
+        $recipientId = $payload['recipient']['id'];
+        $timestamp = $payload['timestamp'];
+        $checkoutUpdate = CheckoutUpdate::create($payload['checkout_update']);
+
+        return new CheckoutUpdateEvent($senderId, $recipientId, $timestamp, $checkoutUpdate);
     }
 }

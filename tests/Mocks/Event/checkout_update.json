@@ -1,0 +1,21 @@
+{
+  "recipient": {
+    "id": "PAGE_ID"
+  },
+  "timestamp": 1473204787206,
+  "sender": {
+    "id": "USER_ID"
+  },
+  "checkout_update": {
+    "payload": "DEVELOPER_DEFINED_PAYLOAD",
+    "shipping_address": {
+      "id": 10105655000959552,
+      "country": "US",
+      "city": "MENLO PARK",
+      "street_1": "1 Hacker Way",
+      "street_2": "",
+      "state": "CA",
+      "postal_code": "94025"
+    }
+  }
+}
