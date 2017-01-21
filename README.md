@@ -18,10 +18,8 @@ A PHP libray to send message and configure thread to [Facebook Messenger](https:
 To install this plugin, run `composer require kerox/messenger` or add this snippet in your project’s composer.json.
 
 ```json
-{
-    "require": {
-        "kerox/messenger": "~1.0"
-    }
+"require": {
+    "kerox/messenger": "~1.0"
 }
 ```
 
@@ -42,7 +40,7 @@ To be able to send messages to an user, you need to configure a webhook in your 
 Once your webhook is configured, you need to validate the callback URL
 
 ```php
-if ($messenger->webhook()->isValidToken()) {
+if (!$messenger->webhook()->isValidToken()) {
     // Display an error
 }
 
@@ -59,7 +57,7 @@ if (!$messenger->webhook()->isValidCallback()) {
     header("HTTP/1.1 400 Invalid Request");
 }
 
-$events = $this->messenger->webhook()->getCallbackEvents();
+$events = $messenger->webhook()->getCallbackEvents();
 foreach ($events as $event) {
     if ($event instance of MessageEvent) {
         $message = $event->getMessage();

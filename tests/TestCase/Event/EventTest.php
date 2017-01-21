@@ -2,6 +2,7 @@
 namespace Kerox\Messenger\Test\TestCase\Callback;
 
 use Kerox\Messenger\Event\AccountLinkingEvent;
+use Kerox\Messenger\Event\CheckoutUpdateEvent;
 use Kerox\Messenger\Event\DeliveryEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
 use Kerox\Messenger\Event\MessageEvent;
@@ -10,6 +11,7 @@ use Kerox\Messenger\Event\PaymentEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
+use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
@@ -115,5 +117,17 @@ class EventTest extends AbstractTestCase
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedPayment, $event->getPayment());
         $this->assertEquals('payment', $event->getName());
+    }
+
+    public function testCheckoutUpdate()
+    {
+        $mockedCheckoutUpdate = $this->createMock(CheckoutUpdate::class);
+        $event = new CheckoutUpdateEvent('sender_id', 'recipient_id', 123456, $mockedCheckoutUpdate);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedCheckoutUpdate, $event->getCheckoutUpdate());
+        $this->assertEquals('checkout_update', $event->getName());
     }
 }

@@ -35,6 +35,11 @@ class Address implements \JsonSerializable
     protected $country;
 
     /**
+     * @var null|int
+     */
+    protected $id;
+
+    /**
      * Address constructor.
      *
      * @param string $street
@@ -117,6 +122,25 @@ class Address implements \JsonSerializable
     }
 
     /**
+     * @param int $id
+     * @return Address
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return null|int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return array
      */
     public function jsonSerialize(): array
@@ -128,6 +152,7 @@ class Address implements \JsonSerializable
             'postal_code' => $this->postalCode,
             'state' => $this->state,
             'country' => $this->country,
+            'id' => $this->id,
         ];
 
         return array_filter($json);
@@ -143,6 +168,10 @@ class Address implements \JsonSerializable
 
         if (isset($payload['street_2'])) {
             $address->setAdditionalStreet($payload['street_2']);
+        }
+
+        if (isset($payload['id'])) {
+            $address->setId($payload['id']);
         }
 
         return $address;

@@ -2,6 +2,7 @@
 namespace Kerox\Messenger\Test\TestCase\Event;
 
 use Kerox\Messenger\Event\AccountLinkingEvent;
+use Kerox\Messenger\Event\CheckoutUpdateEvent;
 use Kerox\Messenger\Event\EventFactory;
 use Kerox\Messenger\Event\DeliveryEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
@@ -12,6 +13,7 @@ use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\RawEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
+use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
@@ -118,6 +120,17 @@ class EventFactoryTest extends AbstractTestCase
         $array = json_decode($json, true);
 
         $expectedEvent = new PaymentEvent('USER_ID', 'PAGE_ID', 1473208792799, Payment::create($array['payment']));
+        $event = EventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+    }
+
+    public function testCheckoutEvent()
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Event/checkout_update.json');
+        $array = json_decode($json, true);
+
+        $expectedEvent = new CheckoutUpdateEvent('USER_ID', 'PAGE_ID', 1473204787206, CheckoutUpdate::create($array['checkout_update']));
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);

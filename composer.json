@@ -2,6 +2,7 @@
   "name": "kerox/messenger",
   "type": "library",
   "description": "PHP Library for Facebook Messenger",
+  "keywords": ["facebook", "messenger", "facebook messenger", "bot messenger", "api"],
   "homepage": "https://github.com/ker0x/messenger",
   "license": "MIT",
   "authors": [
