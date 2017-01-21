@@ -46,4 +46,10 @@ abstract class AbstractEvent
      * @return string
      */
     abstract public function getName(): string;
+
+    /**
+     * @param array $payload
+     * @return mixed
+     */
+    abstract public static function create(array $payload);
 }
