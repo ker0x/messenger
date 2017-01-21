@@ -65,4 +65,18 @@ class MessageEvent extends AbstractEvent
     {
         return $this->message->hasQuickReply();
     }
+
+    /**
+     * @param array $payload
+     * @return \Kerox\Messenger\Event\MessageEvent
+     */
+    public static function create(array $payload): MessageEvent
+    {
+        $senderId = $payload['sender']['id'];
+        $recipientId = $payload['recipient']['id'];
+        $timestamp = $payload['timestamp'];
+        $message = Message::create($payload['message']);
+
+        return new static($senderId, $recipientId, $timestamp, $message);
+    }
 }

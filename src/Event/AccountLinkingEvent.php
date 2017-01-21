@@ -57,4 +57,18 @@ class AccountLinkingEvent extends AbstractEvent
     {
         return self::NAME;
     }
+
+    /**
+     * @param $payload
+     * @return \Kerox\Messenger\Event\AccountLinkingEvent
+     */
+    public static function create(array $payload): AccountLinkingEvent
+    {
+        $senderId = $payload['sender']['id'];
+        $recipientId = $payload['recipient']['id'];
+        $timestamp = $payload['timestamp'];
+        $accountLinking = AccountLinking::create($payload['account_linking']);
+
+        return new static($senderId, $recipientId, $timestamp, $accountLinking);
+    }
 }

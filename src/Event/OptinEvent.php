@@ -57,4 +57,18 @@ class OptinEvent extends AbstractEvent
     {
         return self::NAME;
     }
+
+    /**
+     * @param array $payload
+     * @return \Kerox\Messenger\Event\OptinEvent
+     */
+    public static function create(array $payload): OptinEvent
+    {
+        $senderId = $payload['sender']['id'];
+        $recipientId = $payload['recipient']['id'];
+        $timestamp = $payload['timestamp'];
+        $optin = Optin::create($payload['optin']);
+
+        return new static($senderId, $recipientId, $timestamp, $optin);
+    }
 }
