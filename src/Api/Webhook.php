@@ -92,7 +92,7 @@ class Webhook extends AbstractApi
     public function sendSubscribe(): WebhookResponse
     {
         $request = new WebhookRequest($this->pageToken);
-        $response = $this->client->post('/me/subscribed_apps', $request->build());
+        $response = $this->client->post('me/subscribed_apps', $request->build());
 
         return new WebhookResponse($response);
     }
