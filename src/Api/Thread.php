@@ -27,7 +27,7 @@ class Thread extends AbstractApi
     public function addSetting(ThreadSettings $threadSettings): ThreadResponse
     {
         $request = new ThreadRequest($this->pageToken, $threadSettings);
-        $response = $this->client->post('/me/thread_settings', $request->build());
+        $response = $this->client->post('me/thread_settings', $request->build());
 
         return new ThreadResponse($response);
     }
@@ -44,7 +44,7 @@ class Thread extends AbstractApi
         $threadSettings = new ThreadSettings($type, $state);
 
         $request = new ThreadRequest($this->pageToken, $threadSettings);
-        $this->client->delete('/me/thread_settings', $request->build());
+        $this->client->delete('me/thread_settings', $request->build());
     }
 
     /**

@@ -41,7 +41,7 @@ class Send extends AbstractApi
         $this->isValidNotificationType($notificationType);
 
         $request = new SendRequest($this->pageToken, $recipient, $message, null, $notificationType);
-        $response = $this->client->post('/me/messages', $request->build());
+        $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
     }
@@ -58,7 +58,7 @@ class Send extends AbstractApi
         $this->isValidNotificationType($notificationType);
 
         $request = new SendRequest($this->pageToken, $recipient, null, $action, $notificationType);
-        $response = $this->client->post('/me/messages', $request->build());
+        $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
     }

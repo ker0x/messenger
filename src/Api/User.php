@@ -39,7 +39,7 @@ class User extends AbstractApi implements UserInterface
         }
 
         $request = new UserRequest($this->pageToken, $fields);
-        $response = $this->client->get(sprintf('/%s', $userId), $request->build());
+        $response = $this->client->get(sprintf('%s', $userId), $request->build());
 
         return new UserResponse($response);
     }

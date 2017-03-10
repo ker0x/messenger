@@ -71,7 +71,7 @@ class Messenger
 
         if ($client === null) {
             $client = new Client([
-                'base_uri' => self::API_URL . self::API_VERSION,
+                'base_uri' => self::API_URL . self::API_VERSION . '/',
             ]);
         }
         $this->client = $client;
