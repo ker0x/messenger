@@ -13,7 +13,7 @@ class Messenger
 {
 
     const API_URL = 'https://graph.facebook.com/';
-    const API_VERSION = 'v2.6';
+    const API_VERSION = 'v2.8';
 
     /**
      * @var string
