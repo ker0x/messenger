@@ -3,6 +3,7 @@ namespace Kerox\Messenger;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
@@ -54,6 +55,11 @@ class Messenger
      * @var \Kerox\Messenger\Api\Thread
      */
     protected $threadApi;
+
+    /**
+     * @var \Kerox\Messenger\Api\Code
+     */
+    protected $codeApi;
 
     /**
      * Messenger constructor.
@@ -124,5 +130,17 @@ class Messenger
         }
 
         return $this->threadApi;
+    }
+
+    /**
+     * @return \Kerox\Messenger\Api\Code
+     */
+    public function code(): Code
+    {
+        if ($this->codeApi === null) {
+            $this->codeApi = new Code($this->pageToken, $this->client);
+        }
+
+        return $this->codeApi;
     }
 }
