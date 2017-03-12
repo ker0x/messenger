@@ -34,7 +34,6 @@ class UserTest extends AbstractTestCase
 
     public function testGetProfile()
     {
-
         $response = $this->userApi->getProfile('1234abcd');
 
         $this->assertInstanceOf(UserResponse::class, $response);
