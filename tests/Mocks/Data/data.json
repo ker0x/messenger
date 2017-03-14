@@ -1,0 +1,21 @@
+{
+  "name": "page_messages_active_threads_unique",
+  "period": "day",
+  "values": [
+    {
+      "value": 83111,
+      "end_time": "2017-02-02T08:00:00+0000"
+    },
+    {
+      "value": 85215,
+      "end_time": "2017-02-03T08:00:00+0000"
+    },
+    {
+      "value": 87175,
+      "end_time": "2017-02-04T08:00:00+0000"
+    }
+  ],
+  "title": "Daily unique active threads count by thread fbid",
+  "description": "Daily: total unique active threads created between users and page.",
+  "id": "1234567/insights/page_messages_active_threads_unique/day"
+}

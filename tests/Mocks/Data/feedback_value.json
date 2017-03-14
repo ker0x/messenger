@@ -1,0 +1,10 @@
+{
+  "value": {
+    "TURN_ON": 40,
+    "TURN_OFF": 167,
+    "DELETE": 720,
+    "OTHER": 0,
+    "REPORT_SPAM": 0
+  },
+  "end_time": "2017-02-02T08:00:00+0000"
+}
