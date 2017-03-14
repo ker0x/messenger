@@ -4,6 +4,7 @@ namespace Kerox\Messenger;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Api\Code;
+use Kerox\Messenger\Api\Insights;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
@@ -60,6 +61,11 @@ class Messenger
      * @var \Kerox\Messenger\Api\Code
      */
     protected $codeApi;
+
+    /**
+     * @var \Kerox\Messenger\Api\Insights
+     */
+    protected $insightsApi;
 
     /**
      * Messenger constructor.
@@ -142,5 +148,14 @@ class Messenger
         }
 
         return $this->codeApi;
+    }
+
+    public function insights(): Insights
+    {
+        if ($this->insightsApi === null) {
+            $this->insightsApi = new Insights($this->pageToken, $this->client);
+        }
+
+        return $this->insightsApi;
     }
 }
