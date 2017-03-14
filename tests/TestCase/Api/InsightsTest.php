@@ -44,7 +44,7 @@ class InsightsTest extends AbstractTestCase
         ]);
 
         $insightsApi = new Insights('abcd1234', $client);
-        $response = $insightsApi->threads();
+        $response = $insightsApi->feedback();
 
         $this->assertInstanceOf(InsightsResponse::class, $response);
         $this->assertContainsOnlyInstancesOf(Data::class, $response->getData());
