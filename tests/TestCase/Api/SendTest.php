@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Message;
+use Kerox\Messenger\Model\Message\Attachment\Image;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
@@ -40,7 +41,7 @@ class SendTest extends AbstractTestCase
 
     public function testSendTextToUser()
     {
-        $response = $this->sendApi->sendMessage('1008372609250235', 'Hello World!');
+        $response = $this->sendApi->message('1008372609250235', 'Hello World!');
 
         $this->assertInstanceOf(SendResponse::class, $response);
         $this->assertEquals('1008372609250235', $response->getRecipientId());
@@ -51,7 +52,7 @@ class SendTest extends AbstractTestCase
     {
         $message = new Message($this->getReceipt());
 
-        $response = $this->sendApi->sendMessage('1008372609250235', $message);
+        $response = $this->sendApi->message('1008372609250235', $message);
 
         $this->assertInstanceOf(SendResponse::class, $response);
         $this->assertEquals('1008372609250235', $response->getRecipientId());
@@ -62,7 +63,7 @@ class SendTest extends AbstractTestCase
     {
         $message = $this->getReceipt();
 
-        $response = $this->sendApi->sendMessage('1008372609250235', $message);
+        $response = $this->sendApi->message('1008372609250235', $message);
 
         $this->assertInstanceOf(SendResponse::class, $response);
         $this->assertEquals('1008372609250235', $response->getRecipientId());
@@ -73,19 +74,19 @@ class SendTest extends AbstractTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$message must be a string or an instance of Message or Attachment');
-        $this->sendApi->sendMessage('1008372609250235', 1234);
+        $this->sendApi->message('1008372609250235', 1234);
     }
 
     public function testBadNotificationType()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$notificationType must be either REGULAR, SILENT_PUSH, NO_PUSH');
-        $this->sendApi->sendMessage('1008372609250235', 'Hello World!', 'SILENT_REGULAR');
+        $this->sendApi->message('1008372609250235', 'Hello World!', 'SILENT_REGULAR');
     }
 
     public function testSendActionToUser()
     {
-        $response = $this->sendApi->sendAction('1234abcd', 'typing_on');
+        $response = $this->sendApi->action('1234abcd', 'typing_on');
 
         $this->assertInstanceOf(SendResponse::class, $response);
     }
@@ -94,7 +95,29 @@ class SendTest extends AbstractTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$action must be either typing_on, typing_off, mark_seen');
-        $this->sendApi->sendAction('1008372609250235', 'typing_seen');
+        $this->sendApi->action('1008372609250235', 'typing_seen');
+    }
+
+    public function testSendAttachment()
+    {
+        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/attachment.json');
+        $mockedResponse = new MockHandler([
+            new Response(200, [], $bodyResponse),
+        ]);
+
+        $handler = HandlerStack::create($mockedResponse);
+        $client = new Client([
+            'handler' => $handler
+        ]);
+
+        $sendApi = new Send('abcd1234', $client);
+
+        $response = $sendApi->attachment((new Image('http://www.messenger-rocks.com/image.jpg', true)));
+
+        $this->assertInstanceOf(SendResponse::class, $response);
+        $this->assertEquals('1854626884821032', $response->getAttachmentId());
+        $this->assertNull($response->getRecipientId());
+        $this->assertNull($response->getMessageId());
     }
 
     public function tearDown()

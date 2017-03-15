@@ -35,15 +35,28 @@ class Send extends AbstractApi
      * @param string $notificationType
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function sendMessage(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
+    public function message(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
     {
         $message = $this->isValidMessage($message);
         $this->isValidNotificationType($notificationType);
 
-        $request = new SendRequest($this->pageToken, $recipient, $message, null, $notificationType);
+        $request = new SendRequest($this->pageToken, $message, $recipient, $notificationType);
         $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
+    }
+
+    /**
+     * @deprecated since 1.2.0 and will be remove in 1.3.0. Use the method `message()` instead
+     * @see message()
+     * @param string $recipient
+     * @param $message
+     * @param string $notificationType
+     * @return \Kerox\Messenger\Response\SendResponse
+     */
+    public function sendMessage(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
+    {
+        return $this->message($recipient, $message, $notificationType);
     }
 
     /**
@@ -52,13 +65,40 @@ class Send extends AbstractApi
      * @param string $notificationType
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function sendAction(string $recipient, string $action, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
+    public function action(string $recipient, string $action, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
     {
         $this->isValidAction($action);
         $this->isValidNotificationType($notificationType);
 
-        $request = new SendRequest($this->pageToken, $recipient, null, $action, $notificationType);
+        $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, SendRequest::TYPE_ACTION);
         $response = $this->client->post('me/messages', $request->build());
+
+        return new SendResponse($response);
+    }
+
+    /**
+     * @deprecated since 1.2.0 and will be removed in 1.3.0. Use the method `action()` instead
+     * @see action()
+     * @param string $recipient
+     * @param string $action
+     * @param string $notificationType
+     * @return \Kerox\Messenger\Response\SendResponse
+     */
+    public function sendAction(string $recipient, string $action, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
+    {
+        return $this->action($recipient, $action, $notificationType);
+    }
+
+    /**
+     * @param \Kerox\Messenger\Model\Message\Attachment $attachment
+     * @return \Kerox\Messenger\Response\SendResponse
+     */
+    public function attachment(Attachment $attachment): SendResponse
+    {
+        $message = $this->isValidMessage($attachment);
+
+        $request = new SendRequest($this->pageToken, $message);
+        $response = $this->client->post('me/message_attachments', $request->build());
 
         return new SendResponse($response);
     }
