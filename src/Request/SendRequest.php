@@ -1,6 +1,8 @@
 <?php
 namespace Kerox\Messenger\Request;
 
+use Kerox\Messenger\Model\Message;
+
 class SendRequest extends AbstractRequest
 {
 
@@ -8,7 +10,7 @@ class SendRequest extends AbstractRequest
     const TYPE_ACTION = 'action';
 
     /**
-     * @var null|string
+     * @var null|array
      */
     protected $recipient;
 
@@ -36,11 +38,11 @@ class SendRequest extends AbstractRequest
      * @param string|null $recipient
      * @param string $requestType
      */
-    public function __construct(string $pageToken, $content, $recipient = null, $notificationType = null, string $requestType = self::TYPE_MESSAGE)
+    public function __construct(string $pageToken, $content, string $recipient = null, string $notificationType = null, string $requestType = self::TYPE_MESSAGE)
     {
         parent::__construct($pageToken);
 
-        if ($requestType === self::TYPE_MESSAGE) {
+        if ($content instanceof Message || $requestType === self::TYPE_MESSAGE) {
             $this->message = $content;
         } else {
             $this->senderAction = $content;
