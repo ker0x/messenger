@@ -27,7 +27,7 @@ class SendResponseTest extends AbstractTestCase
 
     public function testResponseWithAttachmentId()
     {
-        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/attachment.json');
+        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/attachment_to_user.json');
 
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);

@@ -1,11 +1,16 @@
 <?php
 namespace Kerox\Messenger\Request;
 
+use Kerox\Messenger\Model\Message;
+
 class SendRequest extends AbstractRequest
 {
 
+    const TYPE_MESSAGE = 'message';
+    const TYPE_ACTION = 'action';
+
     /**
-     * @var string
+     * @var null|array
      */
     protected $recipient;
 
@@ -28,18 +33,22 @@ class SendRequest extends AbstractRequest
      * Request constructor.
      *
      * @param string $pageToken
-     * @param string $recipient
-     * @param $message
-     * @param $senderAction
-     * @param $notificationType
+     * @param string|\Kerox\Messenger\Model\Message $content
+     * @param string|null $notificationType
+     * @param string|null $recipient
+     * @param string $requestType
      */
-    public function __construct(string $pageToken, string $recipient, $message, $senderAction, $notificationType)
+    public function __construct(string $pageToken, $content, string $recipient = null, string $notificationType = null, string $requestType = self::TYPE_MESSAGE)
     {
         parent::__construct($pageToken);
 
-        $this->recipient = $recipient;
-        $this->message = $message;
-        $this->senderAction = $senderAction;
+        if ($content instanceof Message || $requestType === self::TYPE_MESSAGE) {
+            $this->message = $content;
+        } else {
+            $this->senderAction = $content;
+        }
+
+        $this->recipient = (is_string($recipient)) ? ['id' => $recipient] : $recipient;
         $this->notificationType = $notificationType;
     }
 
@@ -59,9 +68,7 @@ class SendRequest extends AbstractRequest
     protected function buildBody(): array
     {
         $body = [
-            'recipient' => [
-                'id' => $this->recipient,
-            ],
+            'recipient' => $this->recipient,
             'message' => $this->message,
             'sender_action' => $this->senderAction,
             'notification_type' => $this->notificationType,
