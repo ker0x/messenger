@@ -10,14 +10,33 @@ class Thread extends AbstractApi
 {
 
     /**
+     * @var null|\Kerox\Messenger\Api\Thread
+     */
+    private static $_instance;
+
+    /**
      * ThreadSettings constructor.
      *
      * @param string $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
-    public function __construct($pageToken, ClientInterface $client)
+    public function __construct(string $pageToken, ClientInterface $client)
     {
         parent::__construct($pageToken, $client);
+    }
+
+    /**
+     * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
+     * @return \Kerox\Messenger\Api\Thread
+     */
+    public static function getInstance(string $pageToken, ClientInterface $client): Thread
+    {
+        if (self::$_instance === null) {
+            self::$_instance = new Thread($pageToken, $client);
+        }
+
+        return self::$_instance;
     }
 
     /**

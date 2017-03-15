@@ -12,6 +12,11 @@ class Webhook extends AbstractApi
 {
 
     /**
+     * @var null|\Kerox\Messenger\Api\Webhook
+     */
+    private static $_instance;
+
+    /**
      * @var string
      */
     protected $appSecret;
@@ -57,6 +62,23 @@ class Webhook extends AbstractApi
         $this->appSecret = $appSecret;
         $this->verifyToken = $verifyToken;
         $this->request = $request ?: ServerRequest::fromGlobals();
+    }
+
+    /**
+     * @param string $appSecret
+     * @param string $verifyToken
+     * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @return \Kerox\Messenger\Api\Webhook
+     */
+    public static function getInstance(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ServerRequestInterface $request = null): Webhook
+    {
+        if (self::$_instance === null) {
+            self::$_instance = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        }
+
+        return self::$_instance;
     }
 
     /**
@@ -120,7 +142,7 @@ class Webhook extends AbstractApi
     public function getBody(): string
     {
         if ($this->body === null) {
-            $this->body = (string)$this->request->getBody();
+            $this->body = (string) $this->request->getBody();
         }
 
         return $this->body;

@@ -19,6 +19,11 @@ class Send extends AbstractApi
     const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
 
     /**
+     * @var null|\Kerox\Messenger\Api\Send
+     */
+    private static $_instance;
+
+    /**
      * Send constructor.
      *
      * @param string $pageToken
@@ -27,6 +32,20 @@ class Send extends AbstractApi
     public function __construct(string $pageToken, ClientInterface $client)
     {
         parent::__construct($pageToken, $client);
+    }
+
+    /**
+     * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
+     * @return \Kerox\Messenger\Api\Send
+     */
+    public static function getInstance(string $pageToken, ClientInterface $client): Send
+    {
+        if (self::$_instance === null) {
+            self::$_instance = new Send($pageToken, $client);
+        }
+
+        return self::$_instance;
     }
 
     /**
