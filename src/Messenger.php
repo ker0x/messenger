@@ -38,36 +38,6 @@ class Messenger
     protected $client;
 
     /**
-     * @var \Kerox\Messenger\Api\Send
-     */
-    protected $sendApi;
-
-    /**
-     * @var \Kerox\Messenger\Api\Webhook
-     */
-    protected $webhookApi;
-
-    /**
-     * @var \Kerox\Messenger\Api\User
-     */
-    protected $userApi;
-
-    /**
-     * @var \Kerox\Messenger\Api\Thread
-     */
-    protected $threadApi;
-
-    /**
-     * @var \Kerox\Messenger\Api\Code
-     */
-    protected $codeApi;
-
-    /**
-     * @var \Kerox\Messenger\Api\Insights
-     */
-    protected $insightsApi;
-
-    /**
      * Messenger constructor.
      *
      * @param string $appSecret
@@ -94,11 +64,7 @@ class Messenger
      */
     public function send(): Send
     {
-        if ($this->sendApi === null) {
-            $this->sendApi = new Send($this->pageToken, $this->client);
-        }
-
-        return $this->sendApi;
+        return Send::getInstance($this->pageToken, $this->client);
     }
 
     /**
@@ -107,11 +73,7 @@ class Messenger
      */
     public function webhook(ServerRequestInterface $request = null): Webhook
     {
-        if ($this->webhookApi === null) {
-            $this->webhookApi = new Webhook($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
-        }
-
-        return $this->webhookApi;
+        return Webhook::getInstance($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
     }
 
     /**
@@ -119,11 +81,7 @@ class Messenger
      */
     public function user(): User
     {
-        if ($this->userApi === null) {
-            $this->userApi = new User($this->pageToken, $this->client);
-        }
-
-        return $this->userApi;
+        return User::getInstance($this->pageToken, $this->client);
     }
 
     /**
@@ -131,11 +89,7 @@ class Messenger
      */
     public function thread(): Thread
     {
-        if ($this->threadApi === null) {
-            $this->threadApi = new Thread($this->pageToken, $this->client);
-        }
-
-        return $this->threadApi;
+        return Thread::getInstance($this->pageToken, $this->client);
     }
 
     /**
@@ -143,19 +97,14 @@ class Messenger
      */
     public function code(): Code
     {
-        if ($this->codeApi === null) {
-            $this->codeApi = new Code($this->pageToken, $this->client);
-        }
-
-        return $this->codeApi;
+        return Code::getInstance($this->pageToken, $this->client);
     }
 
+    /**
+     * @return \Kerox\Messenger\Api\Insights
+     */
     public function insights(): Insights
     {
-        if ($this->insightsApi === null) {
-            $this->insightsApi = new Insights($this->pageToken, $this->client);
-        }
-
-        return $this->insightsApi;
+        return Insights::getInstance($this->pageToken, $this->client);
     }
 }

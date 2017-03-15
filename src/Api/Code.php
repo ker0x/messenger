@@ -11,14 +11,33 @@ class Code extends AbstractApi
     const CODE_TYPE_STANDARD = 'standard';
 
     /**
+     * @var null|\Kerox\Messenger\Api\Code
+     */
+    private static $_instance;
+
+    /**
      * Code constructor.
      *
      * @param string $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
-    public function __construct($pageToken, ClientInterface $client)
+    public function __construct(string $pageToken, ClientInterface $client)
     {
         parent::__construct($pageToken, $client);
+    }
+
+    /**
+     * @param string $pageToken
+     * @param \GuzzleHttp\ClientInterface $client
+     * @return \Kerox\Messenger\Api\Code
+     */
+    public static function getInstance(string $pageToken, ClientInterface $client): Code
+    {
+        if (self::$_instance === null) {
+            self::$_instance = new Code($pageToken, $client);
+        }
+
+        return self::$_instance;
     }
 
     /**
