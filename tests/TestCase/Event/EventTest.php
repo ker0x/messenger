@@ -9,6 +9,7 @@ use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Event\OptinEvent;
 use Kerox\Messenger\Event\PaymentEvent;
 use Kerox\Messenger\Event\PostbackEvent;
+use Kerox\Messenger\Event\PreCheckoutEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
@@ -18,6 +19,7 @@ use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
 use Kerox\Messenger\Model\Callback\Payment;
 use Kerox\Messenger\Model\Callback\Postback;
+use Kerox\Messenger\Model\Callback\PreCheckout;
 use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -129,5 +131,17 @@ class EventTest extends AbstractTestCase
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedCheckoutUpdate, $event->getCheckoutUpdate());
         $this->assertEquals('checkout_update', $event->getName());
+    }
+
+    public function testPreCheckout()
+    {
+        $mockedPreCheckout = $this->createMock(PreCheckout::class);
+        $event = new PreCheckoutEvent('sender_id', 'recipient_id', 123456, $mockedPreCheckout);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedPreCheckout, $event->getPreCheckout());
+        $this->assertEquals('pre_checkout', $event->getName());
     }
 }

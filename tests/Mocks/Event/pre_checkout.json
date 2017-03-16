@@ -1,0 +1,28 @@
+{
+  "recipient": {
+    "id": "PAGE_ID"
+  },
+  "timestamp": 1473208792799,
+  "sender": {
+    "id": "USER_ID"
+  },
+  "pre_checkout":{
+    "payload":"DEVELOPER_DEFINED_PAYLOAD",
+    "requested_user_info":{
+      "shipping_address":{
+        "name":"Peter Chang",
+        "street_1": "1 Hacker Way",
+        "street_2": "",
+        "city": "MENLO PARK",
+        "state": "CA",
+        "country": "US",
+        "postal_code": "94025"
+      },
+      "contact_name":"Peter Chang"
+    },
+    "amount":{
+      "currency":"USD",
+      "amount":"29.62"
+    }
+  }
+}
