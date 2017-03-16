@@ -5,6 +5,11 @@ class Address implements \JsonSerializable
 {
 
     /**
+     * @var null|string
+     */
+    protected $name;
+
+    /**
      * @var string
      */
     protected $street;
@@ -60,6 +65,25 @@ class Address implements \JsonSerializable
         $this->postalCode = $postalCode;
         $this->state = $state;
         $this->country = $country;
+    }
+
+    /**
+     * @param string $name
+     * @return \Kerox\Messenger\Model\Common\Address
+     */
+    public function setName(string $name): Address
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -146,6 +170,7 @@ class Address implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
+            'name' => $this->name,
             'street_1' => $this->street,
             'street_2' => $this->additionalStreet,
             'city' => $this->city,
@@ -172,6 +197,10 @@ class Address implements \JsonSerializable
 
         if (isset($payload['id'])) {
             $address->setId($payload['id']);
+        }
+
+        if (isset($payload['name'])) {
+            $address->setName($payload['name']);
         }
 
         return $address;

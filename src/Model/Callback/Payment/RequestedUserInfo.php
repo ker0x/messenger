@@ -31,10 +31,10 @@ class RequestedUserInfo
      *
      * @param \Kerox\Messenger\Model\Common\Address $shippingAddress
      * @param string $contactName
-     * @param string $contactEmail
-     * @param string $contactPhone
+     * @param null|string $contactEmail
+     * @param null|string $contactPhone
      */
-    public function __construct(Address $shippingAddress, string $contactName, string $contactEmail, string $contactPhone)
+    public function __construct(Address $shippingAddress, string $contactName, $contactEmail = null, $contactPhone = null)
     {
         $this->shippingAddress = $shippingAddress;
         $this->contactName = $contactName;
@@ -59,7 +59,7 @@ class RequestedUserInfo
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getContactEmail(): string
     {
@@ -67,7 +67,7 @@ class RequestedUserInfo
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getContactPhone(): string
     {
@@ -82,6 +82,9 @@ class RequestedUserInfo
     {
         $shippingAddress = Address::create($payload['shipping_address']);
 
-        return new static($shippingAddress, $payload['contact_name'], $payload['contact_email'], $payload['contact_phone']);
+        $contactEmail = $payload['contact_email'] ?? null;
+        $contactPhone = $payload['contact_phone'] ?? null;
+
+        return new static($shippingAddress, $payload['contact_name'], $contactEmail, $contactPhone);
     }
 }

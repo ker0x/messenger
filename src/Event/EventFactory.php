@@ -13,6 +13,7 @@ class EventFactory
         'read' => ReadEvent::class,
         'payment' => PaymentEvent::class,
         'checkout_update' => CheckoutUpdateEvent::class,
+        'pre_checkout' => PreCheckoutEvent::class,
     ];
 
     /**
