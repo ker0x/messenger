@@ -12,6 +12,7 @@ class AccountLinkingTest extends AbstractTestCase
         $accountLinking = new AccountLinking('linked', 'PASS_THROUGH_AUTHORIZATION_CODE');
 
         $this->assertEquals('linked', $accountLinking->getStatus());
+        $this->assertTrue($accountLinking->hasAuthorizationCode());
         $this->assertEquals('PASS_THROUGH_AUTHORIZATION_CODE', $accountLinking->getAuthorizationCode());
     }
 }

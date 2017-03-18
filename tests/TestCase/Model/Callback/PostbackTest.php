@@ -14,6 +14,7 @@ class PostbackTest extends AbstractTestCase
         $postback = new Postback('USER_DEFINED_PAYLOAD', $stub);
 
         $this->assertEquals('USER_DEFINED_PAYLOAD', $postback->getPayload());
+        $this->assertTrue($postback->hasReferral());
         $this->assertEquals($stub, $postback->getReferral());
     }
 }
