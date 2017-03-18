@@ -35,6 +35,14 @@ class Postback
     }
 
     /**
+     * @return bool
+     */
+    public function hasReferral(): bool
+    {
+        return $this->referral !== null;
+    }
+
+    /**
      * @return null|\Kerox\Messenger\Model\Callback\Referral
      */
     public function getReferral()

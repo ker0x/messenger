@@ -35,6 +35,14 @@ class AccountLinking
     }
 
     /**
+     * @return bool
+     */
+    public function hasAuthorizationCode(): bool
+    {
+        return $this->authorizationCode !== null;
+    }
+
+    /**
      * @return null|string
      */
     public function getAuthorizationCode()
