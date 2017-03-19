@@ -3,6 +3,10 @@ namespace Kerox\Messenger\Model\ThreadSettings;
 
 use Kerox\Messenger\Model\ThreadSettings;
 
+/**
+ * @deprecated since 1.2.0 and will be remove in 1.3.0.
+ * @see \Kerox\Messenger\Model\ProfileSettings::addAccountLinkingUrl()
+ */
 class AccountLinking extends ThreadSettings
 {
 

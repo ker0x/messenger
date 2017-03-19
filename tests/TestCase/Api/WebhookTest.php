@@ -51,7 +51,7 @@ class WebhookTest extends AbstractTestCase
 
     public function testSubscribe()
     {
-        $response = $this->webhookApi->sendSubscribe();
+        $response = $this->webhookApi->subscribe();
 
         $this->assertInstanceOf(WebhookResponse::class, $response);
         $this->assertTrue($response->isSuccess());
@@ -71,7 +71,7 @@ class WebhookTest extends AbstractTestCase
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
 
         $this->assertTrue($webhook->isValidToken());
-        $this->assertEquals('1234abcd', $webhook->getChallenge());
+        $this->assertEquals('1234abcd', $webhook->challenge());
     }
 
     public function testIsValidCallback()

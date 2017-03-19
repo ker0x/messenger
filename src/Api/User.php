@@ -44,10 +44,10 @@ class User extends AbstractApi implements UserInterface
      * @param array|null $fields
      * @return \Kerox\Messenger\Response\UserResponse
      */
-    public function getProfile(string $userId, array $fields = null): UserResponse
+    public function profile(string $userId, array $fields = []): UserResponse
     {
         $allowedFields = $this->getAllowedFields();
-        if ($fields !== null) {
+        if (!empty($fields)) {
             foreach ($fields as $field) {
                 if (!in_array($field, $allowedFields)) {
                     throw new \InvalidArgumentException($field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields));
@@ -58,9 +58,21 @@ class User extends AbstractApi implements UserInterface
         }
 
         $request = new UserRequest($this->pageToken, $fields);
-        $response = $this->client->get(sprintf('%s', $userId), $request->build());
+        $response = $this->client->get($userId, $request->build());
 
         return new UserResponse($response);
+    }
+
+    /**
+     * @deprecated since 1.2.0 and will be remove in 1.3.0.
+     * @see profile()
+     * @param string $userId
+     * @param array $fields
+     * @return \Kerox\Messenger\Response\UserResponse
+     */
+    public function getProfile(string $userId, array $fields = []): UserResponse
+    {
+        return $this->profile($userId, $fields);
     }
 
     /**

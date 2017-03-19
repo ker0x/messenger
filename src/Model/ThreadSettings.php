@@ -3,6 +3,10 @@ namespace Kerox\Messenger\Model;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
 
+/**
+ * @deprecated since 1.2.0 and will be remove in 1.3.0.
+ * @see \Kerox\Messenger\Model\ProfileSettings
+ */
 class ThreadSettings implements \JsonSerializable
 {
 

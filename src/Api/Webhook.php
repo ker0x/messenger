@@ -101,7 +101,7 @@ class Webhook extends AbstractApi
     /**
      * @return string|null
      */
-    public function getChallenge()
+    public function challenge()
     {
         $params = $this->request->getQueryParams();
 
@@ -109,14 +109,34 @@ class Webhook extends AbstractApi
     }
 
     /**
+     * @deprecated since 1.2.0 and will be removed in 1.3.0.
+     * @see challenge()
+     * @return null|string
+     */
+    public function getChallenge()
+    {
+        return $this->challenge();
+    }
+
+    /**
      * @return \Kerox\Messenger\Response\WebhookResponse
      */
-    public function sendSubscribe(): WebhookResponse
+    public function subscribe(): WebhookResponse
     {
         $request = new WebhookRequest($this->pageToken);
         $response = $this->client->post('me/subscribed_apps', $request->build());
 
         return new WebhookResponse($response);
+    }
+
+    /**
+     * @deprecated since 1.2.0 and will be removed in 1.3.0.
+     * @see subscribe()
+     * @return \Kerox\Messenger\Response\WebhookResponse
+     */
+    public function sendSubscribe(): WebhookResponse
+    {
+        return $this->subscribe();
     }
 
     /**
