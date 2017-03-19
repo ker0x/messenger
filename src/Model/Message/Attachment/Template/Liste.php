@@ -92,18 +92,16 @@ class Liste extends Template
      */
     public function jsonSerialize(): array
     {
-        $payload = [
-            'template_type' => Template::TYPE_LIST,
-            'top_element_style' => $this->topElementStyle,
-            'elements' => $this->elements,
-            'buttons' => $this->buttons,
-        ];
-
         $json = parent::jsonSerialize();
         $json += [
-            'payload' => array_filter($payload),
+            'payload' => [
+                'template_type' => Template::TYPE_LIST,
+                'top_element_style' => $this->topElementStyle,
+                'elements' => $this->elements,
+                'buttons' => $this->buttons,
+            ],
         ];
 
-        return $json;
+        return $this->arrayFilter($json);
     }
 }

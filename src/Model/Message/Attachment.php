@@ -1,11 +1,13 @@
 <?php
 namespace Kerox\Messenger\Model\Message;
 
+use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Helper\ValidatorTrait;
 
 class Attachment implements \JsonSerializable
 {
 
+    use UtilityTrait;
     use ValidatorTrait;
 
     const TYPE_IMAGE = 'image';

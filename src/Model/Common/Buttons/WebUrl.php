@@ -34,6 +34,11 @@ class WebUrl extends AbstractButtons
     protected $fallbackUrl;
 
     /**
+     * @var null|string
+     */
+    protected $webviewShareButton;
+
+    /**
      * WebUrl constructor.
      *
      * @param string $title
@@ -88,6 +93,15 @@ class WebUrl extends AbstractButtons
         return $this;
     }
 
+    public function setWebviewSahreButton(bool $webviewSahreButton): WebUrl
+    {
+        if (!$webviewSahreButton) {
+            $this->webviewShareButton = 'hide';
+        }
+
+        return $this;
+    }
+
     /**
      * @return array
      */
@@ -112,6 +126,7 @@ class WebUrl extends AbstractButtons
             'webview_height_ratio' => $this->webviewHeightRatio,
             'messenger_extensions' => $this->messengerExtension,
             'fallback_url' => $this->fallbackUrl,
+            'webview_share_button' => $this->webviewShareButton,
         ];
 
         return array_filter($json);

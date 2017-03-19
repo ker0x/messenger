@@ -167,9 +167,14 @@ class TemplateTest extends AbstractTestCase
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/generic.json');
 
         $element = (new GenericElement('Welcome to Peter\'s Hats'))
-            ->setItemUrl('https://petersfancybrownhats.com')
             ->setImageUrl('https://petersfancybrownhats.com/company_image.png')
             ->setSubtitle('We\'ve got the right hat for everyone.')
+            ->setDefaultAction(
+                (new WebUrl('', 'https://peterssendreceiveapp.ngrok.io/view?item=103'))
+                    ->setMessengerExtension(true)
+                    ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
+                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
+            )
             ->setButtons([
                 new WebUrl('View Website', 'https://petersfancybrownhats.com'),
                 new Postback('Start Chatting', 'DEVELOPER_DEFINED_PAYLOAD'),
@@ -263,10 +268,21 @@ class TemplateTest extends AbstractTestCase
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/receipt.json');
 
         $elements = [
-            (new ReceiptElement('Classic White T-Shirt', 50))->setSubtitle('100% Soft and Luxurious Cotton')->setQuantity(2)->setCurrency('USD')->setImageUrl('http://petersapparel.parseapp.com/img/whiteshirt.png'),
-            (new ReceiptElement('Classic Gray T-Shirt', 25))->setSubtitle('100% Soft and Luxurious Cotton')->setQuantity(1)->setCurrency('USD')->setImageUrl('http://petersapparel.parseapp.com/img/grayshirt.png'),
+            (new ReceiptElement('Classic White T-Shirt', 50))
+                ->setSubtitle('100% Soft and Luxurious Cotton')
+                ->setQuantity(2)
+                ->setCurrency('USD')
+                ->setImageUrl('http://petersapparel.parseapp.com/img/whiteshirt.png'),
+            (new ReceiptElement('Classic Gray T-Shirt', 25))
+                ->setSubtitle('100% Soft and Luxurious Cotton')
+                ->setQuantity(1)
+                ->setCurrency('USD')
+                ->setImageUrl('http://petersapparel.parseapp.com/img/grayshirt.png'),
         ];
-        $summary = (new Summary(56.14))->setSubtotal(75.00)->setShippingCost(4.95)->setTotalTax(6.19);
+        $summary = (new Summary(56.14))
+            ->setSubtotal(75.00)
+            ->setShippingCost(4.95)
+            ->setTotalTax(6.19);
 
         $receipt = new Receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
         $receipt
@@ -274,8 +290,12 @@ class TemplateTest extends AbstractTestCase
             ->setTimestamp('1428444852')
             ->setAddress((new Address('1 Hacker Way', 'Menlo Park', '94025', 'CA', 'US'))->setAdditionalStreet('Apt 2'))
             ->setAdjustments([
-                (new Adjustment())->setName('New Customer Discount')->setAmount(20),
-                (new Adjustment())->setName('$10 Off Coupon')->setAmount(10),
+                (new Adjustment())
+                    ->setName('New Customer Discount')
+                    ->setAmount(20),
+                (new Adjustment())
+                    ->setName('$10 Off Coupon')
+                    ->setAmount(10),
             ]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($receipt));

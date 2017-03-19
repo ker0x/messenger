@@ -138,25 +138,23 @@ class Receipt extends Template
      */
     public function jsonSerialize(): array
     {
-        $payload = [
-            'template_type' => Template::TYPE_RECEIPT,
-            'recipient_name' => $this->recipientName,
-            'order_number' => $this->orderNumber,
-            'currency' => $this->currency,
-            'payment_method' => $this->paymentMethod,
-            'order_url' => $this->orderUrl,
-            'timestamp' => $this->timestamp,
-            'elements' => $this->elements,
-            'address' => $this->address,
-            'summary' => $this->summary,
-            'adjustments' => $this->adjustments,
-        ];
-
         $json = parent::jsonSerialize();
         $json += [
-            'payload' => array_filter($payload),
+            'payload' => [
+                'template_type' => Template::TYPE_RECEIPT,
+                'recipient_name' => $this->recipientName,
+                'order_number' => $this->orderNumber,
+                'currency' => $this->currency,
+                'payment_method' => $this->paymentMethod,
+                'order_url' => $this->orderUrl,
+                'timestamp' => $this->timestamp,
+                'elements' => $this->elements,
+                'address' => $this->address,
+                'summary' => $this->summary,
+                'adjustments' => $this->adjustments,
+            ],
         ];
 
-        return $json;
+        return $this->arrayFilter($json);
     }
 }
