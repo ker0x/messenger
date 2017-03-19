@@ -10,6 +10,22 @@
 
 A PHP library to interact with [Facebook Messenger Platform](https://www.messenger.com/)
 
+## Installation
+
+To install this library, run `composer require kerox/messenger` or add this snippet in your project’s composer.json.
+
+```json
+"require": {
+    "kerox/messenger": "~1.0"
+}
+```
+
+## Usage
+
+Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn how to use this library
+
+## Todo
+
 ### API
 
 - [x] Code
@@ -51,20 +67,6 @@ A PHP library to interact with [Facebook Messenger Platform](https://www.messeng
 - [x] Pre Checkout
 - [x] Read
 - [x] Referral
-
-## Installation
-
-To install this library, run `composer require kerox/messenger` or add this snippet in your project’s composer.json.
-
-```json
-"require": {
-    "kerox/messenger": "~1.0"
-}
-```
-
-## Usage
-
-Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn how to use this library
 
 ## License
 
