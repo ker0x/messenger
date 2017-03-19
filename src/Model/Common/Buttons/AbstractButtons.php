@@ -15,6 +15,7 @@ abstract class AbstractButtons implements \JsonSerializable
     const TYPE_PAYMENT = 'payment';
     const TYPE_ACCOUNT_LINK = 'account_link';
     const TYPE_ACCOUNT_UNLINK = 'account_unlink';
+    const TYPE_NESTED = 'nested';
 
     /**
      * @var string

@@ -1,0 +1,15 @@
+{
+  "target_audience": {
+    "audience_type": "custom",
+    "countries": {
+      "whitelist": [
+        "US",
+        "CA"
+      ],
+      "blacklist": [
+        "FR",
+        "IT"
+      ]
+    }
+  }
+}

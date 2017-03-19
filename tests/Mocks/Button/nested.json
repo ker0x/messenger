@@ -1,0 +1,21 @@
+{
+  "type": "nested",
+  "title": "My Account",
+  "call_to_actions": [
+    {
+      "type": "postback",
+      "title": "Pay Bill",
+      "payload": "PAYBILL_PAYLOAD"
+    },
+    {
+      "type": "postback",
+      "title": "History",
+      "payload": "HISTORY_PAYLOAD"
+    },
+    {
+      "type": "postback",
+      "title": "Contact Info",
+      "payload": "CONTACT_INFO_PAYLOAD"
+    }
+  ]
+}
