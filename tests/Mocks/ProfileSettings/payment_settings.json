@@ -1,0 +1,9 @@
+{
+  "payment_settings": {
+    "privacy_url": "http://www.facebook.com",
+    "public_key": "YOUR_PUBLIC_KEY",
+    "test_users": [
+      12345678
+    ]
+  }
+}

@@ -3,6 +3,7 @@ namespace Kerox\Messenger\Test\TestCase\Model\Common;
 
 use Kerox\Messenger\Model\Common\Buttons\AccountLink;
 use Kerox\Messenger\Model\Common\Buttons\AccountUnlink;
+use Kerox\Messenger\Model\Common\Buttons\Nested;
 use Kerox\Messenger\Model\Common\Buttons\Payment;
 use Kerox\Messenger\Model\Common\Buttons\Payment\PaymentSummary;
 use Kerox\Messenger\Model\Common\Buttons\Payment\PriceList;
@@ -85,5 +86,17 @@ class ButtonTest extends AbstractTestCase
             ->setFallbackUrl('https://petersfancyapparel.com/fallback');
 
         $this->assertJsonStringEqualsJsonString('{"type":"web_url","url":"https://petersfancyapparel.com/criteria_selector","title":"Select Criteria","webview_height_ratio": "full","messenger_extensions": true,"fallback_url":"https://petersfancyapparel.com/fallback"}', json_encode($buttonWebUrl));
+    }
+
+    public function testButtonNested()
+    {
+        $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/nested.json');
+
+        $buttonNested = new Nested('My Account', [new Postback('Pay Bill', 'PAYBILL_PAYLOAD')]);
+        $buttonNested
+            ->addButton(new Postback('History', 'HISTORY_PAYLOAD'))
+            ->addButton(new Postback('Contact Info', 'CONTACT_INFO_PAYLOAD'));
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonNested));
     }
 }

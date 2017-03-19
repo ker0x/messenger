@@ -60,6 +60,18 @@ trait ValidatorTrait
      * @return void
      * @throws \InvalidArgumentException
      */
+    protected function isValidCountry(string $value)
+    {
+        if (!preg_match('/^[A-Z]{2}$/', $value)) {
+            throw new InvalidArgumentException("{$value} is not valid. Country must be in ISO 3166 Alpha-2 format like FR.");
+        }
+    }
+
+    /**
+     * @param string $value
+     * @return void
+     * @throws \InvalidArgumentException
+     */
     protected function isValidDateTime(string $value)
     {
         if (!preg_match('/^(\d{4})-(0[1-9]|1[0-2])-([12]\d|0[1-9]|3[01])T(0[0-9]|1\d|2[0-3]):([0-5]\d)$/', $value)) {

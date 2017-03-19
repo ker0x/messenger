@@ -5,6 +5,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
+use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
@@ -85,11 +86,21 @@ class Messenger
     }
 
     /**
+     * @deprecated since 1.2.0 and will be remove in 1.3.0. Use the method `profile()` instead
+     * @see profile()
      * @return \Kerox\Messenger\Api\Thread
      */
     public function thread(): Thread
     {
         return Thread::getInstance($this->pageToken, $this->client);
+    }
+
+    /**
+     * @return \Kerox\Messenger\Api\Profile
+     */
+    public function profile(): Profile
+    {
+        return Profile::getInstance($this->pageToken, $this->client);
     }
 
     /**
