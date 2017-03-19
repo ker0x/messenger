@@ -6,6 +6,10 @@ use Kerox\Messenger\Model\ThreadSettings;
 use Kerox\Messenger\Request\ThreadRequest;
 use Kerox\Messenger\Response\ThreadResponse;
 
+/**
+ * @deprecated since 1.2.0 and will be remove in 1.3.0.
+ * @see \Kerox\Messenger\Api\Profile
+ */
 class Thread extends AbstractApi
 {
 

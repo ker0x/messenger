@@ -1,7 +1,7 @@
 {
   "name": "kerox/messenger",
   "type": "library",
-  "description": "PHP Library for Facebook Messenger",
+  "description": "PHP Library to interact with Facebook Messenger Platform",
   "keywords": [
     "facebook",
     "messenger",

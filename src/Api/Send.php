@@ -66,7 +66,7 @@ class Send extends AbstractApi
     }
 
     /**
-     * @deprecated since 1.2.0 and will be remove in 1.3.0. Use the method `message()` instead
+     * @deprecated since 1.2.0 and will be remove in 1.3.0.
      * @see message()
      * @param string $recipient
      * @param $message
@@ -96,7 +96,7 @@ class Send extends AbstractApi
     }
 
     /**
-     * @deprecated since 1.2.0 and will be removed in 1.3.0. Use the method `action()` instead
+     * @deprecated since 1.2.0 and will be removed in 1.3.0.
      * @see action()
      * @param string $recipient
      * @param string $action

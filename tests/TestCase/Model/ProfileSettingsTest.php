@@ -27,7 +27,7 @@ class ProfileSettingsTest extends AbstractTestCase
     public function testPersistentMenu()
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/persistent_menu.json');
-        $persistentMenu = $this->profileSettings->addPersistentMenus([
+        $persistentMenus= $this->profileSettings->addPersistentMenus([
             (new PersistentMenu())->setComposerInputDisabled(true)->addButtons([
                 (new Nested('My Account', [
                     new Postback('Pay Bill', 'PAYBILL_PAYLOAD'),
@@ -39,7 +39,7 @@ class ProfileSettingsTest extends AbstractTestCase
             (new PersistentMenu('zh_CN'))
         ]);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($persistentMenu));
+        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($persistentMenus));
     }
 
     public function testStartButton()
