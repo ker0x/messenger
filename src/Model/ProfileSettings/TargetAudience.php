@@ -97,7 +97,7 @@ class TargetAudience implements \JsonSerializable
     {
         $allowedAudienceType = $this->getAllowedAudienceType();
         if (!in_array($audienceType, $allowedAudienceType)) {
-            throw new \InvalidArgumentException('$audienceType must be either ' . implode(',', $allowedAudienceType));
+            throw new \InvalidArgumentException('$audienceType must be either ' . implode(', ', $allowedAudienceType));
         }
     }
 

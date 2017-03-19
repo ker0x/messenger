@@ -36,6 +36,13 @@ class TestValidatorTrait extends AbstractTestCase
         $this->isValidLocale('FR_fr');
     }
 
+    public function testInvalidCountry()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('us is not valid. Country must be in ISO 3166 Alpha-2 format like FR.');
+        $this->isValidCountry('us');
+    }
+
     public function testInvalidDateTime()
     {
         $this->expectException(\InvalidArgumentException::class);
