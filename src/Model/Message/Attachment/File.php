@@ -56,17 +56,15 @@ class File extends Attachment
      */
     public function jsonSerialize(): array
     {
-        $payload = [
-            'url' => $this->url,
-            'is_reusable' => $this->reusable,
-            'attachment_id' => $this->attachmentId,
-        ];
-
         $json = parent::jsonSerialize();
         $json += [
-            'payload' => array_filter($payload),
+            'payload' => [
+                'url' => $this->url,
+                'is_reusable' => $this->reusable,
+                'attachment_id' => $this->attachmentId,
+            ],
         ];
 
-        return $json;
+        return $this->arrayFilter($json);
     }
 }

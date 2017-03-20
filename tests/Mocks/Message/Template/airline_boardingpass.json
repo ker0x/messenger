@@ -41,6 +41,7 @@
         ],
         "logo_image_url": "https://www.example.com/en/logo.png",
         "header_image_url": "https://www.example.com/en/fb/header.png",
+        "header_text_field": "Boarding Pass",
         "qr_code": "M1SMITH NICOLAS  CG4X7U nawouehgawgnapwi3jfa0wfh",
         "above_bar_code_image_url": "https://www.example.com/en/PLAT.png",
         "flight_info": {
@@ -96,6 +97,7 @@
         ],
         "logo_image_url": "https://www.example.com/en/logo.png",
         "header_image_url": "https://www.example.com/en/fb/header.png",
+        "header_text_field": "Boarding Pass",
         "qr_code": "M1JONES FARBOUND  CG4X7U nawouehgawgnapwi3jfa0wfh",
         "above_bar_code_image_url": "https://www.example.com/en/PLAT.png",
         "flight_info": {
