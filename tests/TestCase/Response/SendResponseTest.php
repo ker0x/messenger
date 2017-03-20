@@ -58,4 +58,15 @@ class SendResponseTest extends AbstractTestCase
         $this->assertEquals(1234567, $sendResponse->getErrorSubcode());
         $this->assertEquals('BLBz/WZt8dN', $sendResponse->getErrorFbtraceId());
     }
+
+    public function testRawResponse()
+    {
+        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/basic.json');
+
+        $response = new Response(200, [], $body);
+        $sendResponse = new SendResponse($response);
+
+        $this->assertEquals(200, $sendResponse->getResponse()->getStatusCode());
+        $this->assertEquals($body, $sendResponse->getResponse()->getBody());
+    }
 }

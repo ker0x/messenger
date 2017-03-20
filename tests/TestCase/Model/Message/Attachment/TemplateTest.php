@@ -49,7 +49,8 @@ class TemplateTest extends AbstractTestCase
             ->addSecondaryFields('Gate', 'D57')
             ->addSecondaryFields('Seat', '74J')
             ->addSecondaryFields('Sec.Nr.', '003')
-            ->setHeaderImageUrl('https://www.example.com/en/fb/header.png');
+            ->setHeaderImageUrl('https://www.example.com/en/fb/header.png')
+            ->setHeaderTextField('Boarding Pass');
 
 
         $boardingPass2 = new BoardingPass('Jones Farbound', 'CG4X7U', 'https://www.example.com/en/logo.png', 'M1JONES FARBOUND  CG4X7U nawouehgawgnapwi3jfa0wfh', 'https://www.example.com/en/PLAT.png', $flightInfo);
@@ -62,7 +63,8 @@ class TemplateTest extends AbstractTestCase
             ->addSecondaryFields('Gate', 'D57')
             ->addSecondaryFields('Seat', '74K')
             ->addSecondaryFields('Sec.Nr.', '004')
-            ->setHeaderImageUrl('https://www.example.com/en/fb/header.png');
+            ->setHeaderImageUrl('https://www.example.com/en/fb/header.png')
+            ->setHeaderTextField('Boarding Pass');;
 
         $boardingPass = [
             $boardingPass1,
