@@ -38,17 +38,15 @@ class Button extends Template
      */
     public function jsonSerialize(): array
     {
-        $payload = [
-            'template_type' => Template::TYPE_BUTTON,
-            'text' => $this->text,
-            'buttons' => $this->buttons,
-        ];
-
         $json = parent::jsonSerialize();
         $json += [
-            'payload' => array_filter($payload)
+            'payload' => [
+                'template_type' => Template::TYPE_BUTTON,
+                'text' => $this->text,
+                'buttons' => $this->buttons,
+            ]
         ];
 
-        return $json;
+        return $this->arrayFilter($json);
     }
 }

@@ -55,21 +55,19 @@ class AirlineCheckIn extends AbstractAirline
      */
     public function jsonSerialize(): array
     {
-        $payload = [
-            'template_type' => Template::TYPE_AIRLINE_CHECKIN,
-            'intro_message' => $this->introMessage,
-            'locale' => $this->locale,
-            'theme_color' => $this->themeColor,
-            'pnr_number' => $this->pnrNumber,
-            'flight_info' => $this->flightInfo,
-            'checkin_url' => $this->checkinUrl,
-        ];
-
         $json = parent::jsonSerialize();
         $json += [
-            'payload' => array_filter($payload),
+            'payload' => [
+                'template_type' => Template::TYPE_AIRLINE_CHECKIN,
+                'intro_message' => $this->introMessage,
+                'locale' => $this->locale,
+                'theme_color' => $this->themeColor,
+                'pnr_number' => $this->pnrNumber,
+                'flight_info' => $this->flightInfo,
+                'checkin_url' => $this->checkinUrl,
+            ],
         ];
 
-        return $json;
+        return $this->arrayFilter($json);
     }
 }

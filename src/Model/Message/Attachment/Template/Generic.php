@@ -29,16 +29,14 @@ class Generic extends Template
      */
     public function jsonSerialize(): array
     {
-        $payload = [
-            'template_type' => Template::TYPE_GENERIC,
-            'elements' => $this->elements,
-        ];
-
         $json = parent::jsonSerialize();
         $json += [
-            'payload' => array_filter($payload),
+            'payload' => [
+                'template_type' => Template::TYPE_GENERIC,
+                'elements' => $this->elements,
+            ],
         ];
 
-        return $json;
+        return $this->arrayFilter($json);
     }
 }

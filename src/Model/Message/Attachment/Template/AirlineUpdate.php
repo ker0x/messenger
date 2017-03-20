@@ -91,20 +91,18 @@ class AirlineUpdate extends AbstractAirline
      */
     public function jsonSerialize(): array
     {
-        $payload = [
-            'template_type' => Template::TYPE_AIRLINE_UPDATE,
-            'intro_message' => $this->introMessage,
-            'update_type' => $this->updateType,
-            'locale' => $this->locale,
-            'pnr_number' => $this->pnrNumber,
-            'update_flight_info' => $this->updateFlightInfo,
-        ];
-
         $json = parent::jsonSerialize();
         $json += [
-            'payload' => array_filter($payload),
+            'payload' => [
+                'template_type' => Template::TYPE_AIRLINE_UPDATE,
+                'intro_message' => $this->introMessage,
+                'update_type' => $this->updateType,
+                'locale' => $this->locale,
+                'pnr_number' => $this->pnrNumber,
+                'update_flight_info' => $this->updateFlightInfo,
+            ],
         ];
 
-        return $json;
+        return $this->arrayFilter($json);
     }
 }

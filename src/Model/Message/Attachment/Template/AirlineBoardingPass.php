@@ -36,19 +36,17 @@ class AirlineBoardingPass extends AbstractAirline
      */
     public function jsonSerialize(): array
     {
-        $payload = [
-            'template_type' => Template::TYPE_AIRLINE_BOARDINGPASS,
-            'intro_message' => $this->introMessage,
-            'locale' => $this->locale,
-            'theme_color' => $this->themeColor,
-            'boarding_pass' => $this->boardingPass,
-        ];
-
         $json = parent::jsonSerialize();
         $json += [
-            'payload' => array_filter($payload)
+            'payload' => [
+                'template_type' => Template::TYPE_AIRLINE_BOARDINGPASS,
+                'intro_message' => $this->introMessage,
+                'locale' => $this->locale,
+                'theme_color' => $this->themeColor,
+                'boarding_pass' => $this->boardingPass,
+            ]
         ];
 
-        return $json;
+        return $this->arrayFilter($json);
     }
 }

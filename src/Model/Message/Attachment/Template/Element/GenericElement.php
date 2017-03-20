@@ -1,13 +1,15 @@
 <?php
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
+use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+
 class GenericElement extends AbstractElement
 {
 
     /**
-     * @var null|string
+     * @var \Kerox\Messenger\Model\Common\Buttons\WebUrl
      */
-    protected $itemUrl;
+    protected $defaultAction;
 
     /**
      * @var null|\Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
@@ -47,13 +49,12 @@ class GenericElement extends AbstractElement
     }
 
     /**
-     * @param mixed $itemUrl
+     * @param \Kerox\Messenger\Model\Common\Buttons\WebUrl $defaultAction
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
-    public function setItemUrl(string $itemUrl): GenericElement
+    public function setDefaultAction(WebUrl $defaultAction): GenericElement
     {
-        $this->isValidUrl($itemUrl);
-        $this->itemUrl = $itemUrl;
+        $this->defaultAction = $defaultAction;
 
         return $this;
     }
@@ -77,9 +78,9 @@ class GenericElement extends AbstractElement
     {
         $json = parent::jsonSerialize();
         $json += [
-            'item_url' => $this->itemUrl,
-            'image_url' => $this->imageUrl,
             'subtitle' => $this->subtitle,
+            'image_url' => $this->imageUrl,
+            'default_action' => $this->defaultAction,
             'buttons' => $this->buttons,
         ];
 
