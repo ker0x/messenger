@@ -41,7 +41,7 @@ class Message implements \JsonSerializable
     public function __construct($message)
     {
         if (is_string($message)) {
-            $this->isValidString($message, 320);
+            $this->isValidString($message, 640);
             $this->type = self::TYPE_TEXT;
         } elseif ($message instanceof Attachment) {
             $this->type = self::TYPE_ATTACHMENT;
@@ -59,7 +59,7 @@ class Message implements \JsonSerializable
      */
     public function setQuickReplies(array $quickReplies): Message
     {
-        $this->isValidArray($quickReplies, 10);
+        $this->isValidArray($quickReplies, 11);
         $this->quickReplies = $quickReplies;
 
         return $this;
