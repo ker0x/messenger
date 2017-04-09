@@ -110,7 +110,7 @@ class ButtonTest extends AbstractTestCase
             ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_FULL)
             ->setMessengerExtension(true)
             ->setFallbackUrl('https://petersfancyapparel.com/fallback')
-            ->setWebviewSahreButton(false);
+            ->setWebviewShareButton(false);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonWebUrl));
     }

@@ -93,9 +93,9 @@ class WebUrl extends AbstractButtons
         return $this;
     }
 
-    public function setWebviewSahreButton(bool $webviewSahreButton): WebUrl
+    public function setWebviewShareButton(bool $webviewShareButton): WebUrl
     {
-        if (!$webviewSahreButton) {
+        if (!$webviewShareButton) {
             $this->webviewShareButton = 'hide';
         }
 
