@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Event;
 
 class RawEvent extends AbstractEvent

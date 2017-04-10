@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message;
 
 use Kerox\Messenger\Helper\UtilityTrait;

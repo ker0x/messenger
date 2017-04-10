@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Request;
 
 abstract class AbstractRequest
@@ -35,7 +36,7 @@ abstract class AbstractRequest
     protected function buildQuery(): array
     {
         return [
-            'access_token' => $this->pageToken
+            'access_token' => $this->pageToken,
         ];
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Request;
 
 class UserRequest extends AbstractRequest
@@ -47,7 +48,7 @@ class UserRequest extends AbstractRequest
 
         $query = parent::buildQuery();
         $query += [
-            'fields' => $fields
+            'fields' => $fields,
         ];
 
         return $query;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\AccountLinking;
