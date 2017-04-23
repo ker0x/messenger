@@ -126,9 +126,9 @@ class PaymentCredential
 
     /**
      * @param array $payload
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\Payment\PaymentCredential
      */
-    public static function create(array $payload)
+    public static function create(array $payload): PaymentCredential
     {
         $tokenizedCard = $payload['tokenized_card'] ?? null;
         $tokenizedCvv = $payload['tokenized_cvv'] ?? null;

@@ -45,9 +45,9 @@ class Read
 
     /**
      * @param array $payload
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\Read
      */
-    public static function create(array $payload)
+    public static function create(array $payload): Read
     {
         return new static($payload['watermark'], $payload['seq']);
     }

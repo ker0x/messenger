@@ -79,9 +79,9 @@ class PreCheckout
 
     /**
      * @param array $payload
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\PreCheckout
      */
-    public static function create(array $payload)
+    public static function create(array $payload): PreCheckout
     {
         $requestedUserInfo = RequestedUserInfo::create($payload['requested_user_info']);
 
