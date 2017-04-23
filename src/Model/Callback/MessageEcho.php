@@ -75,7 +75,7 @@ class MessageEcho extends Message
 
     /**
      * @param array $payload
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\MessageEcho
      */
     public static function create(array $payload)
     {

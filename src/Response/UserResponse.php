@@ -2,6 +2,7 @@
 
 namespace Kerox\Messenger\Response;
 
+use Kerox\Messenger\Model\Referral;
 use Kerox\Messenger\UserInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -44,6 +45,11 @@ class UserResponse extends AbstractResponse implements UserInterface
     protected $isPaymentEnabled;
 
     /**
+     * @var null|\Kerox\Messenger\Model\Referral
+     */
+    protected $lastAdReferral;
+
+    /**
      * UserProfileResponse constructor.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
@@ -66,6 +72,7 @@ class UserResponse extends AbstractResponse implements UserInterface
         $this->setTimezone($response);
         $this->setGender($response);
         $this->setIsPaymentEnabled($response);
+        $this->setLastAdReferral($response);
     }
 
     /**
@@ -198,6 +205,25 @@ class UserResponse extends AbstractResponse implements UserInterface
     {
         if (isset($response[self::IS_PAYMENT_ENABLED])) {
             $this->isPaymentEnabled = $response[self::IS_PAYMENT_ENABLED];
+        }
+    }
+
+    /**
+     * @return null|\Kerox\Messenger\Model\Referral
+     */
+    public function getLastAdReferral()
+    {
+        return $this->lastAdReferral;
+    }
+
+    /**
+     * @param array $response
+     * @return void
+     */
+    private function setLastAdReferral(array $response)
+    {
+        if (isset($response[self::LAST_AD_REFERRAL])) {
+            $this->lastAdReferral = Referral::create($response[self::LAST_AD_REFERRAL]);
         }
     }
 }

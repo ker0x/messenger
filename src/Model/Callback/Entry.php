@@ -62,9 +62,9 @@ class Entry
 
     /**
      * @param array $entry
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\Entry
      */
-    public static function create(array $entry)
+    public static function create(array $entry): Entry
     {
         $events = [];
         foreach ($entry['messaging'] as $event) {

@@ -2,6 +2,7 @@
 namespace Kerox\Messenger\Test\TestCase\Response;
 
 use GuzzleHttp\Psr7\Response;
+use Kerox\Messenger\Model\Referral;
 use Kerox\Messenger\Response\UserResponse;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -22,5 +23,10 @@ class UserResponseTest extends AbstractTestCase
         $this->assertEquals(-7, $userResponse->getTimezone());
         $this->assertEquals('male', $userResponse->getGender());
         $this->assertTrue($userResponse->getIsPaymentEnabled());
+        $this->assertInstanceOf(Referral::class, $userResponse->getLastAdReferral());
+        $this->assertEquals('ADS', $userResponse->getLastAdReferral()->getSource());
+        $this->assertEquals('OPEN_THREAD', $userResponse->getLastAdReferral()->getType());
+        $this->assertEquals('6045246247433', $userResponse->getLastAdReferral()->getAdId());
+        $this->assertEquals('myparam', $userResponse->getLastAdReferral()->getRef());
     }
 }

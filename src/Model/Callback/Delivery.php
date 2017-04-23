@@ -60,9 +60,9 @@ class Delivery
 
     /**
      * @param array $payload
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\Delivery
      */
-    public static function create(array $payload)
+    public static function create(array $payload): Delivery
     {
         $messageIds = $payload['mids'] ?? [];
 

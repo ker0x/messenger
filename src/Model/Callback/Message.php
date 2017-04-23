@@ -119,7 +119,7 @@ class Message
 
     /**
      * @param array $payload
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\Message
      */
     public static function create(array $payload)
     {

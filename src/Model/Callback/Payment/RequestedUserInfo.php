@@ -77,9 +77,9 @@ class RequestedUserInfo
 
     /**
      * @param array $payload
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo
      */
-    public static function create(array $payload)
+    public static function create(array $payload): RequestedUserInfo
     {
         $shippingAddress = Address::create($payload['shipping_address']);
 

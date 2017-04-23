@@ -53,9 +53,9 @@ class Postback
 
     /**
      * @param array $payload
-     * @return static
+     * @return \Kerox\Messenger\Model\Callback\Postback
      */
-    public static function create(array $payload)
+    public static function create(array $payload): Postback
     {
         $referral = isset($payload['referral']) ? Referral::create($payload['referral']) : null;
 

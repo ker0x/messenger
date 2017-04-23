@@ -12,4 +12,5 @@ interface UserInterface
     const TIMEZONE = 'timezone';
     const GENDER = 'gender';
     const IS_PAYMENT_ENABLED = 'is_payment_enabled';
+    const LAST_AD_REFERRAL = 'last_ad_referral';
 }

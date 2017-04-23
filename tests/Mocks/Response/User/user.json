@@ -5,5 +5,11 @@
   "locale": "en_US",
   "timezone": -7,
   "gender": "male",
-  "is_payment_enabled": true
+  "is_payment_enabled": true,
+  "last_ad_referral": {
+    "source": "ADS",
+    "type": "OPEN_THREAD",
+    "ad_id": "6045246247433",
+    "ref": "myparam"
+  }
 }
