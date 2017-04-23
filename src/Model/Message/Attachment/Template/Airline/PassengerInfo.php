@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 class PassengerInfo implements \JsonSerializable

@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 class ReceiptElement extends AbstractElement

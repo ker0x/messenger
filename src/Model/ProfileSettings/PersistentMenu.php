@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\ProfileSettings;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -56,7 +57,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     public function addButtons(array $buttons): PersistentMenu
     {
         $this->isValidArray($buttons, 5);
-        $this->isValidButtons($buttons);
+        $this->isValidButtons($buttons, $this->getAllowedButtonsType());
 
         $this->buttons = $buttons;
 
@@ -64,24 +65,9 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     }
 
     /**
-     * @param array $buttons
-     */
-    private function isValidButtons(array $buttons)
-    {
-        $allowedButtonsType = $this->getAllowedButtonsType();
-
-        /** @var AbstractButtons $button */
-        foreach ($buttons as $button) {
-            if (!in_array($button->getType(), $allowedButtonsType)) {
-                throw new \InvalidArgumentException('Buttons can only be an instance of WebUrl, PostBack or Nested');
-            }
-        }
-    }
-
-    /**
      * @return array
      */
-    private function getAllowedButtonsType(): array
+    protected function getAllowedButtonsType(): array
     {
         return [
             AbstractButtons::TYPE_WEB_URL,

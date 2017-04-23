@@ -1,10 +1,12 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
 
 class QuickReply implements \JsonSerializable
 {
+
     use ValidatorTrait;
 
     const CONTENT_TYPE_TEXT = 'text';

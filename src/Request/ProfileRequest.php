@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\ProfileSettings;
@@ -46,7 +47,7 @@ class ProfileRequest extends AbstractRequest
             $body = $this->profileSettings;
         } elseif (is_array($this->profileSettings)) {
             $body = [
-                'fields' => $this->profileSettings
+                'fields' => $this->profileSettings,
             ];
         }
 
@@ -62,7 +63,7 @@ class ProfileRequest extends AbstractRequest
 
         if (is_string($this->profileSettings)) {
             $query += [
-                'fields' => $this->profileSettings
+                'fields' => $this->profileSettings,
             ];
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Request;
 
 class InsightsRequest extends AbstractRequest

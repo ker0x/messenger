@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Callback;
 
 use Kerox\Messenger\Model\Common\Address;

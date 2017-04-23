@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 use Kerox\Messenger\Helper\ValidatorTrait;

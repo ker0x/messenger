@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message\Attachment;
 
 use Kerox\Messenger\Model\Message\Attachment;
@@ -19,8 +20,16 @@ class Image extends File
      */
     public function __construct(string $url, bool $reusable = null)
     {
-        $this->isValidExtension($url, $this->allowedExtensions);
+        $this->isValidExtension($url, $this->getAllowedExtensions());
 
         parent::__construct($url, $reusable, Attachment::TYPE_IMAGE);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getAllowedExtensions(): array
+    {
+        return $this->allowedExtensions;
     }
 }

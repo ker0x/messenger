@@ -18,9 +18,11 @@ use Kerox\Messenger\Model\Message\Attachment\Template\AirlineItinerary;
 use Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Button;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement;
+use Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Generic;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Liste;
+use Kerox\Messenger\Model\Message\Attachment\Template\OpenGraph;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
@@ -301,5 +303,21 @@ class TemplateTest extends AbstractTestCase
             ]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($receipt));
+    }
+
+    public function testTemplateOpenGraph()
+    {
+        $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/open_graph.json');
+
+        $elements = [
+            (new OpenGraphElement('https://open.spotify.com/track/7GhIk7Il098yCjg4BQjzvb'))
+                ->setButtons([
+                    (new WebUrl('Learn More', 'https://en.wikipedia.org/wiki/Rickrolling'))
+                ]),
+        ];
+
+        $openGraph = new OpenGraph($elements);
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($openGraph));
     }
 }

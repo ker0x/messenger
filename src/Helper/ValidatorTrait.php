@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Helper;
 
 use InvalidArgumentException;
@@ -120,6 +121,21 @@ trait ValidatorTrait
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if (empty($ext) || !in_array($ext, $allowedExtension)) {
             throw new InvalidArgumentException("{$filename} doesn't have a valid extension. Allowed extensions are " . implode(', ', $allowedExtension));
+        }
+    }
+
+    /**
+     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param array $allowedButtonsType
+     * @return void
+     */
+    protected function isValidButtons(array $buttons, array $allowedButtonsType)
+    {
+        /** @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons $button */
+        foreach ($buttons as $button) {
+            if (!in_array($button->getType(), $allowedButtonsType)) {
+                throw new \InvalidArgumentException('Buttons can only be an instance of ' . implode(', ', $allowedButtonsType));
+            }
         }
     }
 }

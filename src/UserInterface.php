@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger;
 
 interface UserInterface

@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Response;
 
 use Kerox\Messenger\Model\Data;

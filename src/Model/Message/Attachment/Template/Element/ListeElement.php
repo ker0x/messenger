@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 use Kerox\Messenger\Model\Common\Buttons\WebUrl;

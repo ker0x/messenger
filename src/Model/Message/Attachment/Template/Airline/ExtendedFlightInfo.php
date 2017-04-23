@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface

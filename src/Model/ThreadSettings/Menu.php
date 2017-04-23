@@ -26,30 +26,15 @@ class Menu extends ThreadSettings
         parent::__construct(ThreadSettings::TYPE_CALL_TO_ACTIONS, ThreadSettings::STATE_EXISTING_THREAD);
 
         $this->isValidArray($buttons, 5);
-        $this->isValidButton($buttons);
+        $this->isValidButtons($buttons, $this->getAllowedButtonsType());
 
         $this->buttons = $buttons;
     }
 
     /**
-     * @param array $buttons
-     */
-    private function isValidButton(array $buttons)
-    {
-        $allowedButtonsType = $this->getAllowedButtonsType();
-
-        /** @var AbstractButtons $button */
-        foreach ($buttons as $button) {
-            if (!in_array($button->getType(), $allowedButtonsType)) {
-                throw new \InvalidArgumentException('Buttons can only be an instance of WebUrl or PostBack');
-            }
-        }
-    }
-
-    /**
      * @return array
      */
-    private function getAllowedButtonsType(): array
+    protected function getAllowedButtonsType(): array
     {
         return [
             AbstractButtons::TYPE_WEB_URL,

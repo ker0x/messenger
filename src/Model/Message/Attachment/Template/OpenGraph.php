@@ -4,23 +4,24 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class Generic extends Template
+class OpenGraph extends Template
 {
 
     /**
-     * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[]
+     * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement[]
      */
-    protected $elements;
+    protected $elements = [];
 
     /**
-     * Generic constructor.
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[] $elements
+     * OpenGraph constructor.
+     *
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement[] $elements
      */
     public function __construct(array $elements)
     {
         parent::__construct();
 
-        $this->isValidArray($elements, 10);
+        $this->isValidArray($elements, 1);
 
         $this->elements = $elements;
     }
@@ -33,7 +34,7 @@ class Generic extends Template
         $json = parent::jsonSerialize();
         $json += [
             'payload' => [
-                'template_type' => Template::TYPE_GENERIC,
+                'template_type' => Template::TYPE_OPEN_GRAPH,
                 'elements' => $this->elements,
             ],
         ];

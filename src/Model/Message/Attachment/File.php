@@ -1,4 +1,5 @@
 <?php
+
 namespace Kerox\Messenger\Model\Message\Attachment;
 
 use Kerox\Messenger\Model\Message\Attachment;
