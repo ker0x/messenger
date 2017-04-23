@@ -27,7 +27,7 @@ class Nested extends AbstractButtons
 
         $this->isValidString($title, 20);
         $this->isValidArray($buttons, 5);
-        $this->isValidButton($buttons);
+        $this->isValidButtons($buttons, $this->getAllowedButtonsType());
 
         $this->title = $title;
         $this->buttons = $buttons;
@@ -39,7 +39,7 @@ class Nested extends AbstractButtons
      */
     public function addButton(AbstractButtons $button): Nested
     {
-        $this->isValidButton([$button]);
+        $this->isValidButtons([$button], $this->getAllowedButtonsType());
 
         $this->buttons[] = $button;
 
@@ -47,24 +47,9 @@ class Nested extends AbstractButtons
     }
 
     /**
-     * @param array $buttons
-     */
-    private function isValidButton(array $buttons)
-    {
-        $allowedButtonsType = $this->getAllowedButtonsType();
-
-        /** @var AbstractButtons $button */
-        foreach ($buttons as $button) {
-            if (!in_array($button->getType(), $allowedButtonsType)) {
-                throw new \InvalidArgumentException('Buttons can only be an instance of WebUrl, PostBack or Nested');
-            }
-        }
-    }
-
-    /**
      * @return array
      */
-    private function getAllowedButtonsType(): array
+    protected function getAllowedButtonsType(): array
     {
         return [
             AbstractButtons::TYPE_WEB_URL,

@@ -15,6 +15,7 @@ abstract class Template extends Attachment
     const TYPE_GENERIC = 'generic';
     const TYPE_LIST = 'list';
     const TYPE_RECEIPT = 'receipt';
+    const TYPE_OPEN_GRAPH = 'open_graph';
 
     public function __construct()
     {

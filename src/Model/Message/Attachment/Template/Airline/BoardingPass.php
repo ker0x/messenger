@@ -187,9 +187,10 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     {
         if (filter_var($code, FILTER_VALIDATE_URL)) {
             $this->barcodeImageUrl = $code;
-        } else {
-            $this->qrCode = $code;
+
+            return;
         }
+        $this->qrCode = $code;
     }
 
     /**
