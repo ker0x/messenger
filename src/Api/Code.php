@@ -44,14 +44,19 @@ class Code extends AbstractApi
     /**
      * @param int $imageSize
      * @param string $codeType
-     * @return CodeResponse
+     * @param string|null $ref
+     * @return \Kerox\Messenger\Response\CodeResponse
      */
-    public function request(int $imageSize = 1000, string $codeType = self::CODE_TYPE_STANDARD): CodeResponse
+    public function request(int $imageSize = 1000, string $codeType = self::CODE_TYPE_STANDARD, string $ref = null): CodeResponse
     {
         $this->isValidCodeImageSize($imageSize);
         $this->isValidCodeType($codeType);
 
-        $request = new CodeRequest($this->pageToken, $imageSize, $codeType);
+        if ($ref !== null) {
+            $this->isValidRef($ref);
+        }
+
+        $request = new CodeRequest($this->pageToken, $imageSize, $codeType, $ref);
         $response = $this->client->post('me/messenger_codes', $request->build());
 
         return new CodeResponse($response);
@@ -70,12 +75,24 @@ class Code extends AbstractApi
 
     /**
      * @param string $codeType
+     * @throws \InvalidArgumentException
      */
     private function isValidCodeType(string $codeType)
     {
         $allowedCodeType = $this->getAllowedCodeType();
         if (!in_array($codeType, $allowedCodeType)) {
             throw new \InvalidArgumentException('$codeType must be either ' . implode(', ', $allowedCodeType));
+        }
+    }
+
+    /**
+     * @param string $ref
+     * @throws \InvalidArgumentException
+     */
+    private function isValidRef(string $ref)
+    {
+        if (!preg_match('/^[a-zA-Z0-9\+\/=\-.:_ ]{1,250}$/', $ref)) {
+            throw new \InvalidArgumentException('$ref must be a string of max 250 characters. Valid characters are a-z A-Z 0-9 +/=-.:_');
         }
     }
 
