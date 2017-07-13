@@ -82,7 +82,7 @@ class Message
      */
     public function hasText(): bool
     {
-        return !empty($this->text);
+        return $this->text !== null && $this->text !== '';
     }
 
     /**
@@ -98,7 +98,7 @@ class Message
      */
     public function hasQuickReply(): bool
     {
-        return !empty($this->quickReply);
+        return $this->quickReply !== null && $this->quickReply !== '';
     }
 
     /**
