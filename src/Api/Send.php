@@ -19,6 +19,15 @@ class Send extends AbstractApi
     const NOTIFICATION_TYPE_SILENT_PUSH = 'SILENT_PUSH';
     const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
 
+    const TAG_SHIPPING_UPDATE = 'SHIPPING_UPDATE';
+    const TAG_RESERVATION_UPDATE = 'RESERVATION_UPDATE';
+    const TAG_ISSUE_RESOLUTION = 'ISSUE_RESOLUTION';
+    const TAG_APPOINTMENT_UPDATE = 'APPOINTMENT_UPDATE';
+    const TAG_GAME_EVENT = 'GAME_EVENT';
+    const TAG_TRANSPORTATION_UPDATE = 'TRANSPORTATION_UPDATE';
+    const TAG_FEATURE_FUNCTIONALITY_UPDATE = 'FEATURE_FUNCTIONALITY_UPDATE';
+    const TAG_TICKET_UPDATE = 'TICKET_UPDATE';
+
     /**
      * @var null|\Kerox\Messenger\Api\Send
      */
@@ -53,14 +62,19 @@ class Send extends AbstractApi
      * @param string $recipient
      * @param string|\Kerox\Messenger\Model\Message $message
      * @param string $notificationType
+     * @param string|null $tag
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function message(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
+    public function message(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR, $tag = null): SendResponse
     {
         $message = $this->isValidMessage($message);
         $this->isValidNotificationType($notificationType);
 
-        $request = new SendRequest($this->pageToken, $message, $recipient, $notificationType);
+        if ($tag !== null) {
+            $this->isValidTag($tag);
+        }
+
+        $request = new SendRequest($this->pageToken, $message, $recipient, $notificationType, $tag);
         $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
@@ -117,6 +131,7 @@ class Send extends AbstractApi
 
     /**
      * @param string $notificationType
+     * @throws \InvalidArgumentException
      */
     private function isValidNotificationType(string $notificationType)
     {
@@ -140,6 +155,7 @@ class Send extends AbstractApi
 
     /**
      * @param string $action
+     * @throws \InvalidArgumentException
      */
     private function isValidAction(string $action)
     {
@@ -158,6 +174,35 @@ class Send extends AbstractApi
             self::SENDER_ACTION_TYPING_ON,
             self::SENDER_ACTION_TYPING_OFF,
             self::SENDER_ACTION_MARK_SEEN,
+        ];
+    }
+
+    /**
+     * @param string $tag
+     * @throws \InvalidArgumentException
+     */
+    private function isValidTag(string $tag)
+    {
+        $allowedTag = $this->getAllowedTag();
+        if (!in_array($tag, $allowedTag)) {
+            throw new \InvalidArgumentException('$tag must be either ' . implode(', ', $allowedTag));
+        }
+    }
+
+    /**
+     * @return array
+     */
+    private function getAllowedTag(): array
+    {
+        return [
+            self::TAG_ISSUE_RESOLUTION,
+            self::TAG_RESERVATION_UPDATE,
+            self::TAG_SHIPPING_UPDATE,
+            self::TAG_APPOINTMENT_UPDATE,
+            self::TAG_GAME_EVENT,
+            self::TAG_TRANSPORTATION_UPDATE,
+            self::TAG_FEATURE_FUNCTIONALITY_UPDATE,
+            self::TAG_TICKET_UPDATE,
         ];
     }
 }

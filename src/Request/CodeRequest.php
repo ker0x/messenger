@@ -30,6 +30,7 @@ class CodeRequest extends AbstractRequest
      * @param string $pageToken
      * @param int $imageSize
      * @param string $codeType
+     * @param null|string $ref
      */
     public function __construct(string $pageToken, int $imageSize, string $codeType, $ref)
     {

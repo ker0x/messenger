@@ -31,16 +31,28 @@ class SendRequest extends AbstractRequest
     protected $notificationType;
 
     /**
+     * @var null|string
+     */
+    protected $tag;
+
+    /**
      * Request constructor.
      *
      * @param string $pageToken
      * @param string|\Kerox\Messenger\Model\Message $content
-     * @param string|null $notificationType
      * @param string|null $recipient
      * @param string $requestType
+     * @param string|null $notificationType
+     * @param string|null $tag
      */
-    public function __construct(string $pageToken, $content, string $recipient = null, string $notificationType = null, string $requestType = self::TYPE_MESSAGE)
-    {
+    public function __construct(
+        string $pageToken,
+        $content,
+        string $recipient = null,
+        string $notificationType = null,
+        $tag = null,
+        string $requestType = self::TYPE_MESSAGE
+    ) {
         parent::__construct($pageToken);
 
         if ($content instanceof Message || $requestType === self::TYPE_MESSAGE) {
@@ -51,6 +63,7 @@ class SendRequest extends AbstractRequest
 
         $this->recipient = (is_string($recipient)) ? ['id' => $recipient] : $recipient;
         $this->notificationType = $notificationType;
+        $this->tag = $tag;
     }
 
     /**
@@ -73,6 +86,7 @@ class SendRequest extends AbstractRequest
             'message' => $this->message,
             'sender_action' => $this->senderAction,
             'notification_type' => $this->notificationType,
+            'tag' => $this->tag,
         ];
 
         return array_filter($body);

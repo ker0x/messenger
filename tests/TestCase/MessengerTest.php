@@ -5,6 +5,7 @@ use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Api\Send;
+use Kerox\Messenger\Api\Tag;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Api\Webhook;
@@ -31,6 +32,7 @@ class MessengerTest extends AbstractTestCase
         $this->assertInstanceOf(Code::class, $this->messenger->code());
         $this->assertInstanceOf(Insights::class, $this->messenger->insights());
         $this->assertInstanceOf(Profile::class, $this->messenger->profile());
+        $this->assertInstanceOf(Tag::class, $this->messenger->tag());
     }
 
     public function tearDown()
