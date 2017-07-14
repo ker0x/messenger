@@ -1,8 +1,8 @@
 <?php
-namespace Kerox\Messenger\Test\TestCase\Model\Common\Buttons;
+namespace Kerox\Messenger\Test\TestCase\Model\Common\Button;
 
-use Kerox\Messenger\Model\Common\Buttons\Payment\PaymentSummary;
-use Kerox\Messenger\Model\Common\Buttons\Payment\PriceList;
+use Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary;
+use Kerox\Messenger\Model\Common\Button\Payment\PriceList;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class PaymentSummaryTest extends AbstractTestCase

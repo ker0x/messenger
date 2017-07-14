@@ -3,6 +3,7 @@
 namespace Kerox\Messenger\Helper;
 
 use InvalidArgumentException;
+use Kerox\Messenger\Model\Common\Button\AbstractButton;
 
 trait ValidatorTrait
 {
@@ -125,14 +126,18 @@ trait ValidatorTrait
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      * @param array $allowedButtonsType
      * @return void
      */
     protected function isValidButtons(array $buttons, array $allowedButtonsType)
     {
-        /** @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons $button */
+        /** @var \Kerox\Messenger\Model\Common\Button\AbstractButton $button */
         foreach ($buttons as $button) {
+            if (!$button instanceof AbstractButton) {
+                throw new \InvalidArgumentException('Array can only contain instance of AbstractButton.');
+            }
+
             if (!in_array($button->getType(), $allowedButtonsType)) {
                 throw new \InvalidArgumentException('Buttons can only be an instance of ' . implode(', ', $allowedButtonsType));
             }

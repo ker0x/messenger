@@ -1,13 +1,13 @@
 <?php
-namespace Kerox\Messenger\Test\TestCase\Model\Common\Buttons;
+namespace Kerox\Messenger\Test\TestCase\Model\Common\Button;
 
-use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class WebUrlTest extends AbstractTestCase
 {
 
-    public function testButtonWebUrlWithIncorrectWenviewHeightRatio()
+    public function testButtonWebUrlWithIncorrectWebviewHeightRatio()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$webviewHeightRatio must be either compact, tall, full');

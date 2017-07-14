@@ -3,7 +3,7 @@
 namespace Kerox\Messenger\Model\ProfileSettings;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
-use Kerox\Messenger\Model\Common\Buttons\AbstractButtons;
+use Kerox\Messenger\Model\Common\Button\AbstractButton;
 
 class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
 {
@@ -21,7 +21,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     protected $composerInputDisabled = false;
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]
      */
     protected $buttons = [];
 
@@ -51,7 +51,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */
     public function addButtons(array $buttons): PersistentMenu
@@ -70,9 +70,9 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     protected function getAllowedButtonsType(): array
     {
         return [
-            AbstractButtons::TYPE_WEB_URL,
-            AbstractButtons::TYPE_POSTBACK,
-            AbstractButtons::TYPE_NESTED,
+            AbstractButton::TYPE_WEB_URL,
+            AbstractButton::TYPE_POSTBACK,
+            AbstractButton::TYPE_NESTED,
         ];
     }
 

@@ -22,7 +22,7 @@ class UserResponseTest extends AbstractTestCase
         $this->assertEquals('en_US', $userResponse->getLocale());
         $this->assertEquals(-7, $userResponse->getTimezone());
         $this->assertEquals('male', $userResponse->getGender());
-        $this->assertTrue($userResponse->getIsPaymentEnabled());
+        $this->assertTrue($userResponse->isPaymentEnabled());
         $this->assertInstanceOf(Referral::class, $userResponse->getLastAdReferral());
         $this->assertEquals('ADS', $userResponse->getLastAdReferral()->getSource());
         $this->assertEquals('OPEN_THREAD', $userResponse->getLastAdReferral()->getType());

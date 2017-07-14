@@ -42,7 +42,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @var null|bool
      */
-    protected $isPaymentEnabled;
+    protected $paymentEnabled;
 
     /**
      * @var null|\Kerox\Messenger\Model\Referral
@@ -71,7 +71,7 @@ class UserResponse extends AbstractResponse implements UserInterface
         $this->setLocale($response);
         $this->setTimezone($response);
         $this->setGender($response);
-        $this->setIsPaymentEnabled($response);
+        $this->setPaymentEnabled($response);
         $this->setLastAdReferral($response);
     }
 
@@ -152,7 +152,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return int|null
+     * @return null|int
      */
     public function getTimezone()
     {
@@ -190,21 +190,21 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return bool|null
+     * @return null|bool
      */
-    public function getIsPaymentEnabled()
+    public function isPaymentEnabled()
     {
-        return $this->isPaymentEnabled;
+        return $this->paymentEnabled;
     }
 
     /**
      * @param array $response
      * @return void
      */
-    private function setIsPaymentEnabled(array $response)
+    private function setPaymentEnabled(array $response)
     {
         if (isset($response[self::IS_PAYMENT_ENABLED])) {
-            $this->isPaymentEnabled = $response[self::IS_PAYMENT_ENABLED];
+            $this->paymentEnabled = $response[self::IS_PAYMENT_ENABLED];
         }
     }
 

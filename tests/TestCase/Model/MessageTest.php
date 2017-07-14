@@ -72,4 +72,17 @@ class MessageTest extends AbstractTestCase
         $this->expectExceptionMessage('$message must be a string or an instance of Attachment.');
         $message = new Message(123456);
     }
+
+    public function testMessageWithInvalidQuickReplies()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Array can only contain instance of QuickReply.');
+        $message = new Message('Pick a color:');
+        $message
+            ->setQuickReplies([
+                (new QuickReply('text'))->setTitle('Red')->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')->setImageUrl('http://petersfantastichats.com/img/red.png'),
+                (new QuickReply('text'))->setTitle('Green')->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')->setImageUrl('http://petersfantastichats.com/img/green.png'),
+                'Hello'
+            ]);
+    }
 }

@@ -196,7 +196,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return int|null
+     * @return null|int
      */
     public function getErrorCode()
     {
@@ -215,7 +215,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return int|null
+     * @return null|int
      */
     public function getErrorSubcode()
     {

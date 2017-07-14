@@ -13,7 +13,7 @@ class Button extends Template
     protected $text;
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]
      */
     protected $buttons;
 
@@ -21,7 +21,7 @@ class Button extends Template
      * Buttons constructor.
      *
      * @param string $text
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      */
     public function __construct(string $text, array $buttons)
     {

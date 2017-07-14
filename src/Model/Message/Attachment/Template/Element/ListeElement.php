@@ -2,18 +2,18 @@
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
-use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\Common\Button\WebUrl;
 
 class ListeElement extends AbstractElement
 {
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\WebUrl
+     * @var \Kerox\Messenger\Model\Common\Button\WebUrl
      */
     protected $defaultAction;
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]
      */
     protected $buttons = [];
 
@@ -50,7 +50,7 @@ class ListeElement extends AbstractElement
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\WebUrl $defaultAction
+     * @param \Kerox\Messenger\Model\Common\Button\WebUrl $defaultAction
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
      */
     public function setDefaultAction(WebUrl $defaultAction): ListeElement
@@ -61,7 +61,7 @@ class ListeElement extends AbstractElement
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      * @return ListeElement
      */
     public function setButtons(array $buttons): ListeElement

@@ -3,7 +3,7 @@
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
-use Kerox\Messenger\Model\Common\Buttons\AbstractButtons;
+use Kerox\Messenger\Model\Common\Button\AbstractButton;
 
 class OpenGraphElement implements \JsonSerializable
 {
@@ -16,7 +16,7 @@ class OpenGraphElement implements \JsonSerializable
     protected $url;
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]
      */
     protected $buttons = [];
 
@@ -33,7 +33,7 @@ class OpenGraphElement implements \JsonSerializable
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement
      */
     public function setButtons(array $buttons): OpenGraphElement
@@ -52,7 +52,7 @@ class OpenGraphElement implements \JsonSerializable
     protected function getAllowedButtonsType(): array
     {
         return [
-            AbstractButtons::TYPE_WEB_URL,
+            AbstractButton::TYPE_WEB_URL,
         ];
     }
 

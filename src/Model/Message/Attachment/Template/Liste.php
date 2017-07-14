@@ -21,14 +21,14 @@ class Liste extends Template
     protected $elements = [];
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]
      */
     protected $buttons = [];
 
     /**
      * Liste constructor.
      *
-     * @param array $elements
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement[] $elements
      */
     public function __construct(array $elements)
     {
@@ -53,7 +53,7 @@ class Liste extends Template
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Liste
      * @internal param array $buttons
      */

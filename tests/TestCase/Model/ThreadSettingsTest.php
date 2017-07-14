@@ -1,8 +1,8 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Model;
 
-use Kerox\Messenger\Model\Common\Buttons\Postback;
-use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\Common\Button\Postback;
+use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\ThreadSettings;
 use Kerox\Messenger\Model\ThreadSettings\AccountLinking;
 use Kerox\Messenger\Model\ThreadSettings\DomainWhitelist;
