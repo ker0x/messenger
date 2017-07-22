@@ -110,6 +110,7 @@ class AirlineItinerary extends AbstractAirline
         ];
 
         $this->isValidArray($this->priceInfo, 4);
+
         $this->priceInfo[] = array_filter($priceInfo);
 
         return $this;

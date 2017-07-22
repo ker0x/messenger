@@ -46,7 +46,22 @@ class Liste extends Template
     public function setTopElementStyle(string $topElementStyle): Liste
     {
         $this->isValidTopElementStyle($topElementStyle);
+
         $this->topElementStyle = $topElementStyle;
+
+        return $this;
+    }
+
+    /**
+     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Liste
+     * @internal param array $buttons
+     */
+    public function setButtons(array $buttons): Liste
+    {
+        $this->isValidArray($buttons, 1);
+
+        $this->buttons = $buttons;
 
         return $this;
     }
@@ -60,7 +75,7 @@ class Liste extends Template
     {
         $allowedTopElementStyle = $this->getAllowedTopElementStyle();
         if (!in_array($topElementStyle, $allowedTopElementStyle)) {
-            throw new \InvalidArgumentException('$topElementStyle is not a valid');
+            throw new \InvalidArgumentException('$topElementStyle must be either ' . implode(', ', $allowedTopElementStyle));
         }
     }
 
@@ -73,19 +88,6 @@ class Liste extends Template
             self::TOP_ELEMENT_STYLE_LARGE,
             self::TOP_ELEMENT_STYLE_COMPACT,
         ];
-    }
-
-    /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Liste
-     * @internal param array $buttons
-     */
-    public function setButtons(array $buttons): Liste
-    {
-        $this->isValidArray($buttons, 1);
-        $this->buttons = $buttons;
-
-        return $this;
     }
 
     /**

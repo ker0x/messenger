@@ -90,7 +90,6 @@ class ProfileSettings implements \JsonSerializable
      */
     public function addWhitelistedDomains(array $whitelistedDomains): ProfileSettings
     {
-        $this->isValidArray($whitelistedDomains, 10);
         $this->isValidDomains($whitelistedDomains);
 
         $this->whitelistedDomains = $whitelistedDomains;
@@ -138,6 +137,8 @@ class ProfileSettings implements \JsonSerializable
      */
     private function isValidDomains(array $domains)
     {
+        $this->isValidArray($domains, 10);
+
         foreach ($domains as $domain) {
             $this->isValidUrl($domain);
         }

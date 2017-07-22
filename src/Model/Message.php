@@ -61,6 +61,7 @@ class Message implements \JsonSerializable
     public function setQuickReplies(array $quickReplies): Message
     {
         $this->isValidArray($quickReplies, 11);
+
         $this->quickReplies = $quickReplies;
 
         return $this;
@@ -84,6 +85,7 @@ class Message implements \JsonSerializable
     public function setMetadata(string $metadata): Message
     {
         $this->isValidString($metadata, 1000);
+
         $this->metadata = $metadata;
 
         return $this;

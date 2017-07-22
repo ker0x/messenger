@@ -10,6 +10,7 @@ use Kerox\Messenger\Event\OptinEvent;
 use Kerox\Messenger\Event\PaymentEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\PreCheckoutEvent;
+use Kerox\Messenger\Event\RawEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
@@ -36,6 +37,7 @@ class EventTest extends AbstractTestCase
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedMessage, $event->getMessage());
         $this->assertEquals('message', $event->getName());
+        $this->assertFalse($event->isQuickReply());
     }
 
     public function testMessageEchoEvent()
@@ -143,5 +145,15 @@ class EventTest extends AbstractTestCase
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedPreCheckout, $event->getPreCheckout());
         $this->assertEquals('pre_checkout', $event->getName());
+    }
+
+    public function testRawEvent()
+    {
+        $event = new RawEvent('sender_id', 'recipient_id', ['payload' => 'PAYLOAD']);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(['payload' => 'PAYLOAD'], $event->getRaw());
+        $this->assertEquals('raw', $event->getName());
     }
 }

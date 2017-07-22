@@ -62,10 +62,8 @@ class WebUrl extends AbstractButtons
      */
     public function setWebviewHeightRatio(string $webviewHeightRatio): WebUrl
     {
-        $allowedRatioType = $this->getAllowedRatioType();
-        if (!in_array($webviewHeightRatio, $allowedRatioType)) {
-            throw new \InvalidArgumentException('$webviewHeightRatio must be either ' . implode(',', $allowedRatioType));
-        }
+        $this->isValidWebviewHeightRatio($webviewHeightRatio);
+
         $this->webviewHeightRatio = $webviewHeightRatio;
 
         return $this;
@@ -89,6 +87,7 @@ class WebUrl extends AbstractButtons
     public function setFallbackUrl(string $fallbackUrl): WebUrl
     {
         $this->isValidUrl($fallbackUrl);
+
         $this->fallbackUrl = $fallbackUrl;
 
         return $this;
@@ -101,6 +100,19 @@ class WebUrl extends AbstractButtons
         }
 
         return $this;
+    }
+
+    /**
+     * @param string $webviewHeightRatio
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function isValidWebviewHeightRatio(string $webviewHeightRatio)
+    {
+        $allowedRatioType = $this->getAllowedRatioType();
+        if (!in_array($webviewHeightRatio, $allowedRatioType)) {
+            throw new \InvalidArgumentException('$webviewHeightRatio must be either ' . implode(', ', $allowedRatioType));
+        }
     }
 
     /**

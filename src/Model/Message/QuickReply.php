@@ -40,10 +40,8 @@ class QuickReply implements \JsonSerializable
      */
     public function __construct(string $contentType)
     {
-        $allowedContentType = $this->getAllowedContentType();
-        if (!in_array($contentType, $allowedContentType)) {
-            throw new \InvalidArgumentException('Invalid content type');
-        }
+        $this->isValidContentType($contentType);
+
         $this->contentType = $contentType;
     }
 
@@ -55,6 +53,7 @@ class QuickReply implements \JsonSerializable
     {
         $this->checkContentType();
         $this->isValidString($title, 20);
+
         $this->title = $title;
 
         return $this;
@@ -68,6 +67,7 @@ class QuickReply implements \JsonSerializable
     {
         $this->checkContentType();
         $this->isValidString($payload, 1000);
+
         $this->payload = $payload;
 
         return $this;
@@ -84,6 +84,18 @@ class QuickReply implements \JsonSerializable
         $this->imageUrl = $imageUrl;
 
         return $this;
+    }
+
+    /**
+     * @param string $contentType
+     * @throws \InvalidArgumentException
+     */
+    private function isValidContentType(string $contentType)
+    {
+        $allowedContentType = $this->getAllowedContentType();
+        if (!in_array($contentType, $allowedContentType)) {
+            throw new \InvalidArgumentException('Invalid content type');
+        }
     }
 
     /**

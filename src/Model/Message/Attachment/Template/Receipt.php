@@ -107,6 +107,7 @@ class Receipt extends Template
     public function setOrderUrl(string $orderUrl): Receipt
     {
         $this->isValidUrl($orderUrl);
+
         $this->orderUrl = $orderUrl;
 
         return $this;

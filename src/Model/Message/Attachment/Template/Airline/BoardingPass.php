@@ -99,6 +99,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     public function setTravelClass(string $travelClass): BoardingPass
     {
         $this->isValidTravelClass($travelClass);
+
         $this->travelClass = $travelClass;
 
         return $this;
@@ -124,6 +125,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     public function addAuxiliaryFields(string $label, string $value): BoardingPass
     {
         $this->auxiliaryFields[] = $this->setLabelValue($label, $value);
+
         $this->isValidArray($this->auxiliaryFields, 5);
 
         return $this;
@@ -138,6 +140,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     public function addSecondaryFields(string $label, string $value): BoardingPass
     {
         $this->secondaryFields[] = $this->setLabelValue($label, $value);
+
         $this->isValidArray($this->secondaryFields, 5);
 
         return $this;
@@ -150,6 +153,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     public function setHeaderImageUrl(string $headerImageUrl): BoardingPass
     {
         $this->isValidUrl($headerImageUrl);
+
         $this->headerImageUrl = $headerImageUrl;
 
         return $this;
