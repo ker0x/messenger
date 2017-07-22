@@ -67,6 +67,7 @@ class ListeElement extends AbstractElement
     public function setButtons(array $buttons): ListeElement
     {
         $this->isValidArray($buttons, 1);
+
         $this->buttons = $buttons;
 
         return $this;

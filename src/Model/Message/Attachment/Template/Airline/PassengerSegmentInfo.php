@@ -59,6 +59,7 @@ class PassengerSegmentInfo implements \JsonSerializable
     public function addProductInfo(string $title, string $value): PassengerSegmentInfo
     {
         $this->isValidArray($this->productInfo, 4);
+
         $this->productInfo[] = [
             'title' => $title,
             'value' => $value,

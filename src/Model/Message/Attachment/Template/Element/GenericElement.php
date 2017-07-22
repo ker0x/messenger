@@ -67,6 +67,7 @@ class GenericElement extends AbstractElement
     public function setButtons(array $buttons): GenericElement
     {
         $this->isValidArray($buttons, 3);
+
         $this->buttons = $buttons;
 
         return $this;

@@ -32,6 +32,7 @@ class FlightSchedule implements \JsonSerializable
     public function __construct(string $departureTime)
     {
         $this->isValidDateTime($departureTime);
+
         $this->departureTime = $departureTime;
     }
 
@@ -42,6 +43,7 @@ class FlightSchedule implements \JsonSerializable
     public function setBoardingTime(string $boardingTime): FlightSchedule
     {
         $this->isValidDateTime($boardingTime);
+
         $this->boardingTime = $boardingTime;
 
         return $this;
@@ -54,6 +56,7 @@ class FlightSchedule implements \JsonSerializable
     public function setArrivalTime(string $arrivalTime): FlightSchedule
     {
         $this->isValidDateTime($arrivalTime);
+
         $this->arrivalTime = $arrivalTime;
 
         return $this;

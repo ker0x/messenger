@@ -24,7 +24,7 @@ To install this library, run `composer require kerox/messenger` or add this snip
 
 Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn how to use this library
 
-## Todo
+## Features
 
 ### API
 

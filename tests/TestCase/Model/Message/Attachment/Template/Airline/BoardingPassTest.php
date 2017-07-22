@@ -1,7 +1,6 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template\Airline;
 
-use InvalidArgumentException;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
@@ -41,7 +40,7 @@ class BoardingPassTest extends AbstractTestCase
 
     public function testTravelClass()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$travelClass must be either economy, business, first_class');
         $this->boardingPass->setTravelClass('second_class');
 
@@ -49,7 +48,7 @@ class BoardingPassTest extends AbstractTestCase
 
     public function testAddToManyAuxiliaryFields()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->boardingPass
             ->addAuxiliaryFields('Terminal', 'T1')
             ->addAuxiliaryFields('Departure', '30OCT 19:05')
@@ -61,7 +60,7 @@ class BoardingPassTest extends AbstractTestCase
 
     public function testAddToManySecondaryFields()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->boardingPass
             ->addSecondaryFields('Terminal', 'T1')
             ->addSecondaryFields('Departure', '30OCT 19:05')

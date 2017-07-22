@@ -51,7 +51,7 @@ class Send extends AbstractApi
 
     /**
      * @param string $recipient
-     * @param $message
+     * @param string|\Kerox\Messenger\Model\Message $message
      * @param string $notificationType
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -70,7 +70,7 @@ class Send extends AbstractApi
      * @deprecated since 1.2.0 and will be remove in 1.3.0.
      * @see message()
      * @param string $recipient
-     * @param $message
+     * @param string|\Kerox\Messenger\Model\Message $message
      * @param string $notificationType
      * @return \Kerox\Messenger\Response\SendResponse
      */

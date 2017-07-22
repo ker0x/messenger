@@ -71,7 +71,7 @@ class AirlineUpdate extends AbstractAirline
     {
         $allowedUpdateType = $this->getAllowedUpdateType();
         if (!in_array($updateType, $allowedUpdateType)) {
-            throw new \InvalidArgumentException('Allowed values for $updateType are: ' . implode(',', $allowedUpdateType));
+            throw new \InvalidArgumentException('$updateType must be either ' . implode(', ', $allowedUpdateType));
         }
     }
 

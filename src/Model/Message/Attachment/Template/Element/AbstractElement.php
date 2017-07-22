@@ -43,6 +43,7 @@ abstract class AbstractElement implements \JsonSerializable
     public function setSubtitle(string $subtitle)
     {
         $this->isValidString($subtitle, 80);
+
         $this->subtitle = $subtitle;
     }
 
@@ -53,6 +54,7 @@ abstract class AbstractElement implements \JsonSerializable
     public function setImageUrl(string $imageUrl)
     {
         $this->isValidUrl($imageUrl);
+
         $this->imageUrl = $imageUrl;
     }
 

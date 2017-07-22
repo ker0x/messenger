@@ -73,6 +73,7 @@ class ReceiptElement extends AbstractElement
     public function setCurrency(string $currency): ReceiptElement
     {
         $this->isValidCurrency($currency);
+
         $this->currency = $currency;
 
         return $this;

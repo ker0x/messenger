@@ -17,6 +17,10 @@ abstract class Template extends Attachment
     const TYPE_RECEIPT = 'receipt';
     const TYPE_OPEN_GRAPH = 'open_graph';
 
+    /**
+     * Template constructor.
+     *
+     */
     public function __construct()
     {
         parent::__construct(Attachment::TYPE_TEMPLATE);
