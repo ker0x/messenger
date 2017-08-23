@@ -65,18 +65,6 @@ class User extends AbstractApi implements UserInterface
     }
 
     /**
-     * @deprecated since 1.2.0 and will be remove in 1.3.0.
-     * @see profile()
-     * @param string $userId
-     * @param array $fields
-     * @return \Kerox\Messenger\Response\UserResponse
-     */
-    public function getProfile(string $userId, array $fields = []): UserResponse
-    {
-        return $this->profile($userId, $fields);
-    }
-
-    /**
      * @return array
      */
     private function getAllowedFields(): array

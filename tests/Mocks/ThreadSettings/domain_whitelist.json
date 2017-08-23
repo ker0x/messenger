@@ -1,7 +1,0 @@
-{
-  "setting_type": "domain_whitelisting",
-  "whitelisted_domains": [
-    "https://petersfancyapparel.com"
-  ],
-  "domain_action_type": "add"
-}

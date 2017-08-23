@@ -87,16 +87,6 @@ class Messenger
     }
 
     /**
-     * @deprecated since 1.2.0 and will be remove in 1.3.0. Use the method `profile()` instead
-     * @see profile()
-     * @return \Kerox\Messenger\Api\Thread
-     */
-    public function thread(): Thread
-    {
-        return Thread::getInstance($this->pageToken, $this->client);
-    }
-
-    /**
      * @return \Kerox\Messenger\Api\Profile
      */
     public function profile(): Profile
