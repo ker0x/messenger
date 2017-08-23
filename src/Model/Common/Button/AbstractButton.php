@@ -1,10 +1,10 @@
 <?php
 
-namespace Kerox\Messenger\Model\Common\Buttons;
+namespace Kerox\Messenger\Model\Common\Button;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
 
-abstract class AbstractButtons implements \JsonSerializable
+abstract class AbstractButton implements \JsonSerializable
 {
 
     use ValidatorTrait;

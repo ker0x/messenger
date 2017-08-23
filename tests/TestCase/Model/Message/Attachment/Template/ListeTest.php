@@ -1,8 +1,8 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Model\Common\Buttons\Postback;
-use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\Common\Button\Postback;
+use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Liste;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;

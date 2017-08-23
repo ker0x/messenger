@@ -1,10 +1,10 @@
 <?php
 
-namespace Kerox\Messenger\Model\Common\Buttons;
+namespace Kerox\Messenger\Model\Common\Button;
 
-use Kerox\Messenger\Model\Common\Buttons\Payment\PaymentSummary;
+use Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary;
 
-class Payment extends AbstractButtons
+class Payment extends AbstractButton
 {
 
     /**
@@ -18,7 +18,7 @@ class Payment extends AbstractButtons
     protected $payload;
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\Payment\PaymentSummary
+     * @var \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary
      */
     protected $paymentSummary;
 
@@ -26,7 +26,7 @@ class Payment extends AbstractButtons
      * Payment constructor.
      *
      * @param string $payload
-     * @param \Kerox\Messenger\Model\Common\Buttons\Payment\PaymentSummary $paymentSummary
+     * @param \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary $paymentSummary
      */
     public function __construct(string $payload, PaymentSummary $paymentSummary)
     {

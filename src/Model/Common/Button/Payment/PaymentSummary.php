@@ -1,6 +1,6 @@
 <?php
 
-namespace Kerox\Messenger\Model\Common\Buttons\Payment;
+namespace Kerox\Messenger\Model\Common\Button\Payment;
 
 class PaymentSummary implements \JsonSerializable
 {

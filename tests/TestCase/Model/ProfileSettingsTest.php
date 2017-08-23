@@ -1,9 +1,9 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Model;
 
-use Kerox\Messenger\Model\Common\Buttons\Nested;
-use Kerox\Messenger\Model\Common\Buttons\Postback;
-use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\Common\Button\Nested;
+use Kerox\Messenger\Model\Common\Button\Postback;
+use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\ProfileSettings;
 use Kerox\Messenger\Model\ProfileSettings\Greeting;
 use Kerox\Messenger\Model\ProfileSettings\PaymentSettings;

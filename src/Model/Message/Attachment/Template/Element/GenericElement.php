@@ -2,18 +2,18 @@
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
-use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\Common\Button\WebUrl;
 
 class GenericElement extends AbstractElement
 {
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\WebUrl
+     * @var \Kerox\Messenger\Model\Common\Button\WebUrl
      */
     protected $defaultAction;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
+     * @var null|\Kerox\Messenger\Model\Common\Button\AbstractButton[]
      */
     protected $buttons = [];
 
@@ -50,7 +50,7 @@ class GenericElement extends AbstractElement
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\WebUrl $defaultAction
+     * @param \Kerox\Messenger\Model\Common\Button\WebUrl $defaultAction
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
     public function setDefaultAction(WebUrl $defaultAction): GenericElement
@@ -61,7 +61,7 @@ class GenericElement extends AbstractElement
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
     public function setButtons(array $buttons): GenericElement

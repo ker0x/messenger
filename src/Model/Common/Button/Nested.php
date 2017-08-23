@@ -1,8 +1,8 @@
 <?php
 
-namespace Kerox\Messenger\Model\Common\Buttons;
+namespace Kerox\Messenger\Model\Common\Button;
 
-class Nested extends AbstractButtons
+class Nested extends AbstractButton
 {
 
     /**
@@ -11,7 +11,7 @@ class Nested extends AbstractButtons
     protected $title;
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]
      */
     protected $buttons;
 
@@ -19,7 +19,7 @@ class Nested extends AbstractButtons
      * Nested constructor.
      *
      * @param string $title
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      */
     public function __construct(string $title, array $buttons)
     {
@@ -34,10 +34,10 @@ class Nested extends AbstractButtons
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons $button
-     * @return \Kerox\Messenger\Model\Common\Buttons\Nested
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton $button
+     * @return \Kerox\Messenger\Model\Common\Button\Nested
      */
-    public function addButton(AbstractButtons $button): Nested
+    public function addButton(AbstractButton $button): Nested
     {
         $this->isValidButtons([$button], $this->getAllowedButtonsType());
 
@@ -52,9 +52,9 @@ class Nested extends AbstractButtons
     protected function getAllowedButtonsType(): array
     {
         return [
-            AbstractButtons::TYPE_WEB_URL,
-            AbstractButtons::TYPE_POSTBACK,
-            AbstractButtons::TYPE_NESTED,
+            AbstractButton::TYPE_WEB_URL,
+            AbstractButton::TYPE_POSTBACK,
+            AbstractButton::TYPE_NESTED,
         ];
     }
 

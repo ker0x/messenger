@@ -1,16 +1,16 @@
 <?php
 namespace Kerox\Messenger\Test\TestCase\Model\Common;
 
-use Kerox\Messenger\Model\Common\Buttons\AccountLink;
-use Kerox\Messenger\Model\Common\Buttons\AccountUnlink;
-use Kerox\Messenger\Model\Common\Buttons\Nested;
-use Kerox\Messenger\Model\Common\Buttons\Payment;
-use Kerox\Messenger\Model\Common\Buttons\Payment\PaymentSummary;
-use Kerox\Messenger\Model\Common\Buttons\Payment\PriceList;
-use Kerox\Messenger\Model\Common\Buttons\PhoneNumber;
-use Kerox\Messenger\Model\Common\Buttons\Postback;
-use Kerox\Messenger\Model\Common\Buttons\Share;
-use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\Common\Button\AccountLink;
+use Kerox\Messenger\Model\Common\Button\AccountUnlink;
+use Kerox\Messenger\Model\Common\Button\Nested;
+use Kerox\Messenger\Model\Common\Button\Payment;
+use Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary;
+use Kerox\Messenger\Model\Common\Button\Payment\PriceList;
+use Kerox\Messenger\Model\Common\Button\PhoneNumber;
+use Kerox\Messenger\Model\Common\Button\Postback;
+use Kerox\Messenger\Model\Common\Button\Share;
+use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Generic;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;

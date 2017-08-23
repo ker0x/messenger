@@ -1,7 +1,7 @@
 <?php
 namespace Kerox\Messenger\Model\ThreadSettings;
 
-use Kerox\Messenger\Model\Common\Buttons\AbstractButtons;
+use Kerox\Messenger\Model\Common\Button\AbstractButton;
 use Kerox\Messenger\Model\ThreadSettings;
 
 /**
@@ -12,14 +12,14 @@ class Menu extends ThreadSettings
 {
 
     /**
-     * @var \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]
      */
     protected $buttons;
 
     /**
      * Menu constructor.
      *
-     * @param \Kerox\Messenger\Model\Common\Buttons\AbstractButtons[] $buttons
+     * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      */
     public function __construct(array $buttons)
     {
@@ -37,8 +37,8 @@ class Menu extends ThreadSettings
     protected function getAllowedButtonsType(): array
     {
         return [
-            AbstractButtons::TYPE_WEB_URL,
-            AbstractButtons::TYPE_POSTBACK,
+            AbstractButton::TYPE_WEB_URL,
+            AbstractButton::TYPE_POSTBACK,
         ];
     }
 

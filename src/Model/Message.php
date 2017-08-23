@@ -25,7 +25,7 @@ class Message implements \JsonSerializable
     protected $message;
 
     /**
-     * @var array
+     * @var \Kerox\Messenger\Model\Message\QuickReply[]
      */
     protected $quickReplies = [];
 
@@ -54,13 +54,13 @@ class Message implements \JsonSerializable
     }
 
     /**
-     * @param mixed $quickReplies
+     * @param \Kerox\Messenger\Model\Message\QuickReply[] $quickReplies
      * @return \Kerox\Messenger\Model\Message
      * @throws \Exception
      */
     public function setQuickReplies(array $quickReplies): Message
     {
-        $this->isValidArray($quickReplies, 11);
+        $this->isValidQuickReplies($quickReplies);
 
         $this->quickReplies = $quickReplies;
 
@@ -89,6 +89,20 @@ class Message implements \JsonSerializable
         $this->metadata = $metadata;
 
         return $this;
+    }
+
+    /**
+     * @param array $quickReplies
+     * @throws \InvalidArgumentException
+     */
+    private function isValidQuickReplies(array $quickReplies)
+    {
+        $this->isValidArray($quickReplies, 11, 1);
+        foreach ($quickReplies as $quickReply) {
+            if (!$quickReply instanceof QuickReply) {
+                throw new \InvalidArgumentException('Array can only contain instance of QuickReply.');
+            }
+        }
     }
 
     /**

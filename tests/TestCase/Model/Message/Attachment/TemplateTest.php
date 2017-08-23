@@ -2,8 +2,8 @@
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment;
 
 use Kerox\Messenger\Model\Common\Address;
-use Kerox\Messenger\Model\Common\Buttons\Postback;
-use Kerox\Messenger\Model\Common\Buttons\WebUrl;
+use Kerox\Messenger\Model\Common\Button\Postback;
+use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\ExtendedFlightInfo;

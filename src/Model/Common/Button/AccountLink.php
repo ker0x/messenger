@@ -1,8 +1,8 @@
 <?php
 
-namespace Kerox\Messenger\Model\Common\Buttons;
+namespace Kerox\Messenger\Model\Common\Button;
 
-class AccountLink extends AbstractButtons
+class AccountLink extends AbstractButton
 {
 
     /**

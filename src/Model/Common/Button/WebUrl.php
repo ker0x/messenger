@@ -1,8 +1,8 @@
 <?php
 
-namespace Kerox\Messenger\Model\Common\Buttons;
+namespace Kerox\Messenger\Model\Common\Button;
 
-class WebUrl extends AbstractButtons
+class WebUrl extends AbstractButton
 {
 
     const RATIO_TYPE_COMPACT = 'compact';

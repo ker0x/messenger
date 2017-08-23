@@ -2,7 +2,7 @@
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Element;
 
 
-use Kerox\Messenger\Model\Common\Buttons\Postback;
+use Kerox\Messenger\Model\Common\Button\Postback;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
