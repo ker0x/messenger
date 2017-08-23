@@ -26,7 +26,6 @@ class MessengerTest extends AbstractTestCase
     public function testGetInstanceOfApi()
     {
         $this->assertInstanceOf(Send::class, $this->messenger->send());
-        $this->assertInstanceOf(Thread::class, $this->messenger->thread());
         $this->assertInstanceOf(User::class, $this->messenger->user());
         $this->assertInstanceOf(Webhook::class, $this->messenger->webhook());
         $this->assertInstanceOf(Code::class, $this->messenger->code());

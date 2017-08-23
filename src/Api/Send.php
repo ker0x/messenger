@@ -67,19 +67,6 @@ class Send extends AbstractApi
     }
 
     /**
-     * @deprecated since 1.2.0 and will be remove in 1.3.0.
-     * @see message()
-     * @param string $recipient
-     * @param string|\Kerox\Messenger\Model\Message $message
-     * @param string $notificationType
-     * @return \Kerox\Messenger\Response\SendResponse
-     */
-    public function sendMessage(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
-    {
-        return $this->message($recipient, $message, $notificationType);
-    }
-
-    /**
      * @param string $recipient
      * @param string $action
      * @param string $notificationType
@@ -94,19 +81,6 @@ class Send extends AbstractApi
         $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
-    }
-
-    /**
-     * @deprecated since 1.2.0 and will be removed in 1.3.0.
-     * @see action()
-     * @param string $recipient
-     * @param string $action
-     * @param string $notificationType
-     * @return \Kerox\Messenger\Response\SendResponse
-     */
-    public function sendAction(string $recipient, string $action, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
-    {
-        return $this->action($recipient, $action, $notificationType);
     }
 
     /**
