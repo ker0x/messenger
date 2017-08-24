@@ -8,6 +8,41 @@ class Data
 {
 
     /**
+     * @var null|string
+     */
+    protected $name;
+
+    /**
+     * @var null|string
+     */
+    protected $period;
+
+    /**
+     * @var array
+     */
+    protected $values = [];
+
+    /**
+     * @var null|string
+     */
+    protected $title;
+
+    /**
+     * @var null|string
+     */
+    protected $description;
+
+    /**
+     * @var null|string
+     */
+    protected $id;
+
+    /**
+     * @var null|srting
+     */
+    protected $tag;
+
+    /**
      * @var array
      */
     protected $data;
@@ -19,23 +54,55 @@ class Data
      */
     public function __construct(array $data)
     {
-        $this->data = $data;
+        $this->setName($data)
+            ->setPeriod($data)
+            ->setValues($data)
+            ->setTitle($data)
+            ->setDescription($data)
+            ->setId($data)
+            ->setTag($data);
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getName(): string
+    public function getName()
     {
-        return $this->data['name'] ?? '';
+        return $this->name;
     }
 
     /**
-     * @return string
+     * @param array $data
+     * @return \Kerox\Messenger\Model\Data
      */
-    public function getPeriod(): string
+    public function setName(array $data): Data
     {
-        return $this->data['period'] ?? '';
+        if (isset($data['name'])) {
+            $this->name = $data['name'];
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
+     * @param array $data
+     * @return \Kerox\Messenger\Model\Data
+     */
+    public function setPeriod(array $data): Data
+    {
+        if (isset($data['period'])) {
+            $this->period = $data['period'];
+        }
+
+        return $this;
     }
 
     /**
@@ -43,37 +110,114 @@ class Data
      */
     public function getValues(): array
     {
-        $values = [];
-        if (isset($this->data['values']) && !empty($this->data['values'])) {
-            foreach ($this->data['values'] as $value) {
-                $values[] = new Value($value['value'], $value['end_time']);
+        return $this->values;
+    }
+
+    /**
+     * @param array $data
+     * @return \Kerox\Messenger\Model\Data
+     */
+    public function setValues(array $data): Data
+    {
+        if (isset($data['values']) && !empty($data['values'])) {
+            foreach ($data['values'] as $value) {
+                $this->values[] = new Value($value['value'], $value['end_time']);
             }
         }
 
-        return $values;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getTitle(): string
     {
-        return $this->data['title'] ?? '';
+        return $this->title;
     }
 
     /**
-     * @return string
+     * @param array $data
+     * @return \Kerox\Messenger\Model\Data
+     */
+    public function setTitle(array $data): Data
+    {
+        if (isset($data['title'])) {
+            $this->title = $data['title'];
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
      */
     public function getDescription(): string
     {
-        return $this->data['description'] ?? '';
+        return $this->description;
     }
 
     /**
-     * @return string
+     * @param array $data
+     * @return \Kerox\Messenger\Model\Data
+     */
+    public function setDescription(array $data): Data
+    {
+        if (isset($data['description'])) {
+            $this->description = $data['description'];
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
      */
     public function getId(): string
     {
-        return $this->data['id'] ?? '';
+        return $this->id;
+    }
+
+    /**
+     * @param array $data
+     * @return \Kerox\Messenger\Model\Data
+     */
+    public function setId(array $data): Data
+    {
+        if (isset($data['id'])) {
+            $this->id = $data['id'];
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getTag(): string
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param array $data
+     * @return \Kerox\Messenger\Model\Data
+     */
+    public function setTag(array $data): Data
+    {
+        if (isset($data['tag'])) {
+            $this->tag = $data['tag'];
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array $data
+     * @return \Kerox\Messenger\Model\Data
+     */
+    public static function create(array $data): Data
+    {
+        return new static($data);
     }
 }

@@ -17,5 +17,6 @@
   ],
   "title": "Daily unique active threads count by thread fbid",
   "description": "Daily: total unique active threads created between users and page.",
-  "id": "1234567/insights/page_messages_active_threads_unique/day"
+  "id": "1234567/insights/page_messages_active_threads_unique/day",
+  "tag": "SHIPPING_UPDATE"
 }

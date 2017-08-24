@@ -8,6 +8,7 @@ use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Api\Send;
+use Kerox\Messenger\Api\Tag;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Api\Webhook;
@@ -17,7 +18,7 @@ class Messenger
 {
 
     const API_URL = 'https://graph.facebook.com/';
-    const API_VERSION = 'v2.8';
+    const API_VERSION = 'v2.9';
 
     /**
      * @var string
@@ -108,5 +109,13 @@ class Messenger
     public function insights(): Insights
     {
         return Insights::getInstance($this->pageToken, $this->client);
+    }
+
+    /**
+     * @return \Kerox\Messenger\Api\Tag
+     */
+    public function tag(): Tag
+    {
+        return Tag::getInstance($this->pageToken, $this->client);
     }
 }

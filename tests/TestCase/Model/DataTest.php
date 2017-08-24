@@ -18,6 +18,7 @@ class DataTest extends AbstractTestCase
         $this->assertEquals('Daily unique active threads count by thread fbid', $data->getTitle());
         $this->assertEquals('Daily: total unique active threads created between users and page.', $data->getDescription());
         $this->assertEquals('1234567/insights/page_messages_active_threads_unique/day', $data->getId());
+        $this->assertEquals('SHIPPING_UPDATE', $data->getTag());
         $this->assertContainsOnlyInstancesOf(Value::class, $data->getValues());
     }
 }

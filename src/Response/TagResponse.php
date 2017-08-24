@@ -5,7 +5,7 @@ namespace Kerox\Messenger\Response;
 use Kerox\Messenger\Model\Data;
 use Psr\Http\Message\ResponseInterface;
 
-class InsightsResponse extends AbstractResponse
+class TagResponse extends AbstractResponse
 {
 
     const DATA = 'data';
@@ -16,7 +16,7 @@ class InsightsResponse extends AbstractResponse
     protected $data = [];
 
     /**
-     * InsightsResponse constructor.
+     * TagResponse constructor.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
      */
