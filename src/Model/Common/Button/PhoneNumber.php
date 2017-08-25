@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Common\Button;
 
 class PhoneNumber extends AbstractButton
 {
-
     /**
      * @var string
      */
@@ -39,7 +38,7 @@ class PhoneNumber extends AbstractButton
     {
         $json = parent::jsonSerialize();
         $json += [
-            'title' => $this->title,
+            'title'   => $this->title,
             'payload' => $this->payload,
         ];
 

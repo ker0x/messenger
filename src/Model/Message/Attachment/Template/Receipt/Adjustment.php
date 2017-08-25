@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
 
 class Adjustment implements \JsonSerializable
 {
-
     /**
      * @var null|string
      */
@@ -20,11 +19,11 @@ class Adjustment implements \JsonSerializable
      */
     public function __construct()
     {
-        //
     }
 
     /**
      * @param string $name
+     *
      * @return Adjustment
      */
     public function setName(string $name): Adjustment
@@ -36,6 +35,7 @@ class Adjustment implements \JsonSerializable
 
     /**
      * @param float $amount
+     *
      * @return Adjustment
      */
     public function setAmount(float $amount): Adjustment
@@ -51,7 +51,7 @@ class Adjustment implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'name' => $this->name,
+            'name'   => $this->name,
             'amount' => $this->amount,
         ];
 

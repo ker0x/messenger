@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model;
 
 class Referral
 {
-
     /**
      * @var string
      */
@@ -73,6 +72,7 @@ class Referral
 
     /**
      * @param string $ref
+     *
      * @return \Kerox\Messenger\Model\Referral
      */
     public function setRef(string $ref): Referral
@@ -84,6 +84,7 @@ class Referral
 
     /**
      * @param array $referral
+     *
      * @return \Kerox\Messenger\Model\Referral
      */
     public static function create(array $referral): Referral

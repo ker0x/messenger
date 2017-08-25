@@ -8,7 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class UserResponse extends AbstractResponse implements UserInterface
 {
-
     /**
      * @var null|string
      */
@@ -61,7 +60,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     protected function parseResponse(array $response)
     {
@@ -85,7 +83,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     private function setFirstName(array $response)
     {
@@ -104,7 +101,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     private function setLastName(array $response)
     {
@@ -123,7 +119,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     private function setProfilePic(array $response)
     {
@@ -142,7 +137,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     private function setLocale(array $response)
     {
@@ -161,7 +155,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     private function setTimezone(array $response)
     {
@@ -180,7 +173,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     private function setGender(array $response)
     {
@@ -199,7 +191,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     private function setPaymentEnabled(array $response)
     {
@@ -218,7 +209,6 @@ class UserResponse extends AbstractResponse implements UserInterface
 
     /**
      * @param array $response
-     * @return void
      */
     private function setLastAdReferral(array $response)
     {

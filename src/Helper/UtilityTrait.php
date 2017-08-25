@@ -4,12 +4,12 @@ namespace Kerox\Messenger\Helper;
 
 trait UtilityTrait
 {
-
     /**
-     * Enhanced version of array_filter which allow to filter recursively
+     * Enhanced version of array_filter which allow to filter recursively.
      *
-     * @param array $array
+     * @param array          $array
      * @param callable|array $callback
+     *
      * @return array
      */
     public function arrayFilter(array $array, $callback = ['self', 'filter']): array
@@ -26,7 +26,8 @@ trait UtilityTrait
     /**
      * Callback function for filtering.
      *
-     * @param mixed $var Array to filter.
+     * @param mixed $var array to filter
+     *
      * @return bool
      */
     protected static function filter($var)

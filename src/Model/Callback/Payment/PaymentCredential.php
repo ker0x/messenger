@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback\Payment;
 
 class PaymentCredential
 {
-
     /**
      * @var string
      */
@@ -126,6 +125,7 @@ class PaymentCredential
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Payment\PaymentCredential
      */
     public static function create(array $payload): PaymentCredential

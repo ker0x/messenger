@@ -6,8 +6,8 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class Liste extends Template
 {
-
     const TOP_ELEMENT_STYLE_LARGE = 'large';
+
     const TOP_ELEMENT_STYLE_COMPACT = 'compact';
 
     /**
@@ -41,6 +41,7 @@ class Liste extends Template
 
     /**
      * @param string $topElementStyle
+     *
      * @return Liste
      */
     public function setTopElementStyle(string $topElementStyle): Liste
@@ -54,8 +55,8 @@ class Liste extends Template
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Liste
-     * @internal param array $buttons
      */
     public function setButtons(array $buttons): Liste
     {
@@ -68,13 +69,13 @@ class Liste extends Template
 
     /**
      * @param string $topElementStyle
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidTopElementStyle(string $topElementStyle)
     {
         $allowedTopElementStyle = $this->getAllowedTopElementStyle();
-        if (!in_array($topElementStyle, $allowedTopElementStyle)) {
+        if (!in_array($topElementStyle, $allowedTopElementStyle, true)) {
             throw new \InvalidArgumentException('$topElementStyle must be either ' . implode(', ', $allowedTopElementStyle));
         }
     }
@@ -98,10 +99,10 @@ class Liste extends Template
         $json = parent::jsonSerialize();
         $json += [
             'payload' => [
-                'template_type' => Template::TYPE_LIST,
+                'template_type'     => Template::TYPE_LIST,
                 'top_element_style' => $this->topElementStyle,
-                'elements' => $this->elements,
-                'buttons' => $this->buttons,
+                'elements'          => $this->elements,
+                'buttons'           => $this->buttons,
             ],
         ];
 

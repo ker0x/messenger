@@ -4,7 +4,6 @@ namespace Kerox\Messenger;
 
 interface ProfileInterface
 {
-
     const PERSISTENT_MENU = 'persistent_menu';
     const GET_STARTED = 'get_started';
     const GREETING = 'greeting';

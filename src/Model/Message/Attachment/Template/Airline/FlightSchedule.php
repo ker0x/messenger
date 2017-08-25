@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 class FlightSchedule implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     /**
@@ -38,6 +37,7 @@ class FlightSchedule implements \JsonSerializable
 
     /**
      * @param string $boardingTime
+     *
      * @return FlightSchedule
      */
     public function setBoardingTime(string $boardingTime): FlightSchedule
@@ -51,6 +51,7 @@ class FlightSchedule implements \JsonSerializable
 
     /**
      * @param string $arrivalTime
+     *
      * @return FlightSchedule
      */
     public function setArrivalTime(string $arrivalTime): FlightSchedule
@@ -68,9 +69,9 @@ class FlightSchedule implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'boarding_time' => $this->boardingTime,
+            'boarding_time'  => $this->boardingTime,
             'departure_time' => $this->departureTime,
-            'arrival_time' => $this->arrivalTime,
+            'arrival_time'   => $this->arrivalTime,
         ];
 
         return array_filter($json);

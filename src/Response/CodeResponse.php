@@ -6,7 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class CodeResponse extends AbstractResponse
 {
-
     const URI = 'uri';
 
     /**
@@ -26,7 +25,6 @@ class CodeResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     protected function parseResponse(array $response)
     {

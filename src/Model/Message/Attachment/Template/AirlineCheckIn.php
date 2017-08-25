@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class AirlineCheckIn extends AbstractAirline
 {
-
     /**
      * @var string
      */
@@ -33,7 +32,7 @@ class AirlineCheckIn extends AbstractAirline
      * @param string $introMessage
      * @param string $locale
      * @param string $pnrNumber
-     * @param array $flightInfo
+     * @param array  $flightInfo
      * @param string $checkinUrl
      */
     public function __construct(
@@ -61,11 +60,11 @@ class AirlineCheckIn extends AbstractAirline
             'payload' => [
                 'template_type' => Template::TYPE_AIRLINE_CHECKIN,
                 'intro_message' => $this->introMessage,
-                'locale' => $this->locale,
-                'theme_color' => $this->themeColor,
-                'pnr_number' => $this->pnrNumber,
-                'flight_info' => $this->flightInfo,
-                'checkin_url' => $this->checkinUrl,
+                'locale'        => $this->locale,
+                'theme_color'   => $this->themeColor,
+                'pnr_number'    => $this->pnrNumber,
+                'flight_info'   => $this->flightInfo,
+                'checkin_url'   => $this->checkinUrl,
             ],
         ];
 

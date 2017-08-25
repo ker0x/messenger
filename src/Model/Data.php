@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Data\Value;
 
 class Data
 {
-
     /**
      * @var null|string
      */
@@ -54,13 +53,14 @@ class Data
      */
     public function __construct(array $data)
     {
-        $this->setName($data)
-            ->setPeriod($data)
-            ->setValues($data)
-            ->setTitle($data)
-            ->setDescription($data)
-            ->setId($data)
-            ->setTag($data);
+        $this->name = $data['name'] ?? null;
+        $this->period = $data['period'] ?? null;
+        $this->title = $data['title'] ?? null;
+        $this->description = $data['description'] ?? null;
+        $this->id = $data['id'] ?? null;
+        $this->tag = $data['tag'] ?? null;
+
+        $this->setValues($data);
     }
 
     /**
@@ -72,37 +72,11 @@ class Data
     }
 
     /**
-     * @param array $data
-     * @return \Kerox\Messenger\Model\Data
-     */
-    public function setName(array $data): Data
-    {
-        if (isset($data['name'])) {
-            $this->name = $data['name'];
-        }
-
-        return $this;
-    }
-
-    /**
      * @return null|string
      */
     public function getPeriod()
     {
         return $this->period;
-    }
-
-    /**
-     * @param array $data
-     * @return \Kerox\Messenger\Model\Data
-     */
-    public function setPeriod(array $data): Data
-    {
-        if (isset($data['period'])) {
-            $this->period = $data['period'];
-        }
-
-        return $this;
     }
 
     /**
@@ -115,6 +89,7 @@ class Data
 
     /**
      * @param array $data
+     *
      * @return \Kerox\Messenger\Model\Data
      */
     public function setValues(array $data): Data
@@ -137,19 +112,6 @@ class Data
     }
 
     /**
-     * @param array $data
-     * @return \Kerox\Messenger\Model\Data
-     */
-    public function setTitle(array $data): Data
-    {
-        if (isset($data['title'])) {
-            $this->title = $data['title'];
-        }
-
-        return $this;
-    }
-
-    /**
      * @return null|string
      */
     public function getDescription(): string
@@ -158,37 +120,11 @@ class Data
     }
 
     /**
-     * @param array $data
-     * @return \Kerox\Messenger\Model\Data
-     */
-    public function setDescription(array $data): Data
-    {
-        if (isset($data['description'])) {
-            $this->description = $data['description'];
-        }
-
-        return $this;
-    }
-
-    /**
      * @return null|string
      */
     public function getId(): string
     {
         return $this->id;
-    }
-
-    /**
-     * @param array $data
-     * @return \Kerox\Messenger\Model\Data
-     */
-    public function setId(array $data): Data
-    {
-        if (isset($data['id'])) {
-            $this->id = $data['id'];
-        }
-
-        return $this;
     }
 
     /**
@@ -201,19 +137,7 @@ class Data
 
     /**
      * @param array $data
-     * @return \Kerox\Messenger\Model\Data
-     */
-    public function setTag(array $data): Data
-    {
-        if (isset($data['tag'])) {
-            $this->tag = $data['tag'];
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param array $data
+     *
      * @return \Kerox\Messenger\Model\Data
      */
     public static function create(array $data): Data

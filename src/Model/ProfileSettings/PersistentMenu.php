@@ -7,7 +7,6 @@ use Kerox\Messenger\Model\Common\Button\AbstractButton;
 
 class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
 {
-
     use ValidatorTrait;
 
     /**
@@ -41,6 +40,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
 
     /**
      * @param bool $composerInputDisabled
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */
     public function setComposerInputDisabled(bool $composerInputDisabled): PersistentMenu
@@ -52,6 +52,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */
     public function addButtons(array $buttons): PersistentMenu
@@ -82,9 +83,9 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'locale' => $this->locale,
+            'locale'                  => $this->locale,
             'composer_input_disabled' => $this->composerInputDisabled,
-            'call_to_actions' => $this->buttons,
+            'call_to_actions'         => $this->buttons,
         ];
 
         return array_filter($json);

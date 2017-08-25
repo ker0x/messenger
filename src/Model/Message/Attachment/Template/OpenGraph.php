@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class OpenGraph extends Template
 {
-
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement[]
      */
@@ -35,7 +34,7 @@ class OpenGraph extends Template
         $json += [
             'payload' => [
                 'template_type' => Template::TYPE_OPEN_GRAPH,
-                'elements' => $this->elements,
+                'elements'      => $this->elements,
             ],
         ];
 

@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Common\Address;
 
 class RequestedUserInfo
 {
-
     /**
      * @var \Kerox\Messenger\Model\Common\Address
      */
@@ -31,9 +30,9 @@ class RequestedUserInfo
      * RequestedUserInfo constructor.
      *
      * @param \Kerox\Messenger\Model\Common\Address $shippingAddress
-     * @param string $contactName
-     * @param null|string $contactEmail
-     * @param null|string $contactPhone
+     * @param string                                $contactName
+     * @param null|string                           $contactEmail
+     * @param null|string                           $contactPhone
      */
     public function __construct(Address $shippingAddress, string $contactName, $contactEmail = null, $contactPhone = null)
     {
@@ -77,6 +76,7 @@ class RequestedUserInfo
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo
      */
     public static function create(array $payload): RequestedUserInfo

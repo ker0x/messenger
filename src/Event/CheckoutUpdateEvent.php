@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 
 class CheckoutUpdateEvent extends AbstractEvent
 {
-
     const NAME = 'checkout_update';
 
     /**
@@ -22,9 +21,9 @@ class CheckoutUpdateEvent extends AbstractEvent
     /**
      * CheckoutUpdateEvent constructor.
      *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param int $timestamp
+     * @param string                                         $senderId
+     * @param string                                         $recipientId
+     * @param int                                            $timestamp
      * @param \Kerox\Messenger\Model\Callback\CheckoutUpdate $checkoutUpdate
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, CheckoutUpdate $checkoutUpdate)
@@ -61,6 +60,7 @@ class CheckoutUpdateEvent extends AbstractEvent
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Event\CheckoutUpdateEvent
      */
     public static function create(array $payload): CheckoutUpdateEvent

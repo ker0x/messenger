@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Callback\Postback;
 
 class PostbackEvent extends AbstractEvent
 {
-
     const NAME = 'postback';
 
     /**
@@ -22,9 +21,9 @@ class PostbackEvent extends AbstractEvent
     /**
      * PostbackEvent constructor.
      *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param int $timestamp
+     * @param string                                   $senderId
+     * @param string                                   $recipientId
+     * @param int                                      $timestamp
      * @param \Kerox\Messenger\Model\Callback\Postback $postback
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Postback $postback)
@@ -61,6 +60,7 @@ class PostbackEvent extends AbstractEvent
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Event\PostbackEvent
      */
     public static function create(array $payload): PostbackEvent

@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 class BoardingPass implements \JsonSerializable, TravelClassInterface
 {
-
     use ValidatorTrait;
 
     /**
@@ -74,7 +73,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      */
     protected $flightInfo;
 
-
     public function __construct(
         string $passengerName,
         string $pnrNumber,
@@ -94,6 +92,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
 
     /**
      * @param string $travelClass
+     *
      * @return BoardingPass
      */
     public function setTravelClass(string $travelClass): BoardingPass
@@ -107,6 +106,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
 
     /**
      * @param string $seat
+     *
      * @return BoardingPass
      */
     public function setSeat(string $seat): BoardingPass
@@ -119,7 +119,9 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $label
      * @param string $value
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
+     *
      * @internal param array|null $auxiliaryFields
      */
     public function addAuxiliaryFields(string $label, string $value): BoardingPass
@@ -134,7 +136,9 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $label
      * @param string $value
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
+     *
      * @internal param array|null $secondaryFields
      */
     public function addSecondaryFields(string $label, string $value): BoardingPass
@@ -148,6 +152,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
 
     /**
      * @param string $headerImageUrl
+     *
      * @return BoardingPass
      */
     public function setHeaderImageUrl(string $headerImageUrl): BoardingPass
@@ -161,6 +166,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
 
     /**
      * @param string $headerTextField
+     *
      * @return BoardingPass
      */
     public function setHeaderTextField(string $headerTextField): BoardingPass
@@ -173,6 +179,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $label
      * @param string $value
+     *
      * @return array
      */
     private function setLabelValue(string $label, string $value): array
@@ -185,7 +192,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
 
     /**
      * @param string $code
-     * @return void
      */
     private function setCode(string $code)
     {
@@ -199,13 +205,13 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
 
     /**
      * @param string $travelClass
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     public function isValidTravelClass(string $travelClass)
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
-        if (!in_array($travelClass, $allowedTravelClass)) {
+        if (!in_array($travelClass, $allowedTravelClass, true)) {
             throw new \InvalidArgumentException('$travelClass must be either ' . implode(', ', $allowedTravelClass));
         }
     }
@@ -228,19 +234,19 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     public function jsonSerialize(): array
     {
         $json = [
-            'passenger_name' => $this->passengerName,
-            'pnr_number' => $this->pnrNumber,
-            'travel_class' => $this->travelClass,
-            'seat' => $this->seat,
-            'auxiliary_fields' => $this->auxiliaryFields,
-            'secondary_fields' => $this->secondaryFields,
-            'logo_image_url' => $this->logoImageUrl,
-            'header_image_url' => $this->headerImageUrl,
-            'header_text_field' => $this->headerTextField,
-            'qr_code' => $this->qrCode,
-            'barcode_image_url' => $this->barcodeImageUrl,
+            'passenger_name'           => $this->passengerName,
+            'pnr_number'               => $this->pnrNumber,
+            'travel_class'             => $this->travelClass,
+            'seat'                     => $this->seat,
+            'auxiliary_fields'         => $this->auxiliaryFields,
+            'secondary_fields'         => $this->secondaryFields,
+            'logo_image_url'           => $this->logoImageUrl,
+            'header_image_url'         => $this->headerImageUrl,
+            'header_text_field'        => $this->headerTextField,
+            'qr_code'                  => $this->qrCode,
+            'barcode_image_url'        => $this->barcodeImageUrl,
             'above_bar_code_image_url' => $this->aboveBarcodeImageUrl,
-            'flight_info' => $this->flightInfo,
+            'flight_info'              => $this->flightInfo,
         ];
 
         return array_filter($json);

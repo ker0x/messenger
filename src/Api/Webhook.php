@@ -11,7 +11,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class Webhook extends AbstractApi
 {
-
     /**
      * @var null|\Kerox\Messenger\Api\Webhook
      */
@@ -50,10 +49,10 @@ class Webhook extends AbstractApi
     /**
      * Webhook constructor.
      *
-     * @param string $appSecret
-     * @param string $verifyToken
-     * @param string $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
+     * @param string                                   $appSecret
+     * @param string                                   $verifyToken
+     * @param string                                   $pageToken
+     * @param \GuzzleHttp\ClientInterface              $client
      * @param \Psr\Http\Message\ServerRequestInterface $request
      */
     public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ServerRequestInterface $request = null)
@@ -66,17 +65,18 @@ class Webhook extends AbstractApi
     }
 
     /**
-     * @param string $appSecret
-     * @param string $verifyToken
-     * @param string $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
+     * @param string                                   $appSecret
+     * @param string                                   $verifyToken
+     * @param string                                   $pageToken
+     * @param \GuzzleHttp\ClientInterface              $client
      * @param \Psr\Http\Message\ServerRequestInterface $request
+     *
      * @return \Kerox\Messenger\Api\Webhook
      */
     public static function getInstance(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ServerRequestInterface $request = null): Webhook
     {
         if (self::$_instance === null) {
-            self::$_instance = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+            self::$_instance = new self($appSecret, $verifyToken, $pageToken, $client, $request);
         }
 
         return self::$_instance;
@@ -96,7 +96,7 @@ class Webhook extends AbstractApi
             return false;
         }
 
-        return ($params['hub_mode'] === 'subscribe' && $params['hub_verify_token'] === $this->verifyToken);
+        return $params['hub_mode'] === 'subscribe' && $params['hub_verify_token'] === $this->verifyToken;
     }
 
     /**
@@ -134,7 +134,7 @@ class Webhook extends AbstractApi
         $object = $decodedBody['object'] ?? null;
         $entry = $decodedBody['entry'] ?? null;
 
-        return ($object === 'page' && $entry !== null);
+        return $object === 'page' && $entry !== null;
     }
 
     /**
@@ -150,8 +150,9 @@ class Webhook extends AbstractApi
     }
 
     /**
-     * @return array
      * @throws \Exception
+     *
+     * @return array
      */
     public function getDecodedBody(): array
     {

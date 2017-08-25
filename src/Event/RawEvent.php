@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Event;
 
 class RawEvent extends AbstractEvent
 {
-
     const NAME = 'raw';
 
     /**
@@ -17,7 +16,7 @@ class RawEvent extends AbstractEvent
      *
      * @param string $senderId
      * @param string $recipientId
-     * @param array $raw
+     * @param array  $raw
      */
     public function __construct(string $senderId, string $recipientId, array $raw)
     {
@@ -44,6 +43,7 @@ class RawEvent extends AbstractEvent
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Event\RawEvent
      */
     public static function create(array $payload): RawEvent

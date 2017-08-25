@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\UtilityTrait;
 
 class CodeRequest extends AbstractRequest
 {
-
     use UtilityTrait;
 
     /**
@@ -27,9 +26,9 @@ class CodeRequest extends AbstractRequest
     /**
      * CodeRequest constructor.
      *
-     * @param string $pageToken
-     * @param int $imageSize
-     * @param string $codeType
+     * @param string      $pageToken
+     * @param int         $imageSize
+     * @param string      $codeType
      * @param null|string $ref
      */
     public function __construct(string $pageToken, int $imageSize, string $codeType, $ref)
@@ -57,9 +56,9 @@ class CodeRequest extends AbstractRequest
     protected function buildBody(): array
     {
         $body = [
-            'type' => $this->codeType,
+            'type'       => $this->codeType,
             'image_size' => $this->imageSize,
-            'data' => [
+            'data'       => [
                 'ref' => $this->ref,
             ]
         ];

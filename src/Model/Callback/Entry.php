@@ -6,7 +6,6 @@ use Kerox\Messenger\Event\EventFactory;
 
 class Entry
 {
-
     /**
      * @var string
      */
@@ -26,8 +25,8 @@ class Entry
      * Entry constructor.
      *
      * @param string $id
-     * @param int $time
-     * @param array $events
+     * @param int    $time
+     * @param array  $events
      */
     public function __construct(string $id, int $time, array $events)
     {
@@ -62,6 +61,7 @@ class Entry
 
     /**
      * @param array $entry
+     *
      * @return \Kerox\Messenger\Model\Callback\Entry
      */
     public static function create(array $entry): Entry

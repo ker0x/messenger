@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message;
 
 class SendRequest extends AbstractRequest
 {
-
     const TYPE_MESSAGE = 'message';
     const TYPE_ACTION = 'action';
 
@@ -38,12 +37,12 @@ class SendRequest extends AbstractRequest
     /**
      * Request constructor.
      *
-     * @param string $pageToken
+     * @param string                                $pageToken
      * @param string|\Kerox\Messenger\Model\Message $content
-     * @param string|null $recipient
-     * @param string $requestType
-     * @param string|null $notificationType
-     * @param string|null $tag
+     * @param string|null                           $recipient
+     * @param string                                $requestType
+     * @param string|null                           $notificationType
+     * @param string|null                           $tag
      */
     public function __construct(
         string $pageToken,
@@ -82,11 +81,11 @@ class SendRequest extends AbstractRequest
     protected function buildBody(): array
     {
         $body = [
-            'recipient' => $this->recipient,
-            'message' => $this->message,
-            'sender_action' => $this->senderAction,
+            'recipient'         => $this->recipient,
+            'message'           => $this->message,
+            'sender_action'     => $this->senderAction,
             'notification_type' => $this->notificationType,
-            'tag' => $this->tag,
+            'tag'               => $this->tag,
         ];
 
         return array_filter($body);

@@ -7,7 +7,6 @@ use Kerox\Messenger\Model\Common\Button\AbstractButton;
 
 class OpenGraphElement implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     /**
@@ -34,6 +33,7 @@ class OpenGraphElement implements \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement
      */
     public function setButtons(array $buttons): OpenGraphElement
@@ -62,7 +62,7 @@ class OpenGraphElement implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'url' => $this->url,
+            'url'     => $this->url,
             'buttons' => $this->buttons,
         ];
 

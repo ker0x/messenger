@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 class FlightInfo implements \JsonSerializable
 {
-
     /**
      * @var string
      */
@@ -28,9 +27,9 @@ class FlightInfo implements \JsonSerializable
     /**
      * FlightInfo constructor.
      *
-     * @param string $flightNumber
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport $departureAirport
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport $arrivalAirport
+     * @param string                                                                    $flightNumber
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $departureAirport
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $arrivalAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
      */
     public function __construct(
@@ -51,10 +50,10 @@ class FlightInfo implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'flight_number' => $this->flightNumber,
+            'flight_number'     => $this->flightNumber,
             'departure_airport' => $this->departureAirport,
-            'arrival_airport' => $this->arrivalAirport,
-            'flight_schedule' => $this->flightSchedule,
+            'arrival_airport'   => $this->arrivalAirport,
+            'flight_schedule'   => $this->flightSchedule,
         ];
     }
 }

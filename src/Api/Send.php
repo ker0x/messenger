@@ -10,7 +10,6 @@ use Kerox\Messenger\Response\SendResponse;
 
 class Send extends AbstractApi
 {
-
     const SENDER_ACTION_TYPING_ON = 'typing_on';
     const SENDER_ACTION_TYPING_OFF = 'typing_off';
     const SENDER_ACTION_MARK_SEEN = 'mark_seen';
@@ -36,7 +35,7 @@ class Send extends AbstractApi
     /**
      * Send constructor.
      *
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
     public function __construct(string $pageToken, ClientInterface $client)
@@ -45,24 +44,26 @@ class Send extends AbstractApi
     }
 
     /**
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
+     *
      * @return \Kerox\Messenger\Api\Send
      */
     public static function getInstance(string $pageToken, ClientInterface $client): Send
     {
         if (self::$_instance === null) {
-            self::$_instance = new Send($pageToken, $client);
+            self::$_instance = new self($pageToken, $client);
         }
 
         return self::$_instance;
     }
 
     /**
-     * @param string $recipient
+     * @param string                                $recipient
      * @param string|\Kerox\Messenger\Model\Message $message
-     * @param string $notificationType
-     * @param string|null $tag
+     * @param string                                $notificationType
+     * @param string|null                           $tag
+     *
      * @return \Kerox\Messenger\Response\SendResponse
      */
     public function message(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR, $tag = null): SendResponse
@@ -84,6 +85,7 @@ class Send extends AbstractApi
      * @param string $recipient
      * @param string $action
      * @param string $notificationType
+     *
      * @return \Kerox\Messenger\Response\SendResponse
      */
     public function action(string $recipient, string $action, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
@@ -99,6 +101,7 @@ class Send extends AbstractApi
 
     /**
      * @param \Kerox\Messenger\Model\Message\Attachment $attachment
+     *
      * @return \Kerox\Messenger\Response\SendResponse
      */
     public function attachment(Attachment $attachment): SendResponse
@@ -113,8 +116,10 @@ class Send extends AbstractApi
 
     /**
      * @param $message
-     * @return \Kerox\Messenger\Model\Message
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message
      */
     private function isValidMessage($message): Message
     {
@@ -131,12 +136,13 @@ class Send extends AbstractApi
 
     /**
      * @param string $notificationType
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidNotificationType(string $notificationType)
     {
         $allowedNotificationType = $this->getAllowedNotificationType();
-        if (!in_array($notificationType, $allowedNotificationType)) {
+        if (!in_array($notificationType, $allowedNotificationType, true)) {
             throw new \InvalidArgumentException('$notificationType must be either ' . implode(', ', $allowedNotificationType));
         }
     }
@@ -155,12 +161,13 @@ class Send extends AbstractApi
 
     /**
      * @param string $action
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidAction(string $action)
     {
         $allowedSenderAction = $this->getAllowedSenderAction();
-        if (!in_array($action, $allowedSenderAction)) {
+        if (!in_array($action, $allowedSenderAction, true)) {
             throw new \InvalidArgumentException('$action must be either ' . implode(', ', $allowedSenderAction));
         }
     }
@@ -179,12 +186,13 @@ class Send extends AbstractApi
 
     /**
      * @param string $tag
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidTag(string $tag)
     {
         $allowedTag = $this->getAllowedTag();
-        if (!in_array($tag, $allowedTag)) {
+        if (!in_array($tag, $allowedTag, true)) {
             throw new \InvalidArgumentException('$tag must be either ' . implode(', ', $allowedTag));
         }
     }

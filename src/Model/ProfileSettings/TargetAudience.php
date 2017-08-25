@@ -7,7 +7,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 class TargetAudience implements \JsonSerializable
 {
-
     use UtilityTrait;
     use ValidatorTrait;
 
@@ -34,11 +33,14 @@ class TargetAudience implements \JsonSerializable
      * TargetAudience constructor.
      *
      * @param string $audienceType
-     * @param array $whitelistCountries
-     * @param array $blacklistCountries
+     * @param array  $whitelistCountries
+     * @param array  $blacklistCountries
      */
-    public function __construct(string $audienceType = self::AUDIENCE_TYPE_ALL, array $whitelistCountries = [], array $blacklistCountries = [])
-    {
+    public function __construct(
+        string $audienceType = self::AUDIENCE_TYPE_ALL,
+        array $whitelistCountries = [],
+        array $blacklistCountries = []
+    ) {
         $this->isValidAudienceType($audienceType);
         $this->isValidCountries($whitelistCountries);
         $this->isValidCountries($blacklistCountries);
@@ -50,8 +52,10 @@ class TargetAudience implements \JsonSerializable
 
     /**
      * @param string $country
-     * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
     public function addWhitelistCountry(string $country): TargetAudience
     {
@@ -64,8 +68,10 @@ class TargetAudience implements \JsonSerializable
 
     /**
      * @param string $country
-     * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
     public function addBlacklistCountry(string $country): TargetAudience
     {
@@ -78,7 +84,7 @@ class TargetAudience implements \JsonSerializable
 
     /**
      * @param array $countries
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidCountries(array $countries)
@@ -92,12 +98,13 @@ class TargetAudience implements \JsonSerializable
 
     /**
      * @param string $audienceType
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidAudienceType(string $audienceType)
     {
         $allowedAudienceType = $this->getAllowedAudienceType();
-        if (!in_array($audienceType, $allowedAudienceType)) {
+        if (!in_array($audienceType, $allowedAudienceType, true)) {
             throw new \InvalidArgumentException('$audienceType must be either ' . implode(', ', $allowedAudienceType));
         }
     }
@@ -121,7 +128,7 @@ class TargetAudience implements \JsonSerializable
     {
         $json = [
             'audience_type' => $this->audienceType,
-            'countries' => [
+            'countries'     => [
                 'whitelist' => $this->whitelistCountries,
                 'blacklist' => $this->blacklistCountries,
             ]

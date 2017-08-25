@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Callback\Payment;
 
 class PaymentEvent extends AbstractEvent
 {
-
     const NAME = 'payment';
 
     /**
@@ -22,9 +21,9 @@ class PaymentEvent extends AbstractEvent
     /**
      * PaymentEvent constructor.
      *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param int $timestamp
+     * @param string                                  $senderId
+     * @param string                                  $recipientId
+     * @param int                                     $timestamp
      * @param \Kerox\Messenger\Model\Callback\Payment $payment
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Payment $payment)
@@ -61,6 +60,7 @@ class PaymentEvent extends AbstractEvent
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Event\PaymentEvent
      */
     public static function create(array $payload): PaymentEvent

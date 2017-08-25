@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Callback\Optin;
 
 class OptinEvent extends AbstractEvent
 {
-
     const NAME = 'optin';
 
     /**
@@ -22,9 +21,9 @@ class OptinEvent extends AbstractEvent
     /**
      * OptinEvent constructor.
      *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param int $timestamp
+     * @param string                                $senderId
+     * @param string                                $recipientId
+     * @param int                                   $timestamp
      * @param \Kerox\Messenger\Model\Callback\Optin $optin
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Optin $optin)
@@ -61,6 +60,7 @@ class OptinEvent extends AbstractEvent
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Event\OptinEvent
      */
     public static function create(array $payload): OptinEvent

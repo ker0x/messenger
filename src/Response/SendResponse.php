@@ -6,7 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class SendResponse extends AbstractResponse
 {
-
     const RECIPIENT_ID = 'recipient_id';
     const MESSAGE_ID = 'message_id';
     const ATTACHMENT_ID = 'attachment_id';
@@ -70,7 +69,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     protected function parseResponse(array $response)
     {
@@ -83,6 +81,7 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $response
+     *
      * @return bool
      */
     private function hasError(array $response): bool
@@ -110,7 +109,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     private function setRecipientId(array $response)
     {
@@ -129,7 +127,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     private function setMessageId(array $response)
     {
@@ -148,7 +145,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     private function setAttachmentId(array $response)
     {
@@ -167,7 +163,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $error
-     * @return void
      */
     private function setErrorMessage(array $error)
     {
@@ -186,7 +181,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $error
-     * @return void
      */
     private function setErrorType(array $error)
     {
@@ -205,7 +199,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $error
-     * @return void
      */
     private function setErrorCode(array $error)
     {
@@ -224,7 +217,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $error
-     * @return void
      */
     private function setErrorSubcode(array $error)
     {
@@ -243,7 +235,6 @@ class SendResponse extends AbstractResponse
 
     /**
      * @param array $error
-     * @return void
      */
     private function setErrorFbtraceId(array $error)
     {

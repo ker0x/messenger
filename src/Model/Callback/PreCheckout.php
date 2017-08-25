@@ -7,7 +7,6 @@ use Kerox\Messenger\Model\Common\Address;
 
 class PreCheckout
 {
-
     /**
      * @var string
      */
@@ -26,9 +25,9 @@ class PreCheckout
     /**
      * PreCheckout constructor.
      *
-     * @param string $payload
+     * @param string                                                    $payload
      * @param \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo $requestedUserInfo
-     * @param array $amount
+     * @param array                                                     $amount
      */
     public function __construct(string $payload, RequestedUserInfo $requestedUserInfo, array $amount)
     {
@@ -79,6 +78,7 @@ class PreCheckout
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\PreCheckout
      */
     public static function create(array $payload): PreCheckout

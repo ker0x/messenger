@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 class PassengerInfo implements \JsonSerializable
 {
-
     /**
      * @var string
      */
@@ -34,6 +33,7 @@ class PassengerInfo implements \JsonSerializable
 
     /**
      * @param string $ticketNumber
+     *
      * @return PassengerInfo
      */
     public function setTicketNumber(string $ticketNumber): PassengerInfo
@@ -49,9 +49,9 @@ class PassengerInfo implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'passenger_id' => $this->passengerId,
+            'passenger_id'  => $this->passengerId,
             'ticket_number' => $this->ticketNumber,
-            'name' => $this->name,
+            'name'          => $this->name,
         ];
 
         return array_filter($json);

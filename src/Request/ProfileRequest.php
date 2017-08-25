@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\ProfileSettings;
 
 class ProfileRequest extends AbstractRequest
 {
-
     /**
      * @var mixed
      */
@@ -16,7 +15,7 @@ class ProfileRequest extends AbstractRequest
      * ProfileRequest constructor.
      *
      * @param string $pageToken
-     * @param mixed $profileSettings
+     * @param mixed  $profileSettings
      */
     public function __construct(string $pageToken, $profileSettings)
     {

@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Common\Address;
 
 class CheckoutUpdate
 {
-
     /**
      * @var string
      */
@@ -20,7 +19,7 @@ class CheckoutUpdate
     /**
      * CheckoutUpdate constructor.
      *
-     * @param string $payload
+     * @param string                                $payload
      * @param \Kerox\Messenger\Model\Common\Address $shippingAddress
      */
     public function __construct(string $payload, Address $shippingAddress)
@@ -47,6 +46,7 @@ class CheckoutUpdate
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\CheckoutUpdate
      */
     public static function create(array $payload): CheckoutUpdate

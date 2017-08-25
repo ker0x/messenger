@@ -6,7 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class WebhookResponse extends AbstractResponse
 {
-
     const SUCCESS = 'success';
 
     /**
@@ -26,7 +25,6 @@ class WebhookResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     protected function parseResponse(array $response)
     {

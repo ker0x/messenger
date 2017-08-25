@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 class PassengerSegmentInfo implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     /**
@@ -53,7 +52,9 @@ class PassengerSegmentInfo implements \JsonSerializable
     /**
      * @param string $title
      * @param string $value
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo
+     *
      * @internal param array $productInfo
      */
     public function addProductInfo(string $title, string $value): PassengerSegmentInfo
@@ -74,10 +75,10 @@ class PassengerSegmentInfo implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'segment_id' => $this->segmentId,
+            'segment_id'   => $this->segmentId,
             'passenger_id' => $this->passengerId,
-            'seat' => $this->seat,
-            'seat_type' => $this->seatType,
+            'seat'         => $this->seat,
+            'seat_type'    => $this->seatType,
             'product_info' => $this->productInfo,
         ];
 

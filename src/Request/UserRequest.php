@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Request;
 
 class UserRequest extends AbstractRequest
 {
-
     /**
      * @var array
      */
@@ -14,7 +13,7 @@ class UserRequest extends AbstractRequest
      * UserRequest constructor.
      *
      * @param string $pageToken
-     * @param array $fields
+     * @param array  $fields
      */
     public function __construct(string $pageToken, array $fields)
     {
@@ -23,20 +22,12 @@ class UserRequest extends AbstractRequest
         $this->fields = $fields;
     }
 
-    /**
-     * @return null
-     */
     protected function buildHeaders()
     {
-        return;
     }
 
-    /**
-     * @return null
-     */
     protected function buildBody()
     {
-        return;
     }
 
     /**
