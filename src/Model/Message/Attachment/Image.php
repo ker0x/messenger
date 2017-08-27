@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment;
 
 class Image extends File
 {
-
     /**
      * @var array
      */
@@ -15,7 +14,7 @@ class Image extends File
     /**
      * Image constructor.
      *
-     * @param string $url
+     * @param string    $url
      * @param bool|null $reusable
      */
     public function __construct(string $url, bool $reusable = null)

@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Callback\Read;
 
 class ReadEvent extends AbstractEvent
 {
-
     const NAME = 'read';
 
     /**
@@ -22,9 +21,9 @@ class ReadEvent extends AbstractEvent
     /**
      * ReadEvent constructor.
      *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param int $timestamp
+     * @param string                               $senderId
+     * @param string                               $recipientId
+     * @param int                                  $timestamp
      * @param \Kerox\Messenger\Model\Callback\Read $read
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Read $read)
@@ -61,6 +60,7 @@ class ReadEvent extends AbstractEvent
 
     /**
      * @param $payload
+     *
      * @return \Kerox\Messenger\Event\ReadEvent
      */
     public static function create(array $payload): ReadEvent

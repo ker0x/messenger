@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback;
 
 class Postback
 {
-
     /**
      * @var string
      */
@@ -18,7 +17,7 @@ class Postback
     /**
      * Postback constructor.
      *
-     * @param string $payload
+     * @param string                                   $payload
      * @param \Kerox\Messenger\Model\Callback\Referral $referral
      */
     public function __construct(string $payload, Referral $referral = null)
@@ -53,6 +52,7 @@ class Postback
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Postback
      */
     public static function create(array $payload): Postback

@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Common\Button;
 
 class Nested extends AbstractButton
 {
-
     /**
      * @var string
      */
@@ -18,7 +17,7 @@ class Nested extends AbstractButton
     /**
      * Nested constructor.
      *
-     * @param string $title
+     * @param string                                                $title
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      */
     public function __construct(string $title, array $buttons)
@@ -35,6 +34,7 @@ class Nested extends AbstractButton
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton $button
+     *
      * @return \Kerox\Messenger\Model\Common\Button\Nested
      */
     public function addButton(AbstractButton $button): Nested
@@ -65,7 +65,7 @@ class Nested extends AbstractButton
     {
         $json = parent::jsonSerialize();
         $json += [
-            'title' => $this->title,
+            'title'           => $this->title,
             'call_to_actions' => $this->buttons,
         ];
 

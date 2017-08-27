@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class AirlineItinerary extends AbstractAirline
 {
-
     /**
      * @var string
      */
@@ -60,14 +59,14 @@ class AirlineItinerary extends AbstractAirline
     /**
      * AirlineItinerary constructor.
      *
-     * @param string $introMessage
-     * @param string $locale
-     * @param string $pnrNumber
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerInfo[] $passengerInfo
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\ExtendedFlightInfo[] $flightInfo
+     * @param string                                                                            $introMessage
+     * @param string                                                                            $locale
+     * @param string                                                                            $pnrNumber
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerInfo[]        $passengerInfo
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\ExtendedFlightInfo[]   $flightInfo
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo[] $passengerSegmentInfo
-     * @param string $totalPrice
-     * @param string $currency
+     * @param string                                                                            $totalPrice
+     * @param string                                                                            $currency
      */
     public function __construct(
         string $introMessage,
@@ -94,7 +93,9 @@ class AirlineItinerary extends AbstractAirline
      * @param string $title
      * @param string $amount
      * @param string $currency
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItinerary
+     *
      * @internal param array|null $priceInfo
      */
     public function addPriceInfo(string $title, string $amount, string $currency = null): AirlineItinerary
@@ -104,8 +105,8 @@ class AirlineItinerary extends AbstractAirline
         }
 
         $priceInfo = [
-            'title' => $title,
-            'amount' => $amount,
+            'title'    => $title,
+            'amount'   => $amount,
             'currency' => $currency,
         ];
 
@@ -118,6 +119,7 @@ class AirlineItinerary extends AbstractAirline
 
     /**
      * @param string $basePrice
+     *
      * @return AirlineItinerary
      */
     public function setBasePrice(string $basePrice): AirlineItinerary
@@ -129,6 +131,7 @@ class AirlineItinerary extends AbstractAirline
 
     /**
      * @param string $tax
+     *
      * @return AirlineItinerary
      */
     public function setTax(string $tax): AirlineItinerary
@@ -146,19 +149,19 @@ class AirlineItinerary extends AbstractAirline
         $json = parent::jsonSerialize();
         $json += [
             'payload' => [
-                'template_type' => Template::TYPE_AIRLINE_ITINERARY,
-                'intro_message' => $this->introMessage,
-                'locale' => $this->locale,
-                'theme_color' => $this->themeColor,
-                'pnr_number' => $this->pnrNumber,
-                'passenger_info' => $this->passengerInfo,
-                'flight_info' => $this->flightInfo,
+                'template_type'          => Template::TYPE_AIRLINE_ITINERARY,
+                'intro_message'          => $this->introMessage,
+                'locale'                 => $this->locale,
+                'theme_color'            => $this->themeColor,
+                'pnr_number'             => $this->pnrNumber,
+                'passenger_info'         => $this->passengerInfo,
+                'flight_info'            => $this->flightInfo,
                 'passenger_segment_info' => $this->passengerSegmentInfo,
-                'price_info' => $this->priceInfo,
-                'base_price' => $this->basePrice,
-                'tax' => $this->tax,
-                'total_price' => $this->totalPrice,
-                'currency' => $this->currency,
+                'price_info'             => $this->priceInfo,
+                'base_price'             => $this->basePrice,
+                'tax'                    => $this->tax,
+                'total_price'            => $this->totalPrice,
+                'currency'               => $this->currency,
             ],
         ];
 

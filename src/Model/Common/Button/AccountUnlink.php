@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Common\Button;
 
 class AccountUnlink extends AbstractButton
 {
-
     /**
      * AccountUnlink constructor.
      */

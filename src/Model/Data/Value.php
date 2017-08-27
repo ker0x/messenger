@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Data;
 
 class Value
 {
-
     /**
      * @var int|array
      */
@@ -18,7 +17,7 @@ class Value
     /**
      * Value constructor.
      *
-     * @param int $value
+     * @param int    $value
      * @param string $endTime
      */
     public function __construct($value, string $endTime)
@@ -37,6 +36,7 @@ class Value
 
     /**
      * @param bool $asDateTime
+     *
      * @return \DateTime|string
      */
     public function getEndTime(bool $asDateTime = true)

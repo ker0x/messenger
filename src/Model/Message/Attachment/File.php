@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment;
 
 class File extends Attachment
 {
-
     /**
      * @var null|string
      */
@@ -25,9 +24,9 @@ class File extends Attachment
     /**
      * File constructor.
      *
-     * @param string $url
+     * @param string    $url
      * @param bool|null $reusable
-     * @param string $type
+     * @param string    $type
      */
     public function __construct($url, bool $reusable = null, $type = Attachment::TYPE_FILE)
     {
@@ -45,6 +44,7 @@ class File extends Attachment
 
     /**
      * @param $value
+     *
      * @return bool
      */
     private function isAttachmentId($value): bool
@@ -60,8 +60,8 @@ class File extends Attachment
         $json = parent::jsonSerialize();
         $json += [
             'payload' => [
-                'url' => $this->url,
-                'is_reusable' => $this->reusable,
+                'url'           => $this->url,
+                'is_reusable'   => $this->reusable,
                 'attachment_id' => $this->attachmentId,
             ],
         ];

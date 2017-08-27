@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback;
 
 class AccountLinking
 {
-
     /**
      * @var string
      */
@@ -18,7 +17,7 @@ class AccountLinking
     /**
      * AccountLinking constructor.
      *
-     * @param string $status
+     * @param string      $status
      * @param string|null $authorizationCode
      */
     public function __construct(string $status, string $authorizationCode = null)
@@ -53,6 +52,7 @@ class AccountLinking
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\AccountLinking
      */
     public static function create(array $payload): AccountLinking

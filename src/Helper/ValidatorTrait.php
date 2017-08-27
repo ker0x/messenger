@@ -7,23 +7,22 @@ use Kerox\Messenger\Model\Common\Button\AbstractButton;
 
 trait ValidatorTrait
 {
-
     /**
      * @param string $value
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidColor(string $value)
     {
         if (!preg_match('/^#[A-Fa-f0-9]{6}$/', $value)) {
-            throw new InvalidArgumentException("The color must be expressed in #rrggbb format.");
+            throw new InvalidArgumentException('The color must be expressed in #rrggbb format.');
         }
     }
 
     /**
      * @param string $value
-     * @param int $length
-     * @return void
+     * @param int    $length
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidString(string $value, int $length = 20)
@@ -35,7 +34,7 @@ trait ValidatorTrait
 
     /**
      * @param string $value
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidUrl(string $value)
@@ -47,7 +46,7 @@ trait ValidatorTrait
 
     /**
      * @param string $value
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidLocale(string $value)
@@ -59,7 +58,7 @@ trait ValidatorTrait
 
     /**
      * @param string $value
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidCountry(string $value)
@@ -71,7 +70,7 @@ trait ValidatorTrait
 
     /**
      * @param string $value
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidDateTime(string $value)
@@ -83,9 +82,9 @@ trait ValidatorTrait
 
     /**
      * @param array $array
-     * @param int $maxSize
-     * @param int $minSize
-     * @return void
+     * @param int   $maxSize
+     * @param int   $minSize
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidArray(array $array, int $maxSize, int $minSize = null)
@@ -101,7 +100,7 @@ trait ValidatorTrait
 
     /**
      * @param string $value
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidCurrency(string $value)
@@ -113,22 +112,21 @@ trait ValidatorTrait
 
     /**
      * @param string $filename
-     * @param array $allowedExtension
-     * @return void
+     * @param array  $allowedExtension
+     *
      * @throws \InvalidArgumentException
      */
     protected function isValidExtension(string $filename, array $allowedExtension)
     {
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        if (empty($ext) || !in_array($ext, $allowedExtension)) {
+        if (empty($ext) || !in_array($ext, $allowedExtension, true)) {
             throw new InvalidArgumentException("{$filename} doesn't have a valid extension. Allowed extensions are " . implode(', ', $allowedExtension));
         }
     }
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
-     * @param array $allowedButtonsType
-     * @return void
+     * @param array                                                 $allowedButtonsType
      */
     protected function isValidButtons(array $buttons, array $allowedButtonsType)
     {
@@ -138,7 +136,7 @@ trait ValidatorTrait
                 throw new \InvalidArgumentException('Array can only contain instance of AbstractButton.');
             }
 
-            if (!in_array($button->getType(), $allowedButtonsType)) {
+            if (!in_array($button->getType(), $allowedButtonsType, true)) {
                 throw new \InvalidArgumentException('Buttons can only be an instance of ' . implode(', ', $allowedButtonsType));
             }
         }

@@ -7,7 +7,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Generic;
 
 class Share extends AbstractButton
 {
-
     use UtilityTrait;
 
     /**
@@ -17,6 +16,7 @@ class Share extends AbstractButton
 
     /**
      * Share constructor.
+     *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Generic $content
      */
     public function __construct(Generic $content = null)

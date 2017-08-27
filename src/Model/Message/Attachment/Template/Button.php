@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class Button extends Template
 {
-
     /**
      * @var string
      */
@@ -20,7 +19,7 @@ class Button extends Template
     /**
      * Buttons constructor.
      *
-     * @param string $text
+     * @param string                                                $text
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      */
     public function __construct(string $text, array $buttons)
@@ -43,8 +42,8 @@ class Button extends Template
         $json += [
             'payload' => [
                 'template_type' => Template::TYPE_BUTTON,
-                'text' => $this->text,
-                'buttons' => $this->buttons,
+                'text'          => $this->text,
+                'buttons'       => $this->buttons,
             ]
         ];
 

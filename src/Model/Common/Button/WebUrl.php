@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Common\Button;
 
 class WebUrl extends AbstractButton
 {
-
     const RATIO_TYPE_COMPACT = 'compact';
     const RATIO_TYPE_TALL = 'tall';
     const RATIO_TYPE_FULL = 'full';
@@ -58,6 +57,7 @@ class WebUrl extends AbstractButton
 
     /**
      * @param string $webviewHeightRatio
+     *
      * @return WebUrl
      */
     public function setWebviewHeightRatio(string $webviewHeightRatio): WebUrl
@@ -71,6 +71,7 @@ class WebUrl extends AbstractButton
 
     /**
      * @param bool $messengerExtension
+     *
      * @return WebUrl
      */
     public function setMessengerExtension(bool $messengerExtension): WebUrl
@@ -82,6 +83,7 @@ class WebUrl extends AbstractButton
 
     /**
      * @param string $fallbackUrl
+     *
      * @return WebUrl
      */
     public function setFallbackUrl(string $fallbackUrl): WebUrl
@@ -110,7 +112,7 @@ class WebUrl extends AbstractButton
     private function isValidWebviewHeightRatio(string $webviewHeightRatio)
     {
         $allowedRatioType = $this->getAllowedRatioType();
-        if (!in_array($webviewHeightRatio, $allowedRatioType)) {
+        if (!in_array($webviewHeightRatio, $allowedRatioType, true)) {
             throw new \InvalidArgumentException('$webviewHeightRatio must be either ' . implode(', ', $allowedRatioType));
         }
     }
@@ -134,11 +136,11 @@ class WebUrl extends AbstractButton
     {
         $json = parent::jsonSerialize();
         $json += [
-            'url' => $this->url,
-            'title' => $this->title,
+            'url'                  => $this->url,
+            'title'                => $this->title,
             'webview_height_ratio' => $this->webviewHeightRatio,
             'messenger_extensions' => $this->messengerExtension,
-            'fallback_url' => $this->fallbackUrl,
+            'fallback_url'         => $this->fallbackUrl,
             'webview_share_button' => $this->webviewShareButton,
         ];
 

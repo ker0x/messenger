@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Common\Button;
 
 class AccountLink extends AbstractButton
 {
-
     /**
      * @var string
      */

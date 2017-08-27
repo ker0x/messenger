@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Callback\PreCheckout;
 
 class PreCheckoutEvent extends AbstractEvent
 {
-
     const NAME = 'pre_checkout';
 
     /**
@@ -22,9 +21,9 @@ class PreCheckoutEvent extends AbstractEvent
     /**
      * PaymentEvent constructor.
      *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param int $timestamp
+     * @param string                                      $senderId
+     * @param string                                      $recipientId
+     * @param int                                         $timestamp
      * @param \Kerox\Messenger\Model\Callback\PreCheckout $preCheckout
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, PreCheckout $preCheckout)
@@ -61,6 +60,7 @@ class PreCheckoutEvent extends AbstractEvent
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Event\PreCheckoutEvent
      */
     public static function create(array $payload): PreCheckoutEvent

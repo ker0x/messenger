@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Common\Button\WebUrl;
 
 class ListeElement extends AbstractElement
 {
-
     /**
      * @var \Kerox\Messenger\Model\Common\Button\WebUrl
      */
@@ -29,6 +28,7 @@ class ListeElement extends AbstractElement
 
     /**
      * @param string $subtitle
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
      */
     public function setSubtitle(string $subtitle): ListeElement
@@ -40,6 +40,7 @@ class ListeElement extends AbstractElement
 
     /**
      * @param string $imageUrl
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
      */
     public function setImageUrl(string $imageUrl): ListeElement
@@ -51,6 +52,7 @@ class ListeElement extends AbstractElement
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\WebUrl $defaultAction
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
      */
     public function setDefaultAction(WebUrl $defaultAction): ListeElement
@@ -62,6 +64,7 @@ class ListeElement extends AbstractElement
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
+     *
      * @return ListeElement
      */
     public function setButtons(array $buttons): ListeElement
@@ -80,10 +83,10 @@ class ListeElement extends AbstractElement
     {
         $json = parent::jsonSerialize();
         $json += [
-            'subtitle' => $this->subtitle,
-            'image_url' => $this->imageUrl,
+            'subtitle'       => $this->subtitle,
+            'image_url'      => $this->imageUrl,
             'default_action' => $this->defaultAction,
-            'buttons' => $this->buttons,
+            'buttons'        => $this->buttons,
         ];
 
         return array_filter($json);

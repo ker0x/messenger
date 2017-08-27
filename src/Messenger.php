@@ -9,14 +9,12 @@ use Kerox\Messenger\Api\Insights;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Tag;
-use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Api\Webhook;
 use Psr\Http\Message\ServerRequestInterface;
 
 class Messenger
 {
-
     const API_URL = 'https://graph.facebook.com/';
     const API_VERSION = 'v2.9';
 
@@ -43,9 +41,9 @@ class Messenger
     /**
      * Messenger constructor.
      *
-     * @param string $appSecret
-     * @param string $verifyToken
-     * @param string $pageToken
+     * @param string                      $appSecret
+     * @param string                      $verifyToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
     public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client = null)
@@ -72,6 +70,7 @@ class Messenger
 
     /**
      * @param \Psr\Http\Message\ServerRequestInterface $request
+     *
      * @return \Kerox\Messenger\Api\Webhook
      */
     public function webhook(ServerRequestInterface $request = null): Webhook

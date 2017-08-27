@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Common;
 
 class Address implements \JsonSerializable
 {
-
     /**
      * @var null|string
      */
@@ -70,6 +69,7 @@ class Address implements \JsonSerializable
 
     /**
      * @param string $name
+     *
      * @return \Kerox\Messenger\Model\Common\Address
      */
     public function setName(string $name): Address
@@ -97,6 +97,7 @@ class Address implements \JsonSerializable
 
     /**
      * @param string $additionalStreet
+     *
      * @return Address
      */
     public function setAdditionalStreet(string $additionalStreet): Address
@@ -148,6 +149,7 @@ class Address implements \JsonSerializable
 
     /**
      * @param int $id
+     *
      * @return Address
      */
     public function setId(int $id)
@@ -171,14 +173,14 @@ class Address implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'name' => $this->name,
-            'street_1' => $this->street,
-            'street_2' => $this->additionalStreet,
-            'city' => $this->city,
+            'name'        => $this->name,
+            'street_1'    => $this->street,
+            'street_2'    => $this->additionalStreet,
+            'city'        => $this->city,
             'postal_code' => $this->postalCode,
-            'state' => $this->state,
-            'country' => $this->country,
-            'id' => $this->id,
+            'state'       => $this->state,
+            'country'     => $this->country,
+            'id'          => $this->id,
         ];
 
         return array_filter($json);
@@ -186,6 +188,7 @@ class Address implements \JsonSerializable
 
     /**
      * @param array $payload
+     *
      * @return static
      */
     public static function create(array $payload)

@@ -8,7 +8,6 @@ use Kerox\Messenger\Model\Common\Address;
 
 class Payment
 {
-
     /**
      * @var string
      */
@@ -37,11 +36,11 @@ class Payment
     /**
      * Payment constructor.
      *
-     * @param string $payload
+     * @param string                                                    $payload
      * @param \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo $requestedUserInfo
      * @param \Kerox\Messenger\Model\Callback\Payment\PaymentCredential $paymentCredential
-     * @param array $amount
-     * @param string $shippingOptionId
+     * @param array                                                     $amount
+     * @param string                                                    $shippingOptionId
      */
     public function __construct(
         string $payload,
@@ -115,6 +114,7 @@ class Payment
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Payment
      */
     public static function create(array $payload): Payment

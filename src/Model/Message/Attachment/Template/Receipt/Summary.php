@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
 
 class Summary implements \JsonSerializable
 {
-
     /**
      * @var float
      */
@@ -37,6 +36,7 @@ class Summary implements \JsonSerializable
 
     /**
      * @param float $subtotal
+     *
      * @return Summary
      */
     public function setSubtotal(float $subtotal): Summary
@@ -48,6 +48,7 @@ class Summary implements \JsonSerializable
 
     /**
      * @param float $shippingCost
+     *
      * @return Summary
      */
     public function setShippingCost(float $shippingCost): Summary
@@ -59,6 +60,7 @@ class Summary implements \JsonSerializable
 
     /**
      * @param float $totalTax
+     *
      * @return Summary
      */
     public function setTotalTax(float $totalTax): Summary
@@ -74,10 +76,10 @@ class Summary implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'subtotal' => $this->subtotal,
+            'subtotal'      => $this->subtotal,
             'shipping_cost' => $this->shippingCost,
-            'total_tax' => $this->totalTax,
-            'total_cost' => $this->totalCost,
+            'total_tax'     => $this->totalTax,
+            'total_cost'    => $this->totalCost,
         ];
 
         return array_filter($json);

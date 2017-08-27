@@ -7,7 +7,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 class Attachment implements \JsonSerializable
 {
-
     use UtilityTrait;
     use ValidatorTrait;
 

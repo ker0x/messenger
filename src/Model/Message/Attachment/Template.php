@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment;
 
 abstract class Template extends Attachment
 {
-
     const TYPE_AIRLINE_BOARDINGPASS = 'airline_boardingpass';
     const TYPE_AIRLINE_CHECKIN = 'airline_checkin';
     const TYPE_AIRLINE_ITINERARY = 'airline_itinerary';
@@ -19,7 +18,6 @@ abstract class Template extends Attachment
 
     /**
      * Template constructor.
-     *
      */
     public function __construct()
     {

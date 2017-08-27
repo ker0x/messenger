@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Common\Button\Payment;
 
 class PriceList implements \JsonSerializable
 {
-
     /**
      * @var string
      */
@@ -33,7 +32,7 @@ class PriceList implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'label' => $this->label,
+            'label'  => $this->label,
             'amount' => $this->amount,
         ];
     }

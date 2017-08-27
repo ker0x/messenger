@@ -8,7 +8,6 @@ use Kerox\Messenger\Response\TagResponse;
 
 class Tag extends AbstractApi
 {
-
     /**
      * @var null|\Kerox\Messenger\Api\Tag
      */
@@ -17,7 +16,7 @@ class Tag extends AbstractApi
     /**
      * Tag constructor.
      *
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
     public function __construct(string $pageToken, ClientInterface $client)
@@ -26,7 +25,7 @@ class Tag extends AbstractApi
     }
 
     /**
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      *
      * @return \Kerox\Messenger\Api\Tag
@@ -34,7 +33,7 @@ class Tag extends AbstractApi
     public static function getInstance(string $pageToken, ClientInterface $client): Tag
     {
         if (self::$_instance === null) {
-            self::$_instance = new Tag($pageToken, $client);
+            self::$_instance = new self($pageToken, $client);
         }
 
         return self::$_instance;

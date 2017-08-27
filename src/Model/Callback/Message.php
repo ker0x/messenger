@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback;
 
 class Message
 {
-
     /**
      * @var string
      */
@@ -34,10 +33,10 @@ class Message
      * Message constructor.
      *
      * @param string $messageId
-     * @param int $sequence
+     * @param int    $sequence
      * @param string $text
      * @param string $quickReply
-     * @param array $attachments
+     * @param array  $attachments
      */
     public function __construct(
         string $messageId,
@@ -119,6 +118,7 @@ class Message
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Message
      */
     public static function create(array $payload)

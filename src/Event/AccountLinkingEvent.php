@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Callback\AccountLinking;
 
 class AccountLinkingEvent extends AbstractEvent
 {
-
     const NAME = 'account_linking';
 
     /**
@@ -22,9 +21,9 @@ class AccountLinkingEvent extends AbstractEvent
     /**
      * AccountLinkingEvent constructor.
      *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param int $timestamp
+     * @param string                                         $senderId
+     * @param string                                         $recipientId
+     * @param int                                            $timestamp
      * @param \Kerox\Messenger\Model\Callback\AccountLinking $accountLinking
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, AccountLinking $accountLinking)
@@ -61,6 +60,7 @@ class AccountLinkingEvent extends AbstractEvent
 
     /**
      * @param $payload
+     *
      * @return \Kerox\Messenger\Event\AccountLinkingEvent
      */
     public static function create(array $payload): AccountLinkingEvent
