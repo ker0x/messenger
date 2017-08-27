@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 class PaymentSettings implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     /**
@@ -26,6 +25,7 @@ class PaymentSettings implements \JsonSerializable
 
     /**
      * @param string $privacyUrl
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
     public function setPrivacyUrl(string $privacyUrl): PaymentSettings
@@ -38,6 +38,7 @@ class PaymentSettings implements \JsonSerializable
 
     /**
      * @param string $publicKey
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
     public function setPublicKey(string $publicKey): PaymentSettings
@@ -49,6 +50,7 @@ class PaymentSettings implements \JsonSerializable
 
     /**
      * @param int $testUser
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
     public function addTestUser(int $testUser): PaymentSettings
@@ -65,8 +67,8 @@ class PaymentSettings implements \JsonSerializable
     {
         $json = [
             'privacy_url' => $this->privacyUrl,
-            'public_key' => $this->publicKey,
-            'test_users' => $this->testUsers,
+            'public_key'  => $this->publicKey,
+            'test_users'  => $this->testUsers,
         ];
 
         return array_filter($json);

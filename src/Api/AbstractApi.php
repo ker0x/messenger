@@ -6,7 +6,6 @@ use GuzzleHttp\ClientInterface;
 
 abstract class AbstractApi
 {
-
     /**
      * @var string
      */
@@ -20,7 +19,7 @@ abstract class AbstractApi
     /**
      * AbstractApi constructor.
      *
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
     public function __construct(string $pageToken, ClientInterface $client)

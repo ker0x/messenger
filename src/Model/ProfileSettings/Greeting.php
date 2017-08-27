@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 class Greeting implements ProfileSettingsInterface, \JsonSerializable
 {
-
     use ValidatorTrait;
 
     /**
@@ -44,7 +43,7 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
     {
         $json = [
             'locale' => $this->locale,
-            'text' => $this->text,
+            'text'   => $this->text,
         ];
 
         return $json;

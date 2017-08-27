@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Event;
 
 abstract class AbstractEvent
 {
-
     /**
      * @var string
      */
@@ -50,6 +49,7 @@ abstract class AbstractEvent
 
     /**
      * @param array $payload
+     *
      * @return mixed
      */
     abstract public static function create(array $payload);

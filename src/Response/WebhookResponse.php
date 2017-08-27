@@ -6,7 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class WebhookResponse extends AbstractResponse
 {
-
     const SUCCESS = 'success';
 
     /**
@@ -15,7 +14,7 @@ class WebhookResponse extends AbstractResponse
     protected $success;
 
     /**
-     * Webhook constructor.
+     * WebhookResponse constructor.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
      */
@@ -26,28 +25,17 @@ class WebhookResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     protected function parseResponse(array $response)
     {
-        $this->setSuccess($response);
+        $this->success = $response[self::SUCCESS] ?? null;
     }
 
     /**
-     * @return null|bool
+     * @return bool
      */
-    public function isSuccess()
+    public function isSuccess(): bool
     {
-        return $this->success;
-    }
-
-    /**
-     * @param array $response
-     */
-    private function setSuccess(array $response)
-    {
-        if (isset($response[self::SUCCESS])) {
-            $this->success = $response[self::SUCCESS];
-        }
+        return $this->success === true;
     }
 }

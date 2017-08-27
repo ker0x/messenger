@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 class Airport implements \JsonSerializable
 {
-
     /**
      * @var string
      */
@@ -39,6 +38,7 @@ class Airport implements \JsonSerializable
 
     /**
      * @param string $terminal
+     *
      * @return Airport
      */
     public function setTerminal(string $terminal): Airport
@@ -50,6 +50,7 @@ class Airport implements \JsonSerializable
 
     /**
      * @param string $gate
+     *
      * @return Airport
      */
     public function setGate(string $gate): Airport
@@ -66,9 +67,9 @@ class Airport implements \JsonSerializable
     {
         $json = [
             'airport_code' => $this->airportCode,
-            'city' => $this->city,
-            'terminal' => $this->terminal,
-            'gate' => $this->gate,
+            'city'         => $this->city,
+            'terminal'     => $this->terminal,
+            'gate'         => $this->gate,
         ];
 
         return array_filter($json);

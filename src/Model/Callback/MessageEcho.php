@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback;
 
 class MessageEcho extends Message
 {
-
     /**
      * @var bool
      */
@@ -23,14 +22,14 @@ class MessageEcho extends Message
     /**
      * MessageEcho constructor.
      *
-     * @param bool $isEcho
-     * @param int $appId
-     * @param string $messageId
-     * @param int $sequence
+     * @param bool        $isEcho
+     * @param int         $appId
+     * @param string      $messageId
+     * @param int         $sequence
      * @param string|null $metadata
      * @param string|null $text
      * @param string|null $quickReply
-     * @param array $attachments
+     * @param array       $attachments
      */
     public function __construct(
         bool $isEcho,
@@ -50,7 +49,7 @@ class MessageEcho extends Message
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEcho(): bool
     {
@@ -75,6 +74,7 @@ class MessageEcho extends Message
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\MessageEcho
      */
     public static function create(array $payload)

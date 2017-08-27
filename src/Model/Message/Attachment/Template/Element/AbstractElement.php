@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 abstract class AbstractElement implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     /**
@@ -38,7 +37,6 @@ abstract class AbstractElement implements \JsonSerializable
 
     /**
      * @param mixed $subtitle
-     * @return void
      */
     public function setSubtitle(string $subtitle)
     {
@@ -49,7 +47,6 @@ abstract class AbstractElement implements \JsonSerializable
 
     /**
      * @param mixed $imageUrl
-     * @return void
      */
     public function setImageUrl(string $imageUrl)
     {

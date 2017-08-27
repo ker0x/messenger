@@ -2,12 +2,11 @@
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Helper\ValidatorTrait;
+use Kerox\Messenger\Model\Message\Attachment\Template;
 
 abstract class AbstractAirline extends Template
 {
-
     use ValidatorTrait;
 
     /**
@@ -36,6 +35,7 @@ abstract class AbstractAirline extends Template
 
     /**
      * @param string $themeColor
+     *
      * @return AbstractAirline
      */
     public function setThemeColor(string $themeColor): AbstractAirline

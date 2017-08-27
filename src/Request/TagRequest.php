@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Request;
 
 class TagRequest extends AbstractRequest
 {
-
     /**
      * TagRequest constructor.
      *
@@ -15,20 +14,12 @@ class TagRequest extends AbstractRequest
         parent::__construct($pageToken);
     }
 
-    /**
-     * @return null
-     */
     protected function buildHeaders()
     {
-        return;
     }
 
-    /**
-     * @return null
-     */
     protected function buildBody()
     {
-        return;
     }
 
     /**

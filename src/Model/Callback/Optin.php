@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback;
 
 class Optin
 {
-
     /**
      * @var string
      */
@@ -30,6 +29,7 @@ class Optin
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Optin
      */
     public static function create(array $payload): Optin

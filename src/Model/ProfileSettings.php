@@ -8,7 +8,6 @@ use Kerox\Messenger\Model\ProfileSettings\TargetAudience;
 
 class ProfileSettings implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     /**
@@ -48,6 +47,7 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\ProfileSettings\PersistentMenu[] $persistentMenus
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addPersistentMenus(array $persistentMenus): ProfileSettings
@@ -59,8 +59,10 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param string $payload
-     * @return \Kerox\Messenger\Model\ProfileSettings
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addStartButton(string $payload): ProfileSettings
     {
@@ -75,6 +77,7 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\ProfileSettings\Greeting[] $greetings
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addGreetings(array $greetings): ProfileSettings
@@ -86,6 +89,7 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param array $whitelistedDomains
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addWhitelistedDomains(array $whitelistedDomains): ProfileSettings
@@ -99,6 +103,7 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param string $accountLinkingUrl
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addAccountLinkingUrl(string $accountLinkingUrl): ProfileSettings
@@ -112,6 +117,7 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\ProfileSettings\PaymentSettings $paymentSettings
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addPaymentSettings(PaymentSettings $paymentSettings): ProfileSettings
@@ -123,6 +129,7 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\ProfileSettings\TargetAudience $targetAudience
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addTargetAudience(TargetAudience $targetAudience): ProfileSettings
@@ -150,13 +157,13 @@ class ProfileSettings implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            'persistent_menu' => $this->persistentMenus,
-            'get_started' => $this->startButton,
-            'greeting' => $this->greetings,
+            'persistent_menu'     => $this->persistentMenus,
+            'get_started'         => $this->startButton,
+            'greeting'            => $this->greetings,
             'whitelisted_domains' => $this->whitelistedDomains,
             'account_linking_url' => $this->accountLinkingUrl,
-            'payment_settings' => $this->paymentSettings,
-            'target_audience' => $this->targetAudience,
+            'payment_settings'    => $this->paymentSettings,
+            'target_audience'     => $this->targetAudience,
         ];
 
         return array_filter($json);

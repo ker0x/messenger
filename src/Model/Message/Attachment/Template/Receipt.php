@@ -8,7 +8,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 
 class Receipt extends Template
 {
-
     /**
      * @var string
      */
@@ -62,12 +61,12 @@ class Receipt extends Template
     /**
      * Receipt constructor.
      *
-     * @param string $recipientName
-     * @param string $orderNumber
-     * @param string $currency
-     * @param string $paymentMethod
+     * @param string                                                                      $recipientName
+     * @param string                                                                      $orderNumber
+     * @param string                                                                      $currency
+     * @param string                                                                      $paymentMethod
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement[] $elements
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary $summary
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary          $summary
      */
     public function __construct(
         string $recipientName,
@@ -91,6 +90,7 @@ class Receipt extends Template
 
     /**
      * @param string $timestamp
+     *
      * @return Receipt
      */
     public function setTimestamp(string $timestamp): Receipt
@@ -102,6 +102,7 @@ class Receipt extends Template
 
     /**
      * @param string $orderUrl
+     *
      * @return Receipt
      */
     public function setOrderUrl(string $orderUrl): Receipt
@@ -115,6 +116,7 @@ class Receipt extends Template
 
     /**
      * @param \Kerox\Messenger\Model\Common\Address $address
+     *
      * @return Receipt
      */
     public function setAddress(Address $address): Receipt
@@ -126,6 +128,7 @@ class Receipt extends Template
 
     /**
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment[] $adjustments
+     *
      * @return Receipt
      */
     public function setAdjustments(array $adjustments): Receipt
@@ -143,17 +146,17 @@ class Receipt extends Template
         $json = parent::jsonSerialize();
         $json += [
             'payload' => [
-                'template_type' => Template::TYPE_RECEIPT,
+                'template_type'  => Template::TYPE_RECEIPT,
                 'recipient_name' => $this->recipientName,
-                'order_number' => $this->orderNumber,
-                'currency' => $this->currency,
+                'order_number'   => $this->orderNumber,
+                'currency'       => $this->currency,
                 'payment_method' => $this->paymentMethod,
-                'order_url' => $this->orderUrl,
-                'timestamp' => $this->timestamp,
-                'elements' => $this->elements,
-                'address' => $this->address,
-                'summary' => $this->summary,
-                'adjustments' => $this->adjustments,
+                'order_url'      => $this->orderUrl,
+                'timestamp'      => $this->timestamp,
+                'elements'       => $this->elements,
+                'address'        => $this->address,
+                'summary'        => $this->summary,
+                'adjustments'    => $this->adjustments,
             ],
         ];
 

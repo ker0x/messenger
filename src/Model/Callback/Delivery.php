@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback;
 
 class Delivery
 {
-
     /**
      * @var int
      */
@@ -24,8 +23,8 @@ class Delivery
      * Delivery constructor.
      *
      * @param array $messageIds
-     * @param int $watermark
-     * @param int $sequence
+     * @param int   $watermark
+     * @param int   $sequence
      */
     public function __construct(int $watermark, int $sequence, array $messageIds = [])
     {
@@ -60,6 +59,7 @@ class Delivery
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Delivery
      */
     public static function create(array $payload): Delivery

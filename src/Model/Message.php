@@ -2,13 +2,12 @@
 
 namespace Kerox\Messenger\Model;
 
+use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Model\Message\QuickReply;
-use Kerox\Messenger\Helper\ValidatorTrait;
 
 class Message implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     const TYPE_TEXT = 'text';
@@ -55,8 +54,10 @@ class Message implements \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\Message\QuickReply[] $quickReplies
-     * @return \Kerox\Messenger\Model\Message
+     *
      * @throws \Exception
+     *
+     * @return \Kerox\Messenger\Model\Message
      */
     public function setQuickReplies(array $quickReplies): Message
     {
@@ -69,6 +70,7 @@ class Message implements \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\Message\QuickReply $quickReply
+     *
      * @return \Kerox\Messenger\Model\Message
      */
     public function addQuickReply(QuickReply $quickReply): Message
@@ -80,6 +82,7 @@ class Message implements \JsonSerializable
 
     /**
      * @param mixed $metadata
+     *
      * @return Message
      */
     public function setMetadata(string $metadata): Message
@@ -93,6 +96,7 @@ class Message implements \JsonSerializable
 
     /**
      * @param array $quickReplies
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidQuickReplies(array $quickReplies)
@@ -111,9 +115,9 @@ class Message implements \JsonSerializable
     public function jsonSerialize(): array
     {
         $json = [
-            $this->type => $this->message,
+            $this->type     => $this->message,
             'quick_replies' => $this->quickReplies,
-            'metadata' => $this->metadata,
+            'metadata'      => $this->metadata,
         ];
 
         return array_filter($json);

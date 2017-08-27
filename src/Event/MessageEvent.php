@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Callback\Message;
 
 class MessageEvent extends AbstractEvent
 {
-
     const NAME = 'message';
 
     /**
@@ -22,9 +21,9 @@ class MessageEvent extends AbstractEvent
     /**
      * MessageEvent constructor.
      *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param int $timestamp
+     * @param string                                  $senderId
+     * @param string                                  $recipientId
+     * @param int                                     $timestamp
      * @param \Kerox\Messenger\Model\Callback\Message $message
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Message $message)
@@ -69,6 +68,7 @@ class MessageEvent extends AbstractEvent
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Event\MessageEvent
      */
     public static function create(array $payload): MessageEvent

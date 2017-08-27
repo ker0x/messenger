@@ -9,7 +9,6 @@ use Kerox\Messenger\UserInterface;
 
 class User extends AbstractApi implements UserInterface
 {
-
     /**
      * @var null|\Kerox\Messenger\Api\User
      */
@@ -18,7 +17,7 @@ class User extends AbstractApi implements UserInterface
     /**
      * Send constructor.
      *
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
     public function __construct(string $pageToken, ClientInterface $client)
@@ -27,22 +26,24 @@ class User extends AbstractApi implements UserInterface
     }
 
     /**
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
+     *
      * @return \Kerox\Messenger\Api\User
      */
     public static function getInstance(string $pageToken, ClientInterface $client): User
     {
         if (self::$_instance === null) {
-            self::$_instance = new User($pageToken, $client);
+            self::$_instance = new self($pageToken, $client);
         }
 
         return self::$_instance;
     }
 
     /**
-     * @param string $userId
+     * @param string     $userId
      * @param array|null $fields
+     *
      * @return \Kerox\Messenger\Response\UserResponse
      */
     public function profile(string $userId, array $fields = []): UserResponse
@@ -50,7 +51,7 @@ class User extends AbstractApi implements UserInterface
         $allowedFields = $this->getAllowedFields();
         if (!empty($fields)) {
             foreach ($fields as $field) {
-                if (!in_array($field, $allowedFields)) {
+                if (!in_array($field, $allowedFields, true)) {
                     throw new \InvalidArgumentException($field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields));
                 }
             }

@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback;
 
 class Referral
 {
-
     /**
      * @var mixed
      */
@@ -60,6 +59,7 @@ class Referral
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Referral
      */
     public static function create(array $payload): Referral

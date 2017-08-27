@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 abstract class AbstractButton implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     const TYPE_POSTBACK = 'postback';

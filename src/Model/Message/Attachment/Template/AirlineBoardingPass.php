@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class AirlineBoardingPass extends AbstractAirline
 {
-
     /**
      * @var string
      */
@@ -20,8 +19,8 @@ class AirlineBoardingPass extends AbstractAirline
     /**
      * AirlineBoardingPass constructor.
      *
-     * @param string $introMessage
-     * @param string $locale
+     * @param string                                                                    $introMessage
+     * @param string                                                                    $locale
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass[] $boardingPass
      */
     public function __construct(string $introMessage, string $locale, array $boardingPass)
@@ -42,8 +41,8 @@ class AirlineBoardingPass extends AbstractAirline
             'payload' => [
                 'template_type' => Template::TYPE_AIRLINE_BOARDINGPASS,
                 'intro_message' => $this->introMessage,
-                'locale' => $this->locale,
-                'theme_color' => $this->themeColor,
+                'locale'        => $this->locale,
+                'theme_color'   => $this->themeColor,
                 'boarding_pass' => $this->boardingPass,
             ]
         ];

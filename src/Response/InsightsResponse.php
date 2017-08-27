@@ -7,7 +7,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class InsightsResponse extends AbstractResponse
 {
-
     const DATA = 'data';
 
     /**
@@ -27,7 +26,6 @@ class InsightsResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     protected function parseResponse(array $response)
     {

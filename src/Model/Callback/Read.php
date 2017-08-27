@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Callback;
 
 class Read
 {
-
     /**
      * @var int
      */
@@ -45,6 +44,7 @@ class Read
 
     /**
      * @param array $payload
+     *
      * @return \Kerox\Messenger\Model\Callback\Read
      */
     public static function create(array $payload): Read

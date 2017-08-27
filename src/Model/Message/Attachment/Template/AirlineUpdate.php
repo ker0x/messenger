@@ -7,7 +7,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 
 class AirlineUpdate extends AbstractAirline
 {
-
     const UPDATE_TYPE_DELAY = 'delay';
     const UPDATE_TYPE_GATE_CHANGE = 'gate_change';
     const UPDATE_TYPE_CANCELLATION = 'cancellation';
@@ -35,9 +34,9 @@ class AirlineUpdate extends AbstractAirline
     /**
      * AirlineUpdate constructor.
      *
-     * @param string $updateType
-     * @param string $locale
-     * @param string $pnrNumber
+     * @param string                                                                $updateType
+     * @param string                                                                $locale
+     * @param string                                                                $pnrNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
      */
     public function __construct(string $updateType, string $locale, string $pnrNumber, FlightInfo $updateFlightInfo)
@@ -53,6 +52,7 @@ class AirlineUpdate extends AbstractAirline
 
     /**
      * @param string $introMessage
+     *
      * @return AirlineUpdate
      */
     public function setIntroMessage($introMessage): AirlineUpdate
@@ -64,13 +64,13 @@ class AirlineUpdate extends AbstractAirline
 
     /**
      * @param string $updateType
-     * @return void
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidUpdateType(string $updateType)
     {
         $allowedUpdateType = $this->getAllowedUpdateType();
-        if (!in_array($updateType, $allowedUpdateType)) {
+        if (!in_array($updateType, $allowedUpdateType, true)) {
             throw new \InvalidArgumentException('$updateType must be either ' . implode(', ', $allowedUpdateType));
         }
     }
@@ -95,11 +95,11 @@ class AirlineUpdate extends AbstractAirline
         $json = parent::jsonSerialize();
         $json += [
             'payload' => [
-                'template_type' => Template::TYPE_AIRLINE_UPDATE,
-                'intro_message' => $this->introMessage,
-                'update_type' => $this->updateType,
-                'locale' => $this->locale,
-                'pnr_number' => $this->pnrNumber,
+                'template_type'      => Template::TYPE_AIRLINE_UPDATE,
+                'intro_message'      => $this->introMessage,
+                'update_type'        => $this->updateType,
+                'locale'             => $this->locale,
+                'pnr_number'         => $this->pnrNumber,
                 'update_flight_info' => $this->updateFlightInfo,
             ],
         ];

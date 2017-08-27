@@ -6,7 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractResponse
 {
-
     /**
      * @var \Psr\Http\Message\ResponseInterface
      */
@@ -26,6 +25,7 @@ abstract class AbstractResponse
 
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
+     *
      * @return array
      */
     private function decodeResponse(ResponseInterface $response): array
@@ -35,6 +35,7 @@ abstract class AbstractResponse
 
     /**
      * @param array $response
+     *
      * @return mixed
      */
     abstract protected function parseResponse(array $response);

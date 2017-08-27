@@ -33,6 +33,7 @@ class MessengerTest extends AbstractTestCase
         $this->assertInstanceOf(Insights::class, $this->messenger->insights());
         $this->assertInstanceOf(Profile::class, $this->messenger->profile());
         $this->assertInstanceOf(Tag::class, $this->messenger->tag());
+        $this->assertInstanceOf(Thread::class, $this->messenger->thread());
     }
 
     public function tearDown()

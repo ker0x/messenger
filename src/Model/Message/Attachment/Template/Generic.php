@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class Generic extends Template
 {
-
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[]
      */
@@ -14,6 +13,7 @@ class Generic extends Template
 
     /**
      * Generic constructor.
+     *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[] $elements
      */
     public function __construct(array $elements)
@@ -34,7 +34,7 @@ class Generic extends Template
         $json += [
             'payload' => [
                 'template_type' => Template::TYPE_GENERIC,
-                'elements' => $this->elements,
+                'elements'      => $this->elements,
             ],
         ];
 

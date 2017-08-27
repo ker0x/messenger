@@ -10,7 +10,6 @@ use Kerox\Messenger\Response\ProfileResponse;
 
 class Profile extends AbstractApi implements ProfileInterface
 {
-
     /**
      * @var null|\Kerox\Messenger\Api\Profile
      */
@@ -19,7 +18,7 @@ class Profile extends AbstractApi implements ProfileInterface
     /**
      * Profile constructor.
      *
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
     public function __construct($pageToken, ClientInterface $client)
@@ -28,14 +27,15 @@ class Profile extends AbstractApi implements ProfileInterface
     }
 
     /**
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
+     *
      * @return \Kerox\Messenger\Api\Profile
      */
     public static function getInstance(string $pageToken, ClientInterface $client): Profile
     {
         if (self::$_instance === null) {
-            self::$_instance = new Profile($pageToken, $client);
+            self::$_instance = new self($pageToken, $client);
         }
 
         return self::$_instance;
@@ -43,6 +43,7 @@ class Profile extends AbstractApi implements ProfileInterface
 
     /**
      * @param \Kerox\Messenger\Model\ProfileSettings $profileSettings
+     *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
     public function add(ProfileSettings $profileSettings): ProfileResponse
@@ -55,6 +56,7 @@ class Profile extends AbstractApi implements ProfileInterface
 
     /**
      * @param array $profileSettings
+     *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
     public function get(array $profileSettings): ProfileResponse
@@ -71,6 +73,7 @@ class Profile extends AbstractApi implements ProfileInterface
 
     /**
      * @param array $profileSettings
+     *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
     public function delete(array $profileSettings): ProfileResponse
@@ -85,13 +88,14 @@ class Profile extends AbstractApi implements ProfileInterface
 
     /**
      * @param array $fields
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidFields(array $fields)
     {
         $allowedFields = $this->getAllowedFields();
         foreach ($fields as $field) {
-            if (!in_array($field, $allowedFields)) {
+            if (!in_array($field, $allowedFields, true)) {
                 throw new \InvalidArgumentException($field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields));
             }
         }

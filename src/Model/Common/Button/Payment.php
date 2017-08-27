@@ -6,7 +6,6 @@ use Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary;
 
 class Payment extends AbstractButton
 {
-
     /**
      * @var string
      */
@@ -25,7 +24,7 @@ class Payment extends AbstractButton
     /**
      * Payment constructor.
      *
-     * @param string $payload
+     * @param string                                                      $payload
      * @param \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary $paymentSummary
      */
     public function __construct(string $payload, PaymentSummary $paymentSummary)
@@ -46,8 +45,8 @@ class Payment extends AbstractButton
     {
         $json = parent::jsonSerialize();
         $json += [
-            'title' => $this->title,
-            'payload' => $this->payload,
+            'title'           => $this->title,
+            'payload'         => $this->payload,
             'payment_summary' => $this->paymentSummary,
         ];
 

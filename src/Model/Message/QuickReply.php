@@ -6,7 +6,6 @@ use Kerox\Messenger\Helper\ValidatorTrait;
 
 class QuickReply implements \JsonSerializable
 {
-
     use ValidatorTrait;
 
     const CONTENT_TYPE_TEXT = 'text';
@@ -36,6 +35,7 @@ class QuickReply implements \JsonSerializable
      * QuickReply constructor.
      *
      * @param string $contentType
+     *
      * @throws \Exception
      */
     public function __construct(string $contentType)
@@ -47,6 +47,7 @@ class QuickReply implements \JsonSerializable
 
     /**
      * @param string $title
+     *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
     public function setTitle(string $title): QuickReply
@@ -61,6 +62,7 @@ class QuickReply implements \JsonSerializable
 
     /**
      * @param mixed $payload
+     *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
     public function setPayload(string $payload): QuickReply
@@ -75,6 +77,7 @@ class QuickReply implements \JsonSerializable
 
     /**
      * @param mixed $imageUrl
+     *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
     public function setImageUrl(string $imageUrl): QuickReply
@@ -88,12 +91,13 @@ class QuickReply implements \JsonSerializable
 
     /**
      * @param string $contentType
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidContentType(string $contentType)
     {
         $allowedContentType = $this->getAllowedContentType();
-        if (!in_array($contentType, $allowedContentType)) {
+        if (!in_array($contentType, $allowedContentType, true)) {
             throw new \InvalidArgumentException('Invalid content type');
         }
     }
@@ -110,7 +114,6 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @return void
      * @throws \Exception
      */
     private function checkContentType()
@@ -127,9 +130,9 @@ class QuickReply implements \JsonSerializable
     {
         $quickReply = [
             'content_type' => $this->contentType,
-            'title' => $this->title,
-            'payload' => $this->payload,
-            'image_url' => $this->imageUrl,
+            'title'        => $this->title,
+            'payload'      => $this->payload,
+            'image_url'    => $this->imageUrl,
         ];
 
         return array_filter($quickReply);

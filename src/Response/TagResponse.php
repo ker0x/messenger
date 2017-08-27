@@ -7,7 +7,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class TagResponse extends AbstractResponse
 {
-
     const DATA = 'data';
 
     /**
@@ -27,7 +26,6 @@ class TagResponse extends AbstractResponse
 
     /**
      * @param array $response
-     * @return void
      */
     protected function parseResponse(array $response)
     {

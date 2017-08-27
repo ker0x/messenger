@@ -8,7 +8,6 @@ use Kerox\Messenger\Response\CodeResponse;
 
 class Code extends AbstractApi
 {
-
     const CODE_TYPE_STANDARD = 'standard';
 
     /**
@@ -19,7 +18,7 @@ class Code extends AbstractApi
     /**
      * Code constructor.
      *
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      */
     public function __construct(string $pageToken, ClientInterface $client)
@@ -28,23 +27,25 @@ class Code extends AbstractApi
     }
 
     /**
-     * @param string $pageToken
+     * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
+     *
      * @return \Kerox\Messenger\Api\Code
      */
     public static function getInstance(string $pageToken, ClientInterface $client): Code
     {
         if (self::$_instance === null) {
-            self::$_instance = new Code($pageToken, $client);
+            self::$_instance = new self($pageToken, $client);
         }
 
         return self::$_instance;
     }
 
     /**
-     * @param int $imageSize
-     * @param string $codeType
+     * @param int         $imageSize
+     * @param string      $codeType
      * @param string|null $ref
+     *
      * @return \Kerox\Messenger\Response\CodeResponse
      */
     public function request(int $imageSize = 1000, string $codeType = self::CODE_TYPE_STANDARD, string $ref = null): CodeResponse
@@ -64,6 +65,7 @@ class Code extends AbstractApi
 
     /**
      * @param int $imageSize
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidCodeImageSize(int $imageSize)
@@ -75,18 +77,20 @@ class Code extends AbstractApi
 
     /**
      * @param string $codeType
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidCodeType(string $codeType)
     {
         $allowedCodeType = $this->getAllowedCodeType();
-        if (!in_array($codeType, $allowedCodeType)) {
+        if (!in_array($codeType, $allowedCodeType, true)) {
             throw new \InvalidArgumentException('$codeType must be either ' . implode(', ', $allowedCodeType));
         }
     }
 
     /**
      * @param string $ref
+     *
      * @throws \InvalidArgumentException
      */
     private function isValidRef(string $ref)

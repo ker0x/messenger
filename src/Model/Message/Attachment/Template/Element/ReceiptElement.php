@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 class ReceiptElement extends AbstractElement
 {
-
     /**
      * @var null|int
      */
@@ -24,7 +23,7 @@ class ReceiptElement extends AbstractElement
      * Element constructor.
      *
      * @param string $title
-     * @param float $price
+     * @param float  $price
      */
     public function __construct(string $title, float $price)
     {
@@ -35,6 +34,7 @@ class ReceiptElement extends AbstractElement
 
     /**
      * @param string $subtitle
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
     public function setSubtitle(string $subtitle): ReceiptElement
@@ -46,6 +46,7 @@ class ReceiptElement extends AbstractElement
 
     /**
      * @param string $imageUrl
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
     public function setImageUrl(string $imageUrl): ReceiptElement
@@ -57,6 +58,7 @@ class ReceiptElement extends AbstractElement
 
     /**
      * @param int $quantity
+     *
      * @return ReceiptElement
      */
     public function setQuantity(int $quantity): ReceiptElement
@@ -68,6 +70,7 @@ class ReceiptElement extends AbstractElement
 
     /**
      * @param string $currency
+     *
      * @return ReceiptElement
      */
     public function setCurrency(string $currency): ReceiptElement
@@ -86,10 +89,10 @@ class ReceiptElement extends AbstractElement
     {
         $json = parent::jsonSerialize();
         $json += [
-            'subtitle' => $this->subtitle,
-            'quantity' => $this->quantity,
-            'price' => $this->price,
-            'currency' => $this->currency,
+            'subtitle'  => $this->subtitle,
+            'quantity'  => $this->quantity,
+            'price'     => $this->price,
+            'currency'  => $this->currency,
             'image_url' => $this->imageUrl,
         ];
 

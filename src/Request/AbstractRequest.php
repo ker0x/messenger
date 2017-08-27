@@ -4,7 +4,6 @@ namespace Kerox\Messenger\Request;
 
 abstract class AbstractRequest
 {
-
     /**
      * @var string
      */
@@ -47,8 +46,8 @@ abstract class AbstractRequest
     {
         $request = [
             'headers' => $this->buildHeaders(),
-            'json' => $this->buildBody(),
-            'query' => $this->buildQuery(),
+            'json'    => $this->buildBody(),
+            'query'   => $this->buildQuery(),
         ];
 
         return array_filter($request);
