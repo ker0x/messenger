@@ -10,7 +10,7 @@ use Kerox\Messenger\Response\ThreadResponse;
 class Thread extends AbstractApi
 {
     /**
-     * @var null|\Kerox\Messenger\Api\User
+     * @var null|\Kerox\Messenger\Api\Thread
      */
     private static $_instance;
 
