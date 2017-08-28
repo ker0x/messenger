@@ -79,11 +79,12 @@ class MessageEcho extends Message
      */
     public static function create(array $payload)
     {
+	    $appId = $payload['app_id'] ?? null;
         $metadata = $payload['metadata'] ?? null;
         $text = $payload['text'] ?? null;
         $quickReply = $payload['quick_reply']['payload'] ?? null;
         $attachments = $payload['attachments'] ?? [];
 
-        return new static(true, $payload['app_id'], $payload['mid'], $payload['seq'], $metadata, $text, $quickReply, $attachments);
+        return new static(true, $appId, $payload['mid'], $payload['seq'], $metadata, $text, $quickReply, $attachments);
     }
 }
