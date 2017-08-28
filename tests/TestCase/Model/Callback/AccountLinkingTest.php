@@ -7,7 +7,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 class AccountLinkingTest extends AbstractTestCase
 {
 
-    public function testAccountLinkingModel()
+    public function testAccountLinkingCallback()
     {
         $accountLinking = new AccountLinking('linked', 'PASS_THROUGH_AUTHORIZATION_CODE');
 

@@ -21,7 +21,7 @@ class CheckoutUpdateTest extends AbstractTestCase
         $this->checkoutUpdate = CheckoutUpdate::create($array['checkout_update']);
     }
 
-    public function testCheckoutUpdateModel()
+    public function testCheckoutUpdateCallback()
     {
         $this->assertEquals('DEVELOPER_DEFINED_PAYLOAD', $this->checkoutUpdate->getPayload());
         $this->assertInstanceOf(Address::class, $this->checkoutUpdate->getShippingAddress());

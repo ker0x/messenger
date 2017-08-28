@@ -9,7 +9,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 class EntryTest extends AbstractTestCase
 {
 
-    public function testEntryModel()
+    public function testEntryCallback()
     {
         $payload = [
             'id' => 'PAGE_ID',

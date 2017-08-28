@@ -7,7 +7,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 class OptinTest extends AbstractTestCase
 {
 
-    public function testOptinModel()
+    public function testOptinCallback()
     {
         $optin = new Optin('PASS_THROUGH_PARAM');
 

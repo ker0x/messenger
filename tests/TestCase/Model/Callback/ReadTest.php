@@ -7,7 +7,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 class ReadTest extends AbstractTestCase
 {
 
-    public function testReadModel()
+    public function testReadCallback()
     {
         $read = new Read(1458668856253, 38);
 

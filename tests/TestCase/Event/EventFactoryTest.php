@@ -10,6 +10,7 @@ use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Event\OptinEvent;
 use Kerox\Messenger\Event\PassThreadControlEvent;
 use Kerox\Messenger\Event\PaymentEvent;
+use Kerox\Messenger\Event\PolicyEnforcementEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\PreCheckoutEvent;
 use Kerox\Messenger\Event\RawEvent;
@@ -23,6 +24,7 @@ use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
 use Kerox\Messenger\Model\Callback\PassThreadControl;
 use Kerox\Messenger\Model\Callback\Payment;
+use Kerox\Messenger\Model\Callback\PolicyEnforcement;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\PreCheckout;
 use Kerox\Messenger\Model\Callback\Read;
@@ -170,6 +172,17 @@ class EventFactoryTest extends AbstractTestCase
         $array = json_decode($json, true);
 
         $expectedEvent = new PassThreadControlEvent('USER_ID', 'PAGE_ID', 1458692752478, PassThreadControl::create($array['pass_thread_control']));
+        $event = EventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+    }
+
+    public function testPolicyEnforcementEvent()
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Event/policy_enforcement.json');
+        $array = json_decode($json, true);
+
+        $expectedEvent = new PolicyEnforcementEvent('', 'PAGE_ID', 1458692752478, PolicyEnforcement::create($array['policy-enforcement']));
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);

@@ -8,7 +8,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 class PostbackTest extends AbstractTestCase
 {
 
-    public function testPostbackModel()
+    public function testPostbackCallback()
     {
         $stub = $this->createMock(Referral::class);
         $postback = new Postback('USER_DEFINED_PAYLOAD', $stub);

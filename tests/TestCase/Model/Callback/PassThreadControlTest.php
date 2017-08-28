@@ -19,7 +19,7 @@ class PassThreadControlTest extends AbstractTestCase
         $this->passThreadControl = PassThreadControl::create($array['pass_thread_control']);
     }
 
-    public function testPassThreadControl()
+    public function testPassThreadControlCallback()
     {
         $this->assertEquals('123456789', $this->passThreadControl->getNewOwnerAppId());
         $this->assertEquals('additional content that the caller wants to set', $this->passThreadControl->getMetadata());
