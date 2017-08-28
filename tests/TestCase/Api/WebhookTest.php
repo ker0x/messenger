@@ -155,6 +155,39 @@ class WebhookTest extends AbstractTestCase
         $this->assertEquals([$event], $events);
     }
 
+    public function testStandbyEntry()
+    {
+        $appSecret = 'app_secret';
+        $verifyToken = 'verify_token';
+        $pageToken = 'page_token';
+
+
+        $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/stand_by.json');
+        $requestHeaders = [
+            'Content-Type' => 'application/json',
+            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret)
+        ];
+
+        $request = new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
+
+        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Webhook/success.json');
+        $mockedResponse = new MockHandler([
+            new Response(200, [], $bodyResponse),
+        ]);
+
+        $handler = HandlerStack::create($mockedResponse);
+        $client = new Client([
+            'handler' => $handler
+        ]);
+
+        $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
+
+        $webhookApi = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        $events = $webhookApi->getCallbackEvents();
+
+        $this->assertEquals([$event], $events);
+    }
+
     public function tearDown()
     {
         unset($this->webhookApi);
