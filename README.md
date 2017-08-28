@@ -30,8 +30,10 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 
 - [x] Code
 - [x] Insights
-- [x] Thread (2.6) / Profile (2.8)
+- [x] Profile
 - [x] Send
+- [x] Tag
+- [x] Thread
 - [x] User
 - [x] Webhook
 
@@ -57,16 +59,20 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 ### Callback
 
 - [x] Account Linking
+- [x] AppRoles
 - [x] Checkout Update
 - [x] Delivery
 - [x] Message
 - [x] Message Echo
 - [x] Optin
+- [x] PassThreadControl
 - [x] Payment
+- [x] Policy Enforcement
 - [x] Postback
 - [x] Pre Checkout
 - [x] Read
 - [x] Referral
+- [x] TakeThreadControl
 
 ## License
 
