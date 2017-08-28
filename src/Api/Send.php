@@ -93,7 +93,7 @@ class Send extends AbstractApi
         $this->isValidAction($action);
         $this->isValidNotificationType($notificationType);
 
-        $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, SendRequest::TYPE_ACTION);
+        $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, null, SendRequest::TYPE_ACTION);
         $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
