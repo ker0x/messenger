@@ -6,6 +6,11 @@ use Kerox\Messenger\Event\EventFactory;
 
 class Entry
 {
+    const CHANNELS = [
+        'messaging',
+        'standby'
+    ];
+
     /**
      * @var string
      */
@@ -67,8 +72,13 @@ class Entry
     public static function create(array $entry): Entry
     {
         $events = [];
-        foreach ($entry['messaging'] as $event) {
-            $events[] = EventFactory::create($event);
+
+        foreach (self::CHANNELS as $channel) {
+            if (isset($entry[$channel])) {
+                foreach ($entry[$channel] as $event) {
+                    $events[] = EventFactory::create($event);
+                }
+            }
         }
 
         return new static($entry['id'], $entry['time'], $events);
