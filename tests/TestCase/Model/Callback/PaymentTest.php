@@ -23,7 +23,7 @@ class PaymentTest extends AbstractTestCase
         $this->payment = Payment::create($array['payment']);
     }
 
-    public function testPaymentModel()
+    public function testPaymentCallback()
     {
         $this->assertEquals('DEVELOPER_DEFINED_PAYLOAD', $this->payment->getPayload());
         $this->assertEquals('123', $this->payment->getShippingOptionId());

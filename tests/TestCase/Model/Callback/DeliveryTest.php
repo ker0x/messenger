@@ -7,7 +7,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 class DeliveryTest extends AbstractTestCase
 {
 
-    public function testDeliveryModel()
+    public function testDeliveryCallback()
     {
         $delivery = new Delivery(1458668856253, 35, ['mid.1458668856218:ed81099e15d3f4f233']);
 

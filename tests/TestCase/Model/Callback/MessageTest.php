@@ -7,7 +7,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 class MessageTest extends AbstractTestCase
 {
 
-    public function testMessageModel()
+    public function testMessageCallback()
     {
         $message = new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD', [['type' => 'image', 'payload' => ['url' => 'IMAGE_URL']]]);
 

@@ -16,6 +16,7 @@ class EventFactory
         'pre_checkout'        => PreCheckoutEvent::class,
         'take_thread_control' => TakeThreadControlEvent::class,
         'pass_thread_control' => PassThreadControlEvent::class,
+        'policy-enforcement'  => PolicyEnforcementEvent::class,
     ];
 
     /**

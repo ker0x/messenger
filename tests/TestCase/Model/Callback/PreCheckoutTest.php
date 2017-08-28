@@ -22,7 +22,7 @@ class PreCheckoutTest extends AbstractTestCase
         $this->preCheckout = PreCheckout::create($array['pre_checkout']);
     }
 
-    public function testPreCheckoutModel()
+    public function testPreCheckoutCallback()
     {
         $this->assertEquals('DEVELOPER_DEFINED_PAYLOAD', $this->preCheckout->getPayload());
         $this->assertEquals('USD', $this->preCheckout->getCurrency());
