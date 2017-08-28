@@ -38,7 +38,7 @@ class ThreadControl implements \JsonSerializable
     /**
      * @param string $metadata
      */
-    public function setMetadata(string $metadata): void
+    public function setMetadata(string $metadata)
     {
         $this->isValidString($metadata, 1000);
 
