@@ -1,0 +1,11 @@
+{
+  "recipient": {
+    "id": "PAGE_ID"
+  },
+  "timestamp": 1458692752478,
+  "app_roles": {
+    "123456789": [
+      "automation"
+    ]
+  }
+}

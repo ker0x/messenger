@@ -2,6 +2,7 @@
 namespace Kerox\Messenger\Test\TestCase\Callback;
 
 use Kerox\Messenger\Event\AccountLinkingEvent;
+use Kerox\Messenger\Event\AppRolesEvent;
 use Kerox\Messenger\Event\CheckoutUpdateEvent;
 use Kerox\Messenger\Event\DeliveryEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
@@ -9,12 +10,14 @@ use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Event\OptinEvent;
 use Kerox\Messenger\Event\PassThreadControlEvent;
 use Kerox\Messenger\Event\PaymentEvent;
+use Kerox\Messenger\Event\PolicyEnforcementEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\PreCheckoutEvent;
 use Kerox\Messenger\Event\RawEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Event\TakeThreadControlEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
+use Kerox\Messenger\Model\Callback\AppRoles;
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
@@ -22,6 +25,7 @@ use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
 use Kerox\Messenger\Model\Callback\PassThreadControl;
 use Kerox\Messenger\Model\Callback\Payment;
+use Kerox\Messenger\Model\Callback\PolicyEnforcement;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\PreCheckout;
 use Kerox\Messenger\Model\Callback\Read;
@@ -173,6 +177,30 @@ class EventTest extends AbstractTestCase
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedTakeThreadControl, $event->getTakeThreadControl());
         $this->assertEquals('take_thread_control', $event->getName());
+    }
+
+    public function testPolicyEnforcement()
+    {
+        $mockedPolicyEnforcement = $this->createMock(PolicyEnforcement::class);
+        $event = new PolicyEnforcementEvent('sender_id', 'recipient_id', 123456, $mockedPolicyEnforcement);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedPolicyEnforcement, $event->getPolicyEnforcement());
+        $this->assertEquals('policy_enforcement', $event->getName());
+    }
+
+    public function testAppRoles()
+    {
+        $mockedAppRoles = $this->createMock(AppRoles::class);
+        $event = new AppRolesEvent('sender_id', 'recipient_id', 123456, $mockedAppRoles);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedAppRoles, $event->getAppRoles());
+        $this->assertEquals('app_roles', $event->getName());
     }
 
     public function testRawEvent()
