@@ -2,6 +2,7 @@
 namespace Kerox\Messenger\Test\TestCase\Event;
 
 use Kerox\Messenger\Event\AccountLinkingEvent;
+use Kerox\Messenger\Event\AppRolesEvent;
 use Kerox\Messenger\Event\CheckoutUpdateEvent;
 use Kerox\Messenger\Event\EventFactory;
 use Kerox\Messenger\Event\DeliveryEvent;
@@ -17,6 +18,7 @@ use Kerox\Messenger\Event\RawEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Event\TakeThreadControlEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
+use Kerox\Messenger\Model\Callback\AppRoles;
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
@@ -183,6 +185,17 @@ class EventFactoryTest extends AbstractTestCase
         $array = json_decode($json, true);
 
         $expectedEvent = new PolicyEnforcementEvent('', 'PAGE_ID', 1458692752478, PolicyEnforcement::create($array['policy-enforcement']));
+        $event = EventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+    }
+
+    public function testAppRolesEvent()
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Event/app_roles.json');
+        $array = json_decode($json, true);
+
+        $expectedEvent = new AppRolesEvent('', 'PAGE_ID', 1458692752478, AppRoles::create($array['app_roles']));
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);

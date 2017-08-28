@@ -17,6 +17,7 @@ class EventFactory
         'take_thread_control' => TakeThreadControlEvent::class,
         'pass_thread_control' => PassThreadControlEvent::class,
         'policy-enforcement'  => PolicyEnforcementEvent::class,
+        'app_roles'           => AppRolesEvent::class,
     ];
 
     /**
