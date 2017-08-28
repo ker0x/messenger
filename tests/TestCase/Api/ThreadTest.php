@@ -34,6 +34,7 @@ class ThreadTest extends AbstractTestCase
     public function testPassThreadControl()
     {
         $passThreadControl = new ThreadControl(1234567890, 123456789);
+        $passThreadControl->setMetadata('additional content that the caller wants to set');
 
         $response = $this->threadApi->pass($passThreadControl);
 
@@ -44,6 +45,7 @@ class ThreadTest extends AbstractTestCase
     public function testTakeThreadControl()
     {
         $takeThreadControl = new ThreadControl(1234567890);
+        $takeThreadControl->setMetadata('additional content that the caller wants to set');
 
         $response = $this->threadApi->take($takeThreadControl);
 

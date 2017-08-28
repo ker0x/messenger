@@ -98,6 +98,13 @@ class SendTest extends AbstractTestCase
         $this->sendApi->action('1008372609250235', 'typing_seen');
     }
 
+    public function testBadTagType()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$tag must be either ISSUE_RESOLUTION, RESERVATION_UPDATE, SHIPPING_UPDATE, APPOINTMENT_UPDATE, GAME_EVENT, TRANSPORTATION_UPDATE, FEATURE_FUNCTIONALITY_UPDATE, TICKET_UPDATE');
+        $this->sendApi->message('1008372609250235', 'Hello World!', 'REGULAR', 'INVOICE_UPDATE');
+    }
+
     public function testSendAttachment()
     {
         $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/attachment.json');

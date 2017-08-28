@@ -14,6 +14,18 @@ class PersistentMenuTest extends AbstractTestCase
     public function testInvalidButton()
     {
         $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Array can only contain instance of AbstractButton.');
+
+        $persistentMenu = (new PersistentMenu())->setComposerInputDisabled(true)->addButtons([
+            'Phone Number' => [
+                'payload' => 'PHONE_NUMBER_PAYLOAD'
+            ],
+        ]);
+    }
+
+    public function testInvalidButtonType()
+    {
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Buttons can only be an instance of web_url, postback, nested');
 
         $persistentMenu = (new PersistentMenu())->setComposerInputDisabled(true)->addButtons([
