@@ -4,7 +4,7 @@ namespace Kerox\Messenger\Response;
 
 use Psr\Http\Message\ResponseInterface;
 
-class WebhookResponse extends AbstractResponse
+class ThreadResponse extends AbstractResponse
 {
     const SUCCESS = 'success';
 
@@ -14,7 +14,7 @@ class WebhookResponse extends AbstractResponse
     protected $success;
 
     /**
-     * WebhookResponse constructor.
+     * ThreadResponse constructor.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
      */
@@ -32,7 +32,7 @@ class WebhookResponse extends AbstractResponse
     }
 
     /**
-     * @return bool
+     * @return null|bool
      */
     public function isSuccess(): bool
     {

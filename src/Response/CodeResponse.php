@@ -28,7 +28,7 @@ class CodeResponse extends AbstractResponse
      */
     protected function parseResponse(array $response)
     {
-        $this->setUri($response);
+        $this->uri = $response[self::URI] ?? null;
     }
 
     /**
@@ -37,15 +37,5 @@ class CodeResponse extends AbstractResponse
     public function getUri()
     {
         return $this->uri;
-    }
-
-    /**
-     * @param array $response
-     */
-    private function setUri(array $response)
-    {
-        if (isset($response[self::URI])) {
-            $this->uri = $response[self::URI];
-        }
     }
 }

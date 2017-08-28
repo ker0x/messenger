@@ -28,7 +28,7 @@ class ProfileResponse extends AbstractResponse
      */
     protected function parseResponse(array $response)
     {
-        $this->setResult($response);
+        $this->result = $response[self::RESULT] ?? null;
     }
 
     /**
@@ -37,15 +37,5 @@ class ProfileResponse extends AbstractResponse
     public function getResult()
     {
         return $this->result;
-    }
-
-    /**
-     * @param array $response
-     */
-    private function setResult(array $response)
-    {
-        if (isset($response[self::RESULT])) {
-            $this->result = $response[self::RESULT];
-        }
     }
 }

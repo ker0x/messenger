@@ -9,6 +9,7 @@ use Kerox\Messenger\Api\Insights;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Tag;
+use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Api\Webhook;
 use Psr\Http\Message\ServerRequestInterface;
@@ -116,5 +117,13 @@ class Messenger
     public function tag(): Tag
     {
         return Tag::getInstance($this->pageToken, $this->client);
+    }
+
+    /**
+     * @return \Kerox\Messenger\Api\Thread
+     */
+    public function thread(): Thread
+    {
+        return Thread::getInstance($this->pageToken, $this->client);
     }
 }

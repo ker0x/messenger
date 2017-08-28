@@ -7,21 +7,25 @@ use Kerox\Messenger\Event\DeliveryEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
 use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Event\OptinEvent;
+use Kerox\Messenger\Event\PassThreadControlEvent;
 use Kerox\Messenger\Event\PaymentEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\PreCheckoutEvent;
 use Kerox\Messenger\Event\RawEvent;
 use Kerox\Messenger\Event\ReadEvent;
+use Kerox\Messenger\Event\TakeThreadControlEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 use Kerox\Messenger\Model\Callback\Delivery;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
+use Kerox\Messenger\Model\Callback\PassThreadControl;
 use Kerox\Messenger\Model\Callback\Payment;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\PreCheckout;
 use Kerox\Messenger\Model\Callback\Read;
+use Kerox\Messenger\Model\Callback\TakeThreadControl;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class EventTest extends AbstractTestCase
@@ -145,6 +149,30 @@ class EventTest extends AbstractTestCase
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedPreCheckout, $event->getPreCheckout());
         $this->assertEquals('pre_checkout', $event->getName());
+    }
+
+    public function testPassThreadControl()
+    {
+        $mockedPassThreadControl = $this->createMock(PassThreadControl::class);
+        $event = new PassThreadControlEvent('sender_id', 'recipient_id', 123456, $mockedPassThreadControl);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedPassThreadControl, $event->getPassThreadControl());
+        $this->assertEquals('pass_thread_control', $event->getName());
+    }
+
+    public function testTakeThreadControl()
+    {
+        $mockedTakeThreadControl = $this->createMock(TakeThreadControl::class);
+        $event = new TakeThreadControlEvent('sender_id', 'recipient_id', 123456, $mockedTakeThreadControl);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedTakeThreadControl, $event->getTakeThreadControl());
+        $this->assertEquals('take_thread_control', $event->getName());
     }
 
     public function testRawEvent()
