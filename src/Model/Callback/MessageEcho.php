@@ -10,7 +10,7 @@ class MessageEcho extends Message
     protected $isEcho;
 
     /**
-     * @var int
+     * @var null|int
      */
     protected $appId;
 
@@ -23,7 +23,7 @@ class MessageEcho extends Message
      * MessageEcho constructor.
      *
      * @param bool        $isEcho
-     * @param int         $appId
+     * @param null|int    $appId
      * @param string      $messageId
      * @param int         $sequence
      * @param string|null $metadata
@@ -33,7 +33,7 @@ class MessageEcho extends Message
      */
     public function __construct(
         bool $isEcho,
-        int $appId,
+        $appId,
         string $messageId,
         int $sequence,
         string $metadata = null,
@@ -57,9 +57,9 @@ class MessageEcho extends Message
     }
 
     /**
-     * @return int
+     * @return null|int
      */
-    public function getAppId(): int
+    public function getAppId()
     {
         return $this->appId;
     }
@@ -79,7 +79,7 @@ class MessageEcho extends Message
      */
     public static function create(array $payload)
     {
-	    $appId = $payload['app_id'] ?? null;
+        $appId = $payload['app_id'] ?? null;
         $metadata = $payload['metadata'] ?? null;
         $text = $payload['text'] ?? null;
         $quickReply = $payload['quick_reply']['payload'] ?? null;
