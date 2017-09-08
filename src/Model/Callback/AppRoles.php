@@ -28,12 +28,12 @@ class AppRoles
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\AppRoles
      */
-    public static function create(array $payload): AppRoles
+    public static function create(array $callbackData): AppRoles
     {
-        return new static($payload);
+        return new static($callbackData);
     }
 }

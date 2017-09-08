@@ -73,18 +73,18 @@ class MessageEcho extends Message
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\MessageEcho
      */
-    public static function create(array $payload)
+    public static function create(array $callbackData)
     {
-        $appId = $payload['app_id'] ?? null;
-        $metadata = $payload['metadata'] ?? null;
-        $text = $payload['text'] ?? null;
-        $quickReply = $payload['quick_reply']['payload'] ?? null;
-        $attachments = $payload['attachments'] ?? [];
+        $appId = $callbackData['app_id'] ?? null;
+        $metadata = $callbackData['metadata'] ?? null;
+        $text = $callbackData['text'] ?? null;
+        $quickReply = $callbackData['quick_reply']['payload'] ?? null;
+        $attachments = $callbackData['attachments'] ?? [];
 
-        return new static(true, $appId, $payload['mid'], $payload['seq'], $metadata, $text, $quickReply, $attachments);
+        return new static(true, $appId, $callbackData['mid'], $callbackData['seq'], $metadata, $text, $quickReply, $attachments);
     }
 }

@@ -45,14 +45,14 @@ class CheckoutUpdate
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\CheckoutUpdate
      */
-    public static function create(array $payload): CheckoutUpdate
+    public static function create(array $callbackData): CheckoutUpdate
     {
-        $shippingAddress = Address::create($payload['shipping_address']);
+        $shippingAddress = Address::create($callbackData['shipping_address']);
 
-        return new static($payload['payload'], $shippingAddress);
+        return new static($callbackData['payload'], $shippingAddress);
     }
 }

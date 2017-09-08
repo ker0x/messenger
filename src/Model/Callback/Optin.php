@@ -28,12 +28,12 @@ class Optin
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Optin
      */
-    public static function create(array $payload): Optin
+    public static function create(array $callbackData): Optin
     {
-        return new static($payload['ref']);
+        return new static($callbackData['ref']);
     }
 }

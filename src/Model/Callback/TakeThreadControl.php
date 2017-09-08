@@ -43,12 +43,12 @@ class TakeThreadControl
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\TakeThreadControl
      */
-    public static function create(array $payload): TakeThreadControl
+    public static function create(array $callbackData): TakeThreadControl
     {
-        return new static($payload['previous_owner_app_id'], $payload['metadata']);
+        return new static($callbackData['previous_owner_app_id'], $callbackData['metadata']);
     }
 }

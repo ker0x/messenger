@@ -43,14 +43,14 @@ class PolicyEnforcement
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\PolicyEnforcement
      */
-    public static function create(array $payload): PolicyEnforcement
+    public static function create(array $callbackData): PolicyEnforcement
     {
-        $reason = $payload['reason'] ?? null;
+        $reason = $callbackData['reason'] ?? null;
 
-        return new static($payload['action'], $reason);
+        return new static($callbackData['action'], $reason);
     }
 }

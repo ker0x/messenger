@@ -51,14 +51,14 @@ class AccountLinking
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\AccountLinking
      */
-    public static function create(array $payload): AccountLinking
+    public static function create(array $callbackData): AccountLinking
     {
-        $authorizationCode = $payload['authorization_code'] ?? null;
+        $authorizationCode = $callbackData['authorization_code'] ?? null;
 
-        return new static($payload['status'], $authorizationCode);
+        return new static($callbackData['status'], $authorizationCode);
     }
 }
