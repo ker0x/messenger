@@ -113,15 +113,15 @@ class Payment
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Payment
      */
-    public static function create(array $payload): Payment
+    public static function create(array $callbackData): Payment
     {
-        $requestedUserInfo = RequestedUserInfo::create($payload['requested_user_info']);
-        $paymentCredential = PaymentCredential::create($payload['payment_credential']);
+        $requestedUserInfo = RequestedUserInfo::create($callbackData['requested_user_info']);
+        $paymentCredential = PaymentCredential::create($callbackData['payment_credential']);
 
-        return new static($payload['payload'], $requestedUserInfo, $paymentCredential, $payload['amount'], $payload['shipping_option_id']);
+        return new static($callbackData['payload'], $requestedUserInfo, $paymentCredential, $callbackData['amount'], $callbackData['shipping_option_id']);
     }
 }

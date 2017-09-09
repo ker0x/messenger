@@ -58,12 +58,12 @@ class Referral
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Referral
      */
-    public static function create(array $payload): Referral
+    public static function create(array $callbackData): Referral
     {
-        return new static($payload['ref'], $payload['source'], $payload['type']);
+        return new static($callbackData['ref'], $callbackData['source'], $callbackData['type']);
     }
 }

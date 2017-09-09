@@ -117,16 +117,16 @@ class Message
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Message
      */
-    public static function create(array $payload)
+    public static function create(array $callbackData)
     {
-        $text = $payload['text'] ?? null;
-        $quickReply = $payload['quick_reply']['payload'] ?? null;
-        $attachments = $payload['attachments'] ?? [];
+        $text = $callbackData['text'] ?? null;
+        $quickReply = $callbackData['quick_reply']['payload'] ?? null;
+        $attachments = $callbackData['attachments'] ?? [];
 
-        return new static($payload['mid'], $payload['seq'], $text, $quickReply, $attachments);
+        return new static($callbackData['mid'], $callbackData['seq'], $text, $quickReply, $attachments);
     }
 }

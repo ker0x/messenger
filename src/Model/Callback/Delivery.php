@@ -58,14 +58,14 @@ class Delivery
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Delivery
      */
-    public static function create(array $payload): Delivery
+    public static function create(array $callbackData): Delivery
     {
-        $messageIds = $payload['mids'] ?? [];
+        $messageIds = $callbackData['mids'] ?? [];
 
-        return new static($payload['watermark'], $payload['seq'], $messageIds);
+        return new static($callbackData['watermark'], $callbackData['seq'], $messageIds);
     }
 }
