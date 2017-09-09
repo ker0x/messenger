@@ -27,9 +27,11 @@ matrix:
     - php: 7.1
       env: COVERALLS=1 DEFAULT=0
 
-install:
+before_install:
   - composer self-update
-  - composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH
+  - if [ "$GITHUB_COMPOSER_AUTH" ]; then composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH; fi
+
+install:
   - composer install --prefer-dist --no-interaction --dev
 
 before_script:

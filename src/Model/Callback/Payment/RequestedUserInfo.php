@@ -75,17 +75,17 @@ class RequestedUserInfo
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo
      */
-    public static function create(array $payload): RequestedUserInfo
+    public static function create(array $callbackData): RequestedUserInfo
     {
-        $shippingAddress = Address::create($payload['shipping_address']);
+        $shippingAddress = Address::create($callbackData['shipping_address']);
 
-        $contactEmail = $payload['contact_email'] ?? null;
-        $contactPhone = $payload['contact_phone'] ?? null;
+        $contactEmail = $callbackData['contact_email'] ?? null;
+        $contactPhone = $callbackData['contact_phone'] ?? null;
 
-        return new static($shippingAddress, $payload['contact_name'], $contactEmail, $contactPhone);
+        return new static($shippingAddress, $callbackData['contact_name'], $contactEmail, $contactPhone);
     }
 }

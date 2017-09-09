@@ -124,17 +124,17 @@ class PaymentCredential
     }
 
     /**
-     * @param array $payload
+     * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Payment\PaymentCredential
      */
-    public static function create(array $payload): PaymentCredential
+    public static function create(array $callbackData): PaymentCredential
     {
-        $tokenizedCard = $payload['tokenized_card'] ?? null;
-        $tokenizedCvv = $payload['tokenized_cvv'] ?? null;
-        $tokenExpiryMonth = $payload['token_expiry_month'] ?? null;
-        $tokenExpiryYear = $payload['token_expiry_year'] ?? null;
+        $tokenizedCard = $callbackData['tokenized_card'] ?? null;
+        $tokenizedCvv = $callbackData['tokenized_cvv'] ?? null;
+        $tokenExpiryMonth = $callbackData['token_expiry_month'] ?? null;
+        $tokenExpiryYear = $callbackData['token_expiry_year'] ?? null;
 
-        return new static($payload['provider_type'], $payload['charge_id'], $tokenizedCard, $tokenizedCvv, $tokenExpiryMonth, $tokenExpiryYear, $payload['fb_payment_id']);
+        return new static($callbackData['provider_type'], $callbackData['charge_id'], $tokenizedCard, $tokenizedCvv, $tokenExpiryMonth, $tokenExpiryYear, $callbackData['fb_payment_id']);
     }
 }
