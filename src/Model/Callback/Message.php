@@ -30,6 +30,11 @@ class Message
     protected $attachments;
 
     /**
+     * @var null|array
+     */
+    protected $entities;
+
+    /**
      * Message constructor.
      *
      * @param string $messageId
@@ -41,6 +46,7 @@ class Message
     public function __construct(
         string $messageId,
         int $sequence,
+        array $entities = [],
         string $text = null,
         string $quickReply = null,
         array $attachments = []
@@ -50,6 +56,7 @@ class Message
         $this->text = $text;
         $this->quickReply = $quickReply;
         $this->attachments = $attachments;
+        $this->entities = $entities;
     }
 
     /**
@@ -101,11 +108,19 @@ class Message
     }
 
     /**
-     * @return array
-     */
+        * @return array
+        */
     public function getAttachments(): array
     {
         return $this->attachments;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEntities(): array
+    {
+        return $this->entities;
     }
 
     /**
@@ -127,6 +142,13 @@ class Message
         $quickReply = $callbackData['quick_reply']['payload'] ?? null;
         $attachments = $callbackData['attachments'] ?? [];
 
-        return new static($callbackData['mid'], $callbackData['seq'], $text, $quickReply, $attachments);
+        return new static(
+            $callbackData['mid'],
+            $callbackData['seq'],
+            isset($callbackData['nlp']) ? $callbackData['nlp'] : null,
+            $text,
+            $quickReply,
+            $attachments
+        );
     }
 }
