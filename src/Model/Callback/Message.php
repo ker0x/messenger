@@ -145,7 +145,7 @@ class Message
         return new static(
             $callbackData['mid'],
             $callbackData['seq'],
-            isset($callbackData['nlp']) ? $callbackData['nlp'] : null,
+            isset($callbackData['nlp']) ? $callbackData['nlp']['entities'] : null,
             $text,
             $quickReply,
             $attachments
