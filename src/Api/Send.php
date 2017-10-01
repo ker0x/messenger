@@ -26,6 +26,9 @@ class Send extends AbstractApi
     const TAG_TRANSPORTATION_UPDATE = 'TRANSPORTATION_UPDATE';
     const TAG_FEATURE_FUNCTIONALITY_UPDATE = 'FEATURE_FUNCTIONALITY_UPDATE';
     const TAG_TICKET_UPDATE = 'TICKET_UPDATE';
+    const TAG_ACCOUNT_UPDATE = 'ACCOUNT_UPDATE';
+    const TAG_PAYMENT_UPDATE = 'PAYMENT_UPDATE';
+    const TAG_PERSONAL_FINANCE_UPDATE = 'PERSONAL_FINANCE_UPDATE';
 
     /**
      * @var null|\Kerox\Messenger\Api\Send
@@ -211,6 +214,9 @@ class Send extends AbstractApi
             self::TAG_TRANSPORTATION_UPDATE,
             self::TAG_FEATURE_FUNCTIONALITY_UPDATE,
             self::TAG_TICKET_UPDATE,
+            self::TAG_ACCOUNT_UPDATE,
+            self::TAG_PAYMENT_UPDATE,
+            self::TAG_PERSONAL_FINANCE_UPDATE
         ];
     }
 }
