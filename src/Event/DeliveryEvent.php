@@ -6,7 +6,7 @@ use Kerox\Messenger\Model\Callback\Delivery;
 
 class DeliveryEvent extends AbstractEvent
 {
-    const NAME = 'delivery';
+    public const NAME = 'delivery';
 
     /**
      * @var \Kerox\Messenger\Model\Callback\Delivery
@@ -48,7 +48,7 @@ class DeliveryEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\DeliveryEvent
      */
-    public static function create(array $payload): DeliveryEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

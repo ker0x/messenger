@@ -6,7 +6,7 @@ use Kerox\Messenger\Model\Callback\AccountLinking;
 
 class AccountLinkingEvent extends AbstractEvent
 {
-    const NAME = 'account_linking';
+    public const NAME = 'account_linking';
 
     /**
      * @var int
@@ -63,7 +63,7 @@ class AccountLinkingEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\AccountLinkingEvent
      */
-    public static function create(array $payload): AccountLinkingEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

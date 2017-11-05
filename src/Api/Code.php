@@ -8,7 +8,7 @@ use Kerox\Messenger\Response\CodeResponse;
 
 class Code extends AbstractApi
 {
-    const CODE_TYPE_STANDARD = 'standard';
+    private const CODE_TYPE_STANDARD = 'standard';
 
     /**
      * @var null|\Kerox\Messenger\Api\Code
@@ -32,7 +32,7 @@ class Code extends AbstractApi
      *
      * @return \Kerox\Messenger\Api\Code
      */
-    public static function getInstance(string $pageToken, ClientInterface $client): Code
+    public static function getInstance(string $pageToken, ClientInterface $client): self
     {
         if (self::$_instance === null) {
             self::$_instance = new self($pageToken, $client);
@@ -48,7 +48,7 @@ class Code extends AbstractApi
      *
      * @return \Kerox\Messenger\Response\CodeResponse
      */
-    public function request(int $imageSize = 1000, string $codeType = self::CODE_TYPE_STANDARD, string $ref = null): CodeResponse
+    public function request(int $imageSize = 1000, string $codeType = self::CODE_TYPE_STANDARD, ?string $ref = null): CodeResponse
     {
         $this->isValidCodeImageSize($imageSize);
         $this->isValidCodeType($codeType);
@@ -68,7 +68,7 @@ class Code extends AbstractApi
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidCodeImageSize(int $imageSize)
+    private function isValidCodeImageSize(int $imageSize): void
     {
         if ($imageSize < 100 || $imageSize > 2000) {
             throw new \InvalidArgumentException('$imageSize must be between 100 and 2000');
@@ -80,7 +80,7 @@ class Code extends AbstractApi
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidCodeType(string $codeType)
+    private function isValidCodeType(string $codeType): void
     {
         $allowedCodeType = $this->getAllowedCodeType();
         if (!in_array($codeType, $allowedCodeType, true)) {
@@ -93,7 +93,7 @@ class Code extends AbstractApi
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidRef(string $ref)
+    private function isValidRef(string $ref): void
     {
         if (!preg_match('/^[a-zA-Z0-9\+\/=\-.:_ ]{1,250}$/', $ref)) {
             throw new \InvalidArgumentException('$ref must be a string of max 250 characters. Valid characters are a-z A-Z 0-9 +/=-.:_');

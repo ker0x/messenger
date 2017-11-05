@@ -16,8 +16,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class Messenger
 {
-    const API_URL = 'https://graph.facebook.com/';
-    const API_VERSION = 'v2.9';
+    public const API_URL = 'https://graph.facebook.com/';
+    public const API_VERSION = 'v2.9';
 
     /**
      * @var string
@@ -42,12 +42,12 @@ class Messenger
     /**
      * Messenger constructor.
      *
-     * @param string                      $appSecret
-     * @param string                      $verifyToken
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
+     * @param string                           $appSecret
+     * @param string                           $verifyToken
+     * @param string                           $pageToken
+     * @param null|\GuzzleHttp\ClientInterface $client
      */
-    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client = null)
+    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ?ClientInterface $client = null)
     {
         $this->appSecret = $appSecret;
         $this->verifyToken = $verifyToken;
@@ -70,11 +70,11 @@ class Messenger
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param null|\Psr\Http\Message\ServerRequestInterface $request
      *
      * @return \Kerox\Messenger\Api\Webhook
      */
-    public function webhook(ServerRequestInterface $request = null): Webhook
+    public function webhook(?ServerRequestInterface $request = null): Webhook
     {
         return Webhook::getInstance($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
     }

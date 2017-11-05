@@ -73,6 +73,16 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      */
     protected $flightInfo;
 
+    /**
+     * BoardingPass constructor.
+     *
+     * @param string                                                                $passengerName
+     * @param string                                                                $pnrNumber
+     * @param string                                                                $logoImageUrl
+     * @param string                                                                $code
+     * @param string                                                                $aboveBarcodeImageUrl
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $flightInfo
+     */
     public function __construct(
         string $passengerName,
         string $pnrNumber,
@@ -95,7 +105,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @return BoardingPass
      */
-    public function setTravelClass(string $travelClass): BoardingPass
+    public function setTravelClass(string $travelClass): self
     {
         $this->isValidTravelClass($travelClass);
 
@@ -109,7 +119,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @return BoardingPass
      */
-    public function setSeat(string $seat): BoardingPass
+    public function setSeat(string $seat): self
     {
         $this->seat = $seat;
 
@@ -124,7 +134,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @internal param array|null $auxiliaryFields
      */
-    public function addAuxiliaryFields(string $label, string $value): BoardingPass
+    public function addAuxiliaryFields(string $label, string $value): self
     {
         $this->auxiliaryFields[] = $this->setLabelValue($label, $value);
 
@@ -141,7 +151,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @internal param array|null $secondaryFields
      */
-    public function addSecondaryFields(string $label, string $value): BoardingPass
+    public function addSecondaryFields(string $label, string $value): self
     {
         $this->secondaryFields[] = $this->setLabelValue($label, $value);
 
@@ -155,7 +165,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @return BoardingPass
      */
-    public function setHeaderImageUrl(string $headerImageUrl): BoardingPass
+    public function setHeaderImageUrl(string $headerImageUrl): self
     {
         $this->isValidUrl($headerImageUrl);
 
@@ -169,7 +179,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @return BoardingPass
      */
-    public function setHeaderTextField(string $headerTextField): BoardingPass
+    public function setHeaderTextField(string $headerTextField): self
     {
         $this->headerTextField = $headerTextField;
 
@@ -193,7 +203,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $code
      */
-    private function setCode(string $code)
+    private function setCode(string $code): void
     {
         if (filter_var($code, FILTER_VALIDATE_URL)) {
             $this->barcodeImageUrl = $code;
@@ -208,7 +218,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function isValidTravelClass(string $travelClass)
+    public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
         if (!in_array($travelClass, $allowedTravelClass, true)) {

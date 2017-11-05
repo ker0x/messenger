@@ -10,11 +10,11 @@ class Attachment implements \JsonSerializable
     use UtilityTrait;
     use ValidatorTrait;
 
-    const TYPE_IMAGE = 'image';
-    const TYPE_AUDIO = 'audio';
-    const TYPE_VIDEO = 'video';
-    const TYPE_FILE = 'file';
-    const TYPE_TEMPLATE = 'template';
+    protected const TYPE_IMAGE = 'image';
+    protected const TYPE_AUDIO = 'audio';
+    protected const TYPE_VIDEO = 'video';
+    protected const TYPE_FILE = 'file';
+    protected const TYPE_TEMPLATE = 'template';
 
     /**
      * @var string

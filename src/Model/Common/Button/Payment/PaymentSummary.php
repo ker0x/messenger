@@ -4,13 +4,13 @@ namespace Kerox\Messenger\Model\Common\Button\Payment;
 
 class PaymentSummary implements \JsonSerializable
 {
-    const PAYMENT_TYPE_FIXED_AMOUNT = 'FIXED_AMOUNT';
-    const PAYMENT_TYPE_FLEXIBLE_AMOUNT = 'FLEXIBLE_AMOUNT';
+    public const PAYMENT_TYPE_FIXED_AMOUNT = 'FIXED_AMOUNT';
+    public const PAYMENT_TYPE_FLEXIBLE_AMOUNT = 'FLEXIBLE_AMOUNT';
 
-    const USER_INFO_SHIPPING_ADDRESS = 'shipping_address';
-    const USER_INFO_CONTACT_NAME = 'contact_name';
-    const USER_INFO_CONTACT_PHONE = 'contact_phone';
-    const USER_INFO_CONTACT_EMAIL = 'contact_email';
+    public const USER_INFO_SHIPPING_ADDRESS = 'shipping_address';
+    public const USER_INFO_CONTACT_NAME = 'contact_name';
+    public const USER_INFO_CONTACT_PHONE = 'contact_phone';
+    public const USER_INFO_CONTACT_EMAIL = 'contact_email';
 
     /**
      * @var string
@@ -73,7 +73,7 @@ class PaymentSummary implements \JsonSerializable
      *
      * @return PaymentSummary
      */
-    public function isTestPayment(bool $isTestPayment): PaymentSummary
+    public function isTestPayment(bool $isTestPayment): self
     {
         $this->isTestPayment = $isTestPayment;
 
@@ -86,7 +86,7 @@ class PaymentSummary implements \JsonSerializable
      *
      * @return PaymentSummary
      */
-    public function addPriceList(string $label, string $amount): PaymentSummary
+    public function addPriceList(string $label, string $amount): self
     {
         $this->priceList[] = new PriceList($label, $amount);
 
@@ -102,7 +102,9 @@ class PaymentSummary implements \JsonSerializable
     {
         $allowedPaymentType = $this->getAllowedPaymentType();
         if (!in_array($paymentType, $allowedPaymentType, true)) {
-            throw new \InvalidArgumentException('$paymentType must be either ' . implode(', ', $allowedPaymentType));
+            throw new \InvalidArgumentException(
+                '$paymentType must be either ' . implode(', ', $allowedPaymentType)
+            );
         }
     }
 
@@ -122,12 +124,14 @@ class PaymentSummary implements \JsonSerializable
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidRequestedUserInfo(array $requestedUserInfo)
+    private function isValidRequestedUserInfo(array $requestedUserInfo): void
     {
         $allowedUserInfo = $this->getAllowedUserInfo();
         foreach ($requestedUserInfo as $userInfo) {
             if (!in_array($userInfo, $allowedUserInfo, true)) {
-                throw new \InvalidArgumentException("$userInfo is not a valid value. Valid values are " . implode(',', $allowedUserInfo));
+                throw new \InvalidArgumentException(
+                    "$userInfo is not a valid value. Valid values are " . implode(',', $allowedUserInfo)
+                );
             }
         }
     }

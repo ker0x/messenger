@@ -22,11 +22,11 @@ class UserRequest extends AbstractRequest
         $this->fields = $fields;
     }
 
-    protected function buildHeaders()
+    protected function buildHeaders(): void
     {
     }
 
-    protected function buildBody()
+    protected function buildBody(): void
     {
     }
 

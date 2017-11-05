@@ -28,7 +28,7 @@ class PaymentSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
-    public function setPrivacyUrl(string $privacyUrl): PaymentSettings
+    public function setPrivacyUrl(string $privacyUrl): self
     {
         $this->isValidUrl($privacyUrl);
         $this->privacyUrl = $privacyUrl;
@@ -41,7 +41,7 @@ class PaymentSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
-    public function setPublicKey(string $publicKey): PaymentSettings
+    public function setPublicKey(string $publicKey): self
     {
         $this->publicKey = $publicKey;
 
@@ -53,7 +53,7 @@ class PaymentSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
-    public function addTestUser(int $testUser): PaymentSettings
+    public function addTestUser(int $testUser): self
     {
         $this->testUsers[] = $testUser;
 

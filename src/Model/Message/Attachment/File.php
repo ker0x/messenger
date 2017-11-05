@@ -28,7 +28,7 @@ class File extends Attachment
      * @param bool|null $reusable
      * @param string    $type
      */
-    public function __construct($url, bool $reusable = null, $type = Attachment::TYPE_FILE)
+    public function __construct($url, ?bool $reusable = null, $type = Attachment::TYPE_FILE)
     {
         parent::__construct($type);
 

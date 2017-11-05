@@ -27,7 +27,7 @@ class ProfileRequest extends AbstractRequest
     /**
      * @return null|array
      */
-    protected function buildHeaders()
+    protected function buildHeaders(): ?array
     {
         $headers = [
             'Content-Type' => 'application/json',

@@ -10,9 +10,9 @@ class TargetAudience implements \JsonSerializable
     use UtilityTrait;
     use ValidatorTrait;
 
-    const AUDIENCE_TYPE_ALL = 'all';
-    const AUDIENCE_TYPE_CUSTOM = 'custom';
-    const AUDIENCE_TYPE_NONE = 'none';
+    private const AUDIENCE_TYPE_ALL = 'all';
+    private const AUDIENCE_TYPE_CUSTOM = 'custom';
+    private const AUDIENCE_TYPE_NONE = 'none';
 
     /**
      * @var string
@@ -57,7 +57,7 @@ class TargetAudience implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
-    public function addWhitelistCountry(string $country): TargetAudience
+    public function addWhitelistCountry(string $country): self
     {
         $this->isValidCountry($country);
 
@@ -73,7 +73,7 @@ class TargetAudience implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
-    public function addBlacklistCountry(string $country): TargetAudience
+    public function addBlacklistCountry(string $country): self
     {
         $this->isValidCountry($country);
 
@@ -87,7 +87,7 @@ class TargetAudience implements \JsonSerializable
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidCountries(array $countries)
+    private function isValidCountries(array $countries): void
     {
         if (!empty($countries)) {
             foreach ($countries as $country) {
@@ -101,7 +101,7 @@ class TargetAudience implements \JsonSerializable
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidAudienceType(string $audienceType)
+    private function isValidAudienceType(string $audienceType): void
     {
         $allowedAudienceType = $this->getAllowedAudienceType();
         if (!in_array($audienceType, $allowedAudienceType, true)) {
@@ -131,7 +131,7 @@ class TargetAudience implements \JsonSerializable
             'countries'     => [
                 'whitelist' => $this->whitelistCountries,
                 'blacklist' => $this->blacklistCountries,
-            ]
+            ],
         ];
 
         return $this->arrayFilter($json);

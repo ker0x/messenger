@@ -47,7 +47,7 @@ class PassThreadControl
      *
      * @return \Kerox\Messenger\Model\Callback\PassThreadControl
      */
-    public static function create(array $callbackData): PassThreadControl
+    public static function create(array $callbackData): self
     {
         return new static($callbackData['new_owner_app_id'], $callbackData['metadata']);
     }

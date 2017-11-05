@@ -26,7 +26,7 @@ class Postback
      * @param null|string                              $payload
      * @param \Kerox\Messenger\Model\Callback\Referral $referral
      */
-    public function __construct(string $title, $payload = null, $referral = null)
+    public function __construct(string $title, ?string $payload = null, ?Referral $referral = null)
     {
         $this->title = $title;
         $this->payload = $payload;
@@ -52,7 +52,7 @@ class Postback
     /**
      * @return null|string
      */
-    public function getPayload()
+    public function getPayload(): ?string
     {
         return $this->payload;
     }
@@ -68,7 +68,7 @@ class Postback
     /**
      * @return null|\Kerox\Messenger\Model\Callback\Referral
      */
-    public function getReferral()
+    public function getReferral(): ?Referral
     {
         return $this->referral;
     }
@@ -78,7 +78,7 @@ class Postback
      *
      * @return \Kerox\Messenger\Model\Callback\Postback
      */
-    public static function create(array $callbackData): Postback
+    public static function create(array $callbackData): self
     {
         $payload = $callbackData['payload'] ?? null;
         $referral = isset($callbackData['referral']) ? Referral::create($callbackData['referral']) : null;

@@ -12,7 +12,7 @@ class Audio extends File
      * @param string    $url
      * @param bool|null $reusable
      */
-    public function __construct($url, bool $reusable = null)
+    public function __construct($url, ?bool $reusable = null)
     {
         parent::__construct($url, $reusable, Attachment::TYPE_AUDIO);
     }

@@ -40,16 +40,16 @@ class SendRequest extends AbstractRequest
      * @param string                                $pageToken
      * @param string|\Kerox\Messenger\Model\Message $content
      * @param string|null                           $recipient
-     * @param string                                $requestType
      * @param string|null                           $notificationType
      * @param string|null                           $tag
+     * @param string                                $requestType
      */
     public function __construct(
         string $pageToken,
         $content,
-        string $recipient = null,
-        string $notificationType = null,
-        $tag = null,
+        ?string $recipient = null,
+        ?string $notificationType = null,
+        ?string $tag = null,
         string $requestType = self::TYPE_MESSAGE
     ) {
         parent::__construct($pageToken);

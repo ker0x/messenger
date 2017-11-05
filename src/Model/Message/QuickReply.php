@@ -8,8 +8,8 @@ class QuickReply implements \JsonSerializable
 {
     use ValidatorTrait;
 
-    const CONTENT_TYPE_TEXT = 'text';
-    const CONTENT_TYPE_LOCATION = 'location';
+    private const CONTENT_TYPE_TEXT = 'text';
+    private const CONTENT_TYPE_LOCATION = 'location';
 
     /**
      * @var string
@@ -50,7 +50,7 @@ class QuickReply implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
-    public function setTitle(string $title): QuickReply
+    public function setTitle(string $title): self
     {
         $this->checkContentType();
         $this->isValidString($title, 20);
@@ -65,7 +65,7 @@ class QuickReply implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
-    public function setPayload(string $payload): QuickReply
+    public function setPayload(string $payload): self
     {
         $this->checkContentType();
         $this->isValidString($payload, 1000);
@@ -76,11 +76,11 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @param mixed $imageUrl
+     * @param string $imageUrl
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
-    public function setImageUrl(string $imageUrl): QuickReply
+    public function setImageUrl(string $imageUrl): self
     {
         $this->checkContentType();
         $this->isValidUrl($imageUrl);
@@ -94,7 +94,7 @@ class QuickReply implements \JsonSerializable
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidContentType(string $contentType)
+    private function isValidContentType(string $contentType): void
     {
         $allowedContentType = $this->getAllowedContentType();
         if (!in_array($contentType, $allowedContentType, true)) {
@@ -116,7 +116,7 @@ class QuickReply implements \JsonSerializable
     /**
      * @throws \Exception
      */
-    private function checkContentType()
+    private function checkContentType(): void
     {
         if ($this->contentType === self::CONTENT_TYPE_LOCATION) {
             throw new \Exception('Content type is set to location');

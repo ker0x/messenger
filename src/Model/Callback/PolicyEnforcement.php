@@ -20,7 +20,7 @@ class PolicyEnforcement
      * @param string      $action
      * @param null|string $reason
      */
-    public function __construct(string $action, $reason)
+    public function __construct(string $action, ?string $reason = null)
     {
         $this->action = $action;
         $this->reason = $reason;
@@ -37,7 +37,7 @@ class PolicyEnforcement
     /**
      * @return null|string
      */
-    public function getReason()
+    public function getReason(): ?string
     {
         return $this->reason;
     }
@@ -47,7 +47,7 @@ class PolicyEnforcement
      *
      * @return \Kerox\Messenger\Model\Callback\PolicyEnforcement
      */
-    public static function create(array $callbackData): PolicyEnforcement
+    public static function create(array $callbackData): self
     {
         $reason = $callbackData['reason'] ?? null;
 

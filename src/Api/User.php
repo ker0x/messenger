@@ -31,7 +31,7 @@ class User extends AbstractApi implements UserInterface
      *
      * @return \Kerox\Messenger\Api\User
      */
-    public static function getInstance(string $pageToken, ClientInterface $client): User
+    public static function getInstance(string $pageToken, ClientInterface $client): self
     {
         if (self::$_instance === null) {
             self::$_instance = new self($pageToken, $client);

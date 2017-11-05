@@ -35,10 +35,8 @@ abstract class AbstractResponse
 
     /**
      * @param array $response
-     *
-     * @return mixed
      */
-    abstract protected function parseResponse(array $response);
+    abstract protected function parseResponse(array $response): void;
 
     /**
      * @return \Psr\Http\Message\ResponseInterface

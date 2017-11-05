@@ -14,11 +14,11 @@ class WebhookRequest extends AbstractRequest
         parent::__construct($pageToken);
     }
 
-    protected function buildHeaders()
+    protected function buildHeaders(): void
     {
     }
 
-    protected function buildBody()
+    protected function buildBody(): void
     {
     }
 

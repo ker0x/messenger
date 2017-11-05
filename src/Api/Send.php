@@ -10,25 +10,25 @@ use Kerox\Messenger\Response\SendResponse;
 
 class Send extends AbstractApi
 {
-    const SENDER_ACTION_TYPING_ON = 'typing_on';
-    const SENDER_ACTION_TYPING_OFF = 'typing_off';
-    const SENDER_ACTION_MARK_SEEN = 'mark_seen';
+    private const SENDER_ACTION_TYPING_ON = 'typing_on';
+    private const SENDER_ACTION_TYPING_OFF = 'typing_off';
+    private const SENDER_ACTION_MARK_SEEN = 'mark_seen';
 
-    const NOTIFICATION_TYPE_REGULAR = 'REGULAR';
-    const NOTIFICATION_TYPE_SILENT_PUSH = 'SILENT_PUSH';
-    const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
+    private const NOTIFICATION_TYPE_REGULAR = 'REGULAR';
+    private const NOTIFICATION_TYPE_SILENT_PUSH = 'SILENT_PUSH';
+    private const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
 
-    const TAG_SHIPPING_UPDATE = 'SHIPPING_UPDATE';
-    const TAG_RESERVATION_UPDATE = 'RESERVATION_UPDATE';
-    const TAG_ISSUE_RESOLUTION = 'ISSUE_RESOLUTION';
-    const TAG_APPOINTMENT_UPDATE = 'APPOINTMENT_UPDATE';
-    const TAG_GAME_EVENT = 'GAME_EVENT';
-    const TAG_TRANSPORTATION_UPDATE = 'TRANSPORTATION_UPDATE';
-    const TAG_FEATURE_FUNCTIONALITY_UPDATE = 'FEATURE_FUNCTIONALITY_UPDATE';
-    const TAG_TICKET_UPDATE = 'TICKET_UPDATE';
-    const TAG_ACCOUNT_UPDATE = 'ACCOUNT_UPDATE';
-    const TAG_PAYMENT_UPDATE = 'PAYMENT_UPDATE';
-    const TAG_PERSONAL_FINANCE_UPDATE = 'PERSONAL_FINANCE_UPDATE';
+    private const TAG_SHIPPING_UPDATE = 'SHIPPING_UPDATE';
+    private const TAG_RESERVATION_UPDATE = 'RESERVATION_UPDATE';
+    private const TAG_ISSUE_RESOLUTION = 'ISSUE_RESOLUTION';
+    private const TAG_APPOINTMENT_UPDATE = 'APPOINTMENT_UPDATE';
+    private const TAG_GAME_EVENT = 'GAME_EVENT';
+    private const TAG_TRANSPORTATION_UPDATE = 'TRANSPORTATION_UPDATE';
+    private const TAG_FEATURE_FUNCTIONALITY_UPDATE = 'FEATURE_FUNCTIONALITY_UPDATE';
+    private const TAG_TICKET_UPDATE = 'TICKET_UPDATE';
+    private const TAG_ACCOUNT_UPDATE = 'ACCOUNT_UPDATE';
+    private const TAG_PAYMENT_UPDATE = 'PAYMENT_UPDATE';
+    private const TAG_PERSONAL_FINANCE_UPDATE = 'PERSONAL_FINANCE_UPDATE';
 
     /**
      * @var null|\Kerox\Messenger\Api\Send
@@ -52,7 +52,7 @@ class Send extends AbstractApi
      *
      * @return \Kerox\Messenger\Api\Send
      */
-    public static function getInstance(string $pageToken, ClientInterface $client): Send
+    public static function getInstance(string $pageToken, ClientInterface $client): self
     {
         if (self::$_instance === null) {
             self::$_instance = new self($pageToken, $client);
@@ -142,7 +142,7 @@ class Send extends AbstractApi
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidNotificationType(string $notificationType)
+    private function isValidNotificationType(string $notificationType): void
     {
         $allowedNotificationType = $this->getAllowedNotificationType();
         if (!in_array($notificationType, $allowedNotificationType, true)) {
@@ -167,7 +167,7 @@ class Send extends AbstractApi
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidAction(string $action)
+    private function isValidAction(string $action): void
     {
         $allowedSenderAction = $this->getAllowedSenderAction();
         if (!in_array($action, $allowedSenderAction, true)) {
@@ -192,7 +192,7 @@ class Send extends AbstractApi
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidTag(string $tag)
+    private function isValidTag(string $tag): void
     {
         $allowedTag = $this->getAllowedTag();
         if (!in_array($tag, $allowedTag, true)) {
@@ -216,7 +216,7 @@ class Send extends AbstractApi
             self::TAG_TICKET_UPDATE,
             self::TAG_ACCOUNT_UPDATE,
             self::TAG_PAYMENT_UPDATE,
-            self::TAG_PERSONAL_FINANCE_UPDATE
+            self::TAG_PERSONAL_FINANCE_UPDATE,
         ];
     }
 }

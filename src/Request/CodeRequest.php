@@ -31,7 +31,7 @@ class CodeRequest extends AbstractRequest
      * @param string      $codeType
      * @param null|string $ref
      */
-    public function __construct(string $pageToken, int $imageSize, string $codeType, $ref)
+    public function __construct(string $pageToken, int $imageSize, string $codeType, ?string $ref = null)
     {
         parent::__construct($pageToken);
 
@@ -60,7 +60,7 @@ class CodeRequest extends AbstractRequest
             'image_size' => $this->imageSize,
             'data'       => [
                 'ref' => $this->ref,
-            ]
+            ],
         ];
 
         return $this->arrayFilter($body);

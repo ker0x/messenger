@@ -41,8 +41,8 @@ class Message
     public function __construct(
         string $messageId,
         int $sequence,
-        string $text = null,
-        string $quickReply = null,
+        ?string $text = null,
+        ?string $quickReply = null,
         array $attachments = []
     ) {
         $this->messageId = $messageId;
@@ -71,7 +71,7 @@ class Message
     /**
      * @return null|string
      */
-    public function getText()
+    public function getText(): ?string
     {
         return $this->text;
     }
@@ -87,7 +87,7 @@ class Message
     /**
      * @return null|string
      */
-    public function getQuickReply()
+    public function getQuickReply(): ?string
     {
         return $this->quickReply;
     }

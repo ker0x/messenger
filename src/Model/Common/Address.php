@@ -72,7 +72,7 @@ class Address implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Common\Address
      */
-    public function setName(string $name): Address
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -82,7 +82,7 @@ class Address implements \JsonSerializable
     /**
      * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -100,7 +100,7 @@ class Address implements \JsonSerializable
      *
      * @return Address
      */
-    public function setAdditionalStreet(string $additionalStreet): Address
+    public function setAdditionalStreet(string $additionalStreet): self
     {
         $this->additionalStreet = $additionalStreet;
 
@@ -110,7 +110,7 @@ class Address implements \JsonSerializable
     /**
      * @return null|string
      */
-    public function getAdditionalStreet()
+    public function getAdditionalStreet(): ?string
     {
         return $this->additionalStreet;
     }
@@ -152,7 +152,7 @@ class Address implements \JsonSerializable
      *
      * @return Address
      */
-    public function setId(int $id)
+    public function setId(int $id): self
     {
         $this->id = $id;
 
@@ -162,7 +162,7 @@ class Address implements \JsonSerializable
     /**
      * @return null|int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -193,7 +193,13 @@ class Address implements \JsonSerializable
      */
     public static function create(array $payload)
     {
-        $address = new static($payload['street_1'], $payload['city'], $payload['postal_code'], $payload['state'], $payload['country']);
+        $address = new static(
+            $payload['street_1'],
+            $payload['city'],
+            $payload['postal_code'],
+            $payload['state'],
+            $payload['country']
+        );
 
         if (isset($payload['street_2'])) {
             $address->setAdditionalStreet($payload['street_2']);

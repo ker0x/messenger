@@ -17,7 +17,7 @@ class Image extends File
      * @param string    $url
      * @param bool|null $reusable
      */
-    public function __construct(string $url, bool $reusable = null)
+    public function __construct(string $url, ?bool $reusable = null)
     {
         $this->isValidExtension($url, $this->getAllowedExtensions());
 

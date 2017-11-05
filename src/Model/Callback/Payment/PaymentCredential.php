@@ -15,7 +15,7 @@ class PaymentCredential
     protected $chargeId;
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $tokenizedCard;
 
@@ -44,6 +44,7 @@ class PaymentCredential
      *
      * @param string $providerType
      * @param string $chargeId
+     * @param string $tokenizedCard
      * @param string $tokenizedCvv
      * @param string $tokenExpiryMonth
      * @param string $tokenExpiryYear
@@ -52,10 +53,10 @@ class PaymentCredential
     public function __construct(
         string $providerType,
         string $chargeId,
-        string $tokenizedCard,
-        string $tokenizedCvv,
-        string $tokenExpiryMonth,
-        string $tokenExpiryYear,
+        ?string $tokenizedCard = null,
+        ?string $tokenizedCvv = null,
+        ?string $tokenExpiryMonth = null,
+        ?string $tokenExpiryYear = null,
         string $fbPaymentId
     ) {
         $this->providerType = $providerType;
@@ -84,9 +85,9 @@ class PaymentCredential
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getTokenizedCard(): string
+    public function getTokenizedCard(): ?string
     {
         return $this->tokenizedCard;
     }
@@ -94,7 +95,7 @@ class PaymentCredential
     /**
      * @return null|string
      */
-    public function getTokenizedCvv()
+    public function getTokenizedCvv(): ?string
     {
         return $this->tokenizedCvv;
     }
@@ -102,7 +103,7 @@ class PaymentCredential
     /**
      * @return null|string
      */
-    public function getTokenExpiryMonth()
+    public function getTokenExpiryMonth(): ?string
     {
         return $this->tokenExpiryMonth;
     }
@@ -110,7 +111,7 @@ class PaymentCredential
     /**
      * @return null|string
      */
-    public function getTokenExpiryYear()
+    public function getTokenExpiryYear(): ?string
     {
         return $this->tokenExpiryYear;
     }
@@ -128,13 +129,21 @@ class PaymentCredential
      *
      * @return \Kerox\Messenger\Model\Callback\Payment\PaymentCredential
      */
-    public static function create(array $callbackData): PaymentCredential
+    public static function create(array $callbackData): self
     {
         $tokenizedCard = $callbackData['tokenized_card'] ?? null;
         $tokenizedCvv = $callbackData['tokenized_cvv'] ?? null;
         $tokenExpiryMonth = $callbackData['token_expiry_month'] ?? null;
         $tokenExpiryYear = $callbackData['token_expiry_year'] ?? null;
 
-        return new static($callbackData['provider_type'], $callbackData['charge_id'], $tokenizedCard, $tokenizedCvv, $tokenExpiryMonth, $tokenExpiryYear, $callbackData['fb_payment_id']);
+        return new static(
+            $callbackData['provider_type'],
+            $callbackData['charge_id'],
+            $tokenizedCard,
+            $tokenizedCvv,
+            $tokenExpiryMonth,
+            $tokenExpiryYear,
+            $callbackData['fb_payment_id']
+        );
     }
 }

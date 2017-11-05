@@ -38,7 +38,7 @@ abstract class AbstractAirline extends Template
      *
      * @return AbstractAirline
      */
-    public function setThemeColor(string $themeColor): AbstractAirline
+    public function setThemeColor(string $themeColor): self
     {
         $this->isValidColor($themeColor);
 

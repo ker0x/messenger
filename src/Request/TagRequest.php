@@ -9,16 +9,16 @@ class TagRequest extends AbstractRequest
      *
      * @param string $pageToken
      */
-    public function __construct($pageToken)
+    public function __construct(string $pageToken)
     {
         parent::__construct($pageToken);
     }
 
-    protected function buildHeaders()
+    protected function buildHeaders(): void
     {
     }
 
-    protected function buildBody()
+    protected function buildBody(): void
     {
     }
 

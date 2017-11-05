@@ -30,7 +30,7 @@ trait UtilityTrait
      *
      * @return bool
      */
-    protected static function filter($var)
+    protected static function filter($var): bool
     {
         return $var === 0 || $var === 0.0 || $var === '0' || !empty($var);
     }

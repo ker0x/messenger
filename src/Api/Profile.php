@@ -32,7 +32,7 @@ class Profile extends AbstractApi implements ProfileInterface
      *
      * @return \Kerox\Messenger\Api\Profile
      */
-    public static function getInstance(string $pageToken, ClientInterface $client): Profile
+    public static function getInstance(string $pageToken, ClientInterface $client): self
     {
         if (self::$_instance === null) {
             self::$_instance = new self($pageToken, $client);
@@ -91,7 +91,7 @@ class Profile extends AbstractApi implements ProfileInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidFields(array $fields)
+    private function isValidFields(array $fields): void
     {
         $allowedFields = $this->getAllowedFields();
         foreach ($fields as $field) {

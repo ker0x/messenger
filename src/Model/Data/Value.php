@@ -17,8 +17,8 @@ class Value
     /**
      * Value constructor.
      *
-     * @param int    $value
-     * @param string $endTime
+     * @param int|array $value
+     * @param string    $endTime
      */
     public function __construct($value, string $endTime)
     {

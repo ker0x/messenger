@@ -20,7 +20,7 @@ class AccountLinking
      * @param string      $status
      * @param string|null $authorizationCode
      */
-    public function __construct(string $status, string $authorizationCode = null)
+    public function __construct(string $status, ?string $authorizationCode = null)
     {
         $this->status = $status;
         $this->authorizationCode = $authorizationCode;
@@ -45,7 +45,7 @@ class AccountLinking
     /**
      * @return null|string
      */
-    public function getAuthorizationCode()
+    public function getAuthorizationCode(): ?string
     {
         return $this->authorizationCode;
     }
@@ -55,7 +55,7 @@ class AccountLinking
      *
      * @return \Kerox\Messenger\Model\Callback\AccountLinking
      */
-    public static function create(array $callbackData): AccountLinking
+    public static function create(array $callbackData): self
     {
         $authorizationCode = $callbackData['authorization_code'] ?? null;
 

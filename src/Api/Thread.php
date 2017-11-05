@@ -31,7 +31,7 @@ class Thread extends AbstractApi
      *
      * @return \Kerox\Messenger\Api\Thread
      */
-    public static function getInstance(string $pageToken, ClientInterface $client): Thread
+    public static function getInstance(string $pageToken, ClientInterface $client): self
     {
         if (self::$_instance === null) {
             self::$_instance = new self($pageToken, $client);

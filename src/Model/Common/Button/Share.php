@@ -17,9 +17,9 @@ class Share extends AbstractButton
     /**
      * Share constructor.
      *
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Generic $content
+     * @param null|\Kerox\Messenger\Model\Message\Attachment\Template\Generic $content
      */
-    public function __construct(Generic $content = null)
+    public function __construct(?Generic $content = null)
     {
         parent::__construct(self::TYPE_SHARE);
 

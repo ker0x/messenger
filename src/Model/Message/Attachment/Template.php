@@ -6,15 +6,15 @@ use Kerox\Messenger\Model\Message\Attachment;
 
 abstract class Template extends Attachment
 {
-    const TYPE_AIRLINE_BOARDINGPASS = 'airline_boardingpass';
-    const TYPE_AIRLINE_CHECKIN = 'airline_checkin';
-    const TYPE_AIRLINE_ITINERARY = 'airline_itinerary';
-    const TYPE_AIRLINE_UPDATE = 'airline_update';
-    const TYPE_BUTTON = 'button';
-    const TYPE_GENERIC = 'generic';
-    const TYPE_LIST = 'list';
-    const TYPE_RECEIPT = 'receipt';
-    const TYPE_OPEN_GRAPH = 'open_graph';
+    protected const TYPE_AIRLINE_BOARDINGPASS = 'airline_boardingpass';
+    protected const TYPE_AIRLINE_CHECKIN = 'airline_checkin';
+    protected const TYPE_AIRLINE_ITINERARY = 'airline_itinerary';
+    protected const TYPE_AIRLINE_UPDATE = 'airline_update';
+    protected const TYPE_BUTTON = 'button';
+    protected const TYPE_GENERIC = 'generic';
+    protected const TYPE_LIST = 'list';
+    protected const TYPE_RECEIPT = 'receipt';
+    protected const TYPE_OPEN_GRAPH = 'open_graph';
 
     /**
      * Template constructor.

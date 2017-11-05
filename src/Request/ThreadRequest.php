@@ -17,7 +17,7 @@ class ThreadRequest extends AbstractRequest
      * @param string                               $pageToken
      * @param \Kerox\Messenger\Model\ThreadControl $threadControl
      */
-    public function __construct($pageToken, ThreadControl $threadControl)
+    public function __construct(string $pageToken, ThreadControl $threadControl)
     {
         parent::__construct($pageToken);
 

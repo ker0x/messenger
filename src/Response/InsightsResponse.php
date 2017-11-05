@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class InsightsResponse extends AbstractResponse
 {
-    const DATA = 'data';
+    private const DATA = 'data';
 
     /**
      * @var \Kerox\Messenger\Model\Data[]
@@ -27,7 +27,7 @@ class InsightsResponse extends AbstractResponse
     /**
      * @param array $response
      */
-    protected function parseResponse(array $response)
+    protected function parseResponse(array $response): void
     {
         $this->setData($response);
     }
@@ -43,7 +43,7 @@ class InsightsResponse extends AbstractResponse
     /**
      * @param array $response
      */
-    private function setData(array $response)
+    private function setData(array $response): void
     {
         if (isset($response[self::DATA]) && !empty($response[self::DATA])) {
             foreach ($response[self::DATA] as $data) {

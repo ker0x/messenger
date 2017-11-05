@@ -4,5 +4,5 @@ namespace Kerox\Messenger\Model\ProfileSettings;
 
 interface ProfileSettingsInterface
 {
-    const DEFAULT_LOCALE = 'default';
+    public const DEFAULT_LOCALE = 'default';
 }

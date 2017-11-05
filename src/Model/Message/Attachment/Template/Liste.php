@@ -6,9 +6,9 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class Liste extends Template
 {
-    const TOP_ELEMENT_STYLE_LARGE = 'large';
+    public const TOP_ELEMENT_STYLE_LARGE = 'large';
 
-    const TOP_ELEMENT_STYLE_COMPACT = 'compact';
+    public const TOP_ELEMENT_STYLE_COMPACT = 'compact';
 
     /**
      * @var string
@@ -44,7 +44,7 @@ class Liste extends Template
      *
      * @return Liste
      */
-    public function setTopElementStyle(string $topElementStyle): Liste
+    public function setTopElementStyle(string $topElementStyle): self
     {
         $this->isValidTopElementStyle($topElementStyle);
 
@@ -58,7 +58,7 @@ class Liste extends Template
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Liste
      */
-    public function setButtons(array $buttons): Liste
+    public function setButtons(array $buttons): self
     {
         $this->isValidArray($buttons, 1);
 
@@ -76,7 +76,9 @@ class Liste extends Template
     {
         $allowedTopElementStyle = $this->getAllowedTopElementStyle();
         if (!in_array($topElementStyle, $allowedTopElementStyle, true)) {
-            throw new \InvalidArgumentException('$topElementStyle must be either ' . implode(', ', $allowedTopElementStyle));
+            throw new \InvalidArgumentException(
+                '$topElementStyle must be either ' . implode(', ', $allowedTopElementStyle)
+            );
         }
     }
 

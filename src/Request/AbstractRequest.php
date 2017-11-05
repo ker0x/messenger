@@ -30,7 +30,7 @@ abstract class AbstractRequest
     abstract protected function buildBody();
 
     /**
-     * @return mixed
+     * @return array
      */
     protected function buildQuery(): array
     {
