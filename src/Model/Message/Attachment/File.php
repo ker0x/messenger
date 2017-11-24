@@ -51,7 +51,7 @@ class File extends Attachment
      */
     private function isAttachmentId($value): bool
     {
-        return preg_match('/^[\d]+$/', $value);
+        return (bool) preg_match('/^[\d]+$/', $value);
     }
 
     /**

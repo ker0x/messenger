@@ -39,8 +39,10 @@ abstract class AbstractElement implements \JsonSerializable
 
     /**
      * @param mixed $subtitle
+     *
+     * @return mixed
      */
-    public function setSubtitle(string $subtitle): void
+    public function setSubtitle(string $subtitle)
     {
         $this->isValidString($subtitle, 80);
 
@@ -49,8 +51,10 @@ abstract class AbstractElement implements \JsonSerializable
 
     /**
      * @param mixed $imageUrl
+     *
+     * @return mixed
      */
-    public function setImageUrl(string $imageUrl): void
+    public function setImageUrl(string $imageUrl)
     {
         $this->isValidUrl($imageUrl);
 
