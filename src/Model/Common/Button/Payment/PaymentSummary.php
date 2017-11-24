@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Common\Button\Payment;
 
 class PaymentSummary implements \JsonSerializable
@@ -98,7 +100,7 @@ class PaymentSummary implements \JsonSerializable
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidPaymentType(string $paymentType)
+    private function isValidPaymentType(string $paymentType): void
     {
         $allowedPaymentType = $this->getAllowedPaymentType();
         if (!in_array($paymentType, $allowedPaymentType, true)) {

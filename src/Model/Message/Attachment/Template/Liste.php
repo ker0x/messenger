@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
@@ -72,7 +74,7 @@ class Liste extends Template
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidTopElementStyle(string $topElementStyle)
+    private function isValidTopElementStyle(string $topElementStyle): void
     {
         $allowedTopElementStyle = $this->getAllowedTopElementStyle();
         if (!in_array($topElementStyle, $allowedTopElementStyle, true)) {

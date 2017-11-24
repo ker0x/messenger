@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Response;
 
 use Kerox\Messenger\Model\Referral;

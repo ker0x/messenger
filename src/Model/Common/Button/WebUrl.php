@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Common\Button;
 
 class WebUrl extends AbstractButton
 {
-    const RATIO_TYPE_COMPACT = 'compact';
-    const RATIO_TYPE_TALL = 'tall';
-    const RATIO_TYPE_FULL = 'full';
+    public const RATIO_TYPE_COMPACT = 'compact';
+    public const RATIO_TYPE_TALL = 'tall';
+    public const RATIO_TYPE_FULL = 'full';
 
     /**
      * @var string

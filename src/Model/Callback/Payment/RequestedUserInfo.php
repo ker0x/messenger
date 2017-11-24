@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback\Payment;
 
 use Kerox\Messenger\Model\Common\Address;

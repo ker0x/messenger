@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -38,7 +40,7 @@ abstract class AbstractElement implements \JsonSerializable
     /**
      * @param mixed $subtitle
      */
-    public function setSubtitle(string $subtitle)
+    public function setSubtitle(string $subtitle): void
     {
         $this->isValidString($subtitle, 80);
 
@@ -48,7 +50,7 @@ abstract class AbstractElement implements \JsonSerializable
     /**
      * @param mixed $imageUrl
      */
-    public function setImageUrl(string $imageUrl)
+    public function setImageUrl(string $imageUrl): void
     {
         $this->isValidUrl($imageUrl);
 

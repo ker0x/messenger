@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\ProfileSettings;
 
 use Kerox\Messenger\Helper\UtilityTrait;

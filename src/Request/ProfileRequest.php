@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\ProfileSettings;
