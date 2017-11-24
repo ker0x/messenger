@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment;
 
 use Kerox\Messenger\Model\Message\Attachment;
@@ -28,7 +30,7 @@ class File extends Attachment
      * @param bool|null $reusable
      * @param string    $type
      */
-    public function __construct($url, bool $reusable = null, $type = Attachment::TYPE_FILE)
+    public function __construct($url, ?bool $reusable = null, $type = Attachment::TYPE_FILE)
     {
         parent::__construct($type);
 
@@ -49,7 +51,7 @@ class File extends Attachment
      */
     private function isAttachmentId($value): bool
     {
-        return preg_match('/^[\d]+$/', $value);
+        return (bool) preg_match('/^[\d]+$/', $value);
     }
 
     /**

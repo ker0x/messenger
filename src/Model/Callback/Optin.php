@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback;
 
 class Optin
@@ -32,7 +34,7 @@ class Optin
      *
      * @return \Kerox\Messenger\Model\Callback\Optin
      */
-    public static function create(array $callbackData): Optin
+    public static function create(array $callbackData): self
     {
         return new static($callbackData['ref']);
     }

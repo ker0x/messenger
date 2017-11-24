@@ -1,10 +1,14 @@
 language: php
 
-php:
-  - 7.0
-  - 7.1
-
 sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+php:
+  - 7.1
+  - 7.2
 
 env:
   global:
@@ -13,40 +17,24 @@ env:
 
 matrix:
   fast_finish: true
-
-  include:
-    - php: 7.0
-      env: PHPCS=1 DEFAULT=0
-
-    - php: 7.0
-      env: COVERALLS=1 DEFAULT=0
-
-    - php: 7.1
-      env: PHPCS=1 DEFAULT=0
-
-    - php: 7.1
-      env: COVERALLS=1 DEFAULT=0
+  allow_failures:
+      - php: 7.2
 
 before_install:
   - composer self-update
   - if [ "$GITHUB_COMPOSER_AUTH" ]; then composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH; fi
 
 install:
-  - composer install --prefer-dist --no-interaction --dev
+  - composer install --prefer-dist --no-interaction
 
 before_script:
-  - sh -c "if [ '$PHPCS' = '1' ]; then composer require squizlabs/php_codesniffer:dev-master; fi"
-  - sh -c "if [ '$PHPCS' = '1' ]; then composer require friendsofphp/php-cs-fixer:2.2; fi"
-
-  - sh -c "if [ '$COVERALLS' = '1' ]; then composer require --dev satooshi/php-coveralls:dev-master; fi"
-  - sh -c "if [ '$COVERALLS' = '1' ]; then mkdir -p build/logs; fi"
+  - mkdir -p build/logs
 
 script:
-  - sh -c "if [ '$COVERALLS' = '1' ]; then vendor/bin/phpunit --stderr --coverage-clover build/logs/clover.xml; fi"
-  - sh -c "if [ '$COVERALLS' = '1' ]; then php vendor/bin/coveralls -v; fi"
-  - sh -c "if [ '$DEFAULT' = '1' ]; then vendor/bin/phpunit --stderr; fi"
-  - sh -c "if [ '$PHPCS' = '1' ]; then vendor/bin/phpcs -s --config-set ignore_warnings_on_exit 1; fi"
-  - sh -c "if [ '$PHPCS' = '1' ]; then vendor/bin/php-cs-fixer fix --diff --dry-run; fi"
+  - vendor/bin/php-cs-fixer fix --diff --dry-run
+  - vendor/bin/phpcs -s --config-set ignore_warnings_on_exit 1
+  - vendor/bin/phpunit --stderr --coverage-clover build/logs/clover.xml
+  - vendor/bin/coveralls -v
 
 notifications:
   email: false

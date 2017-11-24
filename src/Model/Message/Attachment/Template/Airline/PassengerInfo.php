@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 class PassengerInfo implements \JsonSerializable
@@ -36,7 +38,7 @@ class PassengerInfo implements \JsonSerializable
      *
      * @return PassengerInfo
      */
-    public function setTicketNumber(string $ticketNumber): PassengerInfo
+    public function setTicketNumber(string $ticketNumber): self
     {
         $this->ticketNumber = $ticketNumber;
 

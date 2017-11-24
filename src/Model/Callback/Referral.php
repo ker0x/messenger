@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback;
 
 class Referral
@@ -62,7 +64,7 @@ class Referral
      *
      * @return \Kerox\Messenger\Model\Callback\Referral
      */
-    public static function create(array $callbackData): Referral
+    public static function create(array $callbackData): self
     {
         return new static($callbackData['ref'], $callbackData['source'], $callbackData['type']);
     }

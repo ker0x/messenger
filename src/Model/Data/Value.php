@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Data;
 
 class Value
@@ -17,8 +19,8 @@ class Value
     /**
      * Value constructor.
      *
-     * @param int    $value
-     * @param string $endTime
+     * @param int|array $value
+     * @param string    $endTime
      */
     public function __construct($value, string $endTime)
     {

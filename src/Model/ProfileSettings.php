@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -50,7 +52,7 @@ class ProfileSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
-    public function addPersistentMenus(array $persistentMenus): ProfileSettings
+    public function addPersistentMenus(array $persistentMenus): self
     {
         $this->persistentMenus = $persistentMenus;
 
@@ -64,7 +66,7 @@ class ProfileSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
-    public function addStartButton(string $payload): ProfileSettings
+    public function addStartButton(string $payload): self
     {
         $this->isValidString($payload, 1000);
 
@@ -80,7 +82,7 @@ class ProfileSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
-    public function addGreetings(array $greetings): ProfileSettings
+    public function addGreetings(array $greetings): self
     {
         $this->greetings = $greetings;
 
@@ -92,7 +94,7 @@ class ProfileSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
-    public function addWhitelistedDomains(array $whitelistedDomains): ProfileSettings
+    public function addWhitelistedDomains(array $whitelistedDomains): self
     {
         $this->isValidDomains($whitelistedDomains);
 
@@ -106,7 +108,7 @@ class ProfileSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
-    public function addAccountLinkingUrl(string $accountLinkingUrl): ProfileSettings
+    public function addAccountLinkingUrl(string $accountLinkingUrl): self
     {
         $this->isValidUrl($accountLinkingUrl);
 
@@ -120,7 +122,7 @@ class ProfileSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
-    public function addPaymentSettings(PaymentSettings $paymentSettings): ProfileSettings
+    public function addPaymentSettings(PaymentSettings $paymentSettings): self
     {
         $this->paymentSettings = $paymentSettings;
 
@@ -132,7 +134,7 @@ class ProfileSettings implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
-    public function addTargetAudience(TargetAudience $targetAudience): ProfileSettings
+    public function addTargetAudience(TargetAudience $targetAudience): self
     {
         $this->targetAudience = $targetAudience;
 
@@ -142,7 +144,7 @@ class ProfileSettings implements \JsonSerializable
     /**
      * @param array $domains
      */
-    private function isValidDomains(array $domains)
+    private function isValidDomains(array $domains): void
     {
         $this->isValidArray($domains, 10);
 

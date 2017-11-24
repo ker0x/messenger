@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger;
 
 interface ProfileInterface
 {
-    const PERSISTENT_MENU = 'persistent_menu';
-    const GET_STARTED = 'get_started';
-    const GREETING = 'greeting';
-    const DOMAIN_WHITELISTING = 'whitelisted_domains';
-    const ACCOUNT_LINKING_URL = 'account_linking_url';
-    const PAYMENT_SETTINGS = 'payment_settings';
-    const TARGET_AUDIENCE = 'target_audience';
+    public const PERSISTENT_MENU = 'persistent_menu';
+    public const GET_STARTED = 'get_started';
+    public const GREETING = 'greeting';
+    public const DOMAIN_WHITELISTING = 'whitelisted_domains';
+    public const ACCOUNT_LINKING_URL = 'account_linking_url';
+    public const PAYMENT_SETTINGS = 'payment_settings';
+    public const TARGET_AUDIENCE = 'target_audience';
 }

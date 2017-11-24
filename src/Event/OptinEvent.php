@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Optin;
 
 class OptinEvent extends AbstractEvent
 {
-    const NAME = 'optin';
+    public const NAME = 'optin';
 
     /**
      * @var int
@@ -63,7 +65,7 @@ class OptinEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\OptinEvent
      */
-    public static function create(array $payload): OptinEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model;
 
 use Kerox\Messenger\Model\Data\Value;
@@ -66,7 +68,7 @@ class Data
     /**
      * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -74,7 +76,7 @@ class Data
     /**
      * @return null|string
      */
-    public function getPeriod()
+    public function getPeriod(): ?string
     {
         return $this->period;
     }
@@ -92,7 +94,7 @@ class Data
      *
      * @return \Kerox\Messenger\Model\Data
      */
-    public function setValues(array $data): Data
+    public function setValues(array $data): self
     {
         if (isset($data['values']) && !empty($data['values'])) {
             foreach ($data['values'] as $value) {
@@ -106,7 +108,7 @@ class Data
     /**
      * @return null|string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -114,7 +116,7 @@ class Data
     /**
      * @return null|string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -122,7 +124,7 @@ class Data
     /**
      * @return null|string
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -130,7 +132,7 @@ class Data
     /**
      * @return null|string
      */
-    public function getTag(): string
+    public function getTag(): ?string
     {
         return $this->tag;
     }
@@ -140,7 +142,7 @@ class Data
      *
      * @return \Kerox\Messenger\Model\Data
      */
-    public static function create(array $data): Data
+    public static function create(array $data): self
     {
         return new static($data);
     }

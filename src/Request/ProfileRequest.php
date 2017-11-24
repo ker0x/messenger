@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\ProfileSettings;
@@ -27,7 +29,7 @@ class ProfileRequest extends AbstractRequest
     /**
      * @return null|array
      */
-    protected function buildHeaders()
+    protected function buildHeaders(): ?array
     {
         $headers = [
             'Content-Type' => 'application/json',

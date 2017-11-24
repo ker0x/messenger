@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback\Payment;
 
 use Kerox\Messenger\Model\Common\Address;
@@ -17,12 +19,12 @@ class RequestedUserInfo
     protected $contactName;
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $contactEmail;
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $contactPhone;
 
@@ -34,8 +36,12 @@ class RequestedUserInfo
      * @param null|string                           $contactEmail
      * @param null|string                           $contactPhone
      */
-    public function __construct(Address $shippingAddress, string $contactName, $contactEmail = null, $contactPhone = null)
-    {
+    public function __construct(
+        Address $shippingAddress,
+        string $contactName,
+        ?string $contactEmail = null,
+        ?string $contactPhone = null
+    ) {
         $this->shippingAddress = $shippingAddress;
         $this->contactName = $contactName;
         $this->contactEmail = $contactEmail;
@@ -61,7 +67,7 @@ class RequestedUserInfo
     /**
      * @return null|string
      */
-    public function getContactEmail(): string
+    public function getContactEmail(): ?string
     {
         return $this->contactEmail;
     }
@@ -69,7 +75,7 @@ class RequestedUserInfo
     /**
      * @return null|string
      */
-    public function getContactPhone(): string
+    public function getContactPhone(): ?string
     {
         return $this->contactPhone;
     }
@@ -79,7 +85,7 @@ class RequestedUserInfo
      *
      * @return \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo
      */
-    public static function create(array $callbackData): RequestedUserInfo
+    public static function create(array $callbackData): self
     {
         $shippingAddress = Address::create($callbackData['shipping_address']);
 

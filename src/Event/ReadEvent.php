@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Read;
 
 class ReadEvent extends AbstractEvent
 {
-    const NAME = 'read';
+    public const NAME = 'read';
 
     /**
      * @var int
@@ -63,7 +65,7 @@ class ReadEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\ReadEvent
      */
-    public static function create(array $payload): ReadEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

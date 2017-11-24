@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 
 class CheckoutUpdateEvent extends AbstractEvent
 {
-    const NAME = 'checkout_update';
+    public const NAME = 'checkout_update';
 
     /**
      * @var int
@@ -63,7 +65,7 @@ class CheckoutUpdateEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\CheckoutUpdateEvent
      */
-    public static function create(array $payload): CheckoutUpdateEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

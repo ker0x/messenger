@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -38,7 +40,7 @@ abstract class AbstractAirline extends Template
      *
      * @return AbstractAirline
      */
-    public function setThemeColor(string $themeColor): AbstractAirline
+    public function setThemeColor(string $themeColor): self
     {
         $this->isValidColor($themeColor);
 

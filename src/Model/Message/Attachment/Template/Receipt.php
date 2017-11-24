@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Common\Address;
@@ -93,7 +95,7 @@ class Receipt extends Template
      *
      * @return Receipt
      */
-    public function setTimestamp(string $timestamp): Receipt
+    public function setTimestamp(string $timestamp): self
     {
         $this->timestamp = $timestamp;
 
@@ -105,7 +107,7 @@ class Receipt extends Template
      *
      * @return Receipt
      */
-    public function setOrderUrl(string $orderUrl): Receipt
+    public function setOrderUrl(string $orderUrl): self
     {
         $this->isValidUrl($orderUrl);
 
@@ -119,7 +121,7 @@ class Receipt extends Template
      *
      * @return Receipt
      */
-    public function setAddress(Address $address): Receipt
+    public function setAddress(Address $address): self
     {
         $this->address = $address;
 
@@ -131,7 +133,7 @@ class Receipt extends Template
      *
      * @return Receipt
      */
-    public function setAdjustments(array $adjustments): Receipt
+    public function setAdjustments(array $adjustments): self
     {
         $this->adjustments = $adjustments;
 

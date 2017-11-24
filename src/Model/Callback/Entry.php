@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback;
 
 use Kerox\Messenger\Event\EventFactory;
 
 class Entry
 {
-    const CHANNELS = [
+    private const CHANNELS = [
         'messaging',
-        'standby'
+        'standby',
     ];
 
     /**
@@ -69,7 +71,7 @@ class Entry
      *
      * @return \Kerox\Messenger\Model\Callback\Entry
      */
-    public static function create(array $entry): Entry
+    public static function create(array $entry): self
     {
         $events = [];
 

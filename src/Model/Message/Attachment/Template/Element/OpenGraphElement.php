@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -36,7 +38,7 @@ class OpenGraphElement implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement
      */
-    public function setButtons(array $buttons): OpenGraphElement
+    public function setButtons(array $buttons): self
     {
         $this->isValidArray($buttons, 1);
         $this->isValidButtons($buttons, $this->getAllowedButtonsType());

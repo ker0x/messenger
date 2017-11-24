@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -57,7 +59,7 @@ class PassengerSegmentInfo implements \JsonSerializable
      *
      * @internal param array $productInfo
      */
-    public function addProductInfo(string $title, string $value): PassengerSegmentInfo
+    public function addProductInfo(string $title, string $value): self
     {
         $this->isValidArray($this->productInfo, 4);
 

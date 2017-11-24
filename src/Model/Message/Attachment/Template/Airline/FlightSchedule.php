@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -40,7 +42,7 @@ class FlightSchedule implements \JsonSerializable
      *
      * @return FlightSchedule
      */
-    public function setBoardingTime(string $boardingTime): FlightSchedule
+    public function setBoardingTime(string $boardingTime): self
     {
         $this->isValidDateTime($boardingTime);
 
@@ -54,7 +56,7 @@ class FlightSchedule implements \JsonSerializable
      *
      * @return FlightSchedule
      */
-    public function setArrivalTime(string $arrivalTime): FlightSchedule
+    public function setArrivalTime(string $arrivalTime): self
     {
         $this->isValidDateTime($arrivalTime);
 

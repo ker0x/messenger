@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
@@ -44,7 +46,7 @@ class Button extends Template
                 'template_type' => Template::TYPE_BUTTON,
                 'text'          => $this->text,
                 'buttons'       => $this->buttons,
-            ]
+            ],
         ];
 
         return $this->arrayFilter($json);

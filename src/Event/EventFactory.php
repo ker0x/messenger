@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 class EventFactory
 {
-    const EVENTS = [
+    public const EVENTS = [
         'message'             => MessageEvent::class,
         'postback'            => PostbackEvent::class,
         'optin'               => OptinEvent::class,

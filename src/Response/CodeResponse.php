@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Response;
 
 use Psr\Http\Message\ResponseInterface;
 
 class CodeResponse extends AbstractResponse
 {
-    const URI = 'uri';
+    private const URI = 'uri';
 
     /**
      * @var null|string
@@ -26,7 +28,7 @@ class CodeResponse extends AbstractResponse
     /**
      * @param array $response
      */
-    protected function parseResponse(array $response)
+    protected function parseResponse(array $response): void
     {
         $this->uri = $response[self::URI] ?? null;
     }
@@ -34,7 +36,7 @@ class CodeResponse extends AbstractResponse
     /**
      * @return null|string
      */
-    public function getUri()
+    public function getUri(): ?string
     {
         return $this->uri;
     }

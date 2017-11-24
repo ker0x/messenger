@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Request;
 
 class InsightsRequest extends AbstractRequest
@@ -9,16 +11,16 @@ class InsightsRequest extends AbstractRequest
      *
      * @param string $pageToken
      */
-    public function __construct($pageToken)
+    public function __construct(string $pageToken)
     {
         parent::__construct($pageToken);
     }
 
-    protected function buildHeaders()
+    protected function buildHeaders(): void
     {
     }
 
-    protected function buildBody()
+    protected function buildBody(): void
     {
     }
 

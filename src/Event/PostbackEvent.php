@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Postback;
 
 class PostbackEvent extends AbstractEvent
 {
-    const NAME = 'postback';
+    public const NAME = 'postback';
 
     /**
      * @var int
@@ -63,7 +65,7 @@ class PostbackEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\PostbackEvent
      */
-    public static function create(array $payload): PostbackEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

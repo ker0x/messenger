@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Request;
 
 abstract class AbstractRequest
@@ -30,7 +32,7 @@ abstract class AbstractRequest
     abstract protected function buildBody();
 
     /**
-     * @return mixed
+     * @return array
      */
     protected function buildQuery(): array
     {

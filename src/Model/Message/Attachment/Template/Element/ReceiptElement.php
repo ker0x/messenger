@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 class ReceiptElement extends AbstractElement
@@ -37,7 +39,7 @@ class ReceiptElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
-    public function setSubtitle(string $subtitle): ReceiptElement
+    public function setSubtitle(string $subtitle): self
     {
         parent::setSubtitle($subtitle);
 
@@ -49,7 +51,7 @@ class ReceiptElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
-    public function setImageUrl(string $imageUrl): ReceiptElement
+    public function setImageUrl(string $imageUrl): self
     {
         parent::setImageUrl($imageUrl);
 
@@ -61,7 +63,7 @@ class ReceiptElement extends AbstractElement
      *
      * @return ReceiptElement
      */
-    public function setQuantity(int $quantity): ReceiptElement
+    public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
 
@@ -73,7 +75,7 @@ class ReceiptElement extends AbstractElement
      *
      * @return ReceiptElement
      */
-    public function setCurrency(string $currency): ReceiptElement
+    public function setCurrency(string $currency): self
     {
         $this->isValidCurrency($currency);
 

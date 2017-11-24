@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Common\Button;
 
 class Nested extends AbstractButton
@@ -37,7 +39,7 @@ class Nested extends AbstractButton
      *
      * @return \Kerox\Messenger\Model\Common\Button\Nested
      */
-    public function addButton(AbstractButton $button): Nested
+    public function addButton(AbstractButton $button): self
     {
         $this->isValidButtons([$button], $this->getAllowedButtonsType());
 

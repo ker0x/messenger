@@ -8,11 +8,13 @@ return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
+        '@PHP71Migration' => true,
         'binary_operator_spaces' => array(
             'align_equals' => false,
             'align_double_arrow' => true,
         ),
         '@Symfony:risky' => true,
+        '@PHP71Migration:risky' => true,
         'array_syntax' => ['syntax' => 'short'],
         'linebreak_after_opening_tag' => true,
         'mb_str_functions' => true,
@@ -27,7 +29,8 @@ return PhpCsFixer\Config::create()
         'strict_comparison' => true,
         'strict_param' => true,
         'concat_space' => ['spacing' => 'one'],
-        'trailing_comma_in_multiline_array' => false
+        'trailing_comma_in_multiline_array' => true,
+        'yoda_style' => false
     ])
     ->setFinder($finder)
     ->setCacheFile(__DIR__.'/.php_cs.cache');
