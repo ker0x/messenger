@@ -132,7 +132,7 @@ class PaymentSummary implements \JsonSerializable
         foreach ($requestedUserInfo as $userInfo) {
             if (!in_array($userInfo, $allowedUserInfo, true)) {
                 throw new \InvalidArgumentException(
-                    "$userInfo is not a valid value. Valid values are " . implode(',', $allowedUserInfo)
+                    "$userInfo is not a valid value. Valid values are " . implode(', ', $allowedUserInfo)
                 );
             }
         }
