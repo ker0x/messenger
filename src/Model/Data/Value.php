@@ -43,6 +43,11 @@ class Value
      */
     public function getEndTime(bool $asDateTime = true)
     {
-        return ($asDateTime) ? \DateTime::createFromFormat(\DateTime::ISO8601, $this->endTime) : $this->endTime;
+        $endTime = \DateTime::createFromFormat(\DateTime::ISO8601, $this->endTime);
+        if ($asDateTime && $endTime instanceof \DateTime) {
+            return $endTime;
+        }
+
+        return $this->endTime;
     }
 }

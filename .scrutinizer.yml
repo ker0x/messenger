@@ -11,7 +11,7 @@ filter:
         - "tests/"
     dependency_paths:
         - "vendor/"
-        
+
 tools:
     php_mess_detector: true
     php_cpd:
