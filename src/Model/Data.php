@@ -39,7 +39,7 @@ class Data
     protected $id;
 
     /**
-     * @var null|srting
+     * @var null|string
      */
     protected $tag;
 
