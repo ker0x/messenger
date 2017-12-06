@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Response;
 
 use Psr\Http\Message\ResponseInterface;
@@ -30,15 +32,13 @@ abstract class AbstractResponse
      */
     private function decodeResponse(ResponseInterface $response): array
     {
-        return json_decode($response->getBody(), true);
+        return json_decode($response->getBody()->__toString(), true);
     }
 
     /**
      * @param array $response
-     *
-     * @return mixed
      */
-    abstract protected function parseResponse(array $response);
+    abstract protected function parseResponse(array $response): void;
 
     /**
      * @return \Psr\Http\Message\ResponseInterface

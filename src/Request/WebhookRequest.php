@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Request;
 
 class WebhookRequest extends AbstractRequest
@@ -14,11 +16,11 @@ class WebhookRequest extends AbstractRequest
         parent::__construct($pageToken);
     }
 
-    protected function buildHeaders()
+    protected function buildHeaders(): void
     {
     }
 
-    protected function buildBody()
+    protected function buildBody(): void
     {
     }
 

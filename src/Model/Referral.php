@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model;
 
 class Referral
@@ -65,7 +67,7 @@ class Referral
     /**
      * @return null|string
      */
-    public function getRef()
+    public function getRef(): ?string
     {
         return $this->ref;
     }
@@ -75,7 +77,7 @@ class Referral
      *
      * @return \Kerox\Messenger\Model\Referral
      */
-    public function setRef(string $ref): Referral
+    public function setRef(string $ref): self
     {
         $this->ref = $ref;
 
@@ -87,7 +89,7 @@ class Referral
      *
      * @return \Kerox\Messenger\Model\Referral
      */
-    public static function create(array $referral): Referral
+    public static function create(array $referral): self
     {
         $self = new static($referral['source'], $referral['type'], $referral['ad_id']);
         if (isset($referral['ref'])) {

@@ -33,4 +33,23 @@ class PaymentSummaryTest extends AbstractTestCase
             $priceList
         );
     }
+
+    public function testRequestedUserInfo()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('billing_address is not a valid value. Valid values are shipping_address, contact_name, contact_phone, contact_email');
+
+        $priceList = [
+            new PriceList('Subtotal', '29.99'),
+            new PriceList('Taxes', '2.47'),
+        ];
+
+        $paymentSummary = new PaymentSummary(
+            'USD',
+            PaymentSummary::PAYMENT_TYPE_FIXED_AMOUNT,
+            'Peter\'s Apparel',
+            ['billing_address'],
+            $priceList
+        );
+    }
 }

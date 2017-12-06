@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\PassThreadControl;
 
 class PassThreadControlEvent extends AbstractEvent
 {
-    const NAME = 'pass_thread_control';
+    public const NAME = 'pass_thread_control';
 
     /**
      * @var int
@@ -63,7 +65,7 @@ class PassThreadControlEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\PassThreadControlEvent
      */
-    public static function create(array $payload): PassThreadControlEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

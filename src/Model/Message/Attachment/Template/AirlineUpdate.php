@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
@@ -7,9 +9,9 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 
 class AirlineUpdate extends AbstractAirline
 {
-    const UPDATE_TYPE_DELAY = 'delay';
-    const UPDATE_TYPE_GATE_CHANGE = 'gate_change';
-    const UPDATE_TYPE_CANCELLATION = 'cancellation';
+    public const UPDATE_TYPE_DELAY = 'delay';
+    public const UPDATE_TYPE_GATE_CHANGE = 'gate_change';
+    public const UPDATE_TYPE_CANCELLATION = 'cancellation';
 
     /**
      * @var null|string
@@ -55,7 +57,7 @@ class AirlineUpdate extends AbstractAirline
      *
      * @return AirlineUpdate
      */
-    public function setIntroMessage($introMessage): AirlineUpdate
+    public function setIntroMessage($introMessage): self
     {
         $this->introMessage = $introMessage;
 
@@ -67,7 +69,7 @@ class AirlineUpdate extends AbstractAirline
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidUpdateType(string $updateType)
+    private function isValidUpdateType(string $updateType): void
     {
         $allowedUpdateType = $this->getAllowedUpdateType();
         if (!in_array($updateType, $allowedUpdateType, true)) {

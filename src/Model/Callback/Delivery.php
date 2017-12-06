@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback;
 
 class Delivery
@@ -62,7 +64,7 @@ class Delivery
      *
      * @return \Kerox\Messenger\Model\Callback\Delivery
      */
-    public static function create(array $callbackData): Delivery
+    public static function create(array $callbackData): self
     {
         $messageIds = $callbackData['mids'] ?? [];
 

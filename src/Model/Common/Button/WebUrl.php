@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Common\Button;
 
 class WebUrl extends AbstractButton
 {
-    const RATIO_TYPE_COMPACT = 'compact';
-    const RATIO_TYPE_TALL = 'tall';
-    const RATIO_TYPE_FULL = 'full';
+    public const RATIO_TYPE_COMPACT = 'compact';
+    public const RATIO_TYPE_TALL = 'tall';
+    public const RATIO_TYPE_FULL = 'full';
 
     /**
      * @var string
@@ -60,7 +62,7 @@ class WebUrl extends AbstractButton
      *
      * @return WebUrl
      */
-    public function setWebviewHeightRatio(string $webviewHeightRatio): WebUrl
+    public function setWebviewHeightRatio(string $webviewHeightRatio): self
     {
         $this->isValidWebviewHeightRatio($webviewHeightRatio);
 
@@ -74,7 +76,7 @@ class WebUrl extends AbstractButton
      *
      * @return WebUrl
      */
-    public function setMessengerExtension(bool $messengerExtension): WebUrl
+    public function setMessengerExtension(bool $messengerExtension): self
     {
         $this->messengerExtension = $messengerExtension;
 
@@ -86,7 +88,7 @@ class WebUrl extends AbstractButton
      *
      * @return WebUrl
      */
-    public function setFallbackUrl(string $fallbackUrl): WebUrl
+    public function setFallbackUrl(string $fallbackUrl): self
     {
         $this->isValidUrl($fallbackUrl);
 
@@ -95,7 +97,7 @@ class WebUrl extends AbstractButton
         return $this;
     }
 
-    public function setWebviewShareButton(bool $webviewShareButton): WebUrl
+    public function setWebviewShareButton(bool $webviewShareButton): self
     {
         if (!$webviewShareButton) {
             $this->webviewShareButton = 'hide';
@@ -109,11 +111,13 @@ class WebUrl extends AbstractButton
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidWebviewHeightRatio(string $webviewHeightRatio)
+    private function isValidWebviewHeightRatio(string $webviewHeightRatio): void
     {
         $allowedRatioType = $this->getAllowedRatioType();
         if (!in_array($webviewHeightRatio, $allowedRatioType, true)) {
-            throw new \InvalidArgumentException('$webviewHeightRatio must be either ' . implode(', ', $allowedRatioType));
+            throw new \InvalidArgumentException(
+                '$webviewHeightRatio must be either ' . implode(', ', $allowedRatioType)
+            );
         }
     }
 

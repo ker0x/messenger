@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Api;
 
 use GuzzleHttp\ClientInterface;
@@ -30,7 +32,7 @@ class Insights extends AbstractApi
      *
      * @return \Kerox\Messenger\Api\Insights
      */
-    public static function getInstance(string $pageToken, ClientInterface $client): Insights
+    public static function getInstance(string $pageToken, ClientInterface $client): self
     {
         if (self::$_instance === null) {
             self::$_instance = new self($pageToken, $client);

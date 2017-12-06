@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 use Kerox\Messenger\Model\Common\Button\WebUrl;
@@ -31,7 +33,7 @@ class GenericElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
-    public function setSubtitle(string $subtitle): GenericElement
+    public function setSubtitle(string $subtitle): self
     {
         parent::setSubtitle($subtitle);
 
@@ -43,7 +45,7 @@ class GenericElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
-    public function setImageUrl(string $imageUrl): GenericElement
+    public function setImageUrl(string $imageUrl): self
     {
         parent::setImageUrl($imageUrl);
 
@@ -55,7 +57,7 @@ class GenericElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
-    public function setDefaultAction(WebUrl $defaultAction): GenericElement
+    public function setDefaultAction(WebUrl $defaultAction): self
     {
         $this->defaultAction = $defaultAction;
 
@@ -67,7 +69,7 @@ class GenericElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
-    public function setButtons(array $buttons): GenericElement
+    public function setButtons(array $buttons): self
     {
         $this->isValidArray($buttons, 3);
 

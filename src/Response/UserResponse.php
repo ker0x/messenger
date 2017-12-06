@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Response;
 
 use Kerox\Messenger\Model\Referral;
@@ -61,16 +63,16 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @param array $response
      */
-    protected function parseResponse(array $response)
+    protected function parseResponse(array $response): void
     {
-        $this->firstName = $response[self::FIRST_NAME] ?? null;
-        $this->lastName = $response[self::LAST_NAME] ?? null;
-        $this->profilePic = $response[self::PROFILE_PIC] ?? null;
-        $this->profilePic = $response[self::PROFILE_PIC] ?? null;
-        $this->locale = $response[self::LOCALE] ?? null;
-        $this->timezone = $response[self::TIMEZONE] ?? null;
-        $this->gender = $response[self::GENDER] ?? null;
-        $this->paymentEnabled = $response[self::IS_PAYMENT_ENABLED] ?? null;
+        $this->firstName = $response[UserInterface::FIRST_NAME] ?? null;
+        $this->lastName = $response[UserInterface::LAST_NAME] ?? null;
+        $this->profilePic = $response[UserInterface::PROFILE_PIC] ?? null;
+        $this->profilePic = $response[UserInterface::PROFILE_PIC] ?? null;
+        $this->locale = $response[UserInterface::LOCALE] ?? null;
+        $this->timezone = $response[UserInterface::TIMEZONE] ?? null;
+        $this->gender = $response[UserInterface::GENDER] ?? null;
+        $this->paymentEnabled = $response[UserInterface::IS_PAYMENT_ENABLED] ?? null;
 
         $this->setLastAdReferral($response);
     }
@@ -78,7 +80,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @return null|string
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
@@ -86,7 +88,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @return null|string
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
@@ -94,7 +96,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @return null|string
      */
-    public function getProfilePic()
+    public function getProfilePic(): ?string
     {
         return $this->profilePic;
     }
@@ -102,7 +104,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @return null|string
      */
-    public function getLocale()
+    public function getLocale(): ?string
     {
         return $this->locale;
     }
@@ -110,7 +112,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @return null|int
      */
-    public function getTimezone()
+    public function getTimezone(): ?int
     {
         return $this->timezone;
     }
@@ -118,7 +120,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @return null|string
      */
-    public function getGender()
+    public function getGender(): ?string
     {
         return $this->gender;
     }
@@ -126,7 +128,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @return null|bool
      */
-    public function isPaymentEnabled()
+    public function isPaymentEnabled(): ?bool
     {
         return $this->paymentEnabled;
     }
@@ -134,7 +136,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @return null|\Kerox\Messenger\Model\Referral
      */
-    public function getLastAdReferral()
+    public function getLastAdReferral(): ?Referral
     {
         return $this->lastAdReferral;
     }
@@ -142,10 +144,10 @@ class UserResponse extends AbstractResponse implements UserInterface
     /**
      * @param array $response
      */
-    private function setLastAdReferral(array $response)
+    private function setLastAdReferral(array $response): void
     {
-        if (isset($response[self::LAST_AD_REFERRAL])) {
-            $this->lastAdReferral = Referral::create($response[self::LAST_AD_REFERRAL]);
+        if (isset($response[UserInterface::LAST_AD_REFERRAL])) {
+            $this->lastAdReferral = Referral::create($response[UserInterface::LAST_AD_REFERRAL]);
         }
     }
 }

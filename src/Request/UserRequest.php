@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Request;
 
 class UserRequest extends AbstractRequest
@@ -22,11 +24,11 @@ class UserRequest extends AbstractRequest
         $this->fields = $fields;
     }
 
-    protected function buildHeaders()
+    protected function buildHeaders(): void
     {
     }
 
-    protected function buildBody()
+    protected function buildBody(): void
     {
     }
 

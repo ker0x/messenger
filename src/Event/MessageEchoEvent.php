@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\MessageEcho;
 
 class MessageEchoEvent extends AbstractEvent
 {
-    const NAME = 'message_echo';
+    public const NAME = 'message_echo';
 
     /**
      * @var int
@@ -63,7 +65,7 @@ class MessageEchoEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\MessageEchoEvent
      */
-    public static function create(array $payload): MessageEchoEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

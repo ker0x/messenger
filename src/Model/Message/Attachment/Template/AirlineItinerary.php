@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
@@ -98,7 +100,7 @@ class AirlineItinerary extends AbstractAirline
      *
      * @internal param array|null $priceInfo
      */
-    public function addPriceInfo(string $title, string $amount, string $currency = null): AirlineItinerary
+    public function addPriceInfo(string $title, string $amount, ?string $currency = null): self
     {
         if ($currency !== null) {
             $this->isValidCurrency($currency);
@@ -122,7 +124,7 @@ class AirlineItinerary extends AbstractAirline
      *
      * @return AirlineItinerary
      */
-    public function setBasePrice(string $basePrice): AirlineItinerary
+    public function setBasePrice(string $basePrice): self
     {
         $this->basePrice = $basePrice;
 
@@ -134,7 +136,7 @@ class AirlineItinerary extends AbstractAirline
      *
      * @return AirlineItinerary
      */
-    public function setTax(string $tax): AirlineItinerary
+    public function setTax(string $tax): self
     {
         $this->tax = $tax;
 

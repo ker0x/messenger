@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback;
 
 use Kerox\Messenger\Model\Common\Address;
@@ -49,7 +51,7 @@ class CheckoutUpdate
      *
      * @return \Kerox\Messenger\Model\Callback\CheckoutUpdate
      */
-    public static function create(array $callbackData): CheckoutUpdate
+    public static function create(array $callbackData): self
     {
         $shippingAddress = Address::create($callbackData['shipping_address']);
 

@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Response;
 
 use Psr\Http\Message\ResponseInterface;
 
 class ThreadResponse extends AbstractResponse
 {
-    const SUCCESS = 'success';
+    private const SUCCESS = 'success';
 
     /**
-     * @var null|bool
+     * @var bool
      */
     protected $success;
 
@@ -26,13 +28,13 @@ class ThreadResponse extends AbstractResponse
     /**
      * @param array $response
      */
-    protected function parseResponse(array $response)
+    protected function parseResponse(array $response): void
     {
-        $this->success = $response[self::SUCCESS] ?? null;
+        $this->success = $response[self::SUCCESS] ?? false;
     }
 
     /**
-     * @return null|bool
+     * @return bool
      */
     public function isSuccess(): bool
     {

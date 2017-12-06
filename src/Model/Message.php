@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -10,8 +12,8 @@ class Message implements \JsonSerializable
 {
     use ValidatorTrait;
 
-    const TYPE_TEXT = 'text';
-    const TYPE_ATTACHMENT = 'attachment';
+    private const TYPE_TEXT = 'text';
+    private const TYPE_ATTACHMENT = 'attachment';
 
     /**
      * @var string
@@ -59,7 +61,7 @@ class Message implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message
      */
-    public function setQuickReplies(array $quickReplies): Message
+    public function setQuickReplies(array $quickReplies): self
     {
         $this->isValidQuickReplies($quickReplies);
 
@@ -73,7 +75,7 @@ class Message implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message
      */
-    public function addQuickReply(QuickReply $quickReply): Message
+    public function addQuickReply(QuickReply $quickReply): self
     {
         $this->quickReplies[] = $quickReply;
 
@@ -85,7 +87,7 @@ class Message implements \JsonSerializable
      *
      * @return Message
      */
-    public function setMetadata(string $metadata): Message
+    public function setMetadata(string $metadata): self
     {
         $this->isValidString($metadata, 1000);
 
@@ -99,7 +101,7 @@ class Message implements \JsonSerializable
      *
      * @throws \InvalidArgumentException
      */
-    private function isValidQuickReplies(array $quickReplies)
+    private function isValidQuickReplies(array $quickReplies): void
     {
         $this->isValidArray($quickReplies, 11, 1);
         foreach ($quickReplies as $quickReply) {

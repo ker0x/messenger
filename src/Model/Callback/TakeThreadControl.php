@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback;
 
 class TakeThreadControl
@@ -47,7 +49,7 @@ class TakeThreadControl
      *
      * @return \Kerox\Messenger\Model\Callback\TakeThreadControl
      */
-    public static function create(array $callbackData): TakeThreadControl
+    public static function create(array $callbackData): self
     {
         return new static($callbackData['previous_owner_app_id'], $callbackData['metadata']);
     }

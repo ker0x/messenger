@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Response;
 
 use Psr\Http\Message\ResponseInterface;
 
 class ProfileResponse extends AbstractResponse
 {
-    const RESULT = 'result';
+    private const RESULT = 'result';
 
     /**
      * @var null|string
@@ -26,7 +28,7 @@ class ProfileResponse extends AbstractResponse
     /**
      * @param array $response
      */
-    protected function parseResponse(array $response)
+    protected function parseResponse(array $response): void
     {
         $this->result = $response[self::RESULT] ?? null;
     }
@@ -34,7 +36,7 @@ class ProfileResponse extends AbstractResponse
     /**
      * @return null|string
      */
-    public function getResult()
+    public function getResult(): ?string
     {
         return $this->result;
     }

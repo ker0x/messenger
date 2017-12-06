@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 interface TravelClassInterface
 {
-    const ECONOMY = 'economy';
-    const BUSINESS = 'business';
-    const FIRST_CLASS = 'first_class';
+    public const ECONOMY = 'economy';
+    public const BUSINESS = 'business';
+    public const FIRST_CLASS = 'first_class';
 
     /**
      * @param string $travelClass
      *
-     * @return string
+     * @throws \InvalidArgumentException
      */
-    public function isValidTravelClass(string $travelClass);
+    public function isValidTravelClass(string $travelClass): void;
 
     /**
      * @return array

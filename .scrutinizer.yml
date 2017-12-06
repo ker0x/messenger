@@ -8,7 +8,10 @@ checks:
 
 filter:
     excluded_paths:
-        - tests/
+        - "tests/"
+    dependency_paths:
+        - "vendor/"
+
 tools:
     php_mess_detector: true
     php_cpd:
@@ -22,9 +25,15 @@ tools:
             2: tests/
 
 build:
+    nodes:
+        analysis:
+            project_setup:
+                override: true
+            tests:
+                override: [php-scrutinizer-run]
     environment:
         php:
-            version: 7.0.8
+            version: 7.1
     tests:
         override:
             -

@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\PreCheckout;
 
 class PreCheckoutEvent extends AbstractEvent
 {
-    const NAME = 'pre_checkout';
+    public const NAME = 'pre_checkout';
 
     /**
      * @var int
@@ -63,7 +65,7 @@ class PreCheckoutEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\PreCheckoutEvent
      */
-    public static function create(array $payload): PreCheckoutEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

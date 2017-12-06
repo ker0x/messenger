@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
@@ -44,7 +46,7 @@ class AirlineBoardingPass extends AbstractAirline
                 'locale'        => $this->locale,
                 'theme_color'   => $this->themeColor,
                 'boarding_pass' => $this->boardingPass,
-            ]
+            ],
         ];
 
         return $this->arrayFilter($json);

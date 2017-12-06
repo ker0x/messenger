@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback;
 
 use Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo;
@@ -63,7 +65,7 @@ class PreCheckout
     /**
      * @return null|string
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->amount['currency'] ?? null;
     }
@@ -71,7 +73,7 @@ class PreCheckout
     /**
      * @return null|string
      */
-    public function getAmount()
+    public function getAmount(): ?string
     {
         return $this->amount['amount'] ?? null;
     }
@@ -81,7 +83,7 @@ class PreCheckout
      *
      * @return \Kerox\Messenger\Model\Callback\PreCheckout
      */
-    public static function create(array $callbackData): PreCheckout
+    public static function create(array $callbackData): self
     {
         $requestedUserInfo = RequestedUserInfo::create($callbackData['requested_user_info']);
 

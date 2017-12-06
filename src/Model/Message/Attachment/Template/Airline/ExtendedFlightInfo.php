@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
@@ -58,7 +60,7 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
      *
      * @return ExtendedFlightInfo
      */
-    public function setAircraftType(string $aircraftType): ExtendedFlightInfo
+    public function setAircraftType(string $aircraftType): self
     {
         $this->aircraftType = $aircraftType;
 
@@ -70,7 +72,7 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function isValidTravelClass(string $travelClass)
+    public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
         if (!in_array($travelClass, $allowedTravelClass, true)) {

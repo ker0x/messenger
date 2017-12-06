@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
 class Airport implements \JsonSerializable
@@ -41,7 +43,7 @@ class Airport implements \JsonSerializable
      *
      * @return Airport
      */
-    public function setTerminal(string $terminal): Airport
+    public function setTerminal(string $terminal): self
     {
         $this->terminal = $terminal;
 
@@ -53,7 +55,7 @@ class Airport implements \JsonSerializable
      *
      * @return Airport
      */
-    public function setGate(string $gate): Airport
+    public function setGate(string $gate): self
     {
         $this->gate = $gate;
 

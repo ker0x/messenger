@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model\Callback;
 
 class MessageEcho extends Message
@@ -33,12 +35,12 @@ class MessageEcho extends Message
      */
     public function __construct(
         bool $isEcho,
-        $appId,
+        ?int $appId = null,
         string $messageId,
         int $sequence,
-        string $metadata = null,
-        string $text = null,
-        string $quickReply = null,
+        ?string $metadata = null,
+        ?string $text = null,
+        ?string $quickReply = null,
         array $attachments = []
     ) {
         parent::__construct($messageId, $sequence, $text, $quickReply, $attachments);
@@ -59,7 +61,7 @@ class MessageEcho extends Message
     /**
      * @return null|int
      */
-    public function getAppId()
+    public function getAppId(): ?int
     {
         return $this->appId;
     }
@@ -67,7 +69,7 @@ class MessageEcho extends Message
     /**
      * @return null|string
      */
-    public function getMetadata()
+    public function getMetadata(): ?string
     {
         return $this->metadata;
     }
@@ -85,6 +87,15 @@ class MessageEcho extends Message
         $quickReply = $callbackData['quick_reply']['payload'] ?? null;
         $attachments = $callbackData['attachments'] ?? [];
 
-        return new static(true, $appId, $callbackData['mid'], $callbackData['seq'], $metadata, $text, $quickReply, $attachments);
+        return new static(
+            true,
+            $appId,
+            $callbackData['mid'],
+            $callbackData['seq'],
+            $metadata,
+            $text,
+            $quickReply,
+            $attachments
+        );
     }
 }

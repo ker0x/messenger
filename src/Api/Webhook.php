@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Api;
 
 use GuzzleHttp\ClientInterface;
@@ -55,7 +57,7 @@ class Webhook extends AbstractApi
      * @param \GuzzleHttp\ClientInterface              $client
      * @param \Psr\Http\Message\ServerRequestInterface $request
      */
-    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ServerRequestInterface $request = null)
+    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ?ServerRequestInterface $request = null)
     {
         parent::__construct($pageToken, $client);
 
@@ -73,8 +75,13 @@ class Webhook extends AbstractApi
      *
      * @return \Kerox\Messenger\Api\Webhook
      */
-    public static function getInstance(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ServerRequestInterface $request = null): Webhook
-    {
+    public static function getInstance(
+        string $appSecret,
+        string $verifyToken,
+        string $pageToken,
+        ClientInterface $client,
+        ?ServerRequestInterface $request = null
+    ): self {
         if (self::$_instance === null) {
             self::$_instance = new self($appSecret, $verifyToken, $pageToken, $client, $request);
         }
@@ -102,7 +109,7 @@ class Webhook extends AbstractApi
     /**
      * @return string|null
      */
-    public function challenge()
+    public function challenge(): ?string
     {
         $params = $this->request->getQueryParams();
 
@@ -169,7 +176,7 @@ class Webhook extends AbstractApi
     }
 
     /**
-     * @return \Kerox\Messenger\Model\Entry[]
+     * @return \Kerox\Messenger\Model\Callback\Entry[]
      */
     public function getCallbackEntries(): array
     {
@@ -221,7 +228,7 @@ class Webhook extends AbstractApi
             return false;
         }
 
-        list($algorithm, $hash) = explode('=', $headers[0]);
+        [$algorithm, $hash] = explode('=', $headers[0]);
 
         return hash_equals(hash_hmac($algorithm, $content, $this->appSecret), $hash);
     }

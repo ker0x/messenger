@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -29,7 +31,7 @@ class ThreadControl implements \JsonSerializable
      * @param int      $recipientId
      * @param int|null $targetAppId
      */
-    public function __construct(int $recipientId, int $targetAppId = null)
+    public function __construct(int $recipientId, ?int $targetAppId = null)
     {
         $this->recipientId = $recipientId;
         $this->targetAppId = $targetAppId;
@@ -38,7 +40,7 @@ class ThreadControl implements \JsonSerializable
     /**
      * @param string $metadata
      */
-    public function setMetadata(string $metadata)
+    public function setMetadata(string $metadata): void
     {
         $this->isValidString($metadata, 1000);
 
@@ -52,7 +54,7 @@ class ThreadControl implements \JsonSerializable
     {
         $json = [
             'recipient'     => [
-                'id' => $this->recipientId
+                'id' => $this->recipientId,
             ],
             'target_app_id' => $this->targetAppId,
             'metadata'      => $this->metadata,
