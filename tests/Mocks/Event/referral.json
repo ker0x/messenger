@@ -1,0 +1,14 @@
+{
+  "sender":{
+    "id":"USER_ID"
+  },
+  "recipient": {
+    "id": "PAGE_ID"
+  },
+  "timestamp": 1458692752478,
+  "referral": {
+    "ref": "REF DATA PASSED IN M.ME PARAM",
+    "source": "SHORTLINK",
+    "type": "OPEN_THREAD"
+  }
+}

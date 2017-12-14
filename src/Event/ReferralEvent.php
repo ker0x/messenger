@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Referral;
 
 class ReferralEvent extends AbstractEvent
 {
-    const NAME = 'referral';
+    public const NAME = 'referral';
 
     /**
      * @var int
@@ -63,7 +65,7 @@ class ReferralEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\ReferralEvent
      */
-    public static function create(array $payload): ReferralEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

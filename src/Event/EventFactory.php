@@ -20,6 +20,7 @@ class EventFactory
         'pass_thread_control' => PassThreadControlEvent::class,
         'policy-enforcement'  => PolicyEnforcementEvent::class,
         'app_roles'           => AppRolesEvent::class,
+        'referral'            => ReferralEvent::class,
     ];
 
     /**
