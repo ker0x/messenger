@@ -63,7 +63,7 @@ class PolicyEnforcementEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\PolicyEnforcementEvent
      */
-    public static function create(array $payload): PolicyEnforcementEvent
+    public static function create(array $payload): self
     {
         $senderId = isset($payload['sender']) ? $payload['sender']['id'] : '';
         $recipientId = $payload['recipient']['id'];

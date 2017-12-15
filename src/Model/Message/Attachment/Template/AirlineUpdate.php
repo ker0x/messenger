@@ -55,7 +55,7 @@ class AirlineUpdate extends AbstractAirline
      *
      * @return AirlineUpdate
      */
-    public function setIntroMessage($introMessage): AirlineUpdate
+    public function setIntroMessage($introMessage): self
     {
         $this->introMessage = $introMessage;
 

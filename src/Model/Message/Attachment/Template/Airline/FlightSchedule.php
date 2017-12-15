@@ -40,7 +40,7 @@ class FlightSchedule implements \JsonSerializable
      *
      * @return FlightSchedule
      */
-    public function setBoardingTime(string $boardingTime): FlightSchedule
+    public function setBoardingTime(string $boardingTime): self
     {
         $this->isValidDateTime($boardingTime);
 
@@ -54,7 +54,7 @@ class FlightSchedule implements \JsonSerializable
      *
      * @return FlightSchedule
      */
-    public function setArrivalTime(string $arrivalTime): FlightSchedule
+    public function setArrivalTime(string $arrivalTime): self
     {
         $this->isValidDateTime($arrivalTime);
 

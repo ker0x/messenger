@@ -63,7 +63,7 @@ class AppRolesEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\AppRolesEvent
      */
-    public static function create(array $payload): AppRolesEvent
+    public static function create(array $payload): self
     {
         $senderId = isset($payload['sender']) ? $payload['sender']['id'] : '';
         $recipientId = $payload['recipient']['id'];

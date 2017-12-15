@@ -8,7 +8,7 @@ class Entry
 {
     const CHANNELS = [
         'messaging',
-        'standby'
+        'standby',
     ];
 
     /**
@@ -69,7 +69,7 @@ class Entry
      *
      * @return \Kerox\Messenger\Model\Callback\Entry
      */
-    public static function create(array $entry): Entry
+    public static function create(array $entry): self
     {
         $events = [];
 

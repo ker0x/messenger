@@ -47,7 +47,7 @@ class Read
      *
      * @return \Kerox\Messenger\Model\Callback\Read
      */
-    public static function create(array $callbackData): Read
+    public static function create(array $callbackData): self
     {
         return new static($callbackData['watermark'], $callbackData['seq']);
     }

@@ -73,7 +73,7 @@ class PaymentSummary implements \JsonSerializable
      *
      * @return PaymentSummary
      */
-    public function isTestPayment(bool $isTestPayment): PaymentSummary
+    public function isTestPayment(bool $isTestPayment): self
     {
         $this->isTestPayment = $isTestPayment;
 
@@ -86,7 +86,7 @@ class PaymentSummary implements \JsonSerializable
      *
      * @return PaymentSummary
      */
-    public function addPriceList(string $label, string $amount): PaymentSummary
+    public function addPriceList(string $label, string $amount): self
     {
         $this->priceList[] = new PriceList($label, $amount);
 

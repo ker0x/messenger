@@ -63,7 +63,7 @@ class PreCheckoutEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\PreCheckoutEvent
      */
-    public static function create(array $payload): PreCheckoutEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

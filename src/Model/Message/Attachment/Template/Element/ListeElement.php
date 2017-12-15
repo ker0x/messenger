@@ -31,7 +31,7 @@ class ListeElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
      */
-    public function setSubtitle(string $subtitle): ListeElement
+    public function setSubtitle(string $subtitle): self
     {
         parent::setSubtitle($subtitle);
 
@@ -43,7 +43,7 @@ class ListeElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
      */
-    public function setImageUrl(string $imageUrl): ListeElement
+    public function setImageUrl(string $imageUrl): self
     {
         parent::setImageUrl($imageUrl);
 
@@ -55,7 +55,7 @@ class ListeElement extends AbstractElement
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
      */
-    public function setDefaultAction(WebUrl $defaultAction): ListeElement
+    public function setDefaultAction(WebUrl $defaultAction): self
     {
         $this->defaultAction = $defaultAction;
 
@@ -67,7 +67,7 @@ class ListeElement extends AbstractElement
      *
      * @return ListeElement
      */
-    public function setButtons(array $buttons): ListeElement
+    public function setButtons(array $buttons): self
     {
         $this->isValidArray($buttons, 1);
 

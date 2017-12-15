@@ -44,7 +44,7 @@ class AirlineBoardingPass extends AbstractAirline
                 'locale'        => $this->locale,
                 'theme_color'   => $this->themeColor,
                 'boarding_pass' => $this->boardingPass,
-            ]
+            ],
         ];
 
         return $this->arrayFilter($json);

@@ -73,7 +73,7 @@ class Webhook extends AbstractApi
      *
      * @return \Kerox\Messenger\Api\Webhook
      */
-    public static function getInstance(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ServerRequestInterface $request = null): Webhook
+    public static function getInstance(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ServerRequestInterface $request = null): self
     {
         if (self::$_instance === null) {
             self::$_instance = new self($appSecret, $verifyToken, $pageToken, $client, $request);

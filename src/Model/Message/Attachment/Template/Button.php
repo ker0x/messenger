@@ -44,7 +44,7 @@ class Button extends Template
                 'template_type' => Template::TYPE_BUTTON,
                 'text'          => $this->text,
                 'buttons'       => $this->buttons,
-            ]
+            ],
         ];
 
         return $this->arrayFilter($json);

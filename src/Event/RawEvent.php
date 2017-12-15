@@ -46,7 +46,7 @@ class RawEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\RawEvent
      */
-    public static function create(array $payload): RawEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

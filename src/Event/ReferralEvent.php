@@ -2,36 +2,33 @@
 
 namespace Kerox\Messenger\Event;
 
-use Kerox\Messenger\Model\Callback\Postback;
+use Kerox\Messenger\Model\Callback\Referral;
 
-class PostbackEvent extends AbstractEvent
+class ReferralEvent extends AbstractEvent
 {
-    const NAME = 'postback';
-
+    const NAME = 'referral';
     /**
      * @var int
      */
     protected $timestamp;
-
     /**
-     * @var \Kerox\Messenger\Model\Callback\Postback
+     * @var \Kerox\Messenger\Model\Callback\Referral
      */
-    protected $postback;
+    protected $referral;
 
     /**
-     * PostbackEvent constructor.
+     * ReferralEvent constructor.
      *
      * @param string                                   $senderId
      * @param string                                   $recipientId
      * @param int                                      $timestamp
-     * @param \Kerox\Messenger\Model\Callback\Postback $postback
+     * @param \Kerox\Messenger\Model\Callback\Referral $referral
      */
-    public function __construct(string $senderId, string $recipientId, int $timestamp, Postback $postback)
+    public function __construct(string $senderId, string $recipientId, int $timestamp, Referral $referral)
     {
         parent::__construct($senderId, $recipientId);
-
         $this->timestamp = $timestamp;
-        $this->postback = $postback;
+        $this->referral = $referral;
     }
 
     /**
@@ -43,11 +40,11 @@ class PostbackEvent extends AbstractEvent
     }
 
     /**
-     * @return \Kerox\Messenger\Model\Callback\Postback
+     * @return \Kerox\Messenger\Model\Callback\Referral
      */
-    public function getPostback(): Postback
+    public function getReferral(): Referral
     {
-        return $this->postback;
+        return $this->referral;
     }
 
     /**
@@ -61,15 +58,15 @@ class PostbackEvent extends AbstractEvent
     /**
      * @param array $payload
      *
-     * @return \Kerox\Messenger\Event\PostbackEvent
+     * @return \Kerox\Messenger\Event\ReferralEvent
      */
     public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
         $timestamp = $payload['timestamp'];
-        $postback = Postback::create($payload['postback']);
+        $referral = Referral::create($payload['referral']);
 
-        return new static($senderId, $recipientId, $timestamp, $postback);
+        return new static($senderId, $recipientId, $timestamp, $referral);
     }
 }

@@ -62,7 +62,7 @@ class Delivery
      *
      * @return \Kerox\Messenger\Model\Callback\Delivery
      */
-    public static function create(array $callbackData): Delivery
+    public static function create(array $callbackData): self
     {
         $messageIds = $callbackData['mids'] ?? [];
 

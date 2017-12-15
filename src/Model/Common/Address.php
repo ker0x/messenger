@@ -72,7 +72,7 @@ class Address implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Common\Address
      */
-    public function setName(string $name): Address
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -100,7 +100,7 @@ class Address implements \JsonSerializable
      *
      * @return Address
      */
-    public function setAdditionalStreet(string $additionalStreet): Address
+    public function setAdditionalStreet(string $additionalStreet): self
     {
         $this->additionalStreet = $additionalStreet;
 

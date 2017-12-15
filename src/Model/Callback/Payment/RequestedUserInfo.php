@@ -79,7 +79,7 @@ class RequestedUserInfo
      *
      * @return \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo
      */
-    public static function create(array $callbackData): RequestedUserInfo
+    public static function create(array $callbackData): self
     {
         $shippingAddress = Address::create($callbackData['shipping_address']);
 

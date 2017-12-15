@@ -52,7 +52,7 @@ class Send extends AbstractApi
      *
      * @return \Kerox\Messenger\Api\Send
      */
-    public static function getInstance(string $pageToken, ClientInterface $client): Send
+    public static function getInstance(string $pageToken, ClientInterface $client): self
     {
         if (self::$_instance === null) {
             self::$_instance = new self($pageToken, $client);
@@ -216,7 +216,7 @@ class Send extends AbstractApi
             self::TAG_TICKET_UPDATE,
             self::TAG_ACCOUNT_UPDATE,
             self::TAG_PAYMENT_UPDATE,
-            self::TAG_PERSONAL_FINANCE_UPDATE
+            self::TAG_PERSONAL_FINANCE_UPDATE,
         ];
     }
 }

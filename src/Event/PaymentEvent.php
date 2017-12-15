@@ -63,7 +63,7 @@ class PaymentEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\PaymentEvent
      */
-    public static function create(array $payload): PaymentEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];
