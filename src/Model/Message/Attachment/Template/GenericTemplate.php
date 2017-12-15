@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class Generic extends Template
+class GenericTemplate extends Template
 {
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[]

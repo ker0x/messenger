@@ -7,7 +7,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 
-class AirlineUpdate extends AbstractAirline
+class AirlineUpdateTemplate extends AbstractAirlineTemplate
 {
     public const UPDATE_TYPE_DELAY = 'delay';
     public const UPDATE_TYPE_GATE_CHANGE = 'gate_change';

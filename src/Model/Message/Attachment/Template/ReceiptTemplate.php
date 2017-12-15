@@ -8,7 +8,7 @@ use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 
-class Receipt extends Template
+class ReceiptTemplate extends Template
 {
     /**
      * @var string

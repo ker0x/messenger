@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class Button extends Template
+class ButtonTemplate extends Template
 {
     /**
      * @var string

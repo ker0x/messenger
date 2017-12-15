@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class Liste extends Template
+class ListTemplate extends Template
 {
     public const TOP_ELEMENT_STYLE_LARGE = 'large';
 

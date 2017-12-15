@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class AirlineCheckIn extends AbstractAirline
+class AirlineCheckInTemplate extends AbstractAirlineTemplate
 {
     /**
      * @var string
