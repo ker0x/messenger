@@ -78,7 +78,7 @@ class Postback
      *
      * @return \Kerox\Messenger\Model\Callback\Postback
      */
-    public static function create(array $callbackData): Postback
+    public static function create(array $callbackData): self
     {
         $payload = $callbackData['payload'] ?? null;
         $referral = isset($callbackData['referral']) ? Referral::create($callbackData['referral']) : null;

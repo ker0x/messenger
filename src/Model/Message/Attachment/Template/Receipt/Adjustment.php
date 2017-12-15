@@ -26,7 +26,7 @@ class Adjustment implements \JsonSerializable
      *
      * @return Adjustment
      */
-    public function setName(string $name): Adjustment
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -38,7 +38,7 @@ class Adjustment implements \JsonSerializable
      *
      * @return Adjustment
      */
-    public function setAmount(float $amount): Adjustment
+    public function setAmount(float $amount): self
     {
         $this->amount = $amount;
 

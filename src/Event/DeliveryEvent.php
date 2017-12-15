@@ -48,7 +48,7 @@ class DeliveryEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\DeliveryEvent
      */
-    public static function create(array $payload): DeliveryEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

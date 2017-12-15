@@ -59,7 +59,7 @@ class Message implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message
      */
-    public function setQuickReplies(array $quickReplies): Message
+    public function setQuickReplies(array $quickReplies): self
     {
         $this->isValidQuickReplies($quickReplies);
 
@@ -73,7 +73,7 @@ class Message implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message
      */
-    public function addQuickReply(QuickReply $quickReply): Message
+    public function addQuickReply(QuickReply $quickReply): self
     {
         $this->quickReplies[] = $quickReply;
 
@@ -85,7 +85,7 @@ class Message implements \JsonSerializable
      *
      * @return Message
      */
-    public function setMetadata(string $metadata): Message
+    public function setMetadata(string $metadata): self
     {
         $this->isValidString($metadata, 1000);
 

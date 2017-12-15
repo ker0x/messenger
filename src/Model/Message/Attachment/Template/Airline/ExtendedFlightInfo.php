@@ -58,7 +58,7 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
      *
      * @return ExtendedFlightInfo
      */
-    public function setAircraftType(string $aircraftType): ExtendedFlightInfo
+    public function setAircraftType(string $aircraftType): self
     {
         $this->aircraftType = $aircraftType;
 

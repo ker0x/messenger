@@ -52,7 +52,7 @@ class ThreadControl implements \JsonSerializable
     {
         $json = [
             'recipient'     => [
-                'id' => $this->recipientId
+                'id' => $this->recipientId,
             ],
             'target_app_id' => $this->targetAppId,
             'metadata'      => $this->metadata,

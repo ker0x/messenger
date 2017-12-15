@@ -49,7 +49,7 @@ class CheckoutUpdate
      *
      * @return \Kerox\Messenger\Model\Callback\CheckoutUpdate
      */
-    public static function create(array $callbackData): CheckoutUpdate
+    public static function create(array $callbackData): self
     {
         $shippingAddress = Address::create($callbackData['shipping_address']);
 

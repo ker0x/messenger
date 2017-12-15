@@ -95,7 +95,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @return BoardingPass
      */
-    public function setTravelClass(string $travelClass): BoardingPass
+    public function setTravelClass(string $travelClass): self
     {
         $this->isValidTravelClass($travelClass);
 
@@ -109,7 +109,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @return BoardingPass
      */
-    public function setSeat(string $seat): BoardingPass
+    public function setSeat(string $seat): self
     {
         $this->seat = $seat;
 
@@ -124,7 +124,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @internal param array|null $auxiliaryFields
      */
-    public function addAuxiliaryFields(string $label, string $value): BoardingPass
+    public function addAuxiliaryFields(string $label, string $value): self
     {
         $this->auxiliaryFields[] = $this->setLabelValue($label, $value);
 
@@ -141,7 +141,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @internal param array|null $secondaryFields
      */
-    public function addSecondaryFields(string $label, string $value): BoardingPass
+    public function addSecondaryFields(string $label, string $value): self
     {
         $this->secondaryFields[] = $this->setLabelValue($label, $value);
 
@@ -155,7 +155,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @return BoardingPass
      */
-    public function setHeaderImageUrl(string $headerImageUrl): BoardingPass
+    public function setHeaderImageUrl(string $headerImageUrl): self
     {
         $this->isValidUrl($headerImageUrl);
 
@@ -169,7 +169,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      *
      * @return BoardingPass
      */
-    public function setHeaderTextField(string $headerTextField): BoardingPass
+    public function setHeaderTextField(string $headerTextField): self
     {
         $this->headerTextField = $headerTextField;
 

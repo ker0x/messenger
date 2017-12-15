@@ -57,7 +57,7 @@ class TargetAudience implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
-    public function addWhitelistCountry(string $country): TargetAudience
+    public function addWhitelistCountry(string $country): self
     {
         $this->isValidCountry($country);
 
@@ -73,7 +73,7 @@ class TargetAudience implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
-    public function addBlacklistCountry(string $country): TargetAudience
+    public function addBlacklistCountry(string $country): self
     {
         $this->isValidCountry($country);
 
@@ -131,7 +131,7 @@ class TargetAudience implements \JsonSerializable
             'countries'     => [
                 'whitelist' => $this->whitelistCountries,
                 'blacklist' => $this->blacklistCountries,
-            ]
+            ],
         ];
 
         return $this->arrayFilter($json);

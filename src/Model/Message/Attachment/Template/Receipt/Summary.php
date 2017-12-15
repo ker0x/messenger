@@ -39,7 +39,7 @@ class Summary implements \JsonSerializable
      *
      * @return Summary
      */
-    public function setSubtotal(float $subtotal): Summary
+    public function setSubtotal(float $subtotal): self
     {
         $this->subtotal = $subtotal;
 
@@ -51,7 +51,7 @@ class Summary implements \JsonSerializable
      *
      * @return Summary
      */
-    public function setShippingCost(float $shippingCost): Summary
+    public function setShippingCost(float $shippingCost): self
     {
         $this->shippingCost = $shippingCost;
 
@@ -63,7 +63,7 @@ class Summary implements \JsonSerializable
      *
      * @return Summary
      */
-    public function setTotalTax(float $totalTax): Summary
+    public function setTotalTax(float $totalTax): self
     {
         $this->totalTax = $totalTax;
 

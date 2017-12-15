@@ -63,7 +63,7 @@ class CheckoutUpdateEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\CheckoutUpdateEvent
      */
-    public static function create(array $payload): CheckoutUpdateEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

@@ -63,7 +63,7 @@ class PassThreadControlEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\PassThreadControlEvent
      */
-    public static function create(array $payload): PassThreadControlEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

@@ -71,7 +71,7 @@ class MessageEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\MessageEvent
      */
-    public static function create(array $payload): MessageEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

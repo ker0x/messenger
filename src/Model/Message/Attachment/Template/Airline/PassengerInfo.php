@@ -36,7 +36,7 @@ class PassengerInfo implements \JsonSerializable
      *
      * @return PassengerInfo
      */
-    public function setTicketNumber(string $ticketNumber): PassengerInfo
+    public function setTicketNumber(string $ticketNumber): self
     {
         $this->ticketNumber = $ticketNumber;
 

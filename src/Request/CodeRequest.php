@@ -60,7 +60,7 @@ class CodeRequest extends AbstractRequest
             'image_size' => $this->imageSize,
             'data'       => [
                 'ref' => $this->ref,
-            ]
+            ],
         ];
 
         return $this->arrayFilter($body);

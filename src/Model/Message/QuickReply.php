@@ -50,7 +50,7 @@ class QuickReply implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
-    public function setTitle(string $title): QuickReply
+    public function setTitle(string $title): self
     {
         $this->checkContentType();
         $this->isValidString($title, 20);
@@ -65,7 +65,7 @@ class QuickReply implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
-    public function setPayload(string $payload): QuickReply
+    public function setPayload(string $payload): self
     {
         $this->checkContentType();
         $this->isValidString($payload, 1000);
@@ -80,7 +80,7 @@ class QuickReply implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
-    public function setImageUrl(string $imageUrl): QuickReply
+    public function setImageUrl(string $imageUrl): self
     {
         $this->checkContentType();
         $this->isValidUrl($imageUrl);

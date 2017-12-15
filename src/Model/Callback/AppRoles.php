@@ -32,7 +32,7 @@ class AppRoles
      *
      * @return \Kerox\Messenger\Model\Callback\AppRoles
      */
-    public static function create(array $callbackData): AppRoles
+    public static function create(array $callbackData): self
     {
         return new static($callbackData);
     }

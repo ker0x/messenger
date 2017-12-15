@@ -43,7 +43,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */
-    public function setComposerInputDisabled(bool $composerInputDisabled): PersistentMenu
+    public function setComposerInputDisabled(bool $composerInputDisabled): self
     {
         $this->composerInputDisabled = $composerInputDisabled;
 
@@ -55,7 +55,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */
-    public function addButtons(array $buttons): PersistentMenu
+    public function addButtons(array $buttons): self
     {
         $this->isValidArray($buttons, 5);
         $this->isValidButtons($buttons, $this->getAllowedButtonsType());

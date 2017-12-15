@@ -63,7 +63,7 @@ class ReadEvent extends AbstractEvent
      *
      * @return \Kerox\Messenger\Event\ReadEvent
      */
-    public static function create(array $payload): ReadEvent
+    public static function create(array $payload): self
     {
         $senderId = $payload['sender']['id'];
         $recipientId = $payload['recipient']['id'];

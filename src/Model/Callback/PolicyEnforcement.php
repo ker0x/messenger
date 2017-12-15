@@ -47,7 +47,7 @@ class PolicyEnforcement
      *
      * @return \Kerox\Messenger\Model\Callback\PolicyEnforcement
      */
-    public static function create(array $callbackData): PolicyEnforcement
+    public static function create(array $callbackData): self
     {
         $reason = $callbackData['reason'] ?? null;
 

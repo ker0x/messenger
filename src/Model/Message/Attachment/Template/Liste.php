@@ -44,7 +44,7 @@ class Liste extends Template
      *
      * @return Liste
      */
-    public function setTopElementStyle(string $topElementStyle): Liste
+    public function setTopElementStyle(string $topElementStyle): self
     {
         $this->isValidTopElementStyle($topElementStyle);
 
@@ -58,7 +58,7 @@ class Liste extends Template
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Liste
      */
-    public function setButtons(array $buttons): Liste
+    public function setButtons(array $buttons): self
     {
         $this->isValidArray($buttons, 1);
 
