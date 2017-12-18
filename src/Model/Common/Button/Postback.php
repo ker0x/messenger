@@ -21,6 +21,8 @@ class Postback extends AbstractButton
      *
      * @param string $title
      * @param string $payload
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $title, string $payload)
     {
@@ -36,14 +38,14 @@ class Postback extends AbstractButton
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'title'   => $this->title,
             'payload' => $this->payload,
         ];
 
-        return $json;
+        return $array;
     }
 }

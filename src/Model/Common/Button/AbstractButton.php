@@ -45,10 +45,18 @@ abstract class AbstractButton implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
         return [
             'type' => $this->type,
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

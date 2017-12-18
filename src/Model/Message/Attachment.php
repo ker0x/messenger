@@ -36,12 +36,20 @@ class Attachment implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'type' => $this->type,
         ];
 
-        return $json;
+        return $array;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

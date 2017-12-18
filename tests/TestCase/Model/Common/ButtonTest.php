@@ -12,7 +12,7 @@ use Kerox\Messenger\Model\Common\Button\Postback;
 use Kerox\Messenger\Model\Common\Button\Share;
 use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
-use Kerox\Messenger\Model\Message\Attachment\Template\Generic;
+use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ButtonTest extends AbstractTestCase
@@ -86,7 +86,7 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/share.json');
 
-        $generic = new Generic([
+        $generic = new GenericTemplate([
             (new GenericElement('I took Peter\'s \'Which Hat Are You?\' Quiz'))
                 ->setSubtitle('My result: Fez')
                 ->setImageUrl('https://bot.peters-hats.com/img/hats/fez.jpg')

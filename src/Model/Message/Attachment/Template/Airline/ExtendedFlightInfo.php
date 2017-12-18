@@ -75,7 +75,7 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
     public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
-        if (!in_array($travelClass, $allowedTravelClass, true)) {
+        if (!\in_array($travelClass, $allowedTravelClass, true)) {
             throw new \InvalidArgumentException('$travelClass must be either ' . implode(', ', $allowedTravelClass));
         }
     }
@@ -95,9 +95,9 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'connection_id'     => $this->connectionId,
             'segment_id'        => $this->segmentId,
             'flight_number'     => $this->flightNumber,
@@ -108,6 +108,6 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
             'flight_schedule'   => $this->flightSchedule,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
     }
 }

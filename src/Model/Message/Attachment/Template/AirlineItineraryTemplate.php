@@ -96,9 +96,9 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
      * @param string $amount
      * @param string $currency
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItinerary
+     * @throws \InvalidArgumentException
      *
-     * @internal param array|null $priceInfo
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
      */
     public function addPriceInfo(string $title, string $amount, ?string $currency = null): self
     {
@@ -122,7 +122,7 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     /**
      * @param string $basePrice
      *
-     * @return AirlineItinerary
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
      */
     public function setBasePrice(string $basePrice): self
     {
@@ -134,7 +134,7 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     /**
      * @param string $tax
      *
-     * @return AirlineItinerary
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
      */
     public function setTax(string $tax): self
     {
@@ -146,10 +146,10 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type'          => Template::TYPE_AIRLINE_ITINERARY,
                 'intro_message'          => $this->introMessage,
@@ -167,6 +167,6 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

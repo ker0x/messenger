@@ -25,6 +25,8 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
      *
      * @param string $text
      * @param string $locale
+     *
+     * @throws \Exception
      */
     public function __construct(string $text, string $locale = self::DEFAULT_LOCALE)
     {
@@ -41,13 +43,21 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'locale' => $this->locale,
             'text'   => $this->text,
         ];
 
-        return $json;
+        return $array;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

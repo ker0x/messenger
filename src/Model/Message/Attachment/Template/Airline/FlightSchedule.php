@@ -29,6 +29,8 @@ class FlightSchedule implements \JsonSerializable
      * FlightSchedule constructor.
      *
      * @param string $departureTime
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $departureTime)
     {
@@ -39,6 +41,8 @@ class FlightSchedule implements \JsonSerializable
 
     /**
      * @param string $boardingTime
+     *
+     * @throws \InvalidArgumentException
      *
      * @return FlightSchedule
      */
@@ -54,6 +58,8 @@ class FlightSchedule implements \JsonSerializable
     /**
      * @param string $arrivalTime
      *
+     * @throws \InvalidArgumentException
+     *
      * @return FlightSchedule
      */
     public function setArrivalTime(string $arrivalTime): self
@@ -68,14 +74,22 @@ class FlightSchedule implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'boarding_time'  => $this->boardingTime,
             'departure_time' => $this->departureTime,
             'arrival_time'   => $this->arrivalTime,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

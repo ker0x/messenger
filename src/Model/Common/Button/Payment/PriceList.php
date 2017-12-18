@@ -31,11 +31,19 @@ class PriceList implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
         return [
             'label'  => $this->label,
             'amount' => $this->amount,
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

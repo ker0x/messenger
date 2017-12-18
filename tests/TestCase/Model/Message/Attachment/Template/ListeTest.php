@@ -3,8 +3,8 @@ namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Common\Button\Postback;
 use Kerox\Messenger\Model\Common\Button\WebUrl;
-use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement;
-use Kerox\Messenger\Model\Message\Attachment\Template\Liste;
+use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement;
+use Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ListeTest extends AbstractTestCase
@@ -15,7 +15,7 @@ class ListeTest extends AbstractTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$topElementStyle must be either large, compact');
 
-        $element1 = (new ListeElement('Classic White T-Shirt'))
+        $element1 = (new ListElement('Classic White T-Shirt'))
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png')
             ->setSubtitle('100% Cotton, 200% Comfortable')
             ->setDefaultAction(
@@ -31,7 +31,7 @@ class ListeTest extends AbstractTestCase
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             ]);
 
-        $element2 = (new ListeElement('Classic Blue T-Shirt'))
+        $element2 = (new ListElement('Classic Blue T-Shirt'))
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png')
             ->setSubtitle('100% Cotton, 200% Comfortable')
             ->setDefaultAction(
@@ -47,7 +47,7 @@ class ListeTest extends AbstractTestCase
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             ]);
 
-        $liste = new Liste([$element1, $element2]);
+        $liste = new ListTemplate([$element1, $element2]);
         $liste
             ->setTopElementStyle('x-large')
             ->setButtons([

@@ -55,9 +55,9 @@ class PassengerSegmentInfo implements \JsonSerializable
      * @param string $title
      * @param string $value
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo
+     * @throws \InvalidArgumentException
      *
-     * @internal param array $productInfo
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo
      */
     public function addProductInfo(string $title, string $value): self
     {
@@ -74,9 +74,9 @@ class PassengerSegmentInfo implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'segment_id'   => $this->segmentId,
             'passenger_id' => $this->passengerId,
             'seat'         => $this->seat,
@@ -84,6 +84,14 @@ class PassengerSegmentInfo implements \JsonSerializable
             'product_info' => $this->productInfo,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

@@ -65,14 +65,22 @@ class PaymentSettings implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'privacy_url' => $this->privacyUrl,
             'public_key'  => $this->publicKey,
             'test_users'  => $this->testUsers,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

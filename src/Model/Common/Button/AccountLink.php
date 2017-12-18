@@ -15,6 +15,8 @@ class AccountLink extends AbstractButton
      * AccountLink constructor.
      *
      * @param string $url
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $url)
     {
@@ -28,13 +30,13 @@ class AccountLink extends AbstractButton
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'url' => $this->url,
         ];
 
-        return $json;
+        return $array;
     }
 }

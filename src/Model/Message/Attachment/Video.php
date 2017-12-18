@@ -13,6 +13,8 @@ class Video extends File
      *
      * @param string    $url
      * @param bool|null $reusable
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $url, ?bool $reusable = null)
     {

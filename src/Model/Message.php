@@ -39,6 +39,8 @@ class Message implements \JsonSerializable
      * Message constructor.
      *
      * @param \Kerox\Messenger\Model\Message\Attachment|string $message
+     *
+     * @throws \Exception
      */
     public function __construct($message)
     {
@@ -85,6 +87,8 @@ class Message implements \JsonSerializable
     /**
      * @param mixed $metadata
      *
+     * @throws \InvalidArgumentException
+     *
      * @return Message
      */
     public function setMetadata(string $metadata): self
@@ -114,7 +118,7 @@ class Message implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
         $json = [
             $this->type     => $this->message,
@@ -123,5 +127,13 @@ class Message implements \JsonSerializable
         ];
 
         return array_filter($json);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

@@ -25,6 +25,8 @@ class OpenGraphElement implements \JsonSerializable
      * OpenGraphElement constructor.
      *
      * @param string $url
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $url)
     {
@@ -35,6 +37,8 @@ class OpenGraphElement implements \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement
      */
@@ -61,13 +65,21 @@ class OpenGraphElement implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'url'     => $this->url,
             'buttons' => $this->buttons,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

@@ -4,7 +4,7 @@ namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template\Airlin
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule;
-use Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdate;
+use Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class AirlineUpdateTest extends AbstractTestCase
@@ -21,7 +21,7 @@ class AirlineUpdateTest extends AbstractTestCase
 
         $updateFlightInfo = new FlightInfo('KL123', $departureAirport, $arrivalAirport, $flightSchedule);
 
-        $airlineUpdate = new AirlineUpdate('departure', 'en_US', 'CF23G2', $updateFlightInfo);
+        $airlineUpdate = new AirlineUpdateTemplate('departure', 'en_US', 'CF23G2', $updateFlightInfo);
     }
 
 }

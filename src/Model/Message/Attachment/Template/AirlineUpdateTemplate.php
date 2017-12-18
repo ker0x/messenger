@@ -40,6 +40,8 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
      * @param string                                                                $locale
      * @param string                                                                $pnrNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $updateType, string $locale, string $pnrNumber, FlightInfo $updateFlightInfo)
     {
@@ -55,7 +57,7 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     /**
      * @param string $introMessage
      *
-     * @return AirlineUpdate
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
      */
     public function setIntroMessage($introMessage): self
     {
@@ -72,7 +74,7 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     private function isValidUpdateType(string $updateType): void
     {
         $allowedUpdateType = $this->getAllowedUpdateType();
-        if (!in_array($updateType, $allowedUpdateType, true)) {
+        if (!\in_array($updateType, $allowedUpdateType, true)) {
             throw new \InvalidArgumentException('$updateType must be either ' . implode(', ', $allowedUpdateType));
         }
     }
@@ -92,10 +94,10 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type'      => Template::TYPE_AIRLINE_UPDATE,
                 'intro_message'      => $this->introMessage,
@@ -106,6 +108,6 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

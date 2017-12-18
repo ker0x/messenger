@@ -2,11 +2,11 @@
 namespace Kerox\Messenger\Test\TestCase\Model;
 
 use Kerox\Messenger\Model\Common\Address;
-use Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message;
+use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Model\Message\QuickReply;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -34,7 +34,7 @@ class MessageTest extends AbstractTestCase
             ->setShippingCost(4.95)
             ->setTotalTax(6.19);
 
-        $receipt = new Receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
+        $receipt = new ReceiptTemplate('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
         $receipt
             ->setTimestamp('1428444852')
             ->setOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')

@@ -13,6 +13,8 @@ class Audio extends File
      *
      * @param string    $url
      * @param bool|null $reusable
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($url, ?bool $reusable = null)
     {

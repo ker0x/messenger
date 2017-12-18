@@ -49,7 +49,7 @@ class FlightInfo implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
         return [
             'flight_number'     => $this->flightNumber,
@@ -57,5 +57,13 @@ class FlightInfo implements \JsonSerializable
             'arrival_airport'   => $this->arrivalAirport,
             'flight_schedule'   => $this->flightSchedule,
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

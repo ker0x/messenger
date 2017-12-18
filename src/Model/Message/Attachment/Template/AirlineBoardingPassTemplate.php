@@ -36,10 +36,10 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type' => Template::TYPE_AIRLINE_BOARDINGPASS,
                 'intro_message' => $this->introMessage,
@@ -49,6 +49,6 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

@@ -48,14 +48,22 @@ class PassengerInfo implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'passenger_id'  => $this->passengerId,
             'ticket_number' => $this->ticketNumber,
             'name'          => $this->name,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

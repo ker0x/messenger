@@ -65,15 +65,23 @@ class Airport implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'airport_code' => $this->airportCode,
             'city'         => $this->city,
             'terminal'     => $this->terminal,
             'gate'         => $this->gate,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

@@ -17,6 +17,8 @@ class GenericTemplate extends Template
      * Generic constructor.
      *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[] $elements
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $elements)
     {
@@ -30,16 +32,16 @@ class GenericTemplate extends Template
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type' => Template::TYPE_GENERIC,
                 'elements'      => $this->elements,
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

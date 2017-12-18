@@ -45,6 +45,8 @@ class WebUrl extends AbstractButton
      *
      * @param string $title
      * @param string $url
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $title, string $url)
     {
@@ -59,6 +61,8 @@ class WebUrl extends AbstractButton
 
     /**
      * @param string $webviewHeightRatio
+     *
+     * @throws \InvalidArgumentException
      *
      * @return WebUrl
      */
@@ -85,6 +89,8 @@ class WebUrl extends AbstractButton
 
     /**
      * @param string $fallbackUrl
+     *
+     * @throws \InvalidArgumentException
      *
      * @return WebUrl
      */
@@ -114,7 +120,7 @@ class WebUrl extends AbstractButton
     private function isValidWebviewHeightRatio(string $webviewHeightRatio): void
     {
         $allowedRatioType = $this->getAllowedRatioType();
-        if (!in_array($webviewHeightRatio, $allowedRatioType, true)) {
+        if (!\in_array($webviewHeightRatio, $allowedRatioType, true)) {
             throw new \InvalidArgumentException(
                 '$webviewHeightRatio must be either ' . implode(', ', $allowedRatioType)
             );
@@ -136,10 +142,10 @@ class WebUrl extends AbstractButton
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'url'                  => $this->url,
             'title'                => $this->title,
             'webview_height_ratio' => $this->webviewHeightRatio,
@@ -148,6 +154,6 @@ class WebUrl extends AbstractButton
             'webview_share_button' => $this->webviewShareButton,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
     }
 }

@@ -143,10 +143,10 @@ class ReceiptTemplate extends Template
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type'  => Template::TYPE_RECEIPT,
                 'recipient_name' => $this->recipientName,
@@ -162,6 +162,6 @@ class ReceiptTemplate extends Template
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

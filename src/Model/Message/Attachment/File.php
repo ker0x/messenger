@@ -29,6 +29,8 @@ class File extends Attachment
      * @param string    $url
      * @param bool|null $reusable
      * @param string    $type
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($url, ?bool $reusable = null, $type = Attachment::TYPE_FILE)
     {
@@ -57,10 +59,10 @@ class File extends Attachment
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'url'           => $this->url,
                 'is_reusable'   => $this->reusable,
@@ -68,6 +70,6 @@ class File extends Attachment
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

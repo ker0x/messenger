@@ -75,15 +75,23 @@ class Summary implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'subtotal'      => $this->subtotal,
             'shipping_cost' => $this->shippingCost,
             'total_tax'     => $this->totalTax,
             'total_cost'    => $this->totalCost,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

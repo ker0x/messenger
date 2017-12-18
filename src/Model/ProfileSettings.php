@@ -62,7 +62,7 @@ class ProfileSettings implements \JsonSerializable
     /**
      * @param string $payload
      *
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
@@ -92,6 +92,8 @@ class ProfileSettings implements \JsonSerializable
     /**
      * @param array $whitelistedDomains
      *
+     * @throws \Exception
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addWhitelistedDomains(array $whitelistedDomains): self
@@ -105,6 +107,8 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param string $accountLinkingUrl
+     *
+     * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
@@ -143,6 +147,8 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param array $domains
+     *
+     * @throws \Exception
      */
     private function isValidDomains(array $domains): void
     {
@@ -156,7 +162,7 @@ class ProfileSettings implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
         $json = [
             'persistent_menu'     => $this->persistentMenus,
@@ -169,5 +175,13 @@ class ProfileSettings implements \JsonSerializable
         ];
 
         return array_filter($json);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

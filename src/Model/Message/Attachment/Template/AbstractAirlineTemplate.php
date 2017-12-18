@@ -25,6 +25,8 @@ abstract class AbstractAirlineTemplate extends Template
      * AbstractAirline constructor.
      *
      * @param string $locale
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $locale)
     {
@@ -38,7 +40,9 @@ abstract class AbstractAirlineTemplate extends Template
     /**
      * @param string $themeColor
      *
-     * @return AbstractAirline
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AbstractAirlineTemplate
      */
     public function setThemeColor(string $themeColor): self
     {

@@ -105,7 +105,9 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $travelClass
      *
-     * @return BoardingPass
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
     public function setTravelClass(string $travelClass): self
     {
@@ -119,7 +121,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $seat
      *
-     * @return BoardingPass
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
     public function setSeat(string $seat): self
     {
@@ -132,9 +134,9 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      * @param string $label
      * @param string $value
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
+     * @throws \InvalidArgumentException
      *
-     * @internal param array|null $auxiliaryFields
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
     public function addAuxiliaryFields(string $label, string $value): self
     {
@@ -149,9 +151,9 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      * @param string $label
      * @param string $value
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
+     * @throws \InvalidArgumentException
      *
-     * @internal param array|null $secondaryFields
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
     public function addSecondaryFields(string $label, string $value): self
     {
@@ -165,7 +167,9 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $headerImageUrl
      *
-     * @return BoardingPass
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
     public function setHeaderImageUrl(string $headerImageUrl): self
     {
@@ -179,7 +183,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $headerTextField
      *
-     * @return BoardingPass
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
     public function setHeaderTextField(string $headerTextField): self
     {
@@ -223,7 +227,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
-        if (!in_array($travelClass, $allowedTravelClass, true)) {
+        if (!\in_array($travelClass, $allowedTravelClass, true)) {
             throw new \InvalidArgumentException('$travelClass must be either ' . implode(', ', $allowedTravelClass));
         }
     }
@@ -243,9 +247,9 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'passenger_name'           => $this->passengerName,
             'pnr_number'               => $this->pnrNumber,
             'travel_class'             => $this->travelClass,
@@ -261,6 +265,14 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
             'flight_info'              => $this->flightInfo,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

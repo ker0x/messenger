@@ -12,21 +12,21 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerInfo;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\TravelClassInterface;
-use Kerox\Messenger\Model\Message\Attachment\Template\AirlineBoardingPass;
-use Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckIn;
-use Kerox\Messenger\Model\Message\Attachment\Template\AirlineItinerary;
-use Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdate;
-use Kerox\Messenger\Model\Message\Attachment\Template\Button;
-use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement;
+use Kerox\Messenger\Model\Message\Attachment\Template\AirlineBoardingPassTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckInTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement;
-use Kerox\Messenger\Model\Message\Attachment\Template\Generic;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
-use Kerox\Messenger\Model\Message\Attachment\Template\Liste;
-use Kerox\Messenger\Model\Message\Attachment\Template\OpenGraph;
-use Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
+use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
+use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class TemplateTest extends AbstractTestCase
@@ -73,7 +73,7 @@ class TemplateTest extends AbstractTestCase
             $boardingPass2,
         ];
 
-        $airlineBoardingPass = new AirlineBoardingPass('You are checked in.', 'en_US', $boardingPass);
+        $airlineBoardingPass = new AirlineBoardingPassTemplate('You are checked in.', 'en_US', $boardingPass);
         $airlineBoardingPass
             ->setThemeColor('#FF0000');
 
@@ -92,7 +92,7 @@ class TemplateTest extends AbstractTestCase
             new FlightInfo('f001', $departureAirport, $arrivalAirport, $flightSchedule)
         ];
 
-        $airlineCheckIn = new AirlineCheckIn('Check-in is available now.', 'en_US', 'ABCDEF', $flightInto, 'https://www.airline.com/check-in');
+        $airlineCheckIn = new AirlineCheckInTemplate('Check-in is available now.', 'en_US', 'ABCDEF', $flightInto, 'https://www.airline.com/check-in');
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineCheckIn));
     }
@@ -128,7 +128,7 @@ class TemplateTest extends AbstractTestCase
             (new PassengerSegmentInfo('s002', 'p002', '73B', 'World Business'))->addProductInfo('Lounge', 'Complimentary lounge access')->addProductInfo('Baggage', '1 extra bag 50lbs'),
         ];
 
-        $airlineItinerary = new AirlineItinerary('Here\'s your flight itinerary.', 'en_US', 'ABCDEF', $passengerInfo, $flightInfo, $passengerSegmentInfo, '14003', 'USD');
+        $airlineItinerary = new AirlineItineraryTemplate('Here\'s your flight itinerary.', 'en_US', 'ABCDEF', $passengerInfo, $flightInfo, $passengerSegmentInfo, '14003', 'USD');
         $airlineItinerary
             ->addPriceInfo('Fuel surcharge', '1597', 'USD')
             ->setBasePrice('12206')
@@ -147,7 +147,7 @@ class TemplateTest extends AbstractTestCase
 
         $updateFlightInfo = new FlightInfo('KL123', $departureAirport, $arrivalAirport, $flightSchedule);
 
-        $airlineUpdate = new AirlineUpdate(AirlineUpdate::UPDATE_TYPE_DELAY, 'en_US', 'CF23G2', $updateFlightInfo);
+        $airlineUpdate = new AirlineUpdateTemplate(AirlineUpdateTemplate::UPDATE_TYPE_DELAY, 'en_US', 'CF23G2', $updateFlightInfo);
         $airlineUpdate
             ->setIntroMessage('Your flight is delayed');
 
@@ -158,7 +158,7 @@ class TemplateTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/button.json');
 
-        $button = new Button('What do you want to do next?', [
+        $button = new ButtonTemplate('What do you want to do next?', [
             new WebUrl('Show Website', 'https://petersapparel.parseapp.com'),
             new Postback('Start Chatting', 'USER_DEFINED_PAYLOAD'),
         ]);
@@ -184,16 +184,19 @@ class TemplateTest extends AbstractTestCase
                 new Postback('Start Chatting', 'DEVELOPER_DEFINED_PAYLOAD'),
             ]);
 
-        $generic = new Generic([$element]);
+        $generic = new GenericTemplate([$element]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($generic));
     }
 
-    public function testTemplateListe()
+    /**
+     *
+     */
+    public function testTemplateList()
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/liste.json');
 
-        $element1 = (new ListeElement('Classic White T-Shirt'))
+        $element1 = (new ListElement('Classic White T-Shirt'))
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png')
             ->setSubtitle('100% Cotton, 200% Comfortable')
             ->setDefaultAction(
@@ -209,7 +212,7 @@ class TemplateTest extends AbstractTestCase
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             ]);
 
-        $element2 = (new ListeElement('Classic Blue T-Shirt'))
+        $element2 = (new ListElement('Classic Blue T-Shirt'))
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png')
             ->setSubtitle('100% Cotton, 200% Comfortable')
             ->setDefaultAction(
@@ -225,7 +228,7 @@ class TemplateTest extends AbstractTestCase
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             ]);
 
-        $element3 = (new ListeElement('Classic Black T-Shirt'))
+        $element3 = (new ListElement('Classic Black T-Shirt'))
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/black-t-shirt.png')
             ->setSubtitle('100% Cotton, 200% Comfortable')
             ->setDefaultAction(
@@ -241,7 +244,7 @@ class TemplateTest extends AbstractTestCase
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             ]);
 
-        $element4 = (new ListeElement('Classic Gray T-Shirt'))
+        $element4 = (new ListElement('Classic Gray T-Shirt'))
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/gray-t-shirt.png')
             ->setSubtitle('100% Cotton, 200% Comfortable')
             ->setDefaultAction(
@@ -257,9 +260,9 @@ class TemplateTest extends AbstractTestCase
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             ]);
 
-        $liste = new Liste([$element1, $element2, $element3, $element4]);
+        $liste = new ListTemplate([$element1, $element2, $element3, $element4]);
         $liste
-            ->setTopElementStyle(Liste::TOP_ELEMENT_STYLE_COMPACT)
+            ->setTopElementStyle(ListTemplate::TOP_ELEMENT_STYLE_COMPACT)
             ->setButtons([
                 new Postback('View More', 'payload')
             ]);
@@ -288,7 +291,7 @@ class TemplateTest extends AbstractTestCase
             ->setShippingCost(4.95)
             ->setTotalTax(6.19);
 
-        $receipt = new Receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
+        $receipt = new ReceiptTemplate('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
         $receipt
             ->setOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')
             ->setTimestamp('1428444852')
@@ -312,11 +315,11 @@ class TemplateTest extends AbstractTestCase
         $elements = [
             (new OpenGraphElement('https://open.spotify.com/track/7GhIk7Il098yCjg4BQjzvb'))
                 ->setButtons([
-                    (new WebUrl('Learn More', 'https://en.wikipedia.org/wiki/Rickrolling'))
+                    new WebUrl('Learn More', 'https://en.wikipedia.org/wiki/Rickrolling')
                 ]),
         ];
 
-        $openGraph = new OpenGraph($elements);
+        $openGraph = new OpenGraphTemplate($elements);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($openGraph));
     }

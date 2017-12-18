@@ -16,7 +16,7 @@ class OpenGraphElementTest extends AbstractTestCase
 
         $element = (new OpenGraphElement('https://open.spotify.com/track/7GhIk7Il098yCjg4BQjzvb'))
             ->setButtons([
-                (new Postback('Learn More', 'LEARN_MORE'))
+                new Postback('Learn More', 'LEARN_MORE')
             ]);
     }
 }

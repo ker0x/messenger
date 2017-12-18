@@ -28,6 +28,8 @@ class Payment extends AbstractButton
      *
      * @param string                                                      $payload
      * @param \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary $paymentSummary
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $payload, PaymentSummary $paymentSummary)
     {
@@ -43,15 +45,15 @@ class Payment extends AbstractButton
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'title'           => $this->title,
             'payload'         => $this->payload,
             'payment_summary' => $this->paymentSummary,
         ];
 
-        return $json;
+        return $array;
     }
 }

@@ -21,6 +21,8 @@ class Nested extends AbstractButton
      *
      * @param string                                                $title
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $title, array $buttons)
     {
@@ -36,6 +38,8 @@ class Nested extends AbstractButton
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton $button
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Nested
      */
@@ -63,14 +67,14 @@ class Nested extends AbstractButton
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'title'           => $this->title,
             'call_to_actions' => $this->buttons,
         ];
 
-        return $json;
+        return $array;
     }
 }
