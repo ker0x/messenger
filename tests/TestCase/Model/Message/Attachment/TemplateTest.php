@@ -18,10 +18,12 @@ use Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement;
+use Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\MediaTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
@@ -193,7 +195,7 @@ class TemplateTest extends AbstractTestCase
      */
     public function testTemplateList()
     {
-        $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/liste.json');
+        $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/list.json');
 
         $element1 = ListElement::create('Classic White T-Shirt')
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png')
@@ -319,5 +321,21 @@ class TemplateTest extends AbstractTestCase
         $openGraph = OpenGraphTemplate::create($elements);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($openGraph));
+    }
+
+    public function testTemplateMedia()
+    {
+        $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/media.json');
+
+        $elements = [
+            MediaElement::create('https://www.facebook.com/ker0x/videos/1234567890/', MediaElement::TYPE_VIDEO)
+                ->setButtons([
+                    WebUrl::create('Learn More', 'https://en.wikipedia.org/wiki/Rickrolling')
+                ]),
+        ];
+
+        $media = MediaTemplate::create($elements);
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($media));
     }
 }

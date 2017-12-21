@@ -18,17 +18,6 @@ class Profile extends AbstractApi implements ProfileInterface
     private static $_instance;
 
     /**
-     * Profile constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     */
-    public function __construct($pageToken, ClientInterface $client)
-    {
-        parent::__construct($pageToken, $client);
-    }
-
-    /**
      * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      *
@@ -59,6 +48,8 @@ class Profile extends AbstractApi implements ProfileInterface
     /**
      * @param array $profileSettings
      *
+     * @throws \InvalidArgumentException
+     *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
     public function get(array $profileSettings): ProfileResponse
@@ -75,6 +66,8 @@ class Profile extends AbstractApi implements ProfileInterface
 
     /**
      * @param array $profileSettings
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
@@ -97,7 +90,7 @@ class Profile extends AbstractApi implements ProfileInterface
     {
         $allowedFields = $this->getAllowedFields();
         foreach ($fields as $field) {
-            if (!in_array($field, $allowedFields, true)) {
+            if (!\in_array($field, $allowedFields, true)) {
                 throw new \InvalidArgumentException($field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields));
             }
         }

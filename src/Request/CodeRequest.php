@@ -67,12 +67,4 @@ class CodeRequest extends AbstractRequest
 
         return $this->arrayFilter($body);
     }
-
-    /**
-     * @return array
-     */
-    protected function buildQuery(): array
-    {
-        return parent::buildQuery();
-    }
 }

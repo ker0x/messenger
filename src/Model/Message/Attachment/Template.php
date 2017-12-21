@@ -17,6 +17,7 @@ abstract class Template extends Attachment
     protected const TYPE_LIST = 'list';
     protected const TYPE_RECEIPT = 'receipt';
     protected const TYPE_OPEN_GRAPH = 'open_graph';
+    protected const TYPE_MEDIA = 'media';
 
     /**
      * Template constructor.

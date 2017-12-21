@@ -18,17 +18,6 @@ class Code extends AbstractApi
     private static $_instance;
 
     /**
-     * Code constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     */
-    public function __construct(string $pageToken, ClientInterface $client)
-    {
-        parent::__construct($pageToken, $client);
-    }
-
-    /**
      * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      *
@@ -47,6 +36,8 @@ class Code extends AbstractApi
      * @param int         $imageSize
      * @param string      $codeType
      * @param string|null $ref
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Response\CodeResponse
      */
@@ -85,7 +76,7 @@ class Code extends AbstractApi
     private function isValidCodeType(string $codeType): void
     {
         $allowedCodeType = $this->getAllowedCodeType();
-        if (!in_array($codeType, $allowedCodeType, true)) {
+        if (!\in_array($codeType, $allowedCodeType, true)) {
             throw new \InvalidArgumentException('$codeType must be either ' . implode(', ', $allowedCodeType));
         }
     }

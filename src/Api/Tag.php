@@ -16,17 +16,6 @@ class Tag extends AbstractApi
     private static $_instance;
 
     /**
-     * Tag constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     */
-    public function __construct(string $pageToken, ClientInterface $client)
-    {
-        parent::__construct($pageToken, $client);
-    }
-
-    /**
      * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      *

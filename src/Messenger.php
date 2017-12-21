@@ -19,7 +19,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class Messenger
 {
     public const API_URL = 'https://graph.facebook.com/';
-    public const API_VERSION = 'v2.9';
+    public const API_VERSION = 'v2.11';
 
     /**
      * @var string

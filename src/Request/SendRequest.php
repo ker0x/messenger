@@ -8,8 +8,13 @@ use Kerox\Messenger\Model\Message;
 
 class SendRequest extends AbstractRequest
 {
-    public const TYPE_MESSAGE = 'message';
-    public const TYPE_ACTION = 'action';
+    public const REQUEST_TYPE_MESSAGE = 'message';
+    public const REQUEST_TYPE_ACTION = 'action';
+
+    public const MESSAGING_TYPE_RESPONSE = 'RESPONSE';
+    public const MESSAGING_TYPE_UPDATE = 'UPDATE';
+    public const MESSAGING_TYPE_MESSAGE_TAG = 'MESSAGE_TAG';
+    public const MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION = 'NON_PROMOTIONAL_SUBSCRIPTION';
 
     /**
      * @var null|array
@@ -37,6 +42,11 @@ class SendRequest extends AbstractRequest
     protected $tag;
 
     /**
+     * @var string
+     */
+    protected $messagingType;
+
+    /**
      * Request constructor.
      *
      * @param string                                $pageToken
@@ -45,6 +55,7 @@ class SendRequest extends AbstractRequest
      * @param string|null                           $notificationType
      * @param string|null                           $tag
      * @param string                                $requestType
+     * @param string                                $messagingType
      */
     public function __construct(
         string $pageToken,
@@ -52,17 +63,18 @@ class SendRequest extends AbstractRequest
         ?string $recipient = null,
         ?string $notificationType = null,
         ?string $tag = null,
-        string $requestType = self::TYPE_MESSAGE
+        string $requestType = self::REQUEST_TYPE_MESSAGE,
+        string $messagingType = self::MESSAGING_TYPE_RESPONSE
     ) {
         parent::__construct($pageToken);
 
-        if ($content instanceof Message || $requestType === self::TYPE_MESSAGE) {
+        if ($content instanceof Message || $requestType === self::REQUEST_TYPE_MESSAGE) {
             $this->message = $content;
         } else {
             $this->senderAction = $content;
         }
 
-        $this->recipient = (is_string($recipient)) ? ['id' => $recipient] : $recipient;
+        $this->recipient = \is_string($recipient) ? ['id' => $recipient] : $recipient;
         $this->notificationType = $notificationType;
         $this->tag = $tag;
     }
@@ -83,6 +95,7 @@ class SendRequest extends AbstractRequest
     protected function buildBody(): array
     {
         $body = [
+            'messaging_type'    => $this->messagingType,
             'recipient'         => $this->recipient,
             'message'           => $this->message,
             'sender_action'     => $this->senderAction,
@@ -91,13 +104,5 @@ class SendRequest extends AbstractRequest
         ];
 
         return array_filter($body);
-    }
-
-    /**
-     * @return array
-     */
-    protected function buildQuery(): array
-    {
-        return parent::buildQuery();
     }
 }

@@ -17,17 +17,6 @@ class Thread extends AbstractApi
     private static $_instance;
 
     /**
-     * Send constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     */
-    public function __construct(string $pageToken, ClientInterface $client)
-    {
-        parent::__construct($pageToken, $client);
-    }
-
-    /**
      * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      *

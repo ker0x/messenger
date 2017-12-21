@@ -160,7 +160,7 @@ class ProfileSettings implements \JsonSerializable
      */
     private function isValidDomains(array $domains): void
     {
-        $this->isValidArray($domains, 10);
+        $this->isValidArray($domains, 50);
 
         foreach ($domains as $domain) {
             $this->isValidUrl($domain);

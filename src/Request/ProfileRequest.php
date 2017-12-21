@@ -35,7 +35,7 @@ class ProfileRequest extends AbstractRequest
             'Content-Type' => 'application/json',
         ];
 
-        return (is_string($this->profileSettings)) ? null : $headers;
+        return \is_string($this->profileSettings) ? null : $headers;
     }
 
     /**
@@ -46,7 +46,7 @@ class ProfileRequest extends AbstractRequest
         $body = null;
         if ($this->profileSettings instanceof ProfileSettings) {
             $body = $this->profileSettings;
-        } elseif (is_array($this->profileSettings)) {
+        } elseif (\is_array($this->profileSettings)) {
             $body = [
                 'fields' => $this->profileSettings,
             ];
@@ -62,7 +62,7 @@ class ProfileRequest extends AbstractRequest
     {
         $query = parent::buildQuery();
 
-        if (is_string($this->profileSettings)) {
+        if (\is_string($this->profileSettings)) {
             $query += [
                 'fields' => $this->profileSettings,
             ];
