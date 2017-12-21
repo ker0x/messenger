@@ -11,6 +11,6 @@ class TargetAudienceTest extends AbstractTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$audienceType must be either all, custom, none');
-        $targetAudience = new TargetAudience('partial');
+        $targetAudience = TargetAudience::create('partial');
     }
 }

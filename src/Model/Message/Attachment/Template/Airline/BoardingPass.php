@@ -103,6 +103,27 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
+     * @param string                                                                $passengerName
+     * @param string                                                                $pnrNumber
+     * @param string                                                                $logoImageUrl
+     * @param string                                                                $code
+     * @param string                                                                $aboveBarcodeImageUrl
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $flightInfo
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
+     */
+    public static function create(
+        string $passengerName,
+        string $pnrNumber,
+        string $logoImageUrl,
+        string $code,
+        string $aboveBarcodeImageUrl,
+        FlightInfo $flightInfo
+    ): self {
+        return new self($passengerName, $pnrNumber, $logoImageUrl, $code, $aboveBarcodeImageUrl, $flightInfo);
+    }
+
+    /**
      * @param string $travelClass
      *
      * @throws \InvalidArgumentException

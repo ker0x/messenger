@@ -60,6 +60,19 @@ class WebUrl extends AbstractButton
     }
 
     /**
+     * @param string $title
+     * @param string $url
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\WebUrl
+     */
+    public static function create(string $title, string $url): self
+    {
+        return new self($title, $url);
+    }
+
+    /**
      * @param string $webviewHeightRatio
      *
      * @throws \InvalidArgumentException

@@ -37,6 +37,19 @@ class Nested extends AbstractButton
     }
 
     /**
+     * @param string $title
+     * @param array  $buttons
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\Nested
+     */
+    public static function create(string $title, array $buttons): self
+    {
+        return new self($title, $buttons);
+    }
+
+    /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton $button
      *
      * @throws \InvalidArgumentException

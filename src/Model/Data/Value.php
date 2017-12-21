@@ -29,6 +29,17 @@ class Value
     }
 
     /**
+     * @param        $value
+     * @param string $endTime
+     *
+     * @return \Kerox\Messenger\Model\Data\Value
+     */
+    public static function create($value, string $endTime): self
+    {
+        return new self($value, $endTime);
+    }
+
+    /**
      * @return int|array
      */
     public function getValue()

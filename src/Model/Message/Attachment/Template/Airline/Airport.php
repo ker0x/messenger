@@ -39,6 +39,17 @@ class Airport implements \JsonSerializable
     }
 
     /**
+     * @param string $airportCode
+     * @param string $city
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport
+     */
+    public static function create(string $airportCode, string $city): self
+    {
+        return new self($airportCode, $city);
+    }
+
+    /**
      * @param string $terminal
      *
      * @return Airport

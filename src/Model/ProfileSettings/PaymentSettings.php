@@ -26,7 +26,17 @@ class PaymentSettings implements \JsonSerializable
     protected $testUsers = [];
 
     /**
+     * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
      * @param string $privacyUrl
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */

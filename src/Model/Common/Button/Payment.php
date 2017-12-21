@@ -43,6 +43,19 @@ class Payment extends AbstractButton
     }
 
     /**
+     * @param string                                                      $payload
+     * @param \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary $paymentSummary
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\Payment
+     */
+    public static function create(string $payload, PaymentSummary $paymentSummary): self
+    {
+        return new self($payload, $paymentSummary);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

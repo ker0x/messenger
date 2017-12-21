@@ -16,7 +16,7 @@ class MessageTest extends AbstractTestCase
     public function testMessageWithText()
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Message/text.json');
-        $message = new Message('hello, world!');
+        $message = Message::create('hello, world!');
 
         $this->assertJsonStringEqualsJsonString($json, json_encode($message));
     }
@@ -24,28 +24,38 @@ class MessageTest extends AbstractTestCase
     public function testMessageWithReceipt()
     {
         $elements = [
-            (new ReceiptElement('Classic White T-Shirt', 50))->setSubtitle('100% Soft and Luxurious Cotton')->setQuantity(2)->setCurrency('USD')->setImageUrl('http://petersapparel.parseapp.com/img/whiteshirt.png'),
-            (new ReceiptElement('Classic Gray T-Shirt', 25))->setSubtitle('100% Soft and Luxurious Cotton')->setQuantity(1)->setCurrency('USD')->setImageUrl('http://petersapparel.parseapp.com/img/grayshirt.png'),
+            ReceiptElement::create('Classic White T-Shirt', 50)
+                ->setSubtitle('100% Soft and Luxurious Cotton')
+                ->setQuantity(2)
+                ->setCurrency('USD')
+                ->setImageUrl('http://petersapparel.parseapp.com/img/whiteshirt.png'),
+            ReceiptElement::create('Classic Gray T-Shirt', 25)
+                ->setSubtitle('100% Soft and Luxurious Cotton')
+                ->setQuantity(1)
+                ->setCurrency('USD')
+                ->setImageUrl('http://petersapparel.parseapp.com/img/grayshirt.png'),
         ];
 
-        $summary = new Summary(56.14);
-        $summary
+        $summary = Summary::create(56.14)
             ->setSubtotal(75.00)
             ->setShippingCost(4.95)
             ->setTotalTax(6.19);
 
-        $receipt = new ReceiptTemplate('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
-        $receipt
+        $receipt = ReceiptTemplate::create('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary)
             ->setTimestamp('1428444852')
             ->setOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')
-            ->setAddress(new Address('1 Hacker Way', 'Menlo Park', '94025', 'CA', 'US'))
+            ->setAddress(Address::create('1 Hacker Way', 'Menlo Park', '94025', 'CA', 'US'))
             ->setAdjustments([
-                (new Adjustment())->setName('New Customer Discount')->setAmount(20),
-                (new Adjustment())->setName('$10 Off Coupon')->setAmount(10),
+                Adjustment::create()
+                    ->setName('New Customer Discount')
+                    ->setAmount(20),
+                Adjustment::create()
+                    ->setName('$10 Off Coupon')
+                    ->setAmount(10),
             ]);
 
         $json = file_get_contents(__DIR__ . '/../../Mocks/Message/receipt.json');
-        $message = new Message($receipt);
+        $message = Message::create($receipt);
 
         $this->assertJsonStringEqualsJsonString($json, json_encode($message));
     }
@@ -54,13 +64,18 @@ class MessageTest extends AbstractTestCase
     {
         $json = file_get_contents(__DIR__ .  '/../../Mocks/Message/quick_reply.json');
 
-        $message = new Message('Pick a color:');
-        $message
+        $message = Message::create('Pick a color:')
             ->setQuickReplies([
-                (new QuickReply('text'))->setTitle('Red')->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')->setImageUrl('http://petersfantastichats.com/img/red.png'),
-                (new QuickReply('text'))->setTitle('Green')->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')->setImageUrl('http://petersfantastichats.com/img/green.png')
+                QuickReply::create('text')
+                    ->setTitle('Red')
+                    ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')
+                    ->setImageUrl('http://petersfantastichats.com/img/red.png'),
+                QuickReply::create('text')
+                    ->setTitle('Green')
+                    ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')
+                    ->setImageUrl('http://petersfantastichats.com/img/green.png')
             ])
-            ->addQuickReply(new QuickReply('location'))
+            ->addQuickReply(QuickReply::create('location'))
             ->setMetadata('some metadata');
 
         $this->assertJsonStringEqualsJsonString($json, json_encode($message));
@@ -77,11 +92,16 @@ class MessageTest extends AbstractTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Array can only contain instance of QuickReply.');
-        $message = new Message('Pick a color:');
-        $message
+        $message = Message::create('Pick a color:')
             ->setQuickReplies([
-                (new QuickReply('text'))->setTitle('Red')->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')->setImageUrl('http://petersfantastichats.com/img/red.png'),
-                (new QuickReply('text'))->setTitle('Green')->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')->setImageUrl('http://petersfantastichats.com/img/green.png'),
+                QuickReply::create('text')
+                    ->setTitle('Red')
+                    ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')
+                    ->setImageUrl('http://petersfantastichats.com/img/red.png'),
+                QuickReply::create('text')
+                    ->setTitle('Green')
+                    ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')
+                    ->setImageUrl('http://petersfantastichats.com/img/green.png'),
                 'Hello'
             ]);
     }

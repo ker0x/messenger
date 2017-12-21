@@ -55,6 +55,25 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     }
 
     /**
+     * @param string                                                                $updateType
+     * @param string                                                                $locale
+     * @param string                                                                $pnrNumber
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
+     */
+    public static function create(
+        string $updateType,
+        string $locale,
+        string $pnrNumber,
+        FlightInfo $updateFlightInfo
+    ): self {
+        return new self($updateType, $locale, $pnrNumber, $updateFlightInfo);
+    }
+
+    /**
      * @param string $introMessage
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate

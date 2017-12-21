@@ -92,6 +92,40 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     }
 
     /**
+     * @param string $introMessage
+     * @param string $locale
+     * @param string $pnrNumber
+     * @param array  $passengerInfo
+     * @param array  $flightInfo
+     * @param array  $passengerSegmentInfo
+     * @param string $totalPrice
+     * @param string $currency
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
+     */
+    public static function create(
+        string $introMessage,
+        string $locale,
+        string $pnrNumber,
+        array $passengerInfo,
+        array $flightInfo,
+        array $passengerSegmentInfo,
+        string $totalPrice,
+        string $currency
+    ): self {
+        return new self(
+            $introMessage,
+            $locale,
+            $pnrNumber,
+            $passengerInfo,
+            $flightInfo,
+            $passengerSegmentInfo,
+            $totalPrice,
+            $currency
+        );
+    }
+
+    /**
      * @param string $title
      * @param string $amount
      * @param string $currency

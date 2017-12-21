@@ -37,6 +37,19 @@ class ReceiptElement extends AbstractElement
     }
 
     /**
+     * @param string $title
+     * @param float  $price
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
+     */
+    public static function create(string $title, float $price): self
+    {
+        return new self($title, $price);
+    }
+
+    /**
      * @param string $subtitle
      *
      * @throws \InvalidArgumentException

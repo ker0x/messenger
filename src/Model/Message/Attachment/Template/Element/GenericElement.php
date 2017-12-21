@@ -19,15 +19,15 @@ class GenericElement extends AbstractElement
     protected $buttons = [];
 
     /**
-     * Element constructor.
-     *
      * @param string $title
      *
      * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
-    public function __construct(string $title)
+    public static function create(string $title): self
     {
-        parent::__construct($title);
+        return new self($title);
     }
 
     /**

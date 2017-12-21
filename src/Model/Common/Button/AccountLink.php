@@ -28,6 +28,18 @@ class AccountLink extends AbstractButton
     }
 
     /**
+     * @param string $url
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\AccountLink
+     */
+    public static function create(string $url): self
+    {
+        return new self($url);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

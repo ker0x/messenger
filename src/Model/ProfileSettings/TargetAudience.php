@@ -55,6 +55,23 @@ class TargetAudience implements \JsonSerializable
     }
 
     /**
+     * @param string $audienceType
+     * @param array  $whitelistCountries
+     * @param array  $blacklistCountries
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
+     */
+    public static function create(
+        string $audienceType = self::AUDIENCE_TYPE_ALL,
+        array $whitelistCountries = [],
+        array $blacklistCountries = []
+    ): self {
+        return new self($audienceType, $whitelistCountries, $blacklistCountries);
+    }
+
+    /**
      * @param string $country
      *
      * @throws \InvalidArgumentException

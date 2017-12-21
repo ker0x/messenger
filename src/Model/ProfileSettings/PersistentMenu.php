@@ -43,6 +43,18 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     }
 
     /**
+     * @param string $locale
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
+     */
+    public static function create(string $locale = self::DEFAULT_LOCALE): self
+    {
+        return new self($locale);
+    }
+
+    /**
      * @param bool $composerInputDisabled
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu

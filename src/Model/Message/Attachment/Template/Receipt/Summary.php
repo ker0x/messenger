@@ -37,6 +37,16 @@ class Summary implements \JsonSerializable
     }
 
     /**
+     * @param float $totalCost
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary
+     */
+    public static function create(float $totalCost): self
+    {
+        return new self($totalCost);
+    }
+
+    /**
      * @param float $subtotal
      *
      * @return Summary

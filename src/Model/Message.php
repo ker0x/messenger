@@ -44,7 +44,7 @@ class Message implements \JsonSerializable
      */
     public function __construct($message)
     {
-        if (is_string($message)) {
+        if (\is_string($message)) {
             $this->isValidString($message, 640);
             $this->type = self::TYPE_TEXT;
         } elseif ($message instanceof Attachment) {
@@ -54,6 +54,18 @@ class Message implements \JsonSerializable
         }
 
         $this->message = $message;
+    }
+
+    /**
+     * @param $message
+     *
+     * @throws \Exception
+     *
+     * @return \Kerox\Messenger\Model\Message
+     */
+    public static function create($message): self
+    {
+        return new self($message);
     }
 
     /**
@@ -120,13 +132,13 @@ class Message implements \JsonSerializable
      */
     public function toArray(): array
     {
-        $json = [
+        $array = [
             $this->type     => $this->message,
             'quick_replies' => $this->quickReplies,
             'metadata'      => $this->metadata,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
     }
 
     /**

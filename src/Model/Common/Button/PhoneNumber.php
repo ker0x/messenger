@@ -36,6 +36,19 @@ class PhoneNumber extends AbstractButton
     }
 
     /**
+     * @param string $title
+     * @param string $payload
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\PhoneNumber
+     */
+    public static function create(string $title, string $payload): self
+    {
+        return new self($title, $payload);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

@@ -34,6 +34,17 @@ class PassengerInfo implements \JsonSerializable
     }
 
     /**
+     * @param string $passengerId
+     * @param string $name
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerInfo
+     */
+    public static function create(string $passengerId, string $name): self
+    {
+        return new self($passengerId, $name);
+    }
+
+    /**
      * @param string $ticketNumber
      *
      * @return PassengerInfo

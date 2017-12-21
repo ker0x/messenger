@@ -7,7 +7,7 @@ namespace Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Helper\ValidatorTrait;
 
-class Attachment implements \JsonSerializable
+abstract class Attachment implements \JsonSerializable
 {
     use UtilityTrait;
     use ValidatorTrait;
@@ -38,11 +38,9 @@ class Attachment implements \JsonSerializable
      */
     public function toArray(): array
     {
-        $array = [
+        return [
             'type' => $this->type,
         ];
-
-        return $array;
     }
 
     /**

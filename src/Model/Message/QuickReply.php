@@ -48,6 +48,18 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
+     * @param string $contentType
+     *
+     * @throws \Exception
+     *
+     * @return \Kerox\Messenger\Model\Message\QuickReply
+     */
+    public static function create(string $contentType): self
+    {
+        return new self($contentType);
+    }
+
+    /**
      * @param string $title
      *
      * @throws \Exception

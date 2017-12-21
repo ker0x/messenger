@@ -73,6 +73,27 @@ class PaymentSummary implements \JsonSerializable
     }
 
     /**
+     * @param string $currency
+     * @param string $paymentType
+     * @param string $merchantName
+     * @param array  $requestedUserInfo
+     * @param array  $priceList
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary
+     */
+    public static function create(
+        string $currency,
+        string $paymentType,
+        string $merchantName,
+        array $requestedUserInfo,
+        array $priceList
+    ): self {
+        return new self($currency, $paymentType, $merchantName, $requestedUserInfo, $priceList);
+    }
+
+    /**
      * @param bool $isTestPayment
      *
      * @return PaymentSummary

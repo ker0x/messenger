@@ -30,6 +30,18 @@ class GenericTemplate extends Template
     }
 
     /**
+     * @param array $elements
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate
+     */
+    public static function create(array $elements): self
+    {
+        return new self($elements);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

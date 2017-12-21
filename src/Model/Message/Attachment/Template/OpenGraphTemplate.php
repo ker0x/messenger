@@ -30,6 +30,18 @@ class OpenGraphTemplate extends Template
     }
 
     /**
+     * @param array $elements
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate
+     */
+    public static function create(array $elements): self
+    {
+        return new self($elements);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

@@ -53,7 +53,7 @@ class CheckoutUpdate
      */
     public static function create(array $callbackData): self
     {
-        $shippingAddress = Address::create($callbackData['shipping_address']);
+        $shippingAddress = Address::fromPayload($callbackData['shipping_address']);
 
         return new static($callbackData['payload'], $shippingAddress);
     }

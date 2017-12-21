@@ -21,22 +21,25 @@ class ProfileSettingsTest extends AbstractTestCase
 
     public function setUp()
     {
-        $this->profileSettings = new ProfileSettings();
+        $this->profileSettings = ProfileSettings::create();
     }
 
     public function testPersistentMenu()
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/persistent_menu.json');
         $persistentMenus= $this->profileSettings->addPersistentMenus([
-            (new PersistentMenu())->setComposerInputDisabled(true)->addButtons([
-                (new Nested('My Account', [
-                    new Postback('Pay Bill', 'PAYBILL_PAYLOAD'),
-                    new Postback('History', 'HISTORY_PAYLOAD'),
-                    new Postback('Contact Info', 'CONTACT_INFO_PAYLOAD'),
-                ])),
-                (new WebUrl('Latest News', 'http://petershats.parseapp.com/hat-news'))->setWebviewHeightRatio('full')
-            ]),
-            (new PersistentMenu('zh_CN'))
+            PersistentMenu::create()
+                ->setComposerInputDisabled(true)
+                ->addButtons([
+                    Nested::create('My Account', [
+                        Postback::create('Pay Bill', 'PAYBILL_PAYLOAD'),
+                        Postback::create('History', 'HISTORY_PAYLOAD'),
+                        Postback::create('Contact Info', 'CONTACT_INFO_PAYLOAD'),
+                    ]),
+                    WebUrl::create('Latest News', 'http://petershats.parseapp.com/hat-news')
+                        ->setWebviewHeightRatio('full')
+                ]),
+            PersistentMenu::create('zh_CN')
         ]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($persistentMenus));
@@ -54,8 +57,8 @@ class ProfileSettingsTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/greeting.json');
         $greetings = $this->profileSettings->addGreetings([
-            new Greeting('Hello!'),
-            new Greeting('Timeless apparel for the masses.', 'en_US'),
+            Greeting::create('Hello!'),
+            Greeting::create('Timeless apparel for the masses.', 'en_US'),
         ]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($greetings));
@@ -83,7 +86,7 @@ class ProfileSettingsTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/payment_settings.json');
         $paymentSettings = $this->profileSettings->addPaymentSettings(
-            (new PaymentSettings())
+            PaymentSettings::create()
                 ->setPrivacyUrl('http://www.facebook.com')
                 ->setPublicKey('YOUR_PUBLIC_KEY')
                 ->addTestUser(12345678)
@@ -96,7 +99,7 @@ class ProfileSettingsTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/target_audience.json');
         $targetAudience = $this->profileSettings->addTargetAudience(
-            (new TargetAudience('custom', ['US'], ['FR']))
+            TargetAudience::create('custom', ['US'], ['FR'])
                 ->addWhitelistCountry('CA')
                 ->addBlacklistCountry('IT')
         );

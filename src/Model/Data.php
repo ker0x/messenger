@@ -144,6 +144,6 @@ class Data
      */
     public static function create(array $data): self
     {
-        return new static($data);
+        return new self($data);
     }
 }

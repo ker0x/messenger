@@ -36,6 +36,18 @@ class OpenGraphElement implements \JsonSerializable
     }
 
     /**
+     * @param string $url
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement
+     */
+    public static function create(string $url): self
+    {
+        return new self($url);
+    }
+
+    /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
      * @throws \InvalidArgumentException

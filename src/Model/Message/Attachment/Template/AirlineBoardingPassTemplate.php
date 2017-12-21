@@ -24,6 +24,8 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
      * @param string                                                                    $introMessage
      * @param string                                                                    $locale
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass[] $boardingPass
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $introMessage, string $locale, array $boardingPass)
     {
@@ -31,6 +33,20 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
 
         $this->introMessage = $introMessage;
         $this->boardingPass = $boardingPass;
+    }
+
+    /**
+     * @param string $introMessage
+     * @param string $locale
+     * @param array  $boardingPass
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineBoardingPassTemplate
+     */
+    public static function create(string $introMessage, string $locale, array $boardingPass): self
+    {
+        return new self($introMessage, $locale, $boardingPass);
     }
 
     /**

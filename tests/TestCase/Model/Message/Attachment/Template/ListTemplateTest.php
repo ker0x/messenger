@@ -7,7 +7,7 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
-class ListeTest extends AbstractTestCase
+class ListTemplateTest extends AbstractTestCase
 {
 
     public function testInvalidTopElementStyle()
@@ -15,43 +15,42 @@ class ListeTest extends AbstractTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$topElementStyle must be either large, compact');
 
-        $element1 = (new ListElement('Classic White T-Shirt'))
+        $element1 = ListElement::create('Classic White T-Shirt')
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png')
             ->setSubtitle('100% Cotton, 200% Comfortable')
             ->setDefaultAction(
-                (new WebUrl('', 'https://peterssendreceiveapp.ngrok.io/view?item=100'))
+                WebUrl::create('', 'https://peterssendreceiveapp.ngrok.io/view?item=100')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             )
             ->setButtons([
-                (new WebUrl('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=100'))
+                WebUrl::create('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=100')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             ]);
 
-        $element2 = (new ListElement('Classic Blue T-Shirt'))
+        $element2 = ListElement::create('Classic Blue T-Shirt')
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png')
             ->setSubtitle('100% Cotton, 200% Comfortable')
             ->setDefaultAction(
-                (new WebUrl('', 'https://peterssendreceiveapp.ngrok.io/view?item=101'))
+                WebUrl::create('', 'https://peterssendreceiveapp.ngrok.io/view?item=101')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             )
             ->setButtons([
-                (new WebUrl('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=101'))
+                WebUrl::create('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=101')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
             ]);
 
-        $liste = new ListTemplate([$element1, $element2]);
-        $liste
+        $liste = ListTemplate::create([$element1, $element2])
             ->setTopElementStyle('x-large')
             ->setButtons([
-                new Postback('View More', 'payload')
+                Postback::create('View More', 'payload')
             ]);
     }
 }

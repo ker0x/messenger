@@ -40,6 +40,18 @@ class FlightSchedule implements \JsonSerializable
     }
 
     /**
+     * @param string $departureTime
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule
+     */
+    public static function create(string $departureTime): self
+    {
+        return new self($departureTime);
+    }
+
+    /**
      * @param string $boardingTime
      *
      * @throws \InvalidArgumentException

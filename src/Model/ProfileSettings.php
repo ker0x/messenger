@@ -48,6 +48,14 @@ class ProfileSettings implements \JsonSerializable
     protected $targetAudience;
 
     /**
+     * @return \Kerox\Messenger\Model\ProfileSettings
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
      * @param \Kerox\Messenger\Model\ProfileSettings\PersistentMenu[] $persistentMenus
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
@@ -164,7 +172,7 @@ class ProfileSettings implements \JsonSerializable
      */
     public function toArray(): array
     {
-        $json = [
+        $array = [
             'persistent_menu'     => $this->persistentMenus,
             'get_started'         => $this->startButton,
             'greeting'            => $this->greetings,
@@ -174,7 +182,7 @@ class ProfileSettings implements \JsonSerializable
             'target_audience'     => $this->targetAudience,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
     }
 
     /**

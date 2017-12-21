@@ -36,6 +36,8 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
      * @param string $pnrNumber
      * @param array  $flightInfo
      * @param string $checkinUrl
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(
         string $introMessage,
@@ -50,6 +52,27 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
         $this->pnrNumber = $pnrNumber;
         $this->flightInfo = $flightInfo;
         $this->checkinUrl = $checkinUrl;
+    }
+
+    /**
+     * @param string $introMessage
+     * @param string $locale
+     * @param string $pnrNumber
+     * @param array  $flightInfo
+     * @param string $checkinUrl
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckInTemplate
+     */
+    public static function create(
+        string $introMessage,
+        string $locale,
+        string $pnrNumber,
+        array $flightInfo,
+        string $checkinUrl
+    ): self {
+        return new self($introMessage, $locale, $pnrNumber, $flightInfo, $checkinUrl);
     }
 
     /**

@@ -41,6 +41,19 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
     }
 
     /**
+     * @param string $text
+     * @param string $locale
+     *
+     * @throws \Exception
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings\Greeting
+     */
+    public static function create(string $text, string $locale = self::DEFAULT_LOCALE): self
+    {
+        return new self($text, $locale);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

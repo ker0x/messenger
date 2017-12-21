@@ -87,7 +87,7 @@ class RequestedUserInfo
      */
     public static function create(array $callbackData): self
     {
-        $shippingAddress = Address::create($callbackData['shipping_address']);
+        $shippingAddress = Address::fromPayload($callbackData['shipping_address']);
 
         $contactEmail = $callbackData['contact_email'] ?? null;
         $contactPhone = $callbackData['contact_phone'] ?? null;

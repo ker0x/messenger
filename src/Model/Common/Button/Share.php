@@ -29,6 +29,16 @@ class Share extends AbstractButton
     }
 
     /**
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate|null $content
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\Share
+     */
+    public static function create(?GenericTemplate $content = null): self
+    {
+        return new self($content);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

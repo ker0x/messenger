@@ -24,6 +24,14 @@ class Adjustment implements \JsonSerializable
     }
 
     /**
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
      * @param string $name
      *
      * @return Adjustment

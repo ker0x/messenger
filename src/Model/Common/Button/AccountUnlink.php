@@ -13,4 +13,12 @@ class AccountUnlink extends AbstractButton
     {
         parent::__construct(self::TYPE_ACCOUNT_UNLINK);
     }
+
+    /**
+     * @return \Kerox\Messenger\Model\Common\Button\AccountUnlink
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
 }

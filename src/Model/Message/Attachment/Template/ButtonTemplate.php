@@ -38,6 +38,19 @@ class ButtonTemplate extends Template
     }
 
     /**
+     * @param string $text
+     * @param array  $buttons
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate
+     */
+    public static function create(string $text, array $buttons): self
+    {
+        return new self($text, $buttons);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

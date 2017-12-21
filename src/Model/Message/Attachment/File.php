@@ -47,6 +47,19 @@ class File extends Attachment
     }
 
     /**
+     * @param string    $url
+     * @param bool|null $reusable
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\File
+     */
+    public static function create($url, ?bool $reusable = null): self
+    {
+        return new self($url, $reusable);
+    }
+
+    /**
      * @param $value
      *
      * @return bool
