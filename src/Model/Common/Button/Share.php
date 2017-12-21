@@ -12,7 +12,7 @@ class Share extends AbstractButton
     use UtilityTrait;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Message\Attachment\Template\Generic
+     * @var null|\Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate
      */
     protected $content;
 
