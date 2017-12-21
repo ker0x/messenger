@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
-class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
+class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterface
 {
     /**
      * @var string
@@ -36,6 +36,8 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $arrivalAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
      * @param string                                                                    $travelClass
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(
         string $connectionId,
@@ -53,6 +55,39 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
         $this->connectionId = $connectionId;
         $this->segmentId = $segmentId;
         $this->travelClass = $travelClass;
+    }
+
+    /**
+     * @param string                                                                    $connectionId
+     * @param string                                                                    $segmentId
+     * @param string                                                                    $flightNumber
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $departureAirport
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $arrivalAirport
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
+     * @param string                                                                    $travelClass
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\ExtendedFlightInfo
+     */
+    public static function create(
+        string $connectionId,
+        string $segmentId,
+        string $flightNumber,
+        Airport $departureAirport,
+        Airport $arrivalAirport,
+        FlightSchedule $flightSchedule,
+        string $travelClass
+    ): self {
+        return new self(
+            $connectionId,
+            $segmentId,
+            $flightNumber,
+            $departureAirport,
+            $arrivalAirport,
+            $flightSchedule,
+            $travelClass
+        );
     }
 
     /**
@@ -75,7 +110,7 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
     public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
-        if (!in_array($travelClass, $allowedTravelClass, true)) {
+        if (!\in_array($travelClass, $allowedTravelClass, true)) {
             throw new \InvalidArgumentException('$travelClass must be either ' . implode(', ', $allowedTravelClass));
         }
     }
@@ -95,9 +130,9 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'connection_id'     => $this->connectionId,
             'segment_id'        => $this->segmentId,
             'flight_number'     => $this->flightNumber,
@@ -108,6 +143,6 @@ class ExtendedFlightInfo extends FlightInfo implements TravelClassInterface
             'flight_schedule'   => $this->flightSchedule,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
     }
 }

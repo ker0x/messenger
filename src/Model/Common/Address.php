@@ -70,6 +70,25 @@ class Address implements \JsonSerializable
     }
 
     /**
+     * @param string $street
+     * @param string $city
+     * @param string $postalCode
+     * @param string $state
+     * @param string $country
+     *
+     * @return \Kerox\Messenger\Model\Common\Address
+     */
+    public static function create(
+        string $street,
+        string $city,
+        string $postalCode,
+        string $state,
+        string $country
+    ): self {
+        return new self($street, $city, $postalCode, $state, $country);
+    }
+
+    /**
      * @param string $name
      *
      * @return \Kerox\Messenger\Model\Common\Address
@@ -172,9 +191,9 @@ class Address implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'name'        => $this->name,
             'street_1'    => $this->street,
             'street_2'    => $this->additionalStreet,
@@ -185,17 +204,25 @@ class Address implements \JsonSerializable
             'id'          => $this->id,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 
     /**
      * @param array $payload
      *
-     * @return static
+     * @return \Kerox\Messenger\Model\Common\Address
      */
-    public static function create(array $payload)
+    public static function fromPayload(array $payload): self
     {
-        $address = new static(
+        $address = self::create(
             $payload['street_1'],
             $payload['city'],
             $payload['postal_code'],

@@ -12,7 +12,7 @@ use Kerox\Messenger\Model\Common\Button\Postback;
 use Kerox\Messenger\Model\Common\Button\Share;
 use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
-use Kerox\Messenger\Model\Message\Attachment\Template\Generic;
+use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ButtonTest extends AbstractTestCase
@@ -22,7 +22,7 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/account_link.json');
 
-        $buttonAccountLink = new AccountLink('https://www.example.com/authorize');
+        $buttonAccountLink = AccountLink::create('https://www.example.com/authorize');
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonAccountLink));
     }
@@ -31,7 +31,7 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/account_unlink.json');
 
-        $buttonAccountUnlink = new AccountUnlink();
+        $buttonAccountUnlink = AccountUnlink::create();
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonAccountUnlink));
     }
@@ -40,7 +40,7 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/payment.json');
 
-        $paymentSummary = new PaymentSummary(
+        $paymentSummary = PaymentSummary::create(
             'USD',
             PaymentSummary::PAYMENT_TYPE_FIXED_AMOUNT,
             'Peter\'s Apparel',
@@ -51,15 +51,12 @@ class ButtonTest extends AbstractTestCase
                 PaymentSummary::USER_INFO_CONTACT_EMAIL,
             ],
             [
-                new PriceList('Subtotal', '29.99'),
-                new PriceList('Taxes', '2.47'),
+                PriceList::create('Subtotal', '29.99'),
+                PriceList::create('Taxes', '2.47'),
             ]
-        );
-        $paymentSummary
-            ->isTestPayment(true)
-            ->addPriceList('Shipment', '3');
+        )->isTestPayment(true)->addPriceList('Shipment', '3');
 
-        $buttonPayment = new Payment('DEVELOPER_DEFINED_PAYLOAD', $paymentSummary);
+        $buttonPayment = Payment::create('DEVELOPER_DEFINED_PAYLOAD', $paymentSummary);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPayment));
     }
@@ -68,7 +65,7 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/phone_number.json');
 
-        $buttonPhoneNumber = new PhoneNumber('Call Representative', '+15105551234');
+        $buttonPhoneNumber = PhoneNumber::create('Call Representative', '+15105551234');
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPhoneNumber));
     }
@@ -77,7 +74,7 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/postback.json');
 
-        $buttonPostback = new Postback('Bookmark Item', 'DEVELOPER_DEFINED_PAYLOAD');
+        $buttonPostback = Postback::create('Bookmark Item', 'DEVELOPER_DEFINED_PAYLOAD');
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPostback));
     }
@@ -86,17 +83,17 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/share.json');
 
-        $generic = new Generic([
-            (new GenericElement('I took Peter\'s \'Which Hat Are You?\' Quiz'))
+        $generic = GenericTemplate::create([
+            GenericElement::create('I took Peter\'s \'Which Hat Are You?\' Quiz')
                 ->setSubtitle('My result: Fez')
                 ->setImageUrl('https://bot.peters-hats.com/img/hats/fez.jpg')
                 ->setDefaultAction(new WebUrl('', 'http://m.me/petershats?ref=invited_by_24601'))
                 ->setButtons([
-                    new WebUrl('Take Quiz', 'http://m.me/petershats?ref=invited_by_24601'),
+                    WebUrl::create('Take Quiz', 'http://m.me/petershats?ref=invited_by_24601'),
                 ])
         ]);
 
-        $buttonShare = new Share($generic);
+        $buttonShare = Share::create($generic);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonShare));
     }
@@ -105,8 +102,7 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/weburl.json');
 
-        $buttonWebUrl = new WebUrl('Select Criteria', 'https://petersfancyapparel.com/criteria_selector');
-        $buttonWebUrl
+        $buttonWebUrl = WebUrl::create('Select Criteria', 'https://petersfancyapparel.com/criteria_selector')
             ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_FULL)
             ->setMessengerExtension(true)
             ->setFallbackUrl('https://petersfancyapparel.com/fallback')
@@ -119,10 +115,9 @@ class ButtonTest extends AbstractTestCase
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/nested.json');
 
-        $buttonNested = new Nested('My Account', [new Postback('Pay Bill', 'PAYBILL_PAYLOAD')]);
-        $buttonNested
-            ->addButton(new Postback('History', 'HISTORY_PAYLOAD'))
-            ->addButton(new Postback('Contact Info', 'CONTACT_INFO_PAYLOAD'));
+        $buttonNested = Nested::create('My Account', [new Postback('Pay Bill', 'PAYBILL_PAYLOAD')])
+            ->addButton(Postback::create('History', 'HISTORY_PAYLOAD'))
+            ->addButton(Postback::create('Contact Info', 'CONTACT_INFO_PAYLOAD'));
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonNested));
     }

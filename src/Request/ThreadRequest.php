@@ -43,12 +43,4 @@ class ThreadRequest extends AbstractRequest
     {
         return $this->threadControl;
     }
-
-    /**
-     * @return array
-     */
-    protected function buildQuery(): array
-    {
-        return parent::buildQuery();
-    }
 }

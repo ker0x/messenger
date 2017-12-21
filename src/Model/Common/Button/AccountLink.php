@@ -15,6 +15,8 @@ class AccountLink extends AbstractButton
      * AccountLink constructor.
      *
      * @param string $url
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $url)
     {
@@ -26,15 +28,27 @@ class AccountLink extends AbstractButton
     }
 
     /**
+     * @param string $url
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\AccountLink
+     */
+    public static function create(string $url): self
+    {
+        return new self($url);
+    }
+
+    /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'url' => $this->url,
         ];
 
-        return $json;
+        return $array;
     }
 }

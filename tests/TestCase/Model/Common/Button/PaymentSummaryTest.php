@@ -21,11 +21,11 @@ class PaymentSummaryTest extends AbstractTestCase
         ];
 
         $priceList = [
-            new PriceList('Subtotal', '29.99'),
-            new PriceList('Taxes', '2.47'),
+            PriceList::create('Subtotal', '29.99'),
+            PriceList::create('Taxes', '2.47'),
         ];
 
-        $paymentSummary = new PaymentSummary(
+        $paymentSummary = PaymentSummary::create(
             'USD',
             'MOVING_AMOUNT',
             'Peter\'s Apparel',
@@ -40,8 +40,8 @@ class PaymentSummaryTest extends AbstractTestCase
         $this->expectExceptionMessage('billing_address is not a valid value. Valid values are shipping_address, contact_name, contact_phone, contact_email');
 
         $priceList = [
-            new PriceList('Subtotal', '29.99'),
-            new PriceList('Taxes', '2.47'),
+            PriceList::create('Subtotal', '29.99'),
+            PriceList::create('Taxes', '2.47'),
         ];
 
         $paymentSummary = new PaymentSummary(

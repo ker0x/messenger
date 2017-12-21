@@ -91,7 +91,7 @@ class Referral
      */
     public static function create(array $referral): self
     {
-        $self = new static($referral['source'], $referral['type'], $referral['ad_id']);
+        $self = new self($referral['source'], $referral['type'], $referral['ad_id']);
         if (isset($referral['ref'])) {
             $self->setRef($referral['ref']);
         }

@@ -7,13 +7,21 @@ namespace Kerox\Messenger\Request;
 class InsightsRequest extends AbstractRequest
 {
     /**
-     * InsightsRequest constructor.
+     * @var array
+     */
+    protected $metrics;
+
+    /**
+     * UserRequest constructor.
      *
      * @param string $pageToken
+     * @param array  $metrics
      */
-    public function __construct(string $pageToken)
+    public function __construct(string $pageToken, array $metrics)
     {
         parent::__construct($pageToken);
+
+        $this->metrics = $metrics;
     }
 
     protected function buildHeaders(): void
@@ -29,6 +37,13 @@ class InsightsRequest extends AbstractRequest
      */
     protected function buildQuery(): array
     {
-        return parent::buildQuery();
+        $metrics = implode(',', $this->metrics);
+
+        $query = parent::buildQuery();
+        $query += [
+            'metric' => $metrics,
+        ];
+
+        return $query;
     }
 }

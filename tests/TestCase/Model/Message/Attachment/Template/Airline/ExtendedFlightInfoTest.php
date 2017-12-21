@@ -11,12 +11,12 @@ class ExtendedFlightInfoTest extends AbstractTestCase
 
     public function testInvalidTravelClass()
     {
-        $departureAirport = (new Airport('SFO', 'San Francisco'))->setTerminal('T4')->setGate('G8');
-        $arrivalAirport = (new Airport('SLC', 'Salt Lake City'))->setTerminal('T4')->setGate('G8');
-        $flightSchedule = (new FlightSchedule('2016-01-02T19:45'))->setArrivalTime('2016-01-02T21:20');
+        $departureAirport = Airport::create('SFO', 'San Francisco')->setTerminal('T4')->setGate('G8');
+        $arrivalAirport = Airport::create('SLC', 'Salt Lake City')->setTerminal('T4')->setGate('G8');
+        $flightSchedule = FlightSchedule::create('2016-01-02T19:45')->setArrivalTime('2016-01-02T21:20');
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$travelClass must be either economy, business, first_class');
-        $airlineExtendedFlightInfo = new ExtendedFlightInfo('c001', 's001', 'KL9123', $departureAirport, $arrivalAirport, $flightSchedule, 'second_class');
+        $airlineExtendedFlightInfo = ExtendedFlightInfo::create('c001', 's001', 'KL9123', $departureAirport, $arrivalAirport, $flightSchedule, 'second_class');
     }
 }

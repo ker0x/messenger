@@ -26,7 +26,17 @@ class PaymentSettings implements \JsonSerializable
     protected $testUsers = [];
 
     /**
+     * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
      * @param string $privacyUrl
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
@@ -65,14 +75,22 @@ class PaymentSettings implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'privacy_url' => $this->privacyUrl,
             'public_key'  => $this->publicKey,
             'test_users'  => $this->testUsers,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

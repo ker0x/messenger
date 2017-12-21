@@ -12,7 +12,7 @@ class ValueTest extends AbstractTestCase
         $json = file_get_contents(__DIR__ . '/../../../Mocks/Data/threads_value.json');
         $value = json_decode($json, true);
 
-        $threadsValue = new Value($value['value'], $value['end_time']);
+        $threadsValue = Value::create($value['value'], $value['end_time']);
 
         $this->assertEquals(83111, $threadsValue->getValue());
         $this->assertEquals('2017-02-02T08:00:00+0000', $threadsValue->getEndTime(false));
@@ -24,7 +24,7 @@ class ValueTest extends AbstractTestCase
         $json = file_get_contents(__DIR__ . '/../../../Mocks/Data/feedback_value.json');
         $value = json_decode($json, true);
 
-        $feedbackValue = new Value($value['value'], $value['end_time']);
+        $feedbackValue = Value::create($value['value'], $value['end_time']);
 
         $this->assertEquals([
             'TURN_ON' => 40,

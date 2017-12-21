@@ -97,7 +97,7 @@ trait ValidatorTrait
      */
     protected function isValidArray(array $array, int $maxSize, ?int $minSize = null): void
     {
-        $countArray = count($array);
+        $countArray = \count($array);
         if ($minSize !== null && $countArray < $minSize) {
             throw new InvalidArgumentException("The minimum number of items for this array is {$minSize}.");
         }
@@ -129,7 +129,7 @@ trait ValidatorTrait
     protected function isValidExtension(string $filename, array $allowedExtension): void
     {
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        if (empty($ext) || !in_array($ext, $allowedExtension, true)) {
+        if (empty($ext) || !\in_array($ext, $allowedExtension, true)) {
             throw new InvalidArgumentException(
                 "{$filename} doesn't have a valid extension. Allowed extensions are " . implode(', ', $allowedExtension)
             );
@@ -139,6 +139,8 @@ trait ValidatorTrait
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      * @param array                                                 $allowedButtonsType
+     *
+     * @throws \InvalidArgumentException
      */
     protected function isValidButtons(array $buttons, array $allowedButtonsType): void
     {
@@ -148,7 +150,7 @@ trait ValidatorTrait
                 throw new \InvalidArgumentException('Array can only contain instance of AbstractButton.');
             }
 
-            if (!in_array($button->getType(), $allowedButtonsType, true)) {
+            if (!\in_array($button->getType(), $allowedButtonsType, true)) {
                 throw new \InvalidArgumentException(
                     'Buttons can only be an instance of ' . implode(', ', $allowedButtonsType)
                 );

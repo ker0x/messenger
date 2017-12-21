@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class AirlineCheckIn extends AbstractAirline
+class AirlineCheckInTemplate extends AbstractAirlineTemplate
 {
     /**
      * @var string
@@ -36,6 +36,8 @@ class AirlineCheckIn extends AbstractAirline
      * @param string $pnrNumber
      * @param array  $flightInfo
      * @param string $checkinUrl
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(
         string $introMessage,
@@ -53,12 +55,33 @@ class AirlineCheckIn extends AbstractAirline
     }
 
     /**
+     * @param string $introMessage
+     * @param string $locale
+     * @param string $pnrNumber
+     * @param array  $flightInfo
+     * @param string $checkinUrl
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckInTemplate
+     */
+    public static function create(
+        string $introMessage,
+        string $locale,
+        string $pnrNumber,
+        array $flightInfo,
+        string $checkinUrl
+    ): self {
+        return new self($introMessage, $locale, $pnrNumber, $flightInfo, $checkinUrl);
+    }
+
+    /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type' => Template::TYPE_AIRLINE_CHECKIN,
                 'intro_message' => $this->introMessage,
@@ -70,6 +93,6 @@ class AirlineCheckIn extends AbstractAirline
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

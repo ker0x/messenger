@@ -1,0 +1,19 @@
+{
+  "type": "template",
+  "payload": {
+    "template_type": "media",
+    "elements": [
+      {
+        "media_type": "video",
+        "url": "https://www.facebook.com/ker0x/videos/1234567890/",
+        "buttons": [
+          {
+            "type": "web_url",
+            "title": "Learn More",
+            "url": "https://en.wikipedia.org/wiki/Rickrolling"
+          }
+        ]
+      }
+    ]
+  }
+}

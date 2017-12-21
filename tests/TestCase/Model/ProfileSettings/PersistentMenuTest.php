@@ -16,7 +16,7 @@ class PersistentMenuTest extends AbstractTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Array can only contain instance of AbstractButton.');
 
-        $persistentMenu = (new PersistentMenu())->setComposerInputDisabled(true)->addButtons([
+        $persistentMenu = PersistentMenu::create()->setComposerInputDisabled(true)->addButtons([
             'Phone Number' => [
                 'payload' => 'PHONE_NUMBER_PAYLOAD'
             ],
@@ -28,14 +28,14 @@ class PersistentMenuTest extends AbstractTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Buttons can only be an instance of web_url, postback, nested');
 
-        $persistentMenu = (new PersistentMenu())->setComposerInputDisabled(true)->addButtons([
-            (new PhoneNumber('Phone number', 'PHONE_NUMBER_PAYLOAD')),
-            (new Nested('My Account', [
-                new Postback('Pay Bill', 'PAYBILL_PAYLOAD'),
-                new Postback('History', 'HISTORY_PAYLOAD'),
-                new Postback('Contact Info', 'CONTACT_INFO_PAYLOAD'),
-            ])),
-            (new WebUrl('Latest News', 'http://petershats.parseapp.com/hat-news'))->setWebviewHeightRatio('full')
+        $persistentMenu = PersistentMenu::create()->setComposerInputDisabled(true)->addButtons([
+            PhoneNumber::create('Phone number', 'PHONE_NUMBER_PAYLOAD'),
+            Nested::create('My Account', [
+                Postback::create('Pay Bill', 'PAYBILL_PAYLOAD'),
+                Postback::create('History', 'HISTORY_PAYLOAD'),
+                Postback::create('Contact Info', 'CONTACT_INFO_PAYLOAD'),
+            ]),
+            WebUrl::create('Latest News', 'http://petershats.parseapp.com/hat-news')->setWebviewHeightRatio('full')
         ]);
     }
 }

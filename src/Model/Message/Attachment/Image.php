@@ -8,18 +8,17 @@ use Kerox\Messenger\Model\Message\Attachment;
 
 class Image extends File
 {
-    /**
-     * @var array
-     */
-    protected $allowedExtensions = ['jpg', 'png', 'gif'];
+    protected const ALLOWED_EXTENSIONS = ['jpg', 'png', 'gif'];
 
     /**
      * Image constructor.
      *
      * @param string    $url
      * @param bool|null $reusable
+     *
+     * @throws \InvalidArgumentException
      */
-    public function __construct(string $url, ?bool $reusable = null)
+    public function __construct($url, ?bool $reusable = null)
     {
         $this->isValidExtension($url, $this->getAllowedExtensions());
 
@@ -27,10 +26,23 @@ class Image extends File
     }
 
     /**
+     * @param string    $url
+     * @param bool|null $reusable
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\File
+     */
+    public static function create($url, ?bool $reusable = null): File
+    {
+        return new self($url, $reusable);
+    }
+
+    /**
      * @return array
      */
     protected function getAllowedExtensions(): array
     {
-        return $this->allowedExtensions;
+        return self::ALLOWED_EXTENSIONS;
     }
 }

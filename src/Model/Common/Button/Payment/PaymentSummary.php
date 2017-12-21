@@ -52,6 +52,8 @@ class PaymentSummary implements \JsonSerializable
      * @param string      $merchantName
      * @param array       $requestedUserInfo
      * @param PriceList[] $priceList
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(
         string $currency,
@@ -68,6 +70,27 @@ class PaymentSummary implements \JsonSerializable
         $this->merchantName = $merchantName;
         $this->requestedUserInfo = $requestedUserInfo;
         $this->priceList = $priceList;
+    }
+
+    /**
+     * @param string $currency
+     * @param string $paymentType
+     * @param string $merchantName
+     * @param array  $requestedUserInfo
+     * @param array  $priceList
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary
+     */
+    public static function create(
+        string $currency,
+        string $paymentType,
+        string $merchantName,
+        array $requestedUserInfo,
+        array $priceList
+    ): self {
+        return new self($currency, $paymentType, $merchantName, $requestedUserInfo, $priceList);
     }
 
     /**
@@ -103,7 +126,7 @@ class PaymentSummary implements \JsonSerializable
     private function isValidPaymentType(string $paymentType): void
     {
         $allowedPaymentType = $this->getAllowedPaymentType();
-        if (!in_array($paymentType, $allowedPaymentType, true)) {
+        if (!\in_array($paymentType, $allowedPaymentType, true)) {
             throw new \InvalidArgumentException(
                 '$paymentType must be either ' . implode(', ', $allowedPaymentType)
             );
@@ -130,7 +153,7 @@ class PaymentSummary implements \JsonSerializable
     {
         $allowedUserInfo = $this->getAllowedUserInfo();
         foreach ($requestedUserInfo as $userInfo) {
-            if (!in_array($userInfo, $allowedUserInfo, true)) {
+            if (!\in_array($userInfo, $allowedUserInfo, true)) {
                 throw new \InvalidArgumentException(
                     "$userInfo is not a valid value. Valid values are " . implode(', ', $allowedUserInfo)
                 );
@@ -154,9 +177,9 @@ class PaymentSummary implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'currency'            => $this->currency,
             'payment_type'        => $this->paymentType,
             'is_test_payment'     => $this->isTestPayment,
@@ -165,6 +188,14 @@ class PaymentSummary implements \JsonSerializable
             'price_list'          => $this->priceList,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

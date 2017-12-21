@@ -37,6 +37,16 @@ class Summary implements \JsonSerializable
     }
 
     /**
+     * @param float $totalCost
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary
+     */
+    public static function create(float $totalCost): self
+    {
+        return new self($totalCost);
+    }
+
+    /**
      * @param float $subtotal
      *
      * @return Summary
@@ -75,15 +85,23 @@ class Summary implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'subtotal'      => $this->subtotal,
             'shipping_cost' => $this->shippingCost,
             'total_tax'     => $this->totalTax,
             'total_cost'    => $this->totalCost,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

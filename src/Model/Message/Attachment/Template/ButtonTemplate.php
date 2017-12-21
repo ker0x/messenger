@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class Button extends Template
+class ButtonTemplate extends Template
 {
     /**
      * @var string
@@ -23,6 +23,8 @@ class Button extends Template
      *
      * @param string                                                $text
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $text, array $buttons)
     {
@@ -36,12 +38,25 @@ class Button extends Template
     }
 
     /**
+     * @param string $text
+     * @param array  $buttons
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate
+     */
+    public static function create(string $text, array $buttons): self
+    {
+        return new self($text, $buttons);
+    }
+
+    /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type' => Template::TYPE_BUTTON,
                 'text'          => $this->text,
@@ -49,6 +64,6 @@ class Button extends Template
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

@@ -10,9 +10,9 @@ use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment\Image;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
-use Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
+use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Response\SendResponse;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -119,7 +119,7 @@ class SendTest extends AbstractTestCase
 
         $sendApi = new Send('abcd1234', $client);
 
-        $response = $sendApi->attachment((new Image('http://www.messenger-rocks.com/image.jpg', true)));
+        $response = $sendApi->attachment(new Image('http://www.messenger-rocks.com/image.jpg', true));
 
         $this->assertInstanceOf(SendResponse::class, $response);
         $this->assertEquals('1854626884821032', $response->getAttachmentId());
@@ -145,7 +145,7 @@ class SendTest extends AbstractTestCase
             ->setShippingCost(4.95)
             ->setTotalTax(6.19);
 
-        $receipt = new Receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
+        $receipt = new ReceiptTemplate('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
         $receipt
             ->setTimestamp('1428444852')
             ->setOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')

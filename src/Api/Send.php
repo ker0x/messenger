@@ -38,17 +38,6 @@ class Send extends AbstractApi
     private static $_instance;
 
     /**
-     * Send constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     */
-    public function __construct(string $pageToken, ClientInterface $client)
-    {
-        parent::__construct($pageToken, $client);
-    }
-
-    /**
      * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      *
@@ -69,10 +58,16 @@ class Send extends AbstractApi
      * @param string                                $notificationType
      * @param string|null                           $tag
      *
+     * @throws \Exception
+     *
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function message(string $recipient, $message, string $notificationType = self::NOTIFICATION_TYPE_REGULAR, $tag = null): SendResponse
-    {
+    public function message(
+        string $recipient,
+        $message,
+        string $notificationType = self::NOTIFICATION_TYPE_REGULAR,
+        $tag = null
+    ): SendResponse {
         $message = $this->isValidMessage($message);
         $this->isValidNotificationType($notificationType);
 
@@ -91,14 +86,20 @@ class Send extends AbstractApi
      * @param string $action
      * @param string $notificationType
      *
+     * @throws \InvalidArgumentException
+     *
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function action(string $recipient, string $action, string $notificationType = self::NOTIFICATION_TYPE_REGULAR): SendResponse
-    {
+    public function action(
+        string $recipient,
+        string $action,
+        string $notificationType = self::NOTIFICATION_TYPE_REGULAR
+    ): SendResponse {
         $this->isValidAction($action);
         $this->isValidNotificationType($notificationType);
 
-        $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, null, SendRequest::TYPE_ACTION);
+        $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, null,
+            SendRequest::REQUEST_TYPE_ACTION);
         $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
@@ -106,6 +107,8 @@ class Send extends AbstractApi
 
     /**
      * @param \Kerox\Messenger\Model\Message\Attachment $attachment
+     *
+     * @throws \Exception
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -123,6 +126,7 @@ class Send extends AbstractApi
      * @param $message
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\Message
      */
@@ -132,8 +136,8 @@ class Send extends AbstractApi
             return $message;
         }
 
-        if (is_string($message) || $message instanceof Attachment) {
-            return new Message($message);
+        if (\is_string($message) || $message instanceof Attachment) {
+            return Message::create($message);
         }
 
         throw new \InvalidArgumentException('$message must be a string or an instance of Message or Attachment');
@@ -147,8 +151,9 @@ class Send extends AbstractApi
     private function isValidNotificationType(string $notificationType): void
     {
         $allowedNotificationType = $this->getAllowedNotificationType();
-        if (!in_array($notificationType, $allowedNotificationType, true)) {
-            throw new \InvalidArgumentException('$notificationType must be either ' . implode(', ', $allowedNotificationType));
+        if (!\in_array($notificationType, $allowedNotificationType, true)) {
+            throw new \InvalidArgumentException('$notificationType must be either ' . implode(', ',
+                    $allowedNotificationType));
         }
     }
 
@@ -172,7 +177,7 @@ class Send extends AbstractApi
     private function isValidAction(string $action): void
     {
         $allowedSenderAction = $this->getAllowedSenderAction();
-        if (!in_array($action, $allowedSenderAction, true)) {
+        if (!\in_array($action, $allowedSenderAction, true)) {
             throw new \InvalidArgumentException('$action must be either ' . implode(', ', $allowedSenderAction));
         }
     }
@@ -197,7 +202,7 @@ class Send extends AbstractApi
     private function isValidTag(string $tag): void
     {
         $allowedTag = $this->getAllowedTag();
-        if (!in_array($tag, $allowedTag, true)) {
+        if (!\in_array($tag, $allowedTag, true)) {
             throw new \InvalidArgumentException('$tag must be either ' . implode(', ', $allowedTag));
         }
     }

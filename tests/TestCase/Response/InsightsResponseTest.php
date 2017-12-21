@@ -9,9 +9,9 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 class InsightsResponseTest extends AbstractTestCase
 {
 
-    public function testThreadsResponse()
+    public function testInsightsResponse()
     {
-        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Insights/page_messages_active_threads_unique.json');
+        $body = file_get_contents(__DIR__ . '/../../Mocks/Response/Insights/insights.json');
 
         $response = new Response(200, [], $body);
         $insightsResponse = new InsightsResponse($response);

@@ -11,8 +11,7 @@ class WebUrlTest extends AbstractTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$webviewHeightRatio must be either compact, tall, full');
-        $buttonWebUrl = new WebUrl('Select Criteria', 'https://petersfancyapparel.com/criteria_selector');
-        $buttonWebUrl
+        $buttonWebUrl = WebUrl::create('Select Criteria', 'https://petersfancyapparel.com/criteria_selector')
             ->setWebviewHeightRatio('tail');
     }
 }

@@ -19,17 +19,21 @@ class GenericElement extends AbstractElement
     protected $buttons = [];
 
     /**
-     * Element constructor.
-     *
      * @param string $title
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
-    public function __construct(string $title)
+    public static function create(string $title): self
     {
-        parent::__construct($title);
+        return new self($title);
     }
 
     /**
      * @param string $subtitle
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
@@ -42,6 +46,8 @@ class GenericElement extends AbstractElement
 
     /**
      * @param string $imageUrl
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
@@ -67,6 +73,8 @@ class GenericElement extends AbstractElement
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
+     * @throws \InvalidArgumentException
+     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
     public function setButtons(array $buttons): self
@@ -81,16 +89,16 @@ class GenericElement extends AbstractElement
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'subtitle'       => $this->subtitle,
             'image_url'      => $this->imageUrl,
             'default_action' => $this->defaultAction,
             'buttons'        => $this->buttons,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
     }
 }

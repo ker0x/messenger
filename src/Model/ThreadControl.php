@@ -39,6 +39,8 @@ class ThreadControl implements \JsonSerializable
 
     /**
      * @param string $metadata
+     *
+     * @throws \Exception
      */
     public function setMetadata(string $metadata): void
     {
@@ -50,9 +52,9 @@ class ThreadControl implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'recipient'     => [
                 'id' => $this->recipientId,
             ],
@@ -60,6 +62,14 @@ class ThreadControl implements \JsonSerializable
             'metadata'      => $this->metadata,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

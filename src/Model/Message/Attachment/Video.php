@@ -13,9 +13,24 @@ class Video extends File
      *
      * @param string    $url
      * @param bool|null $reusable
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $url, ?bool $reusable = null)
     {
         parent::__construct($url, $reusable, Attachment::TYPE_VIDEO);
+    }
+
+    /**
+     * @param string    $url
+     * @param bool|null $reusable
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\File
+     */
+    public static function create($url, ?bool $reusable = null): File
+    {
+        return new self($url, $reusable);
     }
 }

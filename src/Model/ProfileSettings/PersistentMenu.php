@@ -30,6 +30,8 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
      * PersistentMenu constructor.
      *
      * @param string $locale
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $locale = self::DEFAULT_LOCALE)
     {
@@ -38,6 +40,18 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
         }
 
         $this->locale = $locale;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
+     */
+    public static function create(string $locale = self::DEFAULT_LOCALE): self
+    {
+        return new self($locale);
     }
 
     /**
@@ -54,6 +68,8 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
 
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */
@@ -82,14 +98,22 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'locale'                  => $this->locale,
             'composer_input_disabled' => $this->composerInputDisabled,
             'call_to_actions'         => $this->buttons,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

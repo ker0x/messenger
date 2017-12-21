@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Model\Common\Button;
 
 use Kerox\Messenger\Helper\UtilityTrait;
-use Kerox\Messenger\Model\Message\Attachment\Template\Generic;
+use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 
 class Share extends AbstractButton
 {
@@ -19,9 +19,9 @@ class Share extends AbstractButton
     /**
      * Share constructor.
      *
-     * @param null|\Kerox\Messenger\Model\Message\Attachment\Template\Generic $content
+     * @param null|\Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate $content
      */
-    public function __construct(?Generic $content = null)
+    public function __construct(?GenericTemplate $content = null)
     {
         parent::__construct(self::TYPE_SHARE);
 
@@ -29,17 +29,27 @@ class Share extends AbstractButton
     }
 
     /**
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate|null $content
+     *
+     * @return \Kerox\Messenger\Model\Common\Button\Share
+     */
+    public static function create(?GenericTemplate $content = null): self
+    {
+        return new self($content);
+    }
+
+    /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'share_contents' => [
                 'attachment' => $this->content,
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

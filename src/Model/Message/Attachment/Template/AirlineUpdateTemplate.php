@@ -7,7 +7,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 
-class AirlineUpdate extends AbstractAirline
+class AirlineUpdateTemplate extends AbstractAirlineTemplate
 {
     public const UPDATE_TYPE_DELAY = 'delay';
     public const UPDATE_TYPE_GATE_CHANGE = 'gate_change';
@@ -40,6 +40,8 @@ class AirlineUpdate extends AbstractAirline
      * @param string                                                                $locale
      * @param string                                                                $pnrNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $updateType, string $locale, string $pnrNumber, FlightInfo $updateFlightInfo)
     {
@@ -53,9 +55,28 @@ class AirlineUpdate extends AbstractAirline
     }
 
     /**
+     * @param string                                                                $updateType
+     * @param string                                                                $locale
+     * @param string                                                                $pnrNumber
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
+     */
+    public static function create(
+        string $updateType,
+        string $locale,
+        string $pnrNumber,
+        FlightInfo $updateFlightInfo
+    ): self {
+        return new self($updateType, $locale, $pnrNumber, $updateFlightInfo);
+    }
+
+    /**
      * @param string $introMessage
      *
-     * @return AirlineUpdate
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
      */
     public function setIntroMessage($introMessage): self
     {
@@ -72,7 +93,7 @@ class AirlineUpdate extends AbstractAirline
     private function isValidUpdateType(string $updateType): void
     {
         $allowedUpdateType = $this->getAllowedUpdateType();
-        if (!in_array($updateType, $allowedUpdateType, true)) {
+        if (!\in_array($updateType, $allowedUpdateType, true)) {
             throw new \InvalidArgumentException('$updateType must be either ' . implode(', ', $allowedUpdateType));
         }
     }
@@ -92,10 +113,10 @@ class AirlineUpdate extends AbstractAirline
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type'      => Template::TYPE_AIRLINE_UPDATE,
                 'intro_message'      => $this->introMessage,
@@ -106,6 +127,6 @@ class AirlineUpdate extends AbstractAirline
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

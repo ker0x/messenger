@@ -11,13 +11,13 @@ class QuickReplyTest extends AbstractTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid content type');
-        $quickReply = new QuickReply('image');
+        $quickReply = QuickReply::create('image');
     }
 
     public function testQuickReplyWithLocationAndTitle()
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Content type is set to location');
-        $quickReply = (new QuickReply('location'))->setTitle('Foo');
+        $quickReply = QuickReply::create('location')->setTitle('Foo');
     }
 }

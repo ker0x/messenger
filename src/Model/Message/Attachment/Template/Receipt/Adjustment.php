@@ -24,6 +24,14 @@ class Adjustment implements \JsonSerializable
     }
 
     /**
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
      * @param string $name
      *
      * @return Adjustment
@@ -50,13 +58,21 @@ class Adjustment implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'name'   => $this->name,
             'amount' => $this->amount,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

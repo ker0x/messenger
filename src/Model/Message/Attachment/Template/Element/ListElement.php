@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
 use Kerox\Messenger\Model\Common\Button\WebUrl;
 
-class ListeElement extends AbstractElement
+class ListElement extends AbstractElement
 {
     /**
      * @var \Kerox\Messenger\Model\Common\Button\WebUrl
@@ -19,19 +19,23 @@ class ListeElement extends AbstractElement
     protected $buttons = [];
 
     /**
-     * ListeElement constructor.
-     *
      * @param string $title
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */
-    public function __construct(string $title)
+    public static function create(string $title): self
     {
-        parent::__construct($title);
+        return new self($title);
     }
 
     /**
      * @param string $subtitle
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */
     public function setSubtitle(string $subtitle): self
     {
@@ -43,7 +47,9 @@ class ListeElement extends AbstractElement
     /**
      * @param string $imageUrl
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */
     public function setImageUrl(string $imageUrl): self
     {
@@ -55,7 +61,7 @@ class ListeElement extends AbstractElement
     /**
      * @param \Kerox\Messenger\Model\Common\Button\WebUrl $defaultAction
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */
     public function setDefaultAction(WebUrl $defaultAction): self
     {
@@ -67,7 +73,9 @@ class ListeElement extends AbstractElement
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @return ListeElement
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */
     public function setButtons(array $buttons): self
     {
@@ -81,16 +89,16 @@ class ListeElement extends AbstractElement
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'subtitle'       => $this->subtitle,
             'image_url'      => $this->imageUrl,
             'default_action' => $this->defaultAction,
             'buttons'        => $this->buttons,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
     }
 }

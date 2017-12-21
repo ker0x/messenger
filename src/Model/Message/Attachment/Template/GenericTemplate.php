@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class Generic extends Template
+class GenericTemplate extends Template
 {
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[]
@@ -17,6 +17,8 @@ class Generic extends Template
      * Generic constructor.
      *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[] $elements
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $elements)
     {
@@ -28,18 +30,30 @@ class Generic extends Template
     }
 
     /**
+     * @param array $elements
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate
+     */
+    public static function create(array $elements): self
+    {
+        return new self($elements);
+    }
+
+    /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type' => Template::TYPE_GENERIC,
                 'elements'      => $this->elements,
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

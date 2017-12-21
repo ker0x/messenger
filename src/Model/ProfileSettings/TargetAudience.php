@@ -37,6 +37,8 @@ class TargetAudience implements \JsonSerializable
      * @param string $audienceType
      * @param array  $whitelistCountries
      * @param array  $blacklistCountries
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(
         string $audienceType = self::AUDIENCE_TYPE_ALL,
@@ -50,6 +52,23 @@ class TargetAudience implements \JsonSerializable
         $this->audienceType = $audienceType;
         $this->whitelistCountries = $whitelistCountries;
         $this->blacklistCountries = $blacklistCountries;
+    }
+
+    /**
+     * @param string $audienceType
+     * @param array  $whitelistCountries
+     * @param array  $blacklistCountries
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
+     */
+    public static function create(
+        string $audienceType = self::AUDIENCE_TYPE_ALL,
+        array $whitelistCountries = [],
+        array $blacklistCountries = []
+    ): self {
+        return new self($audienceType, $whitelistCountries, $blacklistCountries);
     }
 
     /**
@@ -106,7 +125,7 @@ class TargetAudience implements \JsonSerializable
     private function isValidAudienceType(string $audienceType): void
     {
         $allowedAudienceType = $this->getAllowedAudienceType();
-        if (!in_array($audienceType, $allowedAudienceType, true)) {
+        if (!\in_array($audienceType, $allowedAudienceType, true)) {
             throw new \InvalidArgumentException('$audienceType must be either ' . implode(', ', $allowedAudienceType));
         }
     }
@@ -126,9 +145,9 @@ class TargetAudience implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'audience_type' => $this->audienceType,
             'countries'     => [
                 'whitelist' => $this->whitelistCountries,
@@ -136,6 +155,14 @@ class TargetAudience implements \JsonSerializable
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

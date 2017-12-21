@@ -17,17 +17,6 @@ class User extends AbstractApi implements UserInterface
     private static $_instance;
 
     /**
-     * Send constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     */
-    public function __construct(string $pageToken, ClientInterface $client)
-    {
-        parent::__construct($pageToken, $client);
-    }
-
-    /**
      * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      *
@@ -46,6 +35,8 @@ class User extends AbstractApi implements UserInterface
      * @param string     $userId
      * @param array|null $fields
      *
+     * @throws \InvalidArgumentException
+     *
      * @return \Kerox\Messenger\Response\UserResponse
      */
     public function profile(string $userId, array $fields = []): UserResponse
@@ -53,7 +44,7 @@ class User extends AbstractApi implements UserInterface
         $allowedFields = $this->getAllowedFields();
         if (!empty($fields)) {
             foreach ($fields as $field) {
-                if (!in_array($field, $allowedFields, true)) {
+                if (!\in_array($field, $allowedFields, true)) {
                     throw new \InvalidArgumentException($field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields));
                 }
             }

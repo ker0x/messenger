@@ -14,9 +14,9 @@ class OpenGraphElementTest extends AbstractTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Buttons can only be an instance of web_url');
 
-        $element = (new OpenGraphElement('https://open.spotify.com/track/7GhIk7Il098yCjg4BQjzvb'))
+        $element = OpenGraphElement::create('https://open.spotify.com/track/7GhIk7Il098yCjg4BQjzvb')
             ->setButtons([
-                (new Postback('Learn More', 'LEARN_MORE'))
+                Postback::create('Learn More', 'LEARN_MORE')
             ]);
     }
 }

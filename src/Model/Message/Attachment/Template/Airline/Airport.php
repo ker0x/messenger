@@ -39,6 +39,17 @@ class Airport implements \JsonSerializable
     }
 
     /**
+     * @param string $airportCode
+     * @param string $city
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport
+     */
+    public static function create(string $airportCode, string $city): self
+    {
+        return new self($airportCode, $city);
+    }
+
+    /**
      * @param string $terminal
      *
      * @return Airport
@@ -65,15 +76,23 @@ class Airport implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'airport_code' => $this->airportCode,
             'city'         => $this->city,
             'terminal'     => $this->terminal,
             'gate'         => $this->gate,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class OpenGraph extends Template
+class OpenGraphTemplate extends Template
 {
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement[]
@@ -17,6 +17,8 @@ class OpenGraph extends Template
      * OpenGraph constructor.
      *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement[] $elements
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $elements)
     {
@@ -28,18 +30,30 @@ class OpenGraph extends Template
     }
 
     /**
+     * @param array $elements
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate
+     */
+    public static function create(array $elements): self
+    {
+        return new self($elements);
+    }
+
+    /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type' => Template::TYPE_OPEN_GRAPH,
                 'elements'      => $this->elements,
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

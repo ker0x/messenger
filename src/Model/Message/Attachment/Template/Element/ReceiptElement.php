@@ -26,6 +26,8 @@ class ReceiptElement extends AbstractElement
      *
      * @param string $title
      * @param float  $price
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $title, float $price)
     {
@@ -35,7 +37,22 @@ class ReceiptElement extends AbstractElement
     }
 
     /**
+     * @param string $title
+     * @param float  $price
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
+     */
+    public static function create(string $title, float $price): self
+    {
+        return new self($title, $price);
+    }
+
+    /**
      * @param string $subtitle
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
@@ -48,6 +65,8 @@ class ReceiptElement extends AbstractElement
 
     /**
      * @param string $imageUrl
+     *
+     * @throws \InvalidArgumentException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
@@ -73,6 +92,8 @@ class ReceiptElement extends AbstractElement
     /**
      * @param string $currency
      *
+     * @throws \InvalidArgumentException
+     *
      * @return ReceiptElement
      */
     public function setCurrency(string $currency): self
@@ -87,10 +108,10 @@ class ReceiptElement extends AbstractElement
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'subtitle'  => $this->subtitle,
             'quantity'  => $this->quantity,
             'price'     => $this->price,
@@ -98,6 +119,6 @@ class ReceiptElement extends AbstractElement
             'image_url' => $this->imageUrl,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
     }
 }

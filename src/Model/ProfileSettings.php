@@ -48,6 +48,14 @@ class ProfileSettings implements \JsonSerializable
     protected $targetAudience;
 
     /**
+     * @return \Kerox\Messenger\Model\ProfileSettings
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
      * @param \Kerox\Messenger\Model\ProfileSettings\PersistentMenu[] $persistentMenus
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
@@ -62,7 +70,7 @@ class ProfileSettings implements \JsonSerializable
     /**
      * @param string $payload
      *
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
@@ -92,6 +100,8 @@ class ProfileSettings implements \JsonSerializable
     /**
      * @param array $whitelistedDomains
      *
+     * @throws \Exception
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addWhitelistedDomains(array $whitelistedDomains): self
@@ -105,6 +115,8 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param string $accountLinkingUrl
+     *
+     * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
@@ -143,10 +155,12 @@ class ProfileSettings implements \JsonSerializable
 
     /**
      * @param array $domains
+     *
+     * @throws \Exception
      */
     private function isValidDomains(array $domains): void
     {
-        $this->isValidArray($domains, 10);
+        $this->isValidArray($domains, 50);
 
         foreach ($domains as $domain) {
             $this->isValidUrl($domain);
@@ -156,9 +170,9 @@ class ProfileSettings implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'persistent_menu'     => $this->persistentMenus,
             'get_started'         => $this->startButton,
             'greeting'            => $this->greetings,
@@ -168,6 +182,14 @@ class ProfileSettings implements \JsonSerializable
             'target_audience'     => $this->targetAudience,
         ];
 
-        return array_filter($json);
+        return array_filter($array);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

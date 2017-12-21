@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
-class Liste extends Template
+class ListTemplate extends Template
 {
     public const TOP_ELEMENT_STYLE_LARGE = 'large';
 
@@ -31,6 +31,8 @@ class Liste extends Template
      * Liste constructor.
      *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement[] $elements
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $elements)
     {
@@ -42,9 +44,23 @@ class Liste extends Template
     }
 
     /**
+     * @param array $elements
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
+     */
+    public static function create(array $elements): self
+    {
+        return new self($elements);
+    }
+
+    /**
      * @param string $topElementStyle
      *
-     * @return Liste
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
      */
     public function setTopElementStyle(string $topElementStyle): self
     {
@@ -58,7 +74,9 @@ class Liste extends Template
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\Liste
+     * @throws \InvalidArgumentException
+     *
+     * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
      */
     public function setButtons(array $buttons): self
     {
@@ -77,7 +95,7 @@ class Liste extends Template
     private function isValidTopElementStyle(string $topElementStyle): void
     {
         $allowedTopElementStyle = $this->getAllowedTopElementStyle();
-        if (!in_array($topElementStyle, $allowedTopElementStyle, true)) {
+        if (!\in_array($topElementStyle, $allowedTopElementStyle, true)) {
             throw new \InvalidArgumentException(
                 '$topElementStyle must be either ' . implode(', ', $allowedTopElementStyle)
             );
@@ -98,10 +116,10 @@ class Liste extends Template
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = parent::jsonSerialize();
-        $json += [
+        $array = parent::toArray();
+        $array += [
             'payload' => [
                 'template_type'     => Template::TYPE_LIST,
                 'top_element_style' => $this->topElementStyle,
@@ -110,6 +128,6 @@ class Liste extends Template
             ],
         ];
 
-        return $this->arrayFilter($json);
+        return $this->arrayFilter($array);
     }
 }

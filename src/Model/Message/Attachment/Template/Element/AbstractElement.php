@@ -29,6 +29,8 @@ abstract class AbstractElement implements \JsonSerializable
      * AbstractElement constructor.
      *
      * @param string $title
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $title)
     {
@@ -39,6 +41,8 @@ abstract class AbstractElement implements \JsonSerializable
 
     /**
      * @param mixed $subtitle
+     *
+     * @throws \InvalidArgumentException
      *
      * @return mixed
      */
@@ -52,6 +56,8 @@ abstract class AbstractElement implements \JsonSerializable
     /**
      * @param mixed $imageUrl
      *
+     * @throws \InvalidArgumentException
+     *
      * @return mixed
      */
     public function setImageUrl(string $imageUrl)
@@ -64,12 +70,20 @@ abstract class AbstractElement implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $json = [
+        $array = [
             'title' => $this->title,
         ];
 
-        return $json;
+        return $array;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }
