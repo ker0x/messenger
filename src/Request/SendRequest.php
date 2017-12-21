@@ -76,6 +76,7 @@ class SendRequest extends AbstractRequest
 
         $this->recipient = \is_string($recipient) ? ['id' => $recipient] : $recipient;
         $this->notificationType = $notificationType;
+        $this->messagingType = $messagingType;
         $this->tag = $tag;
     }
 
