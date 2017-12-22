@@ -51,6 +51,6 @@ class TakeThreadControl
      */
     public static function create(array $callbackData): self
     {
-        return new static($callbackData['previous_owner_app_id'], $callbackData['metadata']);
+        return new self($callbackData['previous_owner_app_id'], $callbackData['metadata']);
     }
 }

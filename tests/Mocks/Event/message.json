@@ -12,6 +12,27 @@
     "text":"hello, world!",
     "quick_reply": {
       "payload": "DEVELOPER_DEFINED_PAYLOAD"
+    },
+    "nlp": {
+      "entities": {
+        "datetime": [
+          {
+            "confidence": 0.97249440664957,
+            "values": [
+              "..."
+            ],
+            "value": "2017-05-10T14:00:00.000-07:00",
+            "grain": "hour",
+            "type": "value"
+          }
+        ],
+        "greetings": [
+          {
+            "confidence": 1,
+            "value": "true"
+          }
+        ]
+      }
     }
   }
 }

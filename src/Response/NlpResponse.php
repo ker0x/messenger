@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Response;
 
-class ThreadResponse extends AbstractResponse
+class NlpResponse extends AbstractResponse
 {
     private const SUCCESS = 'success';
 

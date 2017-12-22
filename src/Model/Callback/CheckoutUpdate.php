@@ -55,6 +55,6 @@ class CheckoutUpdate
     {
         $shippingAddress = Address::fromPayload($callbackData['shipping_address']);
 
-        return new static($callbackData['payload'], $shippingAddress);
+        return new self($callbackData['payload'], $shippingAddress);
     }
 }

@@ -57,8 +57,13 @@ class Webhook extends AbstractApi
      * @param \GuzzleHttp\ClientInterface              $client
      * @param \Psr\Http\Message\ServerRequestInterface $request
      */
-    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ClientInterface $client, ?ServerRequestInterface $request = null)
-    {
+    public function __construct(
+        string $appSecret,
+        string $verifyToken,
+        string $pageToken,
+        ClientInterface $client,
+        ?ServerRequestInterface $request = null
+    ) {
         parent::__construct($pageToken, $client);
 
         $this->appSecret = $appSecret;
@@ -128,6 +133,8 @@ class Webhook extends AbstractApi
     }
 
     /**
+     * @throws \Exception
+     *
      * @return bool
      */
     public function isValidCallback(): bool
@@ -165,7 +172,7 @@ class Webhook extends AbstractApi
     {
         if ($this->decodedBody === null) {
             $decodedBody = json_decode($this->getBody(), true);
-            if (json_last_error() !== JSON_ERROR_NONE || $decodedBody === null) {
+            if ($decodedBody === null || json_last_error() !== JSON_ERROR_NONE) {
                 $decodedBody = [];
             }
 
@@ -176,6 +183,8 @@ class Webhook extends AbstractApi
     }
 
     /**
+     * @throws \Exception
+     *
      * @return \Kerox\Messenger\Model\Callback\Entry[]
      */
     public function getCallbackEntries(): array
@@ -184,6 +193,8 @@ class Webhook extends AbstractApi
     }
 
     /**
+     * @throws \Exception
+     *
      * @return array
      */
     public function getCallbackEvents(): array
@@ -198,6 +209,8 @@ class Webhook extends AbstractApi
     }
 
     /**
+     * @throws \Exception
+     *
      * @return \Kerox\Messenger\Model\Callback\Entry[]
      */
     private function getHydratedEntries(): array

@@ -36,6 +36,6 @@ class AppRoles
      */
     public static function create(array $callbackData): self
     {
-        return new static($callbackData);
+        return new self($callbackData);
     }
 }

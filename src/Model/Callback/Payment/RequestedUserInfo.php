@@ -92,6 +92,6 @@ class RequestedUserInfo
         $contactEmail = $callbackData['contact_email'] ?? null;
         $contactPhone = $callbackData['contact_phone'] ?? null;
 
-        return new static($shippingAddress, $callbackData['contact_name'], $contactEmail, $contactPhone);
+        return new self($shippingAddress, $callbackData['contact_name'], $contactEmail, $contactPhone);
     }
 }

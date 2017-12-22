@@ -53,6 +53,6 @@ class PolicyEnforcement
     {
         $reason = $callbackData['reason'] ?? null;
 
-        return new static($callbackData['action'], $reason);
+        return new self($callbackData['action'], $reason);
     }
 }

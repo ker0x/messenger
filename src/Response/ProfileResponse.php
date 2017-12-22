@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Response;
 
-use Psr\Http\Message\ResponseInterface;
-
 class ProfileResponse extends AbstractResponse
 {
     private const RESULT = 'result';
@@ -14,16 +12,6 @@ class ProfileResponse extends AbstractResponse
      * @var null|string
      */
     protected $result;
-
-    /**
-     * Thread constructor.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     */
-    public function __construct(ResponseInterface $response)
-    {
-        parent::__construct($response);
-    }
 
     /**
      * @param array $response

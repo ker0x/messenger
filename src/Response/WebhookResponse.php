@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Response;
 
-use Psr\Http\Message\ResponseInterface;
-
 class WebhookResponse extends AbstractResponse
 {
     private const SUCCESS = 'success';
@@ -14,16 +12,6 @@ class WebhookResponse extends AbstractResponse
      * @var bool
      */
     protected $success;
-
-    /**
-     * WebhookResponse constructor.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     */
-    public function __construct(ResponseInterface $response)
-    {
-        parent::__construct($response);
-    }
 
     /**
      * @param array $response

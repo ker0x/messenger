@@ -87,6 +87,6 @@ class PreCheckout
     {
         $requestedUserInfo = RequestedUserInfo::create($callbackData['requested_user_info']);
 
-        return new static($callbackData['payload'], $requestedUserInfo, $callbackData['amount']);
+        return new self($callbackData['payload'], $requestedUserInfo, $callbackData['amount']);
     }
 }

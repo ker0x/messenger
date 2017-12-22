@@ -51,6 +51,6 @@ class PassThreadControl
      */
     public static function create(array $callbackData): self
     {
-        return new static($callbackData['new_owner_app_id'], $callbackData['metadata']);
+        return new self($callbackData['new_owner_app_id'], $callbackData['metadata']);
     }
 }
