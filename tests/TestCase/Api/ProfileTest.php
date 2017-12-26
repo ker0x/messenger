@@ -44,6 +44,7 @@ class ProfileTest extends AbstractTestCase
         $response = $this->profileApi->add($profileSettings);
 
         $this->assertInstanceOf(ProfileResponse::class, $response);
+        $this->assertEquals('success', $response->getResult());
     }
 
     public function testGetSettings()
@@ -51,6 +52,7 @@ class ProfileTest extends AbstractTestCase
         $response = $this->profileApi->get(['greeting', 'get_started']);
 
         $this->assertInstanceOf(ProfileResponse::class, $response);
+        $this->assertEquals('success', $response->getResult());
     }
 
     public function testDeleteSetting()

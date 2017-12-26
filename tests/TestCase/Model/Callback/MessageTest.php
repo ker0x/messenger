@@ -23,8 +23,6 @@ class MessageTest extends AbstractTestCase
 
     public function testMessageModelWithEmptyStringAndEmptyQuickReply()
     {
-        //$message = new Message('mid.1457764197618:41d102a3e1ae206a38', 73, '', '');
-
         $message = Message::create([
             'mid' => 'mid.1457764197618:41d102a3e1ae206a38',
             'seq' => 73,
@@ -32,7 +30,8 @@ class MessageTest extends AbstractTestCase
             'quick_reply' => [
                 'payload' => '',
             ],
-            'attachments' => []
+            'attachments' => [],
+            'entities' => [],
         ]);
 
         $this->assertEquals('mid.1457764197618:41d102a3e1ae206a38', $message->getMessageId());
@@ -40,8 +39,10 @@ class MessageTest extends AbstractTestCase
         $this->assertEquals('', $message->getText());
         $this->assertEquals('', $message->getQuickReply());
         $this->assertEquals([], $message->getAttachments());
+        $this->assertEquals([], $message->getEntities());
         $this->assertFalse($message->hasText());
         $this->assertFalse($message->hasQuickReply());
         $this->assertFalse($message->hasAttachments());
+        $this->assertFalse($message->hasEntities());
     }
 }

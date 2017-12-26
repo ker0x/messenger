@@ -138,7 +138,7 @@ class PaymentCredential
         $tokenExpiryMonth = $callbackData['token_expiry_month'] ?? null;
         $tokenExpiryYear = $callbackData['token_expiry_year'] ?? null;
 
-        return new static(
+        return new self(
             $callbackData['provider_type'],
             $callbackData['charge_id'],
             $tokenizedCard,

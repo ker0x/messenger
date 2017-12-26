@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Response;
 
 use Kerox\Messenger\Model\Data;
-use Psr\Http\Message\ResponseInterface;
 
 class TagResponse extends AbstractResponse
 {
@@ -15,16 +14,6 @@ class TagResponse extends AbstractResponse
      * @var \Kerox\Messenger\Model\Data[]
      */
     protected $data = [];
-
-    /**
-     * TagResponse constructor.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     */
-    public function __construct(ResponseInterface $response)
-    {
-        parent::__construct($response);
-    }
 
     /**
      * @param array $response

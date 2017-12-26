@@ -6,7 +6,6 @@ namespace Kerox\Messenger\Response;
 
 use Kerox\Messenger\Model\Referral;
 use Kerox\Messenger\UserInterface;
-use Psr\Http\Message\ResponseInterface;
 
 class UserResponse extends AbstractResponse implements UserInterface
 {
@@ -51,23 +50,12 @@ class UserResponse extends AbstractResponse implements UserInterface
     protected $lastAdReferral;
 
     /**
-     * UserProfileResponse constructor.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     */
-    public function __construct(ResponseInterface $response)
-    {
-        parent::__construct($response);
-    }
-
-    /**
      * @param array $response
      */
     protected function parseResponse(array $response): void
     {
         $this->firstName = $response[UserInterface::FIRST_NAME] ?? null;
         $this->lastName = $response[UserInterface::LAST_NAME] ?? null;
-        $this->profilePic = $response[UserInterface::PROFILE_PIC] ?? null;
         $this->profilePic = $response[UserInterface::PROFILE_PIC] ?? null;
         $this->locale = $response[UserInterface::LOCALE] ?? null;
         $this->timezone = $response[UserInterface::TIMEZONE] ?? null;

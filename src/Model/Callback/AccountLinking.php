@@ -61,6 +61,6 @@ class AccountLinking
     {
         $authorizationCode = $callbackData['authorization_code'] ?? null;
 
-        return new static($callbackData['status'], $authorizationCode);
+        return new self($callbackData['status'], $authorizationCode);
     }
 }

@@ -8,13 +8,7 @@ A PHP library to interact with [Facebook Messenger Platform](https://www.messeng
 
 ## Installation
 
-To install this library, run `composer require kerox/messenger` or add this snippet in your project’s composer.json.
-
-```json
-"require": {
-    "kerox/messenger": "~1.0"
-}
-```
+To install this library, simply run `composer require kerox/messenger`
 
 ## Usage
 
@@ -26,6 +20,7 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 
 - [x] Code
 - [x] Insights
+- [x] Nlp
 - [x] Profile
 - [x] Send
 - [x] Tag
@@ -50,6 +45,7 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
     - [x] Web Url
 - [x] Generic
 - [x] List
+- [x] Media
 - [x] Receipt
 
 ### Callback
@@ -69,27 +65,3 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 - [x] Read
 - [x] Referral
 - [x] TakeThreadControl
-
-## License
-
-MIT License
-
-Copyright (c) 2016 Romain Monteil
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

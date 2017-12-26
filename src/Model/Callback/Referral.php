@@ -66,6 +66,6 @@ class Referral
      */
     public static function create(array $callbackData): self
     {
-        return new static($callbackData['ref'], $callbackData['source'], $callbackData['type']);
+        return new self($callbackData['ref'], $callbackData['source'], $callbackData['type']);
     }
 }

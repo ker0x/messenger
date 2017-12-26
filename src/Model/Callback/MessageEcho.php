@@ -87,7 +87,7 @@ class MessageEcho extends Message
         $quickReply = $callbackData['quick_reply']['payload'] ?? null;
         $attachments = $callbackData['attachments'] ?? [];
 
-        return new static(
+        return new self(
             true,
             $appId,
             $callbackData['mid'],

@@ -85,6 +85,6 @@ class Postback
         $payload = $callbackData['payload'] ?? null;
         $referral = isset($callbackData['referral']) ? Referral::create($callbackData['referral']) : null;
 
-        return new static($callbackData['title'], $payload, $referral);
+        return new self($callbackData['title'], $payload, $referral);
     }
 }

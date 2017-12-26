@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
+use Kerox\Messenger\Api\Nlp;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Tag;
@@ -127,5 +128,13 @@ class Messenger
     public function thread(): Thread
     {
         return Thread::getInstance($this->pageToken, $this->client);
+    }
+
+    /**
+     * @return \Kerox\Messenger\Api\Nlp
+     */
+    public function nlp(): Nlp
+    {
+        return Nlp::getInstance($this->pageToken, $this->client);
     }
 }

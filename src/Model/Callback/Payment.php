@@ -124,7 +124,7 @@ class Payment
         $requestedUserInfo = RequestedUserInfo::create($callbackData['requested_user_info']);
         $paymentCredential = PaymentCredential::create($callbackData['payment_credential']);
 
-        return new static(
+        return new self(
             $callbackData['payload'],
             $requestedUserInfo,
             $paymentCredential,

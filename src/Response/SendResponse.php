@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Response;
 
-use Psr\Http\Message\ResponseInterface;
-
 class SendResponse extends AbstractResponse
 {
     private const RECIPIENT_ID = 'recipient_id';
@@ -58,16 +56,6 @@ class SendResponse extends AbstractResponse
      * @var null|string
      */
     protected $errorFbtraceId;
-
-    /**
-     * Send constructor.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     */
-    public function __construct(ResponseInterface $response)
-    {
-        parent::__construct($response);
-    }
 
     /**
      * @param array $response

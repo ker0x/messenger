@@ -83,6 +83,6 @@ class Entry
             }
         }
 
-        return new static($entry['id'], $entry['time'], $events);
+        return new self($entry['id'], $entry['time'], $events);
     }
 }

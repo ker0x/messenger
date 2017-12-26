@@ -32,6 +32,11 @@ class Message
     protected $attachments;
 
     /**
+     * @var array
+     */
+    protected $entities;
+
+    /**
      * Message constructor.
      *
      * @param string $messageId
@@ -39,19 +44,22 @@ class Message
      * @param string $text
      * @param string $quickReply
      * @param array  $attachments
+     * @param array  $entities
      */
     public function __construct(
         string $messageId,
         int $sequence,
         ?string $text = null,
         ?string $quickReply = null,
-        array $attachments = []
+        array $attachments = [],
+        array $entities = []
     ) {
         $this->messageId = $messageId;
         $this->sequence = $sequence;
         $this->text = $text;
         $this->quickReply = $quickReply;
         $this->attachments = $attachments;
+        $this->entities = $entities;
     }
 
     /**
@@ -119,6 +127,22 @@ class Message
     }
 
     /**
+     * @return array
+     */
+    public function getEntities(): array
+    {
+        return $this->entities;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasEntities(): bool
+    {
+        return !empty($this->entities);
+    }
+
+    /**
      * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Message
@@ -128,7 +152,8 @@ class Message
         $text = $callbackData['text'] ?? null;
         $quickReply = $callbackData['quick_reply']['payload'] ?? null;
         $attachments = $callbackData['attachments'] ?? [];
+        $entities = $callbackData['nlp']['entities'] ?? [];
 
-        return new static($callbackData['mid'], $callbackData['seq'], $text, $quickReply, $attachments);
+        return new self($callbackData['mid'], $callbackData['seq'], $text, $quickReply, $attachments, $entities);
     }
 }

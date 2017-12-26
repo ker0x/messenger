@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Response;
 
-use Psr\Http\Message\ResponseInterface;
-
 class CodeResponse extends AbstractResponse
 {
     private const URI = 'uri';
@@ -14,16 +12,6 @@ class CodeResponse extends AbstractResponse
      * @var null|string
      */
     protected $uri;
-
-    /**
-     * CodeResponse constructor.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     */
-    public function __construct(ResponseInterface $response)
-    {
-        parent::__construct($response);
-    }
 
     /**
      * @param array $response

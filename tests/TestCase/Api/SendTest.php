@@ -135,24 +135,30 @@ class SendTest extends AbstractTestCase
     private function getReceipt()
     {
         $elements = [
-            (new ReceiptElement('Classic White T-Shirt', 50))->setSubtitle('100% Soft and Luxurious Cotton')->setQuantity(2)->setCurrency('USD')->setImageUrl('http://petersapparel.parseapp.com/img/whiteshirt.png'),
-            (new ReceiptElement('Classic Gray T-Shirt', 25))->setSubtitle('100% Soft and Luxurious Cotton')->setQuantity(1)->setCurrency('USD')->setImageUrl('http://petersapparel.parseapp.com/img/grayshirt.png'),
+            ReceiptElement::create('Classic White T-Shirt', 50)
+                ->setSubtitle('100% Soft and Luxurious Cotton')
+                ->setQuantity(2)
+                ->setCurrency('USD')
+                ->setImageUrl('http://petersapparel.parseapp.com/img/whiteshirt.png'),
+            ReceiptElement::create('Classic Gray T-Shirt', 25)
+                ->setSubtitle('100% Soft and Luxurious Cotton')
+                ->setQuantity(1)
+                ->setCurrency('USD')
+                ->setImageUrl('http://petersapparel.parseapp.com/img/grayshirt.png'),
         ];
 
-        $summary = new Summary(56.14);
-        $summary
+        $summary = Summary::create(56.14)
             ->setSubtotal(75.00)
             ->setShippingCost(4.95)
             ->setTotalTax(6.19);
 
-        $receipt = new ReceiptTemplate('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary);
-        $receipt
+        $receipt = ReceiptTemplate::create('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary)
             ->setTimestamp('1428444852')
             ->setOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')
             ->setAddress(new Address('1 Hacker Way', 'Menlo Park', '94025', 'CA', 'US'))
             ->setAdjustments([
-                (new Adjustment())->setName('New Customer Discount')->setAmount(20),
-                (new Adjustment())->setName('$10 Off Coupon')->setAmount(10),
+                Adjustment::create()->setName('New Customer Discount')->setAmount(20),
+                Adjustment::create()->setName('$10 Off Coupon')->setAmount(10),
             ]);
 
         return $receipt;

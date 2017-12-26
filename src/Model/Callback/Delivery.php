@@ -68,6 +68,6 @@ class Delivery
     {
         $messageIds = $callbackData['mids'] ?? [];
 
-        return new static($callbackData['watermark'], $callbackData['seq'], $messageIds);
+        return new self($callbackData['watermark'], $callbackData['seq'], $messageIds);
     }
 }

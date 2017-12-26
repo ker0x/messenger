@@ -3,6 +3,7 @@ namespace Kerox\Messenger\Test\TestCase;
 
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
+use Kerox\Messenger\Api\Nlp;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Tag;
@@ -34,6 +35,7 @@ class MessengerTest extends AbstractTestCase
         $this->assertInstanceOf(Profile::class, $this->messenger->profile());
         $this->assertInstanceOf(Tag::class, $this->messenger->tag());
         $this->assertInstanceOf(Thread::class, $this->messenger->thread());
+        $this->assertInstanceOf(Nlp::class, $this->messenger->nlp());
     }
 
     public function tearDown()
