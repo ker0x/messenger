@@ -6,6 +6,8 @@ namespace Kerox\Messenger\Helper;
 
 use InvalidArgumentException;
 use Kerox\Messenger\Model\Common\Button\AbstractButton;
+use Kerox\Messenger\Model\Message;
+use Kerox\Messenger\Model\Message\Attachment;
 
 trait ValidatorTrait
 {
@@ -155,6 +157,52 @@ trait ValidatorTrait
                     'Buttons can only be an instance of ' . implode(', ', $allowedButtonsType)
                 );
             }
+        }
+    }
+
+    /**
+     * @param $message
+     *
+     * @throws \Exception
+     *
+     * @return \Kerox\Messenger\Model\Message
+     */
+    private function isValidMessage($message): Message
+    {
+        if ($message instanceof Message) {
+            return $message;
+        }
+
+        if (\is_string($message) || $message instanceof Attachment) {
+            return Message::create($message);
+        }
+
+        throw new \InvalidArgumentException('$message must be a string or an instance of Message or Attachment');
+    }
+
+    /**
+     * @param string $notificationType
+     * @param array  $allowedNotificationType
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function isValidNotificationType(string $notificationType, array $allowedNotificationType): void
+    {
+        if (!\in_array($notificationType, $allowedNotificationType, true)) {
+            throw new \InvalidArgumentException('$notificationType must be either ' . implode(', ', $allowedNotificationType));
+        }
+    }
+
+    /**
+     * @param string $tag
+     * @param array  $allowedTag
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function isValidTag(string $tag, array $allowedTag): void
+    {
+        if (!\in_array($tag, $allowedTag, true)) {
+            throw new \InvalidArgumentException('$tag must be either ' . implode(', ', $allowedTag));
         }
     }
 }
