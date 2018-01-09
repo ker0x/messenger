@@ -63,9 +63,9 @@ class SendResponse extends AbstractResponse
     protected function parseResponse(array $response): void
     {
         if (!$this->hasError($response)) {
-            $this->setRecipientId($response);
-            $this->setMessageId($response);
-            $this->setAttachmentId($response);
+            $this->recipientId = $response[self::RECIPIENT_ID] ?? null;
+            $this->messageId = $response[self::MESSAGE_ID] ?? null;
+            $this->attachmentId = $response[self::ATTACHMENT_ID] ?? null;
         }
     }
 
@@ -77,11 +77,11 @@ class SendResponse extends AbstractResponse
     private function hasError(array $response): bool
     {
         if (isset($response[self::ERROR])) {
-            $this->setErrorMessage($response[self::ERROR]);
-            $this->setErrorType($response[self::ERROR]);
-            $this->setErrorCode($response[self::ERROR]);
-            $this->setErrorSubcode($response[self::ERROR]);
-            $this->setErrorFbtraceId($response[self::ERROR]);
+            $this->errorMessage = $response[self::ERROR][self::ERROR_MESSAGE] ?? null;
+            $this->errorType = $response[self::ERROR][self::ERROR_TYPE] ?? null;
+            $this->errorCode = $response[self::ERROR][self::ERROR_CODE] ?? null;
+            $this->errorSubcode = $response[self::ERROR][self::ERROR_SUBCODE] ?? null;
+            $this->errorFbtraceId = $response[self::ERROR][self::ERROR_FBTRACE_ID] ?? null;
 
             return true;
         }
@@ -98,31 +98,11 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @param array $response
-     */
-    private function setRecipientId(array $response): void
-    {
-        if (isset($response[self::RECIPIENT_ID])) {
-            $this->recipientId = $response[self::RECIPIENT_ID];
-        }
-    }
-
-    /**
      * @return null|string
      */
     public function getMessageId(): ?string
     {
         return $this->messageId;
-    }
-
-    /**
-     * @param array $response
-     */
-    private function setMessageId(array $response): void
-    {
-        if (isset($response[self::MESSAGE_ID])) {
-            $this->messageId = $response[self::MESSAGE_ID];
-        }
     }
 
     /**
@@ -134,31 +114,11 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @param array $response
-     */
-    private function setAttachmentId(array $response): void
-    {
-        if (isset($response[self::ATTACHMENT_ID])) {
-            $this->attachmentId = $response[self::ATTACHMENT_ID];
-        }
-    }
-
-    /**
      * @return null|string
      */
     public function getErrorMessage(): ?string
     {
         return $this->errorMessage;
-    }
-
-    /**
-     * @param array $error
-     */
-    private function setErrorMessage(array $error): void
-    {
-        if (isset($error[self::ERROR_MESSAGE])) {
-            $this->errorMessage = $error[self::ERROR_MESSAGE];
-        }
     }
 
     /**
@@ -170,31 +130,11 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @param array $error
-     */
-    private function setErrorType(array $error): void
-    {
-        if (isset($error[self::ERROR_TYPE])) {
-            $this->errorType = $error[self::ERROR_TYPE];
-        }
-    }
-
-    /**
      * @return null|int
      */
     public function getErrorCode(): ?int
     {
         return $this->errorCode;
-    }
-
-    /**
-     * @param array $error
-     */
-    private function setErrorCode(array $error): void
-    {
-        if (isset($error[self::ERROR_CODE])) {
-            $this->errorCode = $error[self::ERROR_CODE];
-        }
     }
 
     /**
@@ -206,30 +146,10 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @param array $error
-     */
-    private function setErrorSubcode(array $error): void
-    {
-        if (isset($error[self::ERROR_SUBCODE])) {
-            $this->errorSubcode = $error[self::ERROR_SUBCODE];
-        }
-    }
-
-    /**
      * @return null|string
      */
     public function getErrorFbtraceId(): ?string
     {
         return $this->errorFbtraceId;
-    }
-
-    /**
-     * @param array $error
-     */
-    private function setErrorFbtraceId(array $error): void
-    {
-        if (isset($error[self::ERROR_FBTRACE_ID])) {
-            $this->errorFbtraceId = $error[self::ERROR_FBTRACE_ID];
-        }
     }
 }

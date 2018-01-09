@@ -59,8 +59,7 @@ class Nlp extends AbstractApi implements NlpInterface
         if (!empty($configs)) {
             foreach ($configs as $key => $value) {
                 if (!\in_array($key, $allowedConfigKeys, true)) {
-                    throw new \InvalidArgumentException($key . ' is not a valid key. $configs must only contain ' . implode(', ',
-                            $allowedConfigKeys));
+                    throw new \InvalidArgumentException($key . ' is not a valid key. $configs must only contain ' . implode(', ', $allowedConfigKeys));
                 }
 
                 $this->isBool($key, $value);

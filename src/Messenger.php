@@ -6,6 +6,7 @@ namespace Kerox\Messenger;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Kerox\Messenger\Api\Broadcast;
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
 use Kerox\Messenger\Api\Nlp;
@@ -136,5 +137,13 @@ class Messenger
     public function nlp(): Nlp
     {
         return Nlp::getInstance($this->pageToken, $this->client);
+    }
+
+    /**
+     * @return \Kerox\Messenger\Api\Broadcast
+     */
+    public function broadcast(): Broadcast
+    {
+        return Broadcast::getInstance($this->pageToken, $this->client);
     }
 }

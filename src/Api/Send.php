@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Api;
 
 use GuzzleHttp\ClientInterface;
+use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
@@ -12,25 +13,27 @@ use Kerox\Messenger\Response\SendResponse;
 
 class Send extends AbstractApi
 {
-    private const SENDER_ACTION_TYPING_ON = 'typing_on';
-    private const SENDER_ACTION_TYPING_OFF = 'typing_off';
-    private const SENDER_ACTION_MARK_SEEN = 'mark_seen';
+    use ValidatorTrait;
 
-    private const NOTIFICATION_TYPE_REGULAR = 'REGULAR';
-    private const NOTIFICATION_TYPE_SILENT_PUSH = 'SILENT_PUSH';
-    private const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
+    public const SENDER_ACTION_TYPING_ON = 'typing_on';
+    public const SENDER_ACTION_TYPING_OFF = 'typing_off';
+    public const SENDER_ACTION_MARK_SEEN = 'mark_seen';
 
-    private const TAG_SHIPPING_UPDATE = 'SHIPPING_UPDATE';
-    private const TAG_RESERVATION_UPDATE = 'RESERVATION_UPDATE';
-    private const TAG_ISSUE_RESOLUTION = 'ISSUE_RESOLUTION';
-    private const TAG_APPOINTMENT_UPDATE = 'APPOINTMENT_UPDATE';
-    private const TAG_GAME_EVENT = 'GAME_EVENT';
-    private const TAG_TRANSPORTATION_UPDATE = 'TRANSPORTATION_UPDATE';
-    private const TAG_FEATURE_FUNCTIONALITY_UPDATE = 'FEATURE_FUNCTIONALITY_UPDATE';
-    private const TAG_TICKET_UPDATE = 'TICKET_UPDATE';
-    private const TAG_ACCOUNT_UPDATE = 'ACCOUNT_UPDATE';
-    private const TAG_PAYMENT_UPDATE = 'PAYMENT_UPDATE';
-    private const TAG_PERSONAL_FINANCE_UPDATE = 'PERSONAL_FINANCE_UPDATE';
+    public const NOTIFICATION_TYPE_REGULAR = 'REGULAR';
+    public const NOTIFICATION_TYPE_SILENT_PUSH = 'SILENT_PUSH';
+    public const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
+
+    public const TAG_SHIPPING_UPDATE = 'SHIPPING_UPDATE';
+    public const TAG_RESERVATION_UPDATE = 'RESERVATION_UPDATE';
+    public const TAG_ISSUE_RESOLUTION = 'ISSUE_RESOLUTION';
+    public const TAG_APPOINTMENT_UPDATE = 'APPOINTMENT_UPDATE';
+    public const TAG_GAME_EVENT = 'GAME_EVENT';
+    public const TAG_TRANSPORTATION_UPDATE = 'TRANSPORTATION_UPDATE';
+    public const TAG_FEATURE_FUNCTIONALITY_UPDATE = 'FEATURE_FUNCTIONALITY_UPDATE';
+    public const TAG_TICKET_UPDATE = 'TICKET_UPDATE';
+    public const TAG_ACCOUNT_UPDATE = 'ACCOUNT_UPDATE';
+    public const TAG_PAYMENT_UPDATE = 'PAYMENT_UPDATE';
+    public const TAG_PERSONAL_FINANCE_UPDATE = 'PERSONAL_FINANCE_UPDATE';
 
     /**
      * @var null|\Kerox\Messenger\Api\Send
@@ -66,13 +69,13 @@ class Send extends AbstractApi
         string $recipient,
         $message,
         string $notificationType = self::NOTIFICATION_TYPE_REGULAR,
-        $tag = null
+        ?string $tag = null
     ): SendResponse {
         $message = $this->isValidMessage($message);
-        $this->isValidNotificationType($notificationType);
+        $this->isValidNotificationType($notificationType, $this->getAllowedNotificationType());
 
         if ($tag !== null) {
-            $this->isValidTag($tag);
+            $this->isValidTag($tag, $this->getAllowedTag());
         }
 
         $request = new SendRequest($this->pageToken, $message, $recipient, $notificationType, $tag);
@@ -96,10 +99,9 @@ class Send extends AbstractApi
         string $notificationType = self::NOTIFICATION_TYPE_REGULAR
     ): SendResponse {
         $this->isValidAction($action);
-        $this->isValidNotificationType($notificationType);
+        $this->isValidNotificationType($notificationType, $this->getAllowedNotificationType());
 
-        $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, null,
-            SendRequest::REQUEST_TYPE_ACTION);
+        $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, null, SendRequest::REQUEST_TYPE_ACTION);
         $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
@@ -120,41 +122,6 @@ class Send extends AbstractApi
         $response = $this->client->post('me/message_attachments', $request->build());
 
         return new SendResponse($response);
-    }
-
-    /**
-     * @param $message
-     *
-     * @throws \InvalidArgumentException
-     * @throws \Exception
-     *
-     * @return \Kerox\Messenger\Model\Message
-     */
-    private function isValidMessage($message): Message
-    {
-        if ($message instanceof Message) {
-            return $message;
-        }
-
-        if (\is_string($message) || $message instanceof Attachment) {
-            return Message::create($message);
-        }
-
-        throw new \InvalidArgumentException('$message must be a string or an instance of Message or Attachment');
-    }
-
-    /**
-     * @param string $notificationType
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function isValidNotificationType(string $notificationType): void
-    {
-        $allowedNotificationType = $this->getAllowedNotificationType();
-        if (!\in_array($notificationType, $allowedNotificationType, true)) {
-            throw new \InvalidArgumentException('$notificationType must be either ' . implode(', ',
-                    $allowedNotificationType));
-        }
     }
 
     /**
@@ -192,19 +159,6 @@ class Send extends AbstractApi
             self::SENDER_ACTION_TYPING_OFF,
             self::SENDER_ACTION_MARK_SEEN,
         ];
-    }
-
-    /**
-     * @param string $tag
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function isValidTag(string $tag): void
-    {
-        $allowedTag = $this->getAllowedTag();
-        if (!\in_array($tag, $allowedTag, true)) {
-            throw new \InvalidArgumentException('$tag must be either ' . implode(', ', $allowedTag));
-        }
     }
 
     /**

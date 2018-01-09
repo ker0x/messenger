@@ -98,7 +98,7 @@ class Data
     {
         if (isset($data['values']) && !empty($data['values'])) {
             foreach ($data['values'] as $value) {
-                $this->values[] = new Value($value['value'], $value['end_time']);
+                $this->values[] = Value::create($value['value'], $value['end_time']);
             }
         }
 
