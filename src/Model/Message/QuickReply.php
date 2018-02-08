@@ -10,8 +10,8 @@ class QuickReply implements \JsonSerializable
 {
     use ValidatorTrait;
 
-    private const CONTENT_TYPE_TEXT = 'text';
-    private const CONTENT_TYPE_LOCATION = 'location';
+    public const CONTENT_TYPE_TEXT = 'text';
+    public const CONTENT_TYPE_LOCATION = 'location';
 
     /**
      * @var string
@@ -40,7 +40,7 @@ class QuickReply implements \JsonSerializable
      *
      * @throws \Exception
      */
-    public function __construct(string $contentType)
+    public function __construct(string $contentType = self::CONTENT_TYPE_TEXT)
     {
         $this->isValidContentType($contentType);
 
@@ -54,7 +54,7 @@ class QuickReply implements \JsonSerializable
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
      */
-    public static function create(string $contentType): self
+    public static function create(string $contentType = self::CONTENT_TYPE_TEXT): self
     {
         return new self($contentType);
     }
@@ -77,7 +77,7 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @param mixed $payload
+     * @param string $payload
      *
      * @throws \Exception
      *

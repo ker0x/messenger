@@ -38,6 +38,17 @@ class ThreadControl implements \JsonSerializable
     }
 
     /**
+     * @param int      $recipientId
+     * @param int|null $targetAppId
+     *
+     * @return \Kerox\Messenger\Model\ThreadControl
+     */
+    public static function create(int $recipientId, ?int $targetAppId = null): self
+    {
+        return new self($recipientId, $targetAppId);
+    }
+
+    /**
      * @param string $metadata
      *
      * @throws \Exception
