@@ -66,16 +66,16 @@ class MessageTest extends AbstractTestCase
 
         $message = Message::create('Pick a color:')
             ->setQuickReplies([
-                QuickReply::create('text')
+                QuickReply::create()
                     ->setTitle('Red')
                     ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')
                     ->setImageUrl('http://petersfantastichats.com/img/red.png'),
-                QuickReply::create('text')
+                QuickReply::create()
                     ->setTitle('Green')
                     ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')
                     ->setImageUrl('http://petersfantastichats.com/img/green.png')
             ])
-            ->addQuickReply(QuickReply::create('location'))
+            ->addQuickReply(QuickReply::create(QuickReply::CONTENT_TYPE_LOCATION))
             ->setMetadata('some metadata');
 
         $this->assertJsonStringEqualsJsonString($json, json_encode($message));
@@ -94,11 +94,11 @@ class MessageTest extends AbstractTestCase
         $this->expectExceptionMessage('Array can only contain instance of QuickReply.');
         $message = Message::create('Pick a color:')
             ->setQuickReplies([
-                QuickReply::create('text')
+                QuickReply::create()
                     ->setTitle('Red')
                     ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')
                     ->setImageUrl('http://petersfantastichats.com/img/red.png'),
-                QuickReply::create('text')
+                QuickReply::create()
                     ->setTitle('Green')
                     ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')
                     ->setImageUrl('http://petersfantastichats.com/img/green.png'),

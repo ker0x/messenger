@@ -10,7 +10,16 @@ A PHP library to interact with [Facebook Messenger Platform](https://www.messeng
 
 To install this library, simply run `composer require kerox/messenger`
 
-## Usage
+## Basic usage
+
+```php
+use Kerox\Messenger\Messenger;
+
+$messenger = new Messenger($appSecret, $verifyToken, $pageToken)
+$messenger->send()->message(<USER_ID>, 'Hello world!');
+```
+
+## Advance usage
 
 Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn how to use this library
 
@@ -18,6 +27,7 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 
 ### API
 
+- [x] Broadcast
 - [x] Code
 - [x] Insights
 - [x] Nlp
