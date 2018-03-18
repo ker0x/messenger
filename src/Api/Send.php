@@ -36,11 +36,6 @@ class Send extends AbstractApi
     public const TAG_PERSONAL_FINANCE_UPDATE = 'PERSONAL_FINANCE_UPDATE';
 
     /**
-     * @var null|\Kerox\Messenger\Api\Send
-     */
-    private static $_instance;
-
-    /**
      * @param string                      $pageToken
      * @param \GuzzleHttp\ClientInterface $client
      *
@@ -48,11 +43,7 @@ class Send extends AbstractApi
      */
     public static function getInstance(string $pageToken, ClientInterface $client): self
     {
-        if (self::$_instance === null) {
-            self::$_instance = new self($pageToken, $client);
-        }
-
-        return self::$_instance;
+        return new self($pageToken, $client);
     }
 
     /**

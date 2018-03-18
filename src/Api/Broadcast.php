@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Request\BroadcastRequest;
 use Kerox\Messenger\Response\BroadcastResponse;
@@ -12,26 +11,6 @@ use Kerox\Messenger\Response\BroadcastResponse;
 class Broadcast extends AbstractApi
 {
     use ValidatorTrait;
-
-    /**
-     * @var null|\Kerox\Messenger\Api\Broadcast
-     */
-    private static $_instance;
-
-    /**
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     *
-     * @return \Kerox\Messenger\Api\Broadcast
-     */
-    public static function getInstance(string $pageToken, ClientInterface $client): self
-    {
-        if (self::$_instance === null) {
-            self::$_instance = new self($pageToken, $client);
-        }
-
-        return self::$_instance;
-    }
 
     /**
      * @param string|\Kerox\Messenger\Model\Message $message
