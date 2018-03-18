@@ -2,7 +2,6 @@
 
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Model\ProfileSettings;
 use Kerox\Messenger\ProfileInterface;
 use Kerox\Messenger\Request\ProfileRequest;
@@ -10,37 +9,6 @@ use Kerox\Messenger\Response\ProfileResponse;
 
 class Profile extends AbstractApi implements ProfileInterface
 {
-    /**
-     * @var null|\Kerox\Messenger\Api\Profile
-     */
-    private static $_instance;
-
-    /**
-     * Profile constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     */
-    public function __construct($pageToken, ClientInterface $client)
-    {
-        parent::__construct($pageToken, $client);
-    }
-
-    /**
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     *
-     * @return \Kerox\Messenger\Api\Profile
-     */
-    public static function getInstance(string $pageToken, ClientInterface $client): self
-    {
-        if (self::$_instance === null) {
-            self::$_instance = new self($pageToken, $client);
-        }
-
-        return self::$_instance;
-    }
-
     /**
      * @param \Kerox\Messenger\Model\ProfileSettings $profileSettings
      *

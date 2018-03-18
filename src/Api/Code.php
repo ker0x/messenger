@@ -2,44 +2,12 @@
 
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Request\CodeRequest;
 use Kerox\Messenger\Response\CodeResponse;
 
 class Code extends AbstractApi
 {
     const CODE_TYPE_STANDARD = 'standard';
-
-    /**
-     * @var null|\Kerox\Messenger\Api\Code
-     */
-    private static $_instance;
-
-    /**
-     * Code constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     */
-    public function __construct(string $pageToken, ClientInterface $client)
-    {
-        parent::__construct($pageToken, $client);
-    }
-
-    /**
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     *
-     * @return \Kerox\Messenger\Api\Code
-     */
-    public static function getInstance(string $pageToken, ClientInterface $client): self
-    {
-        if (self::$_instance === null) {
-            self::$_instance = new self($pageToken, $client);
-        }
-
-        return self::$_instance;
-    }
 
     /**
      * @param int         $imageSize
