@@ -26,7 +26,7 @@ class MessengerTest extends AbstractTestCase
         $this->messenger = new Messenger('4321dcba', 'abcd1234', '1234abcd');
     }
 
-    public function testGetInstanceOfApi()
+    public function testGetInstanceOfApi(): void
     {
         $this->assertInstanceOf(Send::class, $this->messenger->send());
         $this->assertInstanceOf(User::class, $this->messenger->user());
