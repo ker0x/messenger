@@ -66,7 +66,7 @@ class Messenger
      */
     public function send(): Send
     {
-        return Send::getInstance($this->pageToken, $this->client);
+        return new Send($this->pageToken, $this->client);
     }
 
     /**
@@ -76,7 +76,7 @@ class Messenger
      */
     public function webhook(ServerRequestInterface $request = null): Webhook
     {
-        return Webhook::getInstance($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
+        return new Webhook($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
     }
 
     /**
@@ -84,7 +84,7 @@ class Messenger
      */
     public function user(): User
     {
-        return User::getInstance($this->pageToken, $this->client);
+        return new User($this->pageToken, $this->client);
     }
 
     /**
@@ -92,7 +92,7 @@ class Messenger
      */
     public function profile(): Profile
     {
-        return Profile::getInstance($this->pageToken, $this->client);
+        return new Profile($this->pageToken, $this->client);
     }
 
     /**
@@ -100,7 +100,7 @@ class Messenger
      */
     public function code(): Code
     {
-        return Code::getInstance($this->pageToken, $this->client);
+        return new Code($this->pageToken, $this->client);
     }
 
     /**
@@ -108,7 +108,7 @@ class Messenger
      */
     public function insights(): Insights
     {
-        return Insights::getInstance($this->pageToken, $this->client);
+        return new Insights($this->pageToken, $this->client);
     }
 
     /**
@@ -116,7 +116,7 @@ class Messenger
      */
     public function tag(): Tag
     {
-        return Tag::getInstance($this->pageToken, $this->client);
+        return new Tag($this->pageToken, $this->client);
     }
 
     /**
@@ -124,6 +124,6 @@ class Messenger
      */
     public function thread(): Thread
     {
-        return Thread::getInstance($this->pageToken, $this->client);
+        return new Thread($this->pageToken, $this->client);
     }
 }
