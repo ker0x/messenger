@@ -6,34 +6,14 @@ namespace Kerox\Messenger\Api;
 
 use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Helper\ValidatorTrait;
-use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
 use Kerox\Messenger\Response\SendResponse;
+use Kerox\Messenger\SendInterface;
 
-class Send extends AbstractApi
+class Send extends AbstractApi implements SendInterface
 {
     use ValidatorTrait;
-
-    public const SENDER_ACTION_TYPING_ON = 'typing_on';
-    public const SENDER_ACTION_TYPING_OFF = 'typing_off';
-    public const SENDER_ACTION_MARK_SEEN = 'mark_seen';
-
-    public const NOTIFICATION_TYPE_REGULAR = 'REGULAR';
-    public const NOTIFICATION_TYPE_SILENT_PUSH = 'SILENT_PUSH';
-    public const NOTIFICATION_TYPE_NO_PUSH = 'NO_PUSH';
-
-    public const TAG_SHIPPING_UPDATE = 'SHIPPING_UPDATE';
-    public const TAG_RESERVATION_UPDATE = 'RESERVATION_UPDATE';
-    public const TAG_ISSUE_RESOLUTION = 'ISSUE_RESOLUTION';
-    public const TAG_APPOINTMENT_UPDATE = 'APPOINTMENT_UPDATE';
-    public const TAG_GAME_EVENT = 'GAME_EVENT';
-    public const TAG_TRANSPORTATION_UPDATE = 'TRANSPORTATION_UPDATE';
-    public const TAG_FEATURE_FUNCTIONALITY_UPDATE = 'FEATURE_FUNCTIONALITY_UPDATE';
-    public const TAG_TICKET_UPDATE = 'TICKET_UPDATE';
-    public const TAG_ACCOUNT_UPDATE = 'ACCOUNT_UPDATE';
-    public const TAG_PAYMENT_UPDATE = 'PAYMENT_UPDATE';
-    public const TAG_PERSONAL_FINANCE_UPDATE = 'PERSONAL_FINANCE_UPDATE';
 
     /**
      * @param string                      $pageToken
@@ -63,10 +43,10 @@ class Send extends AbstractApi
         ?string $tag = null
     ): SendResponse {
         $message = $this->isValidMessage($message);
-        $this->isValidNotificationType($notificationType, $this->getAllowedNotificationType());
+        $this->isValidNotificationType($notificationType);
 
         if ($tag !== null) {
-            $this->isValidTag($tag, $this->getAllowedTag());
+            $this->isValidTag($tag);
         }
 
         $request = new SendRequest($this->pageToken, $message, $recipient, $notificationType, $tag);
@@ -89,8 +69,8 @@ class Send extends AbstractApi
         string $action,
         string $notificationType = self::NOTIFICATION_TYPE_REGULAR
     ): SendResponse {
-        $this->isValidAction($action);
-        $this->isValidNotificationType($notificationType, $this->getAllowedNotificationType());
+        $this->isValidSenderAction($action);
+        $this->isValidNotificationType($notificationType);
 
         $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, null, SendRequest::REQUEST_TYPE_ACTION);
         $response = $this->client->post('me/messages', $request->build());
@@ -113,62 +93,5 @@ class Send extends AbstractApi
         $response = $this->client->post('me/message_attachments', $request->build());
 
         return new SendResponse($response);
-    }
-
-    /**
-     * @return array
-     */
-    private function getAllowedNotificationType(): array
-    {
-        return [
-            self::NOTIFICATION_TYPE_REGULAR,
-            self::NOTIFICATION_TYPE_SILENT_PUSH,
-            self::NOTIFICATION_TYPE_NO_PUSH,
-        ];
-    }
-
-    /**
-     * @param string $action
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function isValidAction(string $action): void
-    {
-        $allowedSenderAction = $this->getAllowedSenderAction();
-        if (!\in_array($action, $allowedSenderAction, true)) {
-            throw new \InvalidArgumentException('$action must be either ' . implode(', ', $allowedSenderAction));
-        }
-    }
-
-    /**
-     * @return array
-     */
-    private function getAllowedSenderAction(): array
-    {
-        return [
-            self::SENDER_ACTION_TYPING_ON,
-            self::SENDER_ACTION_TYPING_OFF,
-            self::SENDER_ACTION_MARK_SEEN,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    private function getAllowedTag(): array
-    {
-        return [
-            self::TAG_ISSUE_RESOLUTION,
-            self::TAG_RESERVATION_UPDATE,
-            self::TAG_SHIPPING_UPDATE,
-            self::TAG_APPOINTMENT_UPDATE,
-            self::TAG_GAME_EVENT,
-            self::TAG_TRANSPORTATION_UPDATE,
-            self::TAG_FEATURE_FUNCTIONALITY_UPDATE,
-            self::TAG_TICKET_UPDATE,
-            self::TAG_ACCOUNT_UPDATE,
-            self::TAG_PAYMENT_UPDATE,
-            self::TAG_PERSONAL_FINANCE_UPDATE,
-        ];
     }
 }

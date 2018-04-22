@@ -56,7 +56,7 @@ class Nlp extends AbstractApi implements NlpInterface
      */
     private function isBool(string $key, $value): void
     {
-        if (!\is_bool($value) && \in_array($key, [NlpInterface::CONFIG_KEY_NLP_ENABLED, NlpInterface::CONFIG_KEY_VERBOSE], true)) {
+        if (!\is_bool($value) && \in_array($key, [self::CONFIG_KEY_NLP_ENABLED, self::CONFIG_KEY_VERBOSE], true)) {
             throw new \InvalidArgumentException($key . ' must be a boolean');
         }
     }
@@ -69,7 +69,7 @@ class Nlp extends AbstractApi implements NlpInterface
      */
     private function isString(string $key, $value): void
     {
-        if (!\is_string($value) && \in_array($key, [NlpInterface::CONFIG_KEY_CUSTOM_TOKEN, NlpInterface::CONFIG_KEY_MODEL], true)) {
+        if (!\is_string($value) && \in_array($key, [self::CONFIG_KEY_CUSTOM_TOKEN, self::CONFIG_KEY_MODEL], true)) {
             throw new \InvalidArgumentException($key . ' must be a string');
         }
     }
@@ -82,7 +82,7 @@ class Nlp extends AbstractApi implements NlpInterface
      */
     private function isValidNBest(string $key, $value): void
     {
-        if ($key === NlpInterface::CONFIG_KEY_N_BEST && (!\is_int($value) || $value < 1 || $value > 8)) {
+        if ($key === self::CONFIG_KEY_N_BEST && (!\is_int($value) || $value < 1 || $value > 8)) {
             throw new \InvalidArgumentException($key . ' must be an integer between 1 and 8');
         }
     }
@@ -93,11 +93,11 @@ class Nlp extends AbstractApi implements NlpInterface
     private function getAllowedConfigKeys(): array
     {
         return [
-            NlpInterface::CONFIG_KEY_NLP_ENABLED,
-            NlpInterface::CONFIG_KEY_MODEL,
-            NlpInterface::CONFIG_KEY_CUSTOM_TOKEN,
-            NlpInterface::CONFIG_KEY_VERBOSE,
-            NlpInterface::CONFIG_KEY_N_BEST,
+            self::CONFIG_KEY_NLP_ENABLED,
+            self::CONFIG_KEY_MODEL,
+            self::CONFIG_KEY_CUSTOM_TOKEN,
+            self::CONFIG_KEY_VERBOSE,
+            self::CONFIG_KEY_N_BEST,
         ];
     }
 }

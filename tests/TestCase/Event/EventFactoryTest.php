@@ -17,6 +17,7 @@ use Kerox\Messenger\Event\PreCheckoutEvent;
 use Kerox\Messenger\Event\RawEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Event\ReferralEvent;
+use Kerox\Messenger\Event\RequestThreadControlEvent;
 use Kerox\Messenger\Event\TakeThreadControlEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\AppRoles;
@@ -32,6 +33,7 @@ use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\PreCheckout;
 use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Model\Callback\Referral;
+use Kerox\Messenger\Model\Callback\RequestThreadControl;
 use Kerox\Messenger\Model\Callback\TakeThreadControl;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -176,6 +178,17 @@ class EventFactoryTest extends AbstractTestCase
         $array = json_decode($json, true);
 
         $expectedEvent = new PassThreadControlEvent('USER_ID', 'PAGE_ID', 1458692752478, PassThreadControl::create($array['pass_thread_control']));
+        $event = EventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+    }
+
+    public function testRequestThreadControlEvent()
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Event/request_thread_control.json');
+        $array = json_decode($json, true);
+
+        $expectedEvent = new RequestThreadControlEvent('USER_ID', 'PSID', 1458692752478, RequestThreadControl::create($array['request_thread_control']));
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);

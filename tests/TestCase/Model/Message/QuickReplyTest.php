@@ -17,7 +17,7 @@ class QuickReplyTest extends AbstractTestCase
     public function testQuickReplyWithLocationAndTitle()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Content type is set to location');
+        $this->expectExceptionMessage('Content type must be set to text to use title, payload and image_url');
         $quickReply = QuickReply::create('location')->setTitle('Foo');
     }
 }

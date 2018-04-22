@@ -11,13 +11,13 @@ use Kerox\Messenger\Response\InsightsResponse;
 class Insights extends AbstractApi implements InsightsInterface
 {
     /**
-     * @param array $metrics
-     *
-     * @throws \InvalidArgumentException
+     * @param array    $metrics
+     * @param null|int $since
+     * @param null|int $until
      *
      * @return \Kerox\Messenger\Response\InsightsResponse
      */
-    public function get(array $metrics = []): InsightsResponse
+    public function get(array $metrics = [], ?int $since = null, ?int $until = null): InsightsResponse
     {
         $allowedMetrics = $this->getAllowedMetrics();
         if (!empty($allowedMetrics)) {
@@ -30,7 +30,7 @@ class Insights extends AbstractApi implements InsightsInterface
             $metrics = $allowedMetrics;
         }
 
-        $request = new InsightsRequest($this->pageToken, $metrics);
+        $request = new InsightsRequest($this->pageToken, $metrics, $since, $until);
         $response = $this->client->get('me/insights', $request->build());
 
         return new InsightsResponse($response);
@@ -42,11 +42,11 @@ class Insights extends AbstractApi implements InsightsInterface
     private function getAllowedMetrics(): array
     {
         return [
-            InsightsInterface::ACTIVE_THREAD_UNIQUE,
-            InsightsInterface::BLOCKED_CONVERSATIONS_UNIQUE,
-            InsightsInterface::REPORTED_CONVERSATIONS_UNIQUE,
-            InsightsInterface::REPORTED_CONVERSATIONS_BY_REPORT_TYPE_UNIQUE,
-            InsightsInterface::FEEDBACK_BY_ACTION_UNIQUE,
+            self::ACTIVE_THREAD_UNIQUE,
+            self::BLOCKED_CONVERSATIONS_UNIQUE,
+            self::REPORTED_CONVERSATIONS_UNIQUE,
+            self::REPORTED_CONVERSATIONS_BY_REPORT_TYPE_UNIQUE,
+            self::FEEDBACK_BY_ACTION_UNIQUE,
         ];
     }
 }

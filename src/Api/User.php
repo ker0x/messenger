@@ -43,13 +43,13 @@ class User extends AbstractApi implements UserInterface
     private function getAllowedFields(): array
     {
         return [
-            UserInterface::FIRST_NAME,
-            UserInterface::LAST_NAME,
-            UserInterface::PROFILE_PIC,
-            UserInterface::LOCALE,
-            UserInterface::TIMEZONE,
-            UserInterface::GENDER,
-            UserInterface::IS_PAYMENT_ENABLED,
+            self::FIRST_NAME,
+            self::LAST_NAME,
+            self::PROFILE_PIC,
+            self::LOCALE,
+            self::TIMEZONE,
+            self::GENDER,
+            self::IS_PAYMENT_ENABLED,
         ];
     }
 }
