@@ -36,7 +36,6 @@ class NlpTest extends AbstractTestCase
     {
         $response = $this->nlpApi->config(['nlp_enabled' => true, 'verbose' => false, 'custom_token' => 'abcdef', 'model' => 'fr', 'n_best' => 2]);
 
-        $this->assertInstanceOf(NlpResponse::class, $response);
         $this->assertTrue($response->isSuccess());
     }
 

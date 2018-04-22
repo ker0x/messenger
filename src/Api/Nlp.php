@@ -38,7 +38,9 @@ class Nlp extends AbstractApi implements NlpInterface
         if (!empty($configs)) {
             foreach ($configs as $key => $value) {
                 if (!\in_array($key, $allowedConfigKeys, true)) {
-                    throw new \InvalidArgumentException($key . ' is not a valid key. $configs must only contain ' . implode(', ', $allowedConfigKeys));
+                    throw new \InvalidArgumentException(
+                        $key . ' is not a valid key. $configs must only contain ' . implode(', ', $allowedConfigKeys)
+                    );
                 }
 
                 $this->isBool($key, $value);
@@ -56,7 +58,9 @@ class Nlp extends AbstractApi implements NlpInterface
      */
     private function isBool(string $key, $value): void
     {
-        if (!\is_bool($value) && \in_array($key, [self::CONFIG_KEY_NLP_ENABLED, self::CONFIG_KEY_VERBOSE], true)) {
+        if (!\is_bool($value) &&
+            \in_array($key, [self::CONFIG_KEY_NLP_ENABLED, self::CONFIG_KEY_VERBOSE], true)
+        ) {
             throw new \InvalidArgumentException($key . ' must be a boolean');
         }
     }
@@ -69,7 +73,9 @@ class Nlp extends AbstractApi implements NlpInterface
      */
     private function isString(string $key, $value): void
     {
-        if (!\is_string($value) && \in_array($key, [self::CONFIG_KEY_CUSTOM_TOKEN, self::CONFIG_KEY_MODEL], true)) {
+        if (!\is_string($value) &&
+            \in_array($key, [self::CONFIG_KEY_CUSTOM_TOKEN, self::CONFIG_KEY_MODEL], true)
+        ) {
             throw new \InvalidArgumentException($key . ' must be a string');
         }
     }

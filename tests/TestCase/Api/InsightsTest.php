@@ -35,7 +35,6 @@ class InsightsTest extends AbstractTestCase
     {
         $response = $this->insightsApi->get();
 
-        $this->assertInstanceOf(InsightsResponse::class, $response);
         $this->assertContainsOnlyInstancesOf(Data::class, $response->getData());
     }
 

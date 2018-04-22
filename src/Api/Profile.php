@@ -70,8 +70,9 @@ class Profile extends AbstractApi implements ProfileInterface
         $allowedFields = $this->getAllowedFields();
         foreach ($fields as $field) {
             if (!\in_array($field, $allowedFields, true)) {
-                throw new \InvalidArgumentException($field . ' is not a valid value. $fields must only contain ' . implode(', ',
-                        $allowedFields));
+                throw new \InvalidArgumentException(
+                    $field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields)
+                );
             }
         }
     }

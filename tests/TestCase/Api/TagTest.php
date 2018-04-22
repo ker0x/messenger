@@ -36,7 +36,6 @@ class TagTest extends AbstractTestCase
     {
         $response = $this->tagApi->get();
 
-        $this->assertInstanceOf(TagResponse::class, $response);
         $this->assertContainsOnlyInstancesOf(Data::class, $response->getData());
         $this->assertEquals($this->getData(), $response->getData());
     }
