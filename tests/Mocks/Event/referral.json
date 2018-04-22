@@ -1,6 +1,6 @@
 {
-  "sender":{
-    "id":"USER_ID"
+  "sender": {
+    "id": "USER_ID"
   },
   "recipient": {
     "id": "PAGE_ID"

@@ -64,6 +64,7 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 - [x] AppRoles
 - [x] Checkout Update
 - [x] Delivery
+- [x] GamePlay
 - [x] Message
 - [x] Message Echo
 - [x] Optin
@@ -74,4 +75,5 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 - [x] Pre Checkout
 - [x] Read
 - [x] Referral
+- [x] RequestThreadControl
 - [x] TakeThreadControl

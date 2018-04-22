@@ -5,6 +5,7 @@ use Kerox\Messenger\Event\AccountLinkingEvent;
 use Kerox\Messenger\Event\AppRolesEvent;
 use Kerox\Messenger\Event\CheckoutUpdateEvent;
 use Kerox\Messenger\Event\DeliveryEvent;
+use Kerox\Messenger\Event\GamePlayEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
 use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Event\OptinEvent;
@@ -20,6 +21,7 @@ use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\AppRoles;
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 use Kerox\Messenger\Model\Callback\Delivery;
+use Kerox\Messenger\Model\Callback\GamePlay;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
@@ -201,6 +203,18 @@ class EventTest extends AbstractTestCase
         $this->assertEquals(123456, $event->getTimestamp());
         $this->assertEquals($mockedAppRoles, $event->getAppRoles());
         $this->assertEquals('app_roles', $event->getName());
+    }
+
+    public function testGamePlay()
+    {
+        $mockedGamePlay = $this->createMock(GamePlay::class);
+        $event = new GamePlayEvent('sender_id', 'recipient_id', 123456, $mockedGamePlay);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedGamePlay, $event->getGamePlay());
+        $this->assertEquals('game_play', $event->getName());
     }
 
     public function testRawEvent()
