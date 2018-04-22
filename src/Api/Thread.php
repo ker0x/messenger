@@ -35,4 +35,17 @@ class Thread extends AbstractApi
 
         return new ThreadResponse($response);
     }
+
+    /**
+     * @param \Kerox\Messenger\Model\ThreadControl $threadControl
+     *
+     * @return \Kerox\Messenger\Response\ThreadResponse
+     */
+    public function request(ThreadControl $threadControl): ThreadResponse
+    {
+        $request = new ThreadRequest($this->pageToken, $threadControl);
+        $response = $this->client->post('me/request_thread_control', $request->build());
+
+        return new ThreadResponse($response);
+    }
 }

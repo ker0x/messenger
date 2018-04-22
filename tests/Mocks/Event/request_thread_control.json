@@ -1,0 +1,13 @@
+{
+  "sender": {
+    "id": "USER_ID"
+  },
+  "recipient": {
+    "id": "PSID"
+  },
+  "timestamp": 1458692752478,
+  "request_thread_control": {
+    "requested_owner_app_id": "123456789",
+    "metadata": "additional content that the caller wants to set"
+  }
+}

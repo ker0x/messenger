@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Kerox\Messenger\Model\Common\Button\AbstractButton;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment;
+use Kerox\Messenger\SendInterface;
 
 trait ValidatorTrait
 {
@@ -181,13 +182,26 @@ trait ValidatorTrait
     }
 
     /**
-     * @param string $notificationType
-     * @param array  $allowedNotificationType
+     * @param string $action
      *
      * @throws \InvalidArgumentException
      */
-    protected function isValidNotificationType(string $notificationType, array $allowedNotificationType): void
+    protected function isValidSenderAction(string $action): void
     {
+        $allowedSenderAction = $this->getAllowedSenderAction();
+        if (!\in_array($action, $allowedSenderAction, true)) {
+            throw new \InvalidArgumentException('$action must be either ' . implode(', ', $allowedSenderAction));
+        }
+    }
+
+    /**
+     * @param string $notificationType
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function isValidNotificationType(string $notificationType): void
+    {
+        $allowedNotificationType = $this->getAllowedNotificationType();
         if (!\in_array($notificationType, $allowedNotificationType, true)) {
             throw new \InvalidArgumentException('$notificationType must be either ' . implode(', ', $allowedNotificationType));
         }
@@ -195,14 +209,63 @@ trait ValidatorTrait
 
     /**
      * @param string $tag
-     * @param array  $allowedTag
      *
      * @throws \InvalidArgumentException
      */
-    protected function isValidTag(string $tag, array $allowedTag): void
+    protected function isValidTag(string $tag): void
     {
+        $allowedTag = $this->getAllowedTag();
         if (!\in_array($tag, $allowedTag, true)) {
             throw new \InvalidArgumentException('$tag must be either ' . implode(', ', $allowedTag));
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllowedSenderAction(): array
+    {
+        return [
+            SendInterface::SENDER_ACTION_TYPING_ON,
+            SendInterface::SENDER_ACTION_TYPING_OFF,
+            SendInterface::SENDER_ACTION_MARK_SEEN,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllowedNotificationType(): array
+    {
+        return [
+            SendInterface::NOTIFICATION_TYPE_REGULAR,
+            SendInterface::NOTIFICATION_TYPE_SILENT_PUSH,
+            SendInterface::NOTIFICATION_TYPE_NO_PUSH,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllowedTag(): array
+    {
+        return [
+            SendInterface::TAG_COMMUNITY_ALERT,
+            SendInterface::TAG_CONFIRMED_EVENT_REMINDER,
+            SendInterface::TAG_NON_PROMOTIONAL_SUBSCRIPTION,
+            SendInterface::TAG_PAIRING_UPDATE,
+            SendInterface::TAG_APPLICATION_UPDATE,
+            SendInterface::TAG_ACCOUNT_UPDATE,
+            SendInterface::TAG_PAYMENT_UPDATE,
+            SendInterface::TAG_PERSONAL_FINANCE_UPDATE,
+            SendInterface::TAG_SHIPPING_UPDATE,
+            SendInterface::TAG_RESERVATION_UPDATE,
+            SendInterface::TAG_ISSUE_RESOLUTION,
+            SendInterface::TAG_APPOINTMENT_UPDATE,
+            SendInterface::TAG_GAME_EVENT,
+            SendInterface::TAG_TRANSPORTATION_UPDATE,
+            SendInterface::TAG_FEATURE_FUNCTIONALITY_UPDATE,
+            SendInterface::TAG_TICKET_UPDATE,
+        ];
     }
 }

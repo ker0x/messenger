@@ -82,13 +82,13 @@ class Profile extends AbstractApi implements ProfileInterface
     private function getAllowedFields(): array
     {
         return [
-            ProfileInterface::PERSISTENT_MENU,
-            ProfileInterface::GET_STARTED,
-            ProfileInterface::GREETING,
-            ProfileInterface::DOMAIN_WHITELISTING,
-            ProfileInterface::ACCOUNT_LINKING_URL,
-            ProfileInterface::PAYMENT_SETTINGS,
-            ProfileInterface::TARGET_AUDIENCE,
+            self::PERSISTENT_MENU,
+            self::GET_STARTED,
+            self::GREETING,
+            self::DOMAIN_WHITELISTING,
+            self::ACCOUNT_LINKING_URL,
+            self::PAYMENT_SETTINGS,
+            self::TARGET_AUDIENCE,
         ];
     }
 }

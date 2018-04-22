@@ -12,6 +12,8 @@ class QuickReply implements \JsonSerializable
 
     public const CONTENT_TYPE_TEXT = 'text';
     public const CONTENT_TYPE_LOCATION = 'location';
+    public const CONTENT_TYPE_PHONE = 'user_phone_number';
+    public const CONTENT_TYPE_EMAIL = 'user_email';
 
     /**
      * @var string
@@ -130,6 +132,8 @@ class QuickReply implements \JsonSerializable
         return [
             self::CONTENT_TYPE_TEXT,
             self::CONTENT_TYPE_LOCATION,
+            self::CONTENT_TYPE_PHONE,
+            self::CONTENT_TYPE_LOCATION,
         ];
     }
 
@@ -138,8 +142,8 @@ class QuickReply implements \JsonSerializable
      */
     private function checkContentType(): void
     {
-        if ($this->contentType === self::CONTENT_TYPE_LOCATION) {
-            throw new \Exception('Content type is set to location');
+        if ($this->contentType !== self::CONTENT_TYPE_TEXT) {
+            throw new \Exception('Content type must be set to text to use title, payload and image_url');
         }
     }
 
