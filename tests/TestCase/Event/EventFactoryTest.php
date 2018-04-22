@@ -6,6 +6,7 @@ use Kerox\Messenger\Event\AppRolesEvent;
 use Kerox\Messenger\Event\CheckoutUpdateEvent;
 use Kerox\Messenger\Event\EventFactory;
 use Kerox\Messenger\Event\DeliveryEvent;
+use Kerox\Messenger\Event\GamePlayEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
 use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Event\OptinEvent;
@@ -23,6 +24,7 @@ use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\AppRoles;
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 use Kerox\Messenger\Model\Callback\Delivery;
+use Kerox\Messenger\Model\Callback\GamePlay;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
@@ -222,6 +224,17 @@ class EventFactoryTest extends AbstractTestCase
         $array = json_decode($json, true);
 
         $expectedEvent = new ReferralEvent('USER_ID', 'PAGE_ID', 1458692752478, Referral::create($array['referral']));
+        $event = EventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+    }
+
+    public function testGamePlayEvent()
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Event/game_play.json');
+        $array = json_decode($json, true);
+
+        $expectedEvent = new GamePlayEvent('USER_ID', 'PAGE_ID', 1458692752478, GamePlay::create($array['game_play']));
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);

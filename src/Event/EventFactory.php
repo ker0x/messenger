@@ -22,6 +22,7 @@ class EventFactory
         'policy-enforcement'     => PolicyEnforcementEvent::class,
         'app_roles'              => AppRolesEvent::class,
         'referral'               => ReferralEvent::class,
+        'game_play'              => GamePlayEvent::class,
     ];
 
     /**

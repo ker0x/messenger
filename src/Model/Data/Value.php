@@ -54,7 +54,7 @@ class Value
      */
     public function getEndTime(bool $asDateTime = true)
     {
-        $endTime = \DateTime::createFromFormat(\DateTime::ISO8601, $this->endTime);
+        $endTime = \DateTime::createFromFormat(\DateTime::ATOM, $this->endTime);
         if ($asDateTime && $endTime instanceof \DateTime) {
             return $endTime;
         }

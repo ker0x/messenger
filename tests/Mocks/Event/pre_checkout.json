@@ -6,11 +6,11 @@
   "sender": {
     "id": "USER_ID"
   },
-  "pre_checkout":{
-    "payload":"DEVELOPER_DEFINED_PAYLOAD",
-    "requested_user_info":{
-      "shipping_address":{
-        "name":"Peter Chang",
+  "pre_checkout": {
+    "payload": "DEVELOPER_DEFINED_PAYLOAD",
+    "requested_user_info": {
+      "shipping_address": {
+        "name": "Peter Chang",
         "street_1": "1 Hacker Way",
         "street_2": "",
         "city": "MENLO PARK",
@@ -18,11 +18,11 @@
         "country": "US",
         "postal_code": "94025"
       },
-      "contact_name":"Peter Chang"
+      "contact_name": "Peter Chang"
     },
-    "amount":{
-      "currency":"USD",
-      "amount":"29.62"
+    "amount": {
+      "currency": "USD",
+      "amount": "29.62"
     }
   }
 }
