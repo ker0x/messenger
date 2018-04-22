@@ -21,14 +21,16 @@ class User extends AbstractApi implements UserInterface
     public function profile(string $userId, array $fields = []): UserResponse
     {
         $allowedFields = $this->getAllowedFields();
-        if (!empty($fields)) {
+        $fields = empty($fields) ? $allowedFields : $fields;
+
+        if ($fields !== $allowedFields) {
             foreach ($fields as $field) {
                 if (!\in_array($field, $allowedFields, true)) {
-                    throw new \InvalidArgumentException($field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields));
+                    throw new \InvalidArgumentException(
+                        $field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields)
+                    );
                 }
             }
-        } else {
-            $fields = $allowedFields;
         }
 
         $request = new UserRequest($this->pageToken, $fields);

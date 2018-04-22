@@ -43,7 +43,6 @@ class SendTest extends AbstractTestCase
     {
         $response = $this->sendApi->message('1008372609250235', 'Hello World!');
 
-        $this->assertInstanceOf(SendResponse::class, $response);
         $this->assertEquals('1008372609250235', $response->getRecipientId());
         $this->assertEquals('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
@@ -54,7 +53,6 @@ class SendTest extends AbstractTestCase
 
         $response = $this->sendApi->message('1008372609250235', $message);
 
-        $this->assertInstanceOf(SendResponse::class, $response);
         $this->assertEquals('1008372609250235', $response->getRecipientId());
         $this->assertEquals('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
@@ -65,7 +63,6 @@ class SendTest extends AbstractTestCase
 
         $response = $this->sendApi->message('1008372609250235', $message);
 
-        $this->assertInstanceOf(SendResponse::class, $response);
         $this->assertEquals('1008372609250235', $response->getRecipientId());
         $this->assertEquals('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
@@ -86,9 +83,9 @@ class SendTest extends AbstractTestCase
 
     public function testSendActionToUser()
     {
-        $response = $this->sendApi->action('1234abcd', 'typing_on');
+        $response = $this->sendApi->action('1008372609250235', 'typing_on');
 
-        $this->assertInstanceOf(SendResponse::class, $response);
+        $this->assertEquals('1008372609250235', $response->getRecipientId());
     }
 
     public function testBadActionType()
@@ -121,7 +118,6 @@ class SendTest extends AbstractTestCase
 
         $response = $sendApi->attachment(new Image('http://www.messenger-rocks.com/image.jpg', true));
 
-        $this->assertInstanceOf(SendResponse::class, $response);
         $this->assertEquals('1854626884821032', $response->getAttachmentId());
         $this->assertNull($response->getRecipientId());
         $this->assertNull($response->getMessageId());

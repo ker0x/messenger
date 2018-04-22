@@ -49,7 +49,6 @@ class BroadcastTest extends AbstractTestCase
 
         $response = $broadcastApi->send('0123456789');
 
-        $this->assertInstanceOf(BroadcastResponse::class, $response);
         $this->assertEquals('0123456789', $response->getBroadcastId());
     }
 }

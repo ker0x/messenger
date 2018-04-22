@@ -44,7 +44,8 @@ trait ValidatorTrait
      */
     protected function isValidUrl(string $value): void
     {
-        if (!preg_match('/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/', $value)) {
+        if (!preg_match('/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/',
+            $value)) {
             throw new InvalidArgumentException("{$value} is not a valid url.");
         }
     }
@@ -116,7 +117,8 @@ trait ValidatorTrait
      */
     protected function isValidCurrency(string $value): void
     {
-        if (!preg_match('/^SGD|RON|EUR|TRY|SEK|ZAR|HKD|CHF|NIO|JPY|ISK|TWD|NZD|CZK|AUD|THB|BOB|BRL|MXN|USD|ILS|HNL|MOP|COP|UYU|CRC|DKK|QAR|PYG|CAD|INR|KRW|GTQ|AED|VEF|SAR|NOK|CNY|ARS|PLN|GBP|PEN|PHP|VND|RUB|HUF|MYR|CLP|IDR$/', $value)) {
+        if (!preg_match('/^SGD|RON|EUR|TRY|SEK|ZAR|HKD|CHF|NIO|JPY|ISK|TWD|NZD|CZK|AUD|THB|BOB|BRL|MXN|USD|ILS|HNL|MOP|COP|UYU|CRC|DKK|QAR|PYG|CAD|INR|KRW|GTQ|AED|VEF|SAR|NOK|CNY|ARS|PLN|GBP|PEN|PHP|VND|RUB|HUF|MYR|CLP|IDR$/',
+            $value)) {
             throw new InvalidArgumentException(
                 "{$value} is not a valid currency. Currency must be in ISO-4217-3 format."
             );
@@ -203,7 +205,9 @@ trait ValidatorTrait
     {
         $allowedNotificationType = $this->getAllowedNotificationType();
         if (!\in_array($notificationType, $allowedNotificationType, true)) {
-            throw new \InvalidArgumentException('$notificationType must be either ' . implode(', ', $allowedNotificationType));
+            throw new \InvalidArgumentException(
+                '$notificationType must be either ' . implode(', ', $allowedNotificationType)
+            );
         }
     }
 

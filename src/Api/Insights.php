@@ -20,14 +20,16 @@ class Insights extends AbstractApi implements InsightsInterface
     public function get(array $metrics = [], ?int $since = null, ?int $until = null): InsightsResponse
     {
         $allowedMetrics = $this->getAllowedMetrics();
-        if (!empty($allowedMetrics)) {
+        $metrics = empty($metrics) ? $allowedMetrics : $metrics;
+
+        if ($metrics !== $allowedMetrics) {
             foreach ($metrics as $metric) {
                 if (!\in_array($metric, $allowedMetrics, true)) {
-                    throw new \InvalidArgumentException($metric . ' is not a valid value. $metrics must only contain ' . implode(', ', $allowedMetrics));
+                    throw new \InvalidArgumentException(
+                        $metric . ' is not a valid value. $metrics must only contain ' . implode(', ', $allowedMetrics)
+                    );
                 }
             }
-        } else {
-            $metrics = $allowedMetrics;
         }
 
         $request = new InsightsRequest($this->pageToken, $metrics, $since, $until);

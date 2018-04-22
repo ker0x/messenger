@@ -38,7 +38,6 @@ class ThreadTest extends AbstractTestCase
 
         $response = $this->threadApi->pass($passThreadControl);
 
-        $this->assertInstanceOf(ThreadResponse::class, $response);
         $this->assertTrue($response->isSuccess());
     }
 
@@ -49,7 +48,6 @@ class ThreadTest extends AbstractTestCase
 
         $response = $this->threadApi->take($takeThreadControl);
 
-        $this->assertInstanceOf(ThreadResponse::class, $response);
         $this->assertTrue($response->isSuccess());
     }
 }

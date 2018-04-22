@@ -53,7 +53,6 @@ class WebhookTest extends AbstractTestCase
     {
         $response = $this->webhookApi->subscribe();
 
-        $this->assertInstanceOf(WebhookResponse::class, $response);
         $this->assertTrue($response->isSuccess());
     }
 

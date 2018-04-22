@@ -3,9 +3,8 @@ namespace Kerox\Messenger\Test\TestCase;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
 
-class TestValidatorTrait extends AbstractTestCase
+class ValidatorTraitTest extends AbstractTestCase
 {
-
     use ValidatorTrait;
 
     public function testInvalidColor()
