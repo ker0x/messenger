@@ -133,7 +133,7 @@ class QuickReply implements \JsonSerializable
             self::CONTENT_TYPE_TEXT,
             self::CONTENT_TYPE_LOCATION,
             self::CONTENT_TYPE_PHONE,
-            self::CONTENT_TYPE_LOCATION,
+            self::CONTENT_TYPE_EMAIL,
         ];
     }
 
