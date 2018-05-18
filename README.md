@@ -1,6 +1,29 @@
-|Travis|Coverage|Code Quality|PHP|Downloads|Stable Version|License|Gitter|
-|:------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
-|[![Build](https://img.shields.io/travis/ker0x/messenger.svg?style=flat-square)](https://travis-ci.org/ker0x/messenger)|[![Coverage](https://img.shields.io/scrutinizer/coverage/g/ker0x/messenger.svg?style=flat-square)](https://scrutinizer-ci.com/g/ker0x/messenger/)|[![Code Quality](https://img.shields.io/scrutinizer/g/ker0x/messenger.svg?style=flat-square)](https://scrutinizer-ci.com/g/ker0x/messenger/)|[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=flat-square)](https://php.net)|[![Total Downloads](https://img.shields.io/packagist/dt/kerox/messenger.svg?style=flat-square)](https://packagist.org/packages/kerox/messenger)|[![Latest Stable Version](https://img.shields.io/packagist/v/kerox/messenger.svg?style=flat-square)](https://packagist.org/packages/kerox/messenger)|[![License](https://img.shields.io/packagist/l/kerox/messenger.svg?style=flat-square)](https://packagist.org/packages/kerox/messenger)|[![Gitter](https://img.shields.io/badge/chat-gitter-46bc99.svg?style=flat-square)](https://gitter.im/ker0x/messenger?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+<div align="center">
+    <a href="https://travis-ci.org/ker0x/messenger" title="Build">
+        <img src="https://img.shields.io/travis/ker0x/messenger.svg?style=for-the-badge" alt="travis">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Coverage">
+        <img src="https://img.shields.io/scrutinizer/coverage/g/ker0x/messenger.svg?style=for-the-badge" alt="scrutinizer-coverage">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Code Quality">
+        <img src="https://img.shields.io/scrutinizer/g/ker0x/messenger.svg?style=for-the-badge" alt="Code Quality">
+    </a>
+    <a href="https://php.net" title="Coverage">
+        <img src="https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=for-the-badge" alt="PHP Version">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Downloads">
+        <img src="https://img.shields.io/packagist/dt/kerox/messenger.svg?style=for-the-badge" alt="Downloads">
+    </a>
+    <a href="https://packagist.org/packages/kerox/messenger" title="Latest Stable Version">
+        <img src="https://img.shields.io/packagist/v/kerox/messenger.svg?style=for-the-badge" alt="Latest Stable Version">
+    </a>
+    <a href="https://packagist.org/packages/kerox/messenger" title="License">
+        <img src="https://img.shields.io/packagist/l/kerox/messenger.svg?style=for-the-badge" alt="License">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Chat">
+        <img src="https://img.shields.io/badge/chat-gitter-46bc99.svg?style=for-the-badge" alt="Chat">
+    </a>
+</div>
 
 # Messenger
 
