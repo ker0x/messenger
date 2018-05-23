@@ -1,17 +1,17 @@
 <div align="center">
     <a href="https://travis-ci.org/ker0x/messenger" title="Build">
-        <img src="https://img.shields.io/travis/ker0x/messenger.svg?style=for-the-badge" alt="travis">
+        <img src="https://img.shields.io/travis/ker0x/messenger.svg?style=for-the-badge" alt="Build">
     </a>
     <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Coverage">
-        <img src="https://img.shields.io/scrutinizer/coverage/g/ker0x/messenger.svg?style=for-the-badge" alt="scrutinizer-coverage">
+        <img src="https://img.shields.io/scrutinizer/coverage/g/ker0x/messenger.svg?style=for-the-badge" alt="Coverage">
     </a>
     <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Code Quality">
         <img src="https://img.shields.io/scrutinizer/g/ker0x/messenger.svg?style=for-the-badge" alt="Code Quality">
     </a>
-    <a href="https://php.net" title="Coverage">
+    <a href="https://php.net" title="PHP Version">
         <img src="https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=for-the-badge" alt="PHP Version">
     </a>
-    <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Downloads">
+    <a href="https://packagist.org/packages/kerox/messenger" title="Downloads">
         <img src="https://img.shields.io/packagist/dt/kerox/messenger.svg?style=for-the-badge" alt="Downloads">
     </a>
     <a href="https://packagist.org/packages/kerox/messenger" title="Latest Stable Version">
