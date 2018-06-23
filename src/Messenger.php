@@ -51,8 +51,12 @@ class Messenger
      * @param string                           $pageToken
      * @param null|\GuzzleHttp\ClientInterface $client
      */
-    public function __construct(string $appSecret, string $verifyToken, string $pageToken, ?ClientInterface $client = null)
-    {
+    public function __construct(
+        string $appSecret,
+        string $verifyToken,
+        string $pageToken,
+        ?ClientInterface $client = null
+    ) {
         $this->appSecret = $appSecret;
         $this->verifyToken = $verifyToken;
         $this->pageToken = $pageToken;

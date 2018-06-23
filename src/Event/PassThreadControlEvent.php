@@ -28,8 +28,12 @@ class PassThreadControlEvent extends AbstractEvent
      * @param int                                               $timestamp
      * @param \Kerox\Messenger\Model\Callback\PassThreadControl $passThreadControl
      */
-    public function __construct(string $senderId, string $recipientId, int $timestamp, PassThreadControl $passThreadControl)
-    {
+    public function __construct(
+        string $senderId,
+        string $recipientId,
+        int $timestamp,
+        PassThreadControl $passThreadControl
+    ) {
         parent::__construct($senderId, $recipientId);
 
         $this->timestamp = $timestamp;
