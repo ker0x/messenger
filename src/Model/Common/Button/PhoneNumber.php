@@ -55,7 +55,7 @@ class PhoneNumber extends AbstractButton
     {
         $array = parent::toArray();
         $array += [
-            'title'   => $this->title,
+            'title' => $this->title,
             'payload' => $this->payload,
         ];
 

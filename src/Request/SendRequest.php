@@ -96,12 +96,12 @@ class SendRequest extends AbstractRequest
     protected function buildBody(): array
     {
         $body = [
-            'messaging_type'    => $this->messagingType,
-            'recipient'         => $this->recipient,
-            'message'           => $this->message,
-            'sender_action'     => $this->senderAction,
+            'messaging_type' => $this->messagingType,
+            'recipient' => $this->recipient,
+            'message' => $this->message,
+            'sender_action' => $this->senderAction,
             'notification_type' => $this->notificationType,
-            'tag'               => $this->tag,
+            'tag' => $this->tag,
         ];
 
         return array_filter($body);

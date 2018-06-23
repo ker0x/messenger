@@ -121,10 +121,10 @@ class ListTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type'     => Template::TYPE_LIST,
+                'template_type' => Template::TYPE_LIST,
                 'top_element_style' => $this->topElementStyle,
-                'elements'          => $this->elements,
-                'buttons'           => $this->buttons,
+                'elements' => $this->elements,
+                'buttons' => $this->buttons,
             ],
         ];
 

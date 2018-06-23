@@ -118,11 +118,11 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type'      => Template::TYPE_AIRLINE_UPDATE,
-                'intro_message'      => $this->introMessage,
-                'update_type'        => $this->updateType,
-                'locale'             => $this->locale,
-                'pnr_number'         => $this->pnrNumber,
+                'template_type' => Template::TYPE_AIRLINE_UPDATE,
+                'intro_message' => $this->introMessage,
+                'update_type' => $this->updateType,
+                'locale' => $this->locale,
+                'pnr_number' => $this->pnrNumber,
                 'update_flight_info' => $this->updateFlightInfo,
             ],
         ];

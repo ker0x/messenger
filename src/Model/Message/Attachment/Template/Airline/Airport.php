@@ -80,9 +80,9 @@ class Airport implements \JsonSerializable
     {
         $array = [
             'airport_code' => $this->airportCode,
-            'city'         => $this->city,
-            'terminal'     => $this->terminal,
-            'gate'         => $this->gate,
+            'city' => $this->city,
+            'terminal' => $this->terminal,
+            'gate' => $this->gate,
         ];
 
         return array_filter($array);

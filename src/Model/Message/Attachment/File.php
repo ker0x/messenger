@@ -77,8 +77,8 @@ class File extends Attachment
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'url'           => $this->url,
-                'is_reusable'   => $this->reusable,
+                'url' => $this->url,
+                'is_reusable' => $this->reusable,
                 'attachment_id' => $this->attachmentId,
             ],
         ];

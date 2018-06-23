@@ -133,14 +133,14 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
     public function toArray(): array
     {
         $array = [
-            'connection_id'     => $this->connectionId,
-            'segment_id'        => $this->segmentId,
-            'flight_number'     => $this->flightNumber,
-            'aircraft_type'     => $this->aircraftType,
-            'travel_class'      => $this->travelClass,
+            'connection_id' => $this->connectionId,
+            'segment_id' => $this->segmentId,
+            'flight_number' => $this->flightNumber,
+            'aircraft_type' => $this->aircraftType,
+            'travel_class' => $this->travelClass,
             'departure_airport' => $this->departureAirport,
-            'arrival_airport'   => $this->arrivalAirport,
-            'flight_schedule'   => $this->flightSchedule,
+            'arrival_airport' => $this->arrivalAirport,
+            'flight_schedule' => $this->flightSchedule,
         ];
 
         return array_filter($array);

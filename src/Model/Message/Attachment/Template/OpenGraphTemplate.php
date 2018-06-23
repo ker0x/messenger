@@ -50,7 +50,7 @@ class OpenGraphTemplate extends Template
         $array += [
             'payload' => [
                 'template_type' => Template::TYPE_OPEN_GRAPH,
-                'elements'      => $this->elements,
+                'elements' => $this->elements,
             ],
         ];
 

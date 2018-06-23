@@ -137,10 +137,10 @@ class MediaElement implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'media_type'    => $this->mediaType,
+            'media_type' => $this->mediaType,
             'attachment_id' => $this->attachmentId,
-            'url'           => $this->url,
-            'buttons'       => $this->buttons,
+            'url' => $this->url,
+            'buttons' => $this->buttons,
         ];
 
         return array_filter($array);

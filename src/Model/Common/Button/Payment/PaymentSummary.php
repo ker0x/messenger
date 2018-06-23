@@ -180,12 +180,12 @@ class PaymentSummary implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'currency'            => $this->currency,
-            'payment_type'        => $this->paymentType,
-            'is_test_payment'     => $this->isTestPayment,
-            'merchant_name'       => $this->merchantName,
+            'currency' => $this->currency,
+            'payment_type' => $this->paymentType,
+            'is_test_payment' => $this->isTestPayment,
+            'merchant_name' => $this->merchantName,
             'requested_user_info' => $this->requestedUserInfo,
-            'price_list'          => $this->priceList,
+            'price_list' => $this->priceList,
         ];
 
         return array_filter($array);

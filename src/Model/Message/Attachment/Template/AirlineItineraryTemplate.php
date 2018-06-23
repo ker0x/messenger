@@ -141,8 +141,8 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
         }
 
         $priceInfo = [
-            'title'    => $title,
-            'amount'   => $amount,
+            'title' => $title,
+            'amount' => $amount,
             'currency' => $currency,
         ];
 
@@ -185,19 +185,19 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type'          => Template::TYPE_AIRLINE_ITINERARY,
-                'intro_message'          => $this->introMessage,
-                'locale'                 => $this->locale,
-                'theme_color'            => $this->themeColor,
-                'pnr_number'             => $this->pnrNumber,
-                'passenger_info'         => $this->passengerInfo,
-                'flight_info'            => $this->flightInfo,
+                'template_type' => Template::TYPE_AIRLINE_ITINERARY,
+                'intro_message' => $this->introMessage,
+                'locale' => $this->locale,
+                'theme_color' => $this->themeColor,
+                'pnr_number' => $this->pnrNumber,
+                'passenger_info' => $this->passengerInfo,
+                'flight_info' => $this->flightInfo,
                 'passenger_segment_info' => $this->passengerSegmentInfo,
-                'price_info'             => $this->priceInfo,
-                'base_price'             => $this->basePrice,
-                'tax'                    => $this->tax,
-                'total_price'            => $this->totalPrice,
-                'currency'               => $this->currency,
+                'price_info' => $this->priceInfo,
+                'base_price' => $this->basePrice,
+                'tax' => $this->tax,
+                'total_price' => $this->totalPrice,
+                'currency' => $this->currency,
             ],
         ];
 

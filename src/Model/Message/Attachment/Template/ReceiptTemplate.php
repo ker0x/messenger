@@ -175,17 +175,17 @@ class ReceiptTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type'  => Template::TYPE_RECEIPT,
+                'template_type' => Template::TYPE_RECEIPT,
                 'recipient_name' => $this->recipientName,
-                'order_number'   => $this->orderNumber,
-                'currency'       => $this->currency,
+                'order_number' => $this->orderNumber,
+                'currency' => $this->currency,
                 'payment_method' => $this->paymentMethod,
-                'order_url'      => $this->orderUrl,
-                'timestamp'      => $this->timestamp,
-                'elements'       => $this->elements,
-                'address'        => $this->address,
-                'summary'        => $this->summary,
-                'adjustments'    => $this->adjustments,
+                'order_url' => $this->orderUrl,
+                'timestamp' => $this->timestamp,
+                'elements' => $this->elements,
+                'address' => $this->address,
+                'summary' => $this->summary,
+                'adjustments' => $this->adjustments,
             ],
         ];
 

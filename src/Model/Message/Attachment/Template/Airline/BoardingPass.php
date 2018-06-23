@@ -271,19 +271,19 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     public function toArray(): array
     {
         $array = [
-            'passenger_name'           => $this->passengerName,
-            'pnr_number'               => $this->pnrNumber,
-            'travel_class'             => $this->travelClass,
-            'seat'                     => $this->seat,
-            'auxiliary_fields'         => $this->auxiliaryFields,
-            'secondary_fields'         => $this->secondaryFields,
-            'logo_image_url'           => $this->logoImageUrl,
-            'header_image_url'         => $this->headerImageUrl,
-            'header_text_field'        => $this->headerTextField,
-            'qr_code'                  => $this->qrCode,
-            'barcode_image_url'        => $this->barcodeImageUrl,
+            'passenger_name' => $this->passengerName,
+            'pnr_number' => $this->pnrNumber,
+            'travel_class' => $this->travelClass,
+            'seat' => $this->seat,
+            'auxiliary_fields' => $this->auxiliaryFields,
+            'secondary_fields' => $this->secondaryFields,
+            'logo_image_url' => $this->logoImageUrl,
+            'header_image_url' => $this->headerImageUrl,
+            'header_text_field' => $this->headerTextField,
+            'qr_code' => $this->qrCode,
+            'barcode_image_url' => $this->barcodeImageUrl,
             'above_bar_code_image_url' => $this->aboveBarcodeImageUrl,
-            'flight_info'              => $this->flightInfo,
+            'flight_info' => $this->flightInfo,
         ];
 
         return array_filter($array);

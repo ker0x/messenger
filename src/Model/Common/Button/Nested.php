@@ -84,7 +84,7 @@ class Nested extends AbstractButton
     {
         $array = parent::toArray();
         $array += [
-            'title'           => $this->title,
+            'title' => $this->title,
             'call_to_actions' => $this->buttons,
         ];
 

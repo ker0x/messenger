@@ -89,9 +89,9 @@ class FlightSchedule implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'boarding_time'  => $this->boardingTime,
+            'boarding_time' => $this->boardingTime,
             'departure_time' => $this->departureTime,
-            'arrival_time'   => $this->arrivalTime,
+            'arrival_time' => $this->arrivalTime,
         ];
 
         return array_filter($array);

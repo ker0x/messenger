@@ -88,10 +88,10 @@ class Summary implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'subtotal'      => $this->subtotal,
+            'subtotal' => $this->subtotal,
             'shipping_cost' => $this->shippingCost,
-            'total_tax'     => $this->totalTax,
-            'total_cost'    => $this->totalCost,
+            'total_tax' => $this->totalTax,
+            'total_cost' => $this->totalCost,
         ];
 
         return array_filter($array);

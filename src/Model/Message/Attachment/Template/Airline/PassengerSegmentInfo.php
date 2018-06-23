@@ -90,10 +90,10 @@ class PassengerSegmentInfo implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'segment_id'   => $this->segmentId,
+            'segment_id' => $this->segmentId,
             'passenger_id' => $this->passengerId,
-            'seat'         => $this->seat,
-            'seat_type'    => $this->seatType,
+            'seat' => $this->seat,
+            'seat_type' => $this->seatType,
             'product_info' => $this->productInfo,
         ];
 

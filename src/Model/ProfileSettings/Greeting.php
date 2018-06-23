@@ -60,7 +60,7 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
     {
         $array = [
             'locale' => $this->locale,
-            'text'   => $this->text,
+            'text' => $this->text,
         ];
 
         return $array;

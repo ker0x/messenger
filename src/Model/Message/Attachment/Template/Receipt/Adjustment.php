@@ -61,7 +61,7 @@ class Adjustment implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'name'   => $this->name,
+            'name' => $this->name,
             'amount' => $this->amount,
         ];
 
