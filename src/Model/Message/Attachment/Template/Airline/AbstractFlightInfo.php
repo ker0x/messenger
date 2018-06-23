@@ -52,10 +52,10 @@ abstract class AbstractFlightInfo implements \JsonSerializable
     public function toArray(): array
     {
         return [
-            'flight_number'     => $this->flightNumber,
+            'flight_number' => $this->flightNumber,
             'departure_airport' => $this->departureAirport,
-            'arrival_airport'   => $this->arrivalAirport,
-            'flight_schedule'   => $this->flightSchedule,
+            'arrival_airport' => $this->arrivalAirport,
+            'flight_schedule' => $this->flightSchedule,
         ];
     }
 

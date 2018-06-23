@@ -149,7 +149,7 @@ class TargetAudience implements \JsonSerializable
     {
         $array = [
             'audience_type' => $this->audienceType,
-            'countries'     => [
+            'countries' => [
                 'whitelist' => $this->whitelistCountries,
                 'blacklist' => $this->blacklistCountries,
             ],

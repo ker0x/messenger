@@ -50,7 +50,7 @@ class GenericTemplate extends Template
         $array += [
             'payload' => [
                 'template_type' => Template::TYPE_GENERIC,
-                'elements'      => $this->elements,
+                'elements' => $this->elements,
             ],
         ];
 

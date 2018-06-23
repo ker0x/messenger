@@ -59,8 +59,8 @@ class ButtonTemplate extends Template
         $array += [
             'payload' => [
                 'template_type' => Template::TYPE_BUTTON,
-                'text'          => $this->text,
-                'buttons'       => $this->buttons,
+                'text' => $this->text,
+                'buttons' => $this->buttons,
             ],
         ];
 

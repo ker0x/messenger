@@ -101,9 +101,9 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'locale'                  => $this->locale,
+            'locale' => $this->locale,
             'composer_input_disabled' => $this->composerInputDisabled,
-            'call_to_actions'         => $this->buttons,
+            'call_to_actions' => $this->buttons,
         ];
 
         return array_filter($array);

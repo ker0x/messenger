@@ -62,9 +62,9 @@ class PassengerInfo implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'passenger_id'  => $this->passengerId,
+            'passenger_id' => $this->passengerId,
             'ticket_number' => $this->ticketNumber,
-            'name'          => $this->name,
+            'name' => $this->name,
         ];
 
         return array_filter($array);

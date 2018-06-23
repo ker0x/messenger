@@ -112,10 +112,10 @@ class ReceiptElement extends AbstractElement
     {
         $array = parent::toArray();
         $array += [
-            'subtitle'  => $this->subtitle,
-            'quantity'  => $this->quantity,
-            'price'     => $this->price,
-            'currency'  => $this->currency,
+            'subtitle' => $this->subtitle,
+            'quantity' => $this->quantity,
+            'price' => $this->price,
+            'currency' => $this->currency,
             'image_url' => $this->imageUrl,
         ];
 

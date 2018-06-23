@@ -43,11 +43,11 @@ class NlpRequest extends AbstractRequest
     {
         $query = parent::buildQuery();
         $query += [
-            'nlp_enabled'  => $this->configs['nlp_enabled'] ?? null,
-            'model'        => $this->configs['model'] ?? null,
+            'nlp_enabled' => $this->configs['nlp_enabled'] ?? null,
+            'model' => $this->configs['model'] ?? null,
             'custom_token' => $this->configs['custom_token'] ?? null,
-            'verbose'      => $this->configs['verbose'] ?? null,
-            'n_best'       => $this->configs['n_best'] ?? null,
+            'verbose' => $this->configs['verbose'] ?? null,
+            'n_best' => $this->configs['n_best'] ?? null,
         ];
 
         return $this->arrayFilter($query);

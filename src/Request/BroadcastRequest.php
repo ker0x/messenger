@@ -81,12 +81,12 @@ class BroadcastRequest extends AbstractRequest
     protected function buildBody(): array
     {
         $body = [
-            'messages'            => [
+            'messages' => [
                 $this->message,
             ],
             'message_creative_id' => $this->messageCreativeId,
-            'notification_type'   => $this->notificationType,
-            'tag'                 => $this->tag,
+            'notification_type' => $this->notificationType,
+            'tag' => $this->tag,
         ];
 
         return array_filter($body);

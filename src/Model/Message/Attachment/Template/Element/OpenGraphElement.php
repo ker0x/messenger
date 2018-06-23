@@ -80,7 +80,7 @@ class OpenGraphElement implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'url'     => $this->url,
+            'url' => $this->url,
             'buttons' => $this->buttons,
         ];
 

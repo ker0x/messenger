@@ -65,8 +65,8 @@ class MediaTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type'     => Template::TYPE_MEDIA,
-                'elements'          => $this->elements,
+                'template_type' => Template::TYPE_MEDIA,
+                'elements' => $this->elements,
             ],
         ];
 

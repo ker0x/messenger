@@ -154,9 +154,9 @@ class QuickReply implements \JsonSerializable
     {
         $quickReply = [
             'content_type' => $this->contentType,
-            'title'        => $this->title,
-            'payload'      => $this->payload,
-            'image_url'    => $this->imageUrl,
+            'title' => $this->title,
+            'payload' => $this->payload,
+            'image_url' => $this->imageUrl,
         ];
 
         return array_filter($quickReply);

@@ -93,10 +93,10 @@ class GenericElement extends AbstractElement
     {
         $array = parent::toArray();
         $array += [
-            'subtitle'       => $this->subtitle,
-            'image_url'      => $this->imageUrl,
+            'subtitle' => $this->subtitle,
+            'image_url' => $this->imageUrl,
             'default_action' => $this->defaultAction,
-            'buttons'        => $this->buttons,
+            'buttons' => $this->buttons,
         ];
 
         return array_filter($array);

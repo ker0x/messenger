@@ -194,14 +194,14 @@ class Address implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'name'        => $this->name,
-            'street_1'    => $this->street,
-            'street_2'    => $this->additionalStreet,
-            'city'        => $this->city,
+            'name' => $this->name,
+            'street_1' => $this->street,
+            'street_2' => $this->additionalStreet,
+            'city' => $this->city,
             'postal_code' => $this->postalCode,
-            'state'       => $this->state,
-            'country'     => $this->country,
-            'id'          => $this->id,
+            'state' => $this->state,
+            'country' => $this->country,
+            'id' => $this->id,
         ];
 
         return array_filter($array);

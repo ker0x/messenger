@@ -66,11 +66,11 @@ class ThreadControl implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'recipient'     => [
+            'recipient' => [
                 'id' => $this->recipientId,
             ],
             'target_app_id' => $this->targetAppId,
-            'metadata'      => $this->metadata,
+            'metadata' => $this->metadata,
         ];
 
         return array_filter($array);

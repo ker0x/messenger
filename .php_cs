@@ -11,7 +11,7 @@ return PhpCsFixer\Config::create()
         '@PHP71Migration' => true,
         'binary_operator_spaces' => array(
             'align_equals' => false,
-            'align_double_arrow' => true,
+            'align_double_arrow' => false,
         ),
         '@Symfony:risky' => true,
         '@PHP71Migration:risky' => true,

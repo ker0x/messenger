@@ -173,13 +173,13 @@ class ProfileSettings implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'persistent_menu'     => $this->persistentMenus,
-            'get_started'         => $this->startButton,
-            'greeting'            => $this->greetings,
+            'persistent_menu' => $this->persistentMenus,
+            'get_started' => $this->startButton,
+            'greeting' => $this->greetings,
             'whitelisted_domains' => $this->whitelistedDomains,
             'account_linking_url' => $this->accountLinkingUrl,
-            'payment_settings'    => $this->paymentSettings,
-            'target_audience'     => $this->targetAudience,
+            'payment_settings' => $this->paymentSettings,
+            'target_audience' => $this->targetAudience,
         ];
 
         return array_filter($array);

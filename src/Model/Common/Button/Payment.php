@@ -62,8 +62,8 @@ class Payment extends AbstractButton
     {
         $array = parent::toArray();
         $array += [
-            'title'           => $this->title,
-            'payload'         => $this->payload,
+            'title' => $this->title,
+            'payload' => $this->payload,
             'payment_summary' => $this->paymentSummary,
         ];
 

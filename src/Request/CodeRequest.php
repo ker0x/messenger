@@ -58,9 +58,9 @@ class CodeRequest extends AbstractRequest
     protected function buildBody(): array
     {
         $body = [
-            'type'       => $this->codeType,
+            'type' => $this->codeType,
             'image_size' => $this->imageSize,
-            'data'       => [
+            'data' => [
                 'ref' => $this->ref,
             ],
         ];

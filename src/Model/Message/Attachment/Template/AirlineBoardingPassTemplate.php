@@ -59,8 +59,8 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
             'payload' => [
                 'template_type' => Template::TYPE_AIRLINE_BOARDINGPASS,
                 'intro_message' => $this->introMessage,
-                'locale'        => $this->locale,
-                'theme_color'   => $this->themeColor,
+                'locale' => $this->locale,
+                'theme_color' => $this->themeColor,
                 'boarding_pass' => $this->boardingPass,
             ],
         ];

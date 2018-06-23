@@ -45,7 +45,7 @@ class PriceList implements \JsonSerializable
     public function toArray(): array
     {
         return [
-            'label'  => $this->label,
+            'label' => $this->label,
             'amount' => $this->amount,
         ];
     }

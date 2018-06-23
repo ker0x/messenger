@@ -159,11 +159,11 @@ class WebUrl extends AbstractButton
     {
         $array = parent::toArray();
         $array += [
-            'url'                  => $this->url,
-            'title'                => $this->title,
+            'url' => $this->url,
+            'title' => $this->title,
             'webview_height_ratio' => $this->webviewHeightRatio,
             'messenger_extensions' => $this->messengerExtension,
-            'fallback_url'         => $this->fallbackUrl,
+            'fallback_url' => $this->fallbackUrl,
             'webview_share_button' => $this->webviewShareButton,
         ];
 

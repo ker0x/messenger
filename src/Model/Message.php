@@ -133,9 +133,9 @@ class Message implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            $this->type     => $this->message,
+            $this->type => $this->message,
             'quick_replies' => $this->quickReplies,
-            'metadata'      => $this->metadata,
+            'metadata' => $this->metadata,
         ];
 
         return array_filter($array);

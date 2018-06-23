@@ -5,8 +5,8 @@
     <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Coverage">
         <img src="https://img.shields.io/scrutinizer/coverage/g/ker0x/messenger.svg?style=for-the-badge" alt="Coverage">
     </a>
-    <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Code Quality">
-        <img src="https://img.shields.io/scrutinizer/g/ker0x/messenger.svg?style=for-the-badge" alt="Code Quality">
+    <a href="https://app.codacy.com/app/monteil-romain/messenger" title="Code Quality">
+        <img src="https://img.shields.io/codacy/grade/64818aeb1b7a4254b5bcc611301f1db5.svg?style=for-the-badge" alt="Codacy grade">
     </a>
     <a href="https://php.net" title="PHP Version">
         <img src="https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=for-the-badge" alt="PHP Version">

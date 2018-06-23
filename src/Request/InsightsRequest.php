@@ -60,8 +60,8 @@ class InsightsRequest extends AbstractRequest
         $query = parent::buildQuery();
         $query += [
             'metric' => $metrics,
-            'since'  => $this->since,
-            'until'  => $this->until,
+            'since' => $this->since,
+            'until' => $this->until,
         ];
 
         return $this->arrayFilter($query);
