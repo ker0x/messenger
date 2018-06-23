@@ -170,7 +170,7 @@ trait ValidatorTrait
      *
      * @return \Kerox\Messenger\Model\Message
      */
-    private function isValidMessage($message): Message
+    protected function isValidMessage($message): Message
     {
         if ($message instanceof Message) {
             return $message;

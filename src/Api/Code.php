@@ -20,8 +20,11 @@ class Code extends AbstractApi
      *
      * @return \Kerox\Messenger\Response\CodeResponse
      */
-    public function request(int $imageSize = 1000, string $codeType = self::CODE_TYPE_STANDARD, ?string $ref = null): CodeResponse
-    {
+    public function request(
+        int $imageSize = 1000,
+        string $codeType = self::CODE_TYPE_STANDARD,
+        ?string $ref = null
+    ): CodeResponse {
         $this->isValidCodeImageSize($imageSize);
         $this->isValidCodeType($codeType);
 
@@ -56,7 +59,9 @@ class Code extends AbstractApi
     {
         $allowedCodeType = $this->getAllowedCodeType();
         if (!\in_array($codeType, $allowedCodeType, true)) {
-            throw new \InvalidArgumentException('$codeType must be either ' . implode(', ', $allowedCodeType));
+            throw new \InvalidArgumentException(
+                '$codeType must be either ' . implode(', ', $allowedCodeType)
+            );
         }
     }
 
@@ -68,7 +73,9 @@ class Code extends AbstractApi
     private function isValidRef(string $ref): void
     {
         if (!preg_match('/^[a-zA-Z0-9\+\/=\-.:_ ]{1,250}$/', $ref)) {
-            throw new \InvalidArgumentException('$ref must be a string of max 250 characters. Valid characters are a-z A-Z 0-9 +/=-.:_');
+            throw new \InvalidArgumentException(
+                '$ref must be a string of max 250 characters. Valid characters are a-z A-Z 0-9 +/=-.:_'
+            );
         }
     }
 
