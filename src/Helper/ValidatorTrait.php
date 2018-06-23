@@ -119,10 +119,10 @@ trait ValidatorTrait
      */
     protected function isValidCurrency(string $value): void
     {
-        if (!preg_match(
-            '/^SGD|RON|EUR|TRY|SEK|ZAR|HKD|CHF|NIO|JPY|ISK|TWD|NZD|CZK|AUD|THB|BOB|BRL|MXN|USD|ILS|HNL|MOP|COP|UYU|CRC|DKK|QAR|PYG|CAD|INR|KRW|GTQ|AED|VEF|SAR|NOK|CNY|ARS|PLN|GBP|PEN|PHP|VND|RUB|HUF|MYR|CLP|IDR$/',
-            $value
-        )) {
+        $allowedCurrency = $this->getAllowedCurrency();
+
+        $regex = '/^' . implode('|', $allowedCurrency) . '$/';
+        if (!preg_match($regex, $value)) {
             throw new InvalidArgumentException(
                 "{$value} is not a valid currency. Currency must be in ISO-4217-3 format."
             );
@@ -274,6 +274,64 @@ trait ValidatorTrait
             SendInterface::TAG_TRANSPORTATION_UPDATE,
             SendInterface::TAG_FEATURE_FUNCTIONALITY_UPDATE,
             SendInterface::TAG_TICKET_UPDATE,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllowedCurrency(): array
+    {
+        return [
+            'SGD',
+            'RON',
+            'EUR',
+            'TRY',
+            'SEK',
+            'ZAR',
+            'HKD',
+            'CHF',
+            'NIO',
+            'JPY',
+            'ISK',
+            'TWD',
+            'NZD',
+            'CZK',
+            'AUD',
+            'THB',
+            'BOB',
+            'BRL',
+            'MXN',
+            'USD',
+            'ILS',
+            'HNL',
+            'MOP',
+            'COP',
+            'UYU',
+            'CRC',
+            'DKK',
+            'QAR',
+            'PYG',
+            'CAD',
+            'INR',
+            'KRW',
+            'GTQ',
+            'AED',
+            'VEF',
+            'SAR',
+            'NOK',
+            'CNY',
+            'ARS',
+            'PLN',
+            'GBP',
+            'PEN',
+            'PHP',
+            'VND',
+            'RUB',
+            'HUF',
+            'MYR',
+            'CLP',
+            'IDR',
         ];
     }
 }
