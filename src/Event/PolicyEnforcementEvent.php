@@ -28,8 +28,12 @@ class PolicyEnforcementEvent extends AbstractEvent
      * @param int                                               $timestamp
      * @param \Kerox\Messenger\Model\Callback\PolicyEnforcement $policyEnforcement
      */
-    public function __construct(string $senderId, string $recipientId, int $timestamp, PolicyEnforcement $policyEnforcement)
-    {
+    public function __construct(
+        string $senderId,
+        string $recipientId,
+        int $timestamp,
+        PolicyEnforcement $policyEnforcement
+    ) {
         parent::__construct($senderId, $recipientId);
 
         $this->timestamp = $timestamp;
