@@ -28,8 +28,12 @@ class TakeThreadControlEvent extends AbstractEvent
      * @param int                                               $timestamp
      * @param \Kerox\Messenger\Model\Callback\TakeThreadControl $takeThreadControl
      */
-    public function __construct(string $senderId, string $recipientId, int $timestamp, TakeThreadControl $takeThreadControl)
-    {
+    public function __construct(
+        string $senderId,
+        string $recipientId,
+        int $timestamp,
+        TakeThreadControl $takeThreadControl
+    ) {
         parent::__construct($senderId, $recipientId);
 
         $this->timestamp = $timestamp;
