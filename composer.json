@@ -38,5 +38,13 @@
     "psr-4": {
       "Kerox\\Messenger\\Test\\": "tests"
     }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "csfix": "php-cs-fixer fix --diff --verbose --config=.php_cs"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
   }
 }
