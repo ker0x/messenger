@@ -30,7 +30,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     protected $locale;
 
     /**
-     * @var null|int
+     * @var null|float
      */
     protected $timezone;
 
@@ -98,9 +98,9 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return null|int
+     * @return null|float
      */
-    public function getTimezone(): ?int
+    public function getTimezone(): ?float
     {
         return $this->timezone;
     }
