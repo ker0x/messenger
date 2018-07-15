@@ -10,6 +10,7 @@ use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
 use Kerox\Messenger\Response\SendResponse;
 use Kerox\Messenger\SendInterface;
+use Psr\Log\InvalidArgumentException;
 
 class Send extends AbstractApi implements SendInterface
 {
@@ -29,27 +30,18 @@ class Send extends AbstractApi implements SendInterface
     /**
      * @param string                                $recipient
      * @param string|\Kerox\Messenger\Model\Message $message
-     * @param string                                $notificationType
-     * @param string|null                           $tag
+     * @param array                                 $options
      *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function message(
-        string $recipient,
-        $message,
-        string $notificationType = self::NOTIFICATION_TYPE_REGULAR,
-        ?string $tag = null
-    ): SendResponse {
+    public function message(string $recipient, $message, array $options = []): SendResponse
+    {
         $message = $this->isValidMessage($message);
-        $this->isValidNotificationType($notificationType);
+        $options = $this->isValidOptions($options, $message);
 
-        if ($tag !== null) {
-            $this->isValidTag($tag);
-        }
-
-        $request = new SendRequest($this->pageToken, $message, $recipient, $notificationType, $tag);
+        $request = new SendRequest($this->pageToken, $message, $recipient, $options);
         $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
@@ -58,21 +50,16 @@ class Send extends AbstractApi implements SendInterface
     /**
      * @param string $recipient
      * @param string $action
-     * @param string $notificationType
-     *
-     * @throws \InvalidArgumentException
+     * @param array  $options
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
-    public function action(
-        string $recipient,
-        string $action,
-        string $notificationType = self::NOTIFICATION_TYPE_REGULAR
-    ): SendResponse {
+    public function action(string $recipient, string $action, array $options = []): SendResponse
+    {
         $this->isValidSenderAction($action);
-        $this->isValidNotificationType($notificationType);
+        $options = $this->isValidOptions($options, $action);
 
-        $request = new SendRequest($this->pageToken, $action, $recipient, $notificationType, null, SendRequest::REQUEST_TYPE_ACTION);
+        $request = new SendRequest($this->pageToken, $action, $recipient, $options, SendRequest::REQUEST_TYPE_ACTION);
         $response = $this->client->post('me/messages', $request->build());
 
         return new SendResponse($response);
@@ -93,5 +80,52 @@ class Send extends AbstractApi implements SendInterface
         $response = $this->client->post('me/message_attachments', $request->build());
 
         return new SendResponse($response);
+    }
+
+    /**
+     * @param array $options
+     * @param       $message
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return array
+     */
+    private function isValidOptions(array $options, $message): array
+    {
+        $allowedOptionsKeys = $this->getAllowedOptionsKeys();
+        array_map(function ($key) use ($allowedOptionsKeys): void {
+            if (!\in_array($key, $allowedOptionsKeys, true)) {
+                throw new InvalidArgumentException(sprintf(
+                    'Only "%s" are allowed keys for options.',
+                    implode(', ', $allowedOptionsKeys)
+                ));
+            }
+        }, array_keys($options));
+
+        if (isset($options['messaging_type'])) {
+            $this->isValidMessagingType($options['messaging_type']);
+        }
+
+        if (isset($options['notification_type'])) {
+            $this->isValidNotificationType($options['notification_type']);
+        }
+
+        if (isset($options['tag'])) {
+            $this->isValidTag($options['tag'], $message);
+        }
+
+        return $options;
+    }
+
+    /**
+     * @return array
+     */
+    private function getAllowedOptionsKeys(): array
+    {
+        return [
+            'messaging_type',
+            'notification_type',
+            'tag',
+        ];
     }
 }

@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Kerox\Messenger\Model\Common\Button\AbstractButton;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment;
+use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 use Kerox\Messenger\SendInterface;
 
 trait ValidatorTrait
@@ -123,9 +124,10 @@ trait ValidatorTrait
 
         $regex = '/^' . implode('|', $allowedCurrency) . '$/';
         if (!preg_match($regex, $value)) {
-            throw new InvalidArgumentException(
-                "{$value} is not a valid currency. Currency must be in ISO-4217-3 format."
-            );
+            throw new InvalidArgumentException(sprintf(
+                '%s is not a valid currency. Currency must be in ISO-4217-3 format.',
+                $value
+            ));
         }
     }
 
@@ -139,9 +141,11 @@ trait ValidatorTrait
     {
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if (empty($ext) || !\in_array($ext, $allowedExtension, true)) {
-            throw new InvalidArgumentException(
-                "{$filename} doesn't have a valid extension. Allowed extensions are " . implode(', ', $allowedExtension)
-            );
+            throw new InvalidArgumentException(sprintf(
+                "%s doesn't have a valid extension. Allowed extensions are %s",
+                $filename,
+                implode(', ', $allowedExtension)
+            ));
         }
     }
 
@@ -160,9 +164,10 @@ trait ValidatorTrait
             }
 
             if (!\in_array($button->getType(), $allowedButtonsType, true)) {
-                throw new \InvalidArgumentException(
-                    'Buttons can only be an instance of ' . implode(', ', $allowedButtonsType)
-                );
+                throw new \InvalidArgumentException(sprintf(
+                    'Buttons can only be an instance of %s',
+                    implode(', ', $allowedButtonsType)
+                ));
             }
         }
     }
@@ -184,7 +189,7 @@ trait ValidatorTrait
             return Message::create($message);
         }
 
-        throw new \InvalidArgumentException('$message must be a string or an instance of Message or Attachment');
+        throw new \InvalidArgumentException('message must be a string or an instance of Message or Attachment');
     }
 
     /**
@@ -196,7 +201,26 @@ trait ValidatorTrait
     {
         $allowedSenderAction = $this->getAllowedSenderAction();
         if (!\in_array($action, $allowedSenderAction, true)) {
-            throw new \InvalidArgumentException('$action must be either ' . implode(', ', $allowedSenderAction));
+            throw new \InvalidArgumentException(sprintf(
+                'action must be either "%s"',
+                implode(', ', $allowedSenderAction)
+            ));
+        }
+    }
+
+    /**
+     * @param string $messagingType
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function isValidMessagingType(string $messagingType): void
+    {
+        $allowedMessagingType = $this->getAllowedMessagingType();
+        if (!\in_array($messagingType, $allowedMessagingType, true)) {
+            throw new \InvalidArgumentException(sprintf(
+                'messagingType must be either %s',
+                implode(', ', $allowedMessagingType)
+            ));
         }
     }
 
@@ -209,22 +233,35 @@ trait ValidatorTrait
     {
         $allowedNotificationType = $this->getAllowedNotificationType();
         if (!\in_array($notificationType, $allowedNotificationType, true)) {
-            throw new \InvalidArgumentException(
-                '$notificationType must be either ' . implode(', ', $allowedNotificationType)
-            );
+            throw new \InvalidArgumentException(sprintf(
+                'notificationType must be either %s',
+                implode(', ', $allowedNotificationType)
+            ));
         }
     }
 
     /**
-     * @param string $tag
+     * @param string                         $tag
+     * @param \Kerox\Messenger\Model\Message $message
      *
      * @throws \InvalidArgumentException
      */
-    protected function isValidTag(string $tag): void
+    protected function isValidTag(string $tag, Message $message = null): void
     {
         $allowedTag = $this->getAllowedTag();
         if (!\in_array($tag, $allowedTag, true)) {
-            throw new \InvalidArgumentException('$tag must be either ' . implode(', ', $allowedTag));
+            throw new \InvalidArgumentException(sprintf(
+                'tag must be either %s',
+                implode(', ', $allowedTag)
+            ));
+        }
+
+        if ($tag === SendInterface::TAG_ISSUE_RESOLUTION && $message !== null && !$message instanceof GenericTemplate) {
+            throw new \InvalidArgumentException(sprintf(
+                'message must be an instance of %s if $tag is set to %s',
+                GenericTemplate::class,
+                SendInterface::TAG_ISSUE_RESOLUTION
+            ));
         }
     }
 
@@ -237,6 +274,19 @@ trait ValidatorTrait
             SendInterface::SENDER_ACTION_TYPING_ON,
             SendInterface::SENDER_ACTION_TYPING_OFF,
             SendInterface::SENDER_ACTION_MARK_SEEN,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllowedMessagingType(): array
+    {
+        return [
+            SendInterface::MESSAGING_TYPE_RESPONSE,
+            SendInterface::MESSAGING_TYPE_MESSAGE_TAG,
+            SendInterface::MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION,
+            SendInterface::MESSAGING_TYPE_UPDATE,
         ];
     }
 

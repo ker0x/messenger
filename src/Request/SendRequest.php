@@ -11,11 +11,6 @@ class SendRequest extends AbstractRequest
     public const REQUEST_TYPE_MESSAGE = 'message';
     public const REQUEST_TYPE_ACTION = 'action';
 
-    public const MESSAGING_TYPE_RESPONSE = 'RESPONSE';
-    public const MESSAGING_TYPE_UPDATE = 'UPDATE';
-    public const MESSAGING_TYPE_MESSAGE_TAG = 'MESSAGE_TAG';
-    public const MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION = 'NON_PROMOTIONAL_SUBSCRIPTION';
-
     /**
      * @var null|array
      */
@@ -52,19 +47,15 @@ class SendRequest extends AbstractRequest
      * @param string                                $pageToken
      * @param string|\Kerox\Messenger\Model\Message $content
      * @param string|null                           $recipient
-     * @param string|null                           $notificationType
-     * @param string|null                           $tag
+     * @param array                                 $options
      * @param string                                $requestType
-     * @param string                                $messagingType
      */
     public function __construct(
         string $pageToken,
         $content,
         ?string $recipient = null,
-        ?string $notificationType = null,
-        ?string $tag = null,
-        string $requestType = self::REQUEST_TYPE_MESSAGE,
-        string $messagingType = self::MESSAGING_TYPE_RESPONSE
+        array $options = [],
+        string $requestType = self::REQUEST_TYPE_MESSAGE
     ) {
         parent::__construct($pageToken);
 
@@ -75,9 +66,9 @@ class SendRequest extends AbstractRequest
         }
 
         $this->recipient = \is_string($recipient) ? ['id' => $recipient] : $recipient;
-        $this->notificationType = $notificationType;
-        $this->messagingType = $messagingType;
-        $this->tag = $tag;
+        $this->messagingType = $options['messaging_type'] ?? null;
+        $this->notificationType = $options['notification_type'] ?? null;
+        $this->tag = $options['tag'] ?? null;
     }
 
     /**

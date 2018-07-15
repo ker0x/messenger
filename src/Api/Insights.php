@@ -19,23 +19,39 @@ class Insights extends AbstractApi implements InsightsInterface
      */
     public function get(array $metrics = [], ?int $since = null, ?int $until = null): InsightsResponse
     {
-        $allowedMetrics = $this->getAllowedMetrics();
-        $metrics = empty($metrics) ? $allowedMetrics : $metrics;
-
-        if ($metrics !== $allowedMetrics) {
-            foreach ($metrics as $metric) {
-                if (!\in_array($metric, $allowedMetrics, true)) {
-                    throw new \InvalidArgumentException(
-                        $metric . ' is not a valid value. $metrics must only contain ' . implode(', ', $allowedMetrics)
-                    );
-                }
-            }
-        }
+        $metrics = $this->isValidMetrics($metrics);
 
         $request = new InsightsRequest($this->pageToken, $metrics, $since, $until);
         $response = $this->client->get('me/insights', $request->build());
 
         return new InsightsResponse($response);
+    }
+
+    /**
+     * @param array $metrics
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return array
+     */
+    private function isValidMetrics(array $metrics): array
+    {
+        $allowedMetrics = $this->getAllowedMetrics();
+
+        $metrics = empty($metrics) ? $allowedMetrics : $metrics;
+        if ($metrics !== $allowedMetrics) {
+            array_map(function ($metric) use ($allowedMetrics): void {
+                if (!\in_array($metric, $allowedMetrics, true)) {
+                    throw new \InvalidArgumentException(sprintf(
+                        '%s is not a valid value. $metrics must only contain %s',
+                        $metric,
+                        implode(', ', $allowedMetrics)
+                    ));
+                }
+            }, $metrics);
+        }
+
+        return $metrics;
     }
 
     /**
