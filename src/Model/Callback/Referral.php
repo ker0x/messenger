@@ -12,12 +12,12 @@ class Referral
     protected $ref;
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $source;
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $type;
 
@@ -25,10 +25,10 @@ class Referral
      * Referral constructor.
      *
      * @param $ref
-     * @param string $source
-     * @param string $type
+     * @param null|string $source
+     * @param null|string $type
      */
-    public function __construct($ref, string $source, string $type)
+    public function __construct($ref, ?string $source, ?string $type)
     {
         $this->ref = $ref;
         $this->source = $source;
@@ -44,17 +44,17 @@ class Referral
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
         return $this->source;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -66,6 +66,10 @@ class Referral
      */
     public static function create(array $callbackData): self
     {
-        return new self($callbackData['ref'], $callbackData['source'], $callbackData['type']);
+        $ref = $callbackData['ref'] ?? null;
+        $source = $callbackData['source'] ?? null;
+        $type = $callbackData['type'] ?? null;
+
+        return new self($ref, $source, $type);
     }
 }

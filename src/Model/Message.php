@@ -91,6 +91,8 @@ class Message implements \JsonSerializable
      */
     public function addQuickReply(QuickReply $quickReply): self
     {
+        $this->isValidQuickReplies($this->quickReplies);
+
         $this->quickReplies[] = $quickReply;
 
         return $this;
