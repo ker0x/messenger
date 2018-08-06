@@ -51,7 +51,7 @@ class RequestThreadControlEvent extends AbstractEvent
     /**
      * @return \Kerox\Messenger\Model\Callback\RequestThreadControl
      */
-    public function getTakeThreadControl(): RequestThreadControl
+    public function getRequestThreadControl(): RequestThreadControl
     {
         return $this->requestThreadControl;
     }

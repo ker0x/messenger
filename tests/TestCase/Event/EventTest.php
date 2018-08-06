@@ -16,6 +16,8 @@ use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\PreCheckoutEvent;
 use Kerox\Messenger\Event\RawEvent;
 use Kerox\Messenger\Event\ReadEvent;
+use Kerox\Messenger\Event\ReferralEvent;
+use Kerox\Messenger\Event\RequestThreadControlEvent;
 use Kerox\Messenger\Event\TakeThreadControlEvent;
 use Kerox\Messenger\Model\Callback\AccountLinking;
 use Kerox\Messenger\Model\Callback\AppRoles;
@@ -31,6 +33,8 @@ use Kerox\Messenger\Model\Callback\PolicyEnforcement;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\PreCheckout;
 use Kerox\Messenger\Model\Callback\Read;
+use Kerox\Messenger\Model\Callback\Referral;
+use Kerox\Messenger\Model\Callback\RequestThreadControl;
 use Kerox\Messenger\Model\Callback\TakeThreadControl;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -169,6 +173,18 @@ class EventTest extends AbstractTestCase
         $this->assertEquals('pass_thread_control', $event->getName());
     }
 
+    public function testRequestThreadControl()
+    {
+        $mockedRequestThreadControl = $this->createMock(RequestThreadControl::class);
+        $event = new RequestThreadControlEvent('sender_id', 'recipient_id', 123456, $mockedRequestThreadControl);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedRequestThreadControl, $event->getRequestThreadControl());
+        $this->assertEquals('request_thread_control', $event->getName());
+    }
+
     public function testTakeThreadControl()
     {
         $mockedTakeThreadControl = $this->createMock(TakeThreadControl::class);
@@ -225,5 +241,17 @@ class EventTest extends AbstractTestCase
         $this->assertEquals('recipient_id', $event->getRecipientId());
         $this->assertEquals(['payload' => 'PAYLOAD'], $event->getRaw());
         $this->assertEquals('raw', $event->getName());
+    }
+
+    public function testReferralEvent()
+    {
+        $mockedReferral = $this->createMock(Referral::class);
+        $event = new ReferralEvent('sender_id', 'recipient_id', 123456, $mockedReferral);
+
+        $this->assertEquals('sender_id', $event->getSenderId());
+        $this->assertEquals('recipient_id', $event->getRecipientId());
+        $this->assertEquals(123456, $event->getTimestamp());
+        $this->assertEquals($mockedReferral, $event->getReferral());
+        $this->assertEquals('referral', $event->getName());
     }
 }
