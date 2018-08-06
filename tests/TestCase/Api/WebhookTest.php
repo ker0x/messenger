@@ -27,7 +27,6 @@ class WebhookTest extends AbstractTestCase
         $verifyToken = 'verify_token';
         $pageToken = 'page_token';
 
-
         $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/message.json');
         $requestHeaders = [
             'Content-Type' => 'application/json',
@@ -160,7 +159,6 @@ class WebhookTest extends AbstractTestCase
         $verifyToken = 'verify_token';
         $pageToken = 'page_token';
 
-
         $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/stand_by.json');
         $requestHeaders = [
             'Content-Type' => 'application/json',
@@ -185,6 +183,93 @@ class WebhookTest extends AbstractTestCase
         $events = $webhookApi->getCallbackEvents();
 
         $this->assertEquals([$event], $events);
+    }
+
+    public function testWebhookVerificationWithInvalidRequestMethod()
+    {
+        $appSecret = 'app_secret';
+        $verifyToken = 'verify_token';
+        $pageToken = 'page_token';
+
+        $client = new Client();
+
+        $params = ['hub_mode' => 'subscribe', 'hub_verify_token' => $verifyToken, 'hub_challenge' => '1234abcd'];
+        $request = (new ServerRequest('POST', '/'))->withQueryParams($params);
+
+        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+
+        $this->assertFalse($webhook->isValidToken());
+    }
+
+    public function testWebhookVerificationWithMissingParam()
+    {
+        $appSecret = 'app_secret';
+        $verifyToken = 'verify_token';
+        $pageToken = 'page_token';
+
+        $client = new Client();
+
+        $params = ['hub_mode' => 'subscribe', 'hub_challenge' => '1234abcd'];
+        $request = (new ServerRequest('GET', '/'))->withQueryParams($params);
+
+        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+
+        $this->assertFalse($webhook->isValidToken());
+    }
+
+    public function testWebhookWithMissingHeaders()
+    {
+        $appSecret = 'app_secret';
+        $verifyToken = 'verify_token';
+        $pageToken = 'page_token';
+
+        $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/stand_by.json');
+        $requestHeaders = [];
+
+        $request = new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
+
+        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Webhook/success.json');
+        $mockedResponse = new MockHandler([
+            new Response(200, [], $bodyResponse),
+        ]);
+
+        $handler = HandlerStack::create($mockedResponse);
+        $client = new Client([
+            'handler' => $handler
+        ]);
+
+        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+
+        $this->assertFalse($webhook->isValidCallback());
+    }
+
+    public function testWebhookWithInvalidCallback()
+    {
+        $appSecret = 'app_secret';
+        $verifyToken = 'verify_token';
+        $pageToken = 'page_token';
+
+        $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/invalid_message.json');
+        $requestHeaders = [
+            'Content-Type' => 'application/json',
+            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret)
+        ];
+
+        $request = new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
+
+        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Webhook/success.json');
+        $mockedResponse = new MockHandler([
+            new Response(200, [], $bodyResponse),
+        ]);
+
+        $handler = HandlerStack::create($mockedResponse);
+        $client = new Client([
+            'handler' => $handler
+        ]);
+
+        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+
+        $this->assertEquals([], $webhook->getDecodedBody());
     }
 
     public function tearDown()
