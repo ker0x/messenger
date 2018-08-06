@@ -17,17 +17,6 @@ class Send extends AbstractApi implements SendInterface
     use ValidatorTrait;
 
     /**
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
-     *
-     * @return \Kerox\Messenger\Api\Send
-     */
-    public static function getInstance(string $pageToken, ClientInterface $client): self
-    {
-        return new self($pageToken, $client);
-    }
-
-    /**
      * @param string                                $recipient
      * @param string|\Kerox\Messenger\Model\Message $message
      * @param array                                 $options
