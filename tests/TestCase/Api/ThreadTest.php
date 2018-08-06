@@ -50,4 +50,14 @@ class ThreadTest extends AbstractTestCase
 
         $this->assertTrue($response->isSuccess());
     }
+
+    public function testRequestThreadControl()
+    {
+        $requestThreadControl = ThreadControl::create(1234567890);
+        $requestThreadControl->setMetadata('additional content that the caller wants to set');
+
+        $response = $this->threadApi->request($requestThreadControl);
+
+        $this->assertTrue($response->isSuccess());
+    }
 }

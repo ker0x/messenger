@@ -13,7 +13,7 @@ class FileTest extends AbstractTestCase
     public function testFile()
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/file.json');
-        $file = new File('https://petersapparel.com/bin/receipt.pdf', true);
+        $file = File::create('https://petersapparel.com/bin/receipt.pdf', true);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($file));
     }
@@ -21,7 +21,7 @@ class FileTest extends AbstractTestCase
     public function testAudio()
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/audio.json');
-        $audio = new Audio('https://petersapparel.com/bin/clip.mp3');
+        $audio = Audio::create('https://petersapparel.com/bin/clip.mp3');
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($audio));
     }
@@ -29,7 +29,7 @@ class FileTest extends AbstractTestCase
     public function testVideo()
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/video.json');
-        $video = new Video('https://petersapparel.com/bin/clip.mp4');
+        $video = Video::create('https://petersapparel.com/bin/clip.mp4');
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($video));
     }
@@ -37,7 +37,7 @@ class FileTest extends AbstractTestCase
     public function testImage()
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/image.json');
-        $video = new Image('https://petersapparel.com/img/shirt.png');
+        $video = Image::create('https://petersapparel.com/img/shirt.png');
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($video));
     }
@@ -45,7 +45,7 @@ class FileTest extends AbstractTestCase
     public function testFileWithAttachmentId()
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/file_attachment.json');
-        $file = new File('1745504518999123');
+        $file = File::create('1745504518999123');
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($file));
     }
