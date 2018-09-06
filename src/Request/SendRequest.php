@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\Message;
+use Kerox\Messenger\SendInterface;
 
 class SendRequest extends AbstractRequest
 {
@@ -66,9 +67,9 @@ class SendRequest extends AbstractRequest
         }
 
         $this->recipient = \is_string($recipient) ? ['id' => $recipient] : $recipient;
-        $this->messagingType = $options['messaging_type'] ?? null;
-        $this->notificationType = $options['notification_type'] ?? null;
-        $this->tag = $options['tag'] ?? null;
+        $this->messagingType = $options[SendInterface::OPTION_MESSAGING_TYPE] ?? null;
+        $this->notificationType = $options[SendInterface::OPTION_NOTIFICATION_TYPE] ?? null;
+        $this->tag = $options[SendInterface::OPTION_TAG] ?? null;
     }
 
     /**

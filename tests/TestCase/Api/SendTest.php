@@ -76,7 +76,7 @@ class SendTest extends AbstractTestCase
     public function testBadMessage()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('message must be a string or an instance of Message or Attachment');
+        $this->expectExceptionMessage('message must be a string or an instance of Kerox\Messenger\Model\Message or Kerox\Messenger\Model\Message\Attachment.');
         $this->sendApi->message('1008372609250235', 1234);
     }
 
@@ -90,7 +90,7 @@ class SendTest extends AbstractTestCase
     public function testSendMessageWithBadOptionsKey()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Only "messaging_type, notification_type, tag" are allowed keys for options.');
+        $this->expectExceptionMessage('Only messaging_type, notification_type, tag are allowed keys for options.');
         $this->sendApi->message('1008372609250235', 'Hello World!', [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'action_type' => SendRequest::REQUEST_TYPE_ACTION
@@ -100,7 +100,7 @@ class SendTest extends AbstractTestCase
     public function testBadActionType()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('action must be either "typing_on, typing_off, mark_seen"');
+        $this->expectExceptionMessage('action must be either typing_on, typing_off, mark_seen');
         $this->sendApi->action('1008372609250235', 'typing_seen');
     }
 
@@ -137,7 +137,7 @@ class SendTest extends AbstractTestCase
         $message = $this->getReceipt();
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('message must be an instance of Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate if $tag is set to ISSUE_RESOLUTION');
+        $this->expectExceptionMessage('message must be an instance of Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate if tag is set to ISSUE_RESOLUTION.');
         $this->sendApi->message('1008372609250235', $message, [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'tag' => SendInterface::TAG_ISSUE_RESOLUTION,

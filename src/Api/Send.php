@@ -9,7 +9,6 @@ use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
 use Kerox\Messenger\Response\SendResponse;
 use Kerox\Messenger\SendInterface;
-use Psr\Log\InvalidArgumentException;
 
 class Send extends AbstractApi implements SendInterface
 {
@@ -81,28 +80,40 @@ class Send extends AbstractApi implements SendInterface
     private function isValidOptions(array $options, $message): array
     {
         $allowedOptionsKeys = $this->getAllowedOptionsKeys();
-        array_map(function ($key) use ($allowedOptionsKeys): void {
+        foreach ($options as $key => $value) {
             if (!\in_array($key, $allowedOptionsKeys, true)) {
-                throw new InvalidArgumentException(sprintf(
-                    'Only "%s" are allowed keys for options.',
+                throw new \InvalidArgumentException(sprintf(
+                    'Only %s are allowed keys for options.',
                     implode(', ', $allowedOptionsKeys)
                 ));
             }
-        }, array_keys($options));
 
-        if (isset($options['messaging_type'])) {
-            $this->isValidMessagingType($options['messaging_type']);
-        }
-
-        if (isset($options['notification_type'])) {
-            $this->isValidNotificationType($options['notification_type']);
-        }
-
-        if (isset($options['tag'])) {
-            $this->isValidTag($options['tag'], $message);
+            if ($key === self::OPTION_MESSAGING_TYPE) {
+                $this->isValidMessagingType($value);
+            } elseif ($key === self::OPTION_NOTIFICATION_TYPE) {
+                $this->isValidNotificationType($value);
+            } elseif ($key === self::OPTION_TAG) {
+                $this->isValidTag($value, $message);
+            }
         }
 
         return $options;
+    }
+
+    /**
+     * @param string $messagingType
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function isValidMessagingType(string $messagingType): void
+    {
+        $allowedMessagingType = $this->getAllowedMessagingType();
+        if (!\in_array($messagingType, $allowedMessagingType, true)) {
+            throw new \InvalidArgumentException(sprintf(
+                'messagingType must be either %s.',
+                implode(', ', $allowedMessagingType)
+            ));
+        }
     }
 
     /**
@@ -111,9 +122,22 @@ class Send extends AbstractApi implements SendInterface
     private function getAllowedOptionsKeys(): array
     {
         return [
-            'messaging_type',
-            'notification_type',
-            'tag',
+            self::OPTION_MESSAGING_TYPE,
+            self::OPTION_NOTIFICATION_TYPE,
+            self::OPTION_TAG,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllowedMessagingType(): array
+    {
+        return [
+            self::MESSAGING_TYPE_RESPONSE,
+            self::MESSAGING_TYPE_MESSAGE_TAG,
+            self::MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION,
+            self::MESSAGING_TYPE_UPDATE,
         ];
     }
 }
