@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\Message;
+use Kerox\Messenger\SendInterface;
 
 class BroadcastRequest extends AbstractRequest
 {
     public const REQUEST_TYPE_MESSAGE = 'message';
     public const REQUEST_TYPE_ACTION = 'action';
-
-    public const MESSAGING_TYPE_RESPONSE = 'RESPONSE';
-    public const MESSAGING_TYPE_UPDATE = 'UPDATE';
-    public const MESSAGING_TYPE_MESSAGE_TAG = 'MESSAGE_TAG';
-    public const MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION = 'NON_PROMOTIONAL_SUBSCRIPTION';
 
     /**
      * @var null|string|\Kerox\Messenger\Model\Message
@@ -47,22 +43,20 @@ class BroadcastRequest extends AbstractRequest
      * @param string                              $pageToken
      * @param \Kerox\Messenger\Model\Message|null $message
      * @param string|null                         $messageCreativeId
-     * @param string|null                         $notificationType
-     * @param string|null                         $tag
+     * @param array                               $options
      */
     public function __construct(
         string $pageToken,
         ?Message $message = null,
         ?string $messageCreativeId = null,
-        ?string $notificationType = null,
-        ?string $tag = null
+        array $options = []
     ) {
         parent::__construct($pageToken);
 
         $this->message = $message;
         $this->messageCreativeId = $messageCreativeId;
-        $this->notificationType = $notificationType;
-        $this->tag = $tag;
+        $this->notificationType = $options[SendInterface::OPTION_NOTIFICATION_TYPE] ?? null;
+        $this->tag = $options[SendInterface::OPTION_TAG] ?? null;
     }
 
     /**

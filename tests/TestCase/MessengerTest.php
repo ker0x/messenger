@@ -15,7 +15,6 @@ use Kerox\Messenger\Messenger;
 
 class MessengerTest extends AbstractTestCase
 {
-
     /**
      * @var Messenger
      */

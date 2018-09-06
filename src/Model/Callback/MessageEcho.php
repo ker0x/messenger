@@ -35,7 +35,7 @@ class MessageEcho extends Message
      */
     public function __construct(
         bool $isEcho,
-        ?int $appId = null,
+        ?int $appId,
         string $messageId,
         int $sequence,
         ?string $metadata = null,

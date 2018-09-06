@@ -21,7 +21,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class Messenger
 {
     public const API_URL = 'https://graph.facebook.com/';
-    public const API_VERSION = 'v2.11';
+    public const API_VERSION = 'v3.1';
 
     /**
      * @var string
@@ -49,12 +49,14 @@ class Messenger
      * @param string                           $appSecret
      * @param string                           $verifyToken
      * @param string                           $pageToken
+     * @param string                           $apiVersion
      * @param null|\GuzzleHttp\ClientInterface $client
      */
     public function __construct(
         string $appSecret,
         string $verifyToken,
         string $pageToken,
+        string $apiVersion = self::API_VERSION,
         ?ClientInterface $client = null
     ) {
         $this->appSecret = $appSecret;
@@ -63,7 +65,7 @@ class Messenger
 
         if ($client === null) {
             $client = new Client([
-                'base_uri' => self::API_URL . self::API_VERSION . '/',
+                'base_uri' => self::API_URL . $apiVersion . '/',
             ]);
         }
         $this->client = $client;

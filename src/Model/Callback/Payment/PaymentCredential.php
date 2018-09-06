@@ -55,10 +55,10 @@ class PaymentCredential
     public function __construct(
         string $providerType,
         string $chargeId,
-        ?string $tokenizedCard = null,
-        ?string $tokenizedCvv = null,
-        ?string $tokenExpiryMonth = null,
-        ?string $tokenExpiryYear = null,
+        ?string $tokenizedCard,
+        ?string $tokenizedCvv,
+        ?string $tokenExpiryMonth,
+        ?string $tokenExpiryYear,
         string $fbPaymentId
     ) {
         $this->providerType = $providerType;

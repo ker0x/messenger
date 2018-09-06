@@ -90,7 +90,7 @@ trait ValidatorTrait
     {
         if (!preg_match('/^(\d{4})-(0[1-9]|1[0-2])-([12]\d|0[1-9]|3[01])T(0\d|1\d|2[0-3]):([0-5]\d)$/', $value)) {
             throw new InvalidArgumentException(
-                "{$value} is not valid. DateTime must be in ISO-8601 AAAA-MM-JJThh:mm format"
+                "{$value} is not valid. DateTime must be in ISO-8601 AAAA-MM-JJThh:mm format."
             );
         }
     }
@@ -142,7 +142,7 @@ trait ValidatorTrait
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if (empty($ext) || !\in_array($ext, $allowedExtension, true)) {
             throw new InvalidArgumentException(sprintf(
-                "%s doesn't have a valid extension. Allowed extensions are %s",
+                "%s doesn't have a valid extension. Allowed extensions are %s.",
                 $filename,
                 implode(', ', $allowedExtension)
             ));
@@ -160,12 +160,14 @@ trait ValidatorTrait
         /** @var \Kerox\Messenger\Model\Common\Button\AbstractButton $button */
         foreach ($buttons as $button) {
             if (!$button instanceof AbstractButton) {
-                throw new \InvalidArgumentException('Array can only contain instance of AbstractButton.');
+                throw new \InvalidArgumentException(
+                    sprintf('Array can only contain instance of %s.', AbstractButton::class)
+                );
             }
 
             if (!\in_array($button->getType(), $allowedButtonsType, true)) {
                 throw new \InvalidArgumentException(sprintf(
-                    'Buttons can only be an instance of %s',
+                    'Buttons can only be an instance of %s.',
                     implode(', ', $allowedButtonsType)
                 ));
             }
@@ -189,7 +191,9 @@ trait ValidatorTrait
             return Message::create($message);
         }
 
-        throw new \InvalidArgumentException('message must be a string or an instance of Message or Attachment');
+        throw new \InvalidArgumentException(
+            sprintf('message must be a string or an instance of %s or %s.', Message::class, Attachment::class)
+        );
     }
 
     /**
@@ -202,24 +206,8 @@ trait ValidatorTrait
         $allowedSenderAction = $this->getAllowedSenderAction();
         if (!\in_array($action, $allowedSenderAction, true)) {
             throw new \InvalidArgumentException(sprintf(
-                'action must be either "%s"',
+                'action must be either %s.',
                 implode(', ', $allowedSenderAction)
-            ));
-        }
-    }
-
-    /**
-     * @param string $messagingType
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function isValidMessagingType(string $messagingType): void
-    {
-        $allowedMessagingType = $this->getAllowedMessagingType();
-        if (!\in_array($messagingType, $allowedMessagingType, true)) {
-            throw new \InvalidArgumentException(sprintf(
-                'messagingType must be either %s',
-                implode(', ', $allowedMessagingType)
             ));
         }
     }
@@ -234,7 +222,7 @@ trait ValidatorTrait
         $allowedNotificationType = $this->getAllowedNotificationType();
         if (!\in_array($notificationType, $allowedNotificationType, true)) {
             throw new \InvalidArgumentException(sprintf(
-                'notificationType must be either %s',
+                'notificationType must be either %s.',
                 implode(', ', $allowedNotificationType)
             ));
         }
@@ -251,14 +239,14 @@ trait ValidatorTrait
         $allowedTag = $this->getAllowedTag();
         if (!\in_array($tag, $allowedTag, true)) {
             throw new \InvalidArgumentException(sprintf(
-                'tag must be either %s',
+                'tag must be either %s.',
                 implode(', ', $allowedTag)
             ));
         }
 
         if ($tag === SendInterface::TAG_ISSUE_RESOLUTION && $message !== null && !$message instanceof GenericTemplate) {
             throw new \InvalidArgumentException(sprintf(
-                'message must be an instance of %s if $tag is set to %s',
+                'message must be an instance of %s if tag is set to %s.',
                 GenericTemplate::class,
                 SendInterface::TAG_ISSUE_RESOLUTION
             ));
@@ -274,19 +262,6 @@ trait ValidatorTrait
             SendInterface::SENDER_ACTION_TYPING_ON,
             SendInterface::SENDER_ACTION_TYPING_OFF,
             SendInterface::SENDER_ACTION_MARK_SEEN,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllowedMessagingType(): array
-    {
-        return [
-            SendInterface::MESSAGING_TYPE_RESPONSE,
-            SendInterface::MESSAGING_TYPE_MESSAGE_TAG,
-            SendInterface::MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION,
-            SendInterface::MESSAGING_TYPE_UPDATE,
         ];
     }
 

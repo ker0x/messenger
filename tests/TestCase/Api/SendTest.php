@@ -7,14 +7,12 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Model\Common\Address;
-use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment\Image;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Request\SendRequest;
-use Kerox\Messenger\Response\SendResponse;
 use Kerox\Messenger\SendInterface;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -51,7 +49,7 @@ class SendTest extends AbstractTestCase
 
     public function testSendMessageToUser()
     {
-        $message = new Message($this->getReceipt());
+        $message = $this->getReceipt();
 
         $response = $this->sendApi->message('1008372609250235', $message, [
             'messaging_type' => SendInterface::MESSAGING_TYPE_RESPONSE,
@@ -76,7 +74,7 @@ class SendTest extends AbstractTestCase
     public function testBadMessage()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('message must be a string or an instance of Message or Attachment');
+        $this->expectExceptionMessage('message must be a string or an instance of Kerox\Messenger\Model\Message or Kerox\Messenger\Model\Message\Attachment.');
         $this->sendApi->message('1008372609250235', 1234);
     }
 
@@ -90,7 +88,7 @@ class SendTest extends AbstractTestCase
     public function testSendMessageWithBadOptionsKey()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Only "messaging_type, notification_type, tag" are allowed keys for options.');
+        $this->expectExceptionMessage('Only messaging_type, notification_type, tag are allowed keys for options.');
         $this->sendApi->message('1008372609250235', 'Hello World!', [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'action_type' => SendRequest::REQUEST_TYPE_ACTION
@@ -100,7 +98,7 @@ class SendTest extends AbstractTestCase
     public function testBadActionType()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('action must be either "typing_on, typing_off, mark_seen"');
+        $this->expectExceptionMessage('action must be either typing_on, typing_off, mark_seen');
         $this->sendApi->action('1008372609250235', 'typing_seen');
     }
 
@@ -137,7 +135,7 @@ class SendTest extends AbstractTestCase
         $message = $this->getReceipt();
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('message must be an instance of Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate if $tag is set to ISSUE_RESOLUTION');
+        $this->expectExceptionMessage('message must be an instance of Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate if tag is set to ISSUE_RESOLUTION.');
         $this->sendApi->message('1008372609250235', $message, [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'tag' => SendInterface::TAG_ISSUE_RESOLUTION,

@@ -31,7 +31,15 @@ A PHP library to interact with [Facebook Messenger Platform](https://www.messeng
 
 ## Installation
 
-To install this library, simply run `composer require kerox/messenger`
+You can install Messenger using Composer:
+
+```
+composer require kerox/messenger
+```
+
+You will then need to:
+* run ``composer install`` to get these dependencies added to your vendor directory
+* add the autoloader to your application with this line: ``require('vendor/autoload.php');``
 
 ## Basic usage
 
