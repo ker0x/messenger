@@ -30,7 +30,7 @@ class ButtonTemplate extends Template
     {
         parent::__construct();
 
-        $this->isValidString($text, 320);
+        $this->isValidString($text, 640);
         $this->isValidArray($buttons, 3);
 
         $this->text = $text;
