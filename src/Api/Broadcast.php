@@ -31,28 +31,55 @@ class Broadcast extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param string      $messageCreativeId
-     * @param string      $notificationType
-     * @param string|null $tag
-     *
-     * @throws \InvalidArgumentException
+     * @param string $messageCreativeId
+     * @param array  $options
      *
      * @return \Kerox\Messenger\Response\BroadcastResponse
      */
-    public function send(
-        string $messageCreativeId,
-        string $notificationType = self::NOTIFICATION_TYPE_REGULAR,
-        ?string $tag = null
-    ): BroadcastResponse {
-        $this->isValidNotificationType($notificationType);
+    public function send(string $messageCreativeId, array $options = []): BroadcastResponse
+    {
+        $options = $this->isValidOptions($options);
 
-        if ($tag !== null) {
-            $this->isValidTag($tag);
-        }
-
-        $request = new BroadcastRequest($this->pageToken, null, $messageCreativeId, $notificationType, $tag);
+        $request = new BroadcastRequest($this->pageToken, null, $messageCreativeId, $options);
         $response = $this->client->post('me/broadcast_messages', $request->build());
 
         return new BroadcastResponse($response);
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
+    private function isValidOptions(array $options): array
+    {
+        $allowedOptionsKeys = $this->getAllowedOptionsKeys();
+        foreach ($options as $key => $value) {
+            if (!\in_array($key, $allowedOptionsKeys, true)) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Only %s are allowed keys for options.',
+                    implode(', ', $allowedOptionsKeys)
+                ));
+            }
+
+            if ($key === self::OPTION_NOTIFICATION_TYPE) {
+                $this->isValidNotificationType($value);
+            } elseif ($key === self::OPTION_TAG) {
+                $this->isValidTag($value);
+            }
+        }
+
+        return $options;
+    }
+
+    /**
+     * @return array
+     */
+    private function getAllowedOptionsKeys(): array
+    {
+        return [
+            self::OPTION_NOTIFICATION_TYPE,
+            self::OPTION_TAG,
+        ];
     }
 }

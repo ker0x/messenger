@@ -19,14 +19,18 @@ class ButtonTemplate extends Template
     protected $buttons;
 
     /**
+     * @var bool
+     */
+    protected $sharable;
+
+    /**
      * Buttons constructor.
      *
      * @param string                                                $text
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
-     *
-     * @throws \InvalidArgumentException
+     * @param bool                                                  $sharable
      */
-    public function __construct(string $text, array $buttons)
+    public function __construct(string $text, array $buttons, bool $sharable = false)
     {
         parent::__construct();
 
@@ -35,19 +39,19 @@ class ButtonTemplate extends Template
 
         $this->text = $text;
         $this->buttons = $buttons;
+        $this->sharable = $sharable;
     }
 
     /**
      * @param string $text
      * @param array  $buttons
-     *
-     * @throws \InvalidArgumentException
+     * @param bool   $sharable
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate
      */
-    public static function create(string $text, array $buttons): self
+    public static function create(string $text, array $buttons, bool $sharable = false): self
     {
-        return new self($text, $buttons);
+        return new self($text, $buttons, $sharable);
     }
 
     /**
@@ -61,6 +65,7 @@ class ButtonTemplate extends Template
                 'template_type' => Template::TYPE_BUTTON,
                 'text' => $this->text,
                 'buttons' => $this->buttons,
+                'sharable' => $this->sharable,
             ],
         ];
 

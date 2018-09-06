@@ -162,7 +162,7 @@ class TemplateTest extends AbstractTestCase
         $button = ButtonTemplate::create('What do you want to do next?', [
             WebUrl::create('Show Website', 'https://petersapparel.parseapp.com'),
             Postback::create('Start Chatting', 'USER_DEFINED_PAYLOAD'),
-        ]);
+        ], true);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($button));
     }
