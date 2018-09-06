@@ -7,14 +7,12 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Model\Common\Address;
-use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment\Image;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Request\SendRequest;
-use Kerox\Messenger\Response\SendResponse;
 use Kerox\Messenger\SendInterface;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -51,7 +49,7 @@ class SendTest extends AbstractTestCase
 
     public function testSendMessageToUser()
     {
-        $message = new Message($this->getReceipt());
+        $message = $this->getReceipt();
 
         $response = $this->sendApi->message('1008372609250235', $message, [
             'messaging_type' => SendInterface::MESSAGING_TYPE_RESPONSE,
