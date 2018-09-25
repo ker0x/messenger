@@ -12,7 +12,6 @@ php:
 
 env:
   global:
-    - DEFAULT=1
     - secure: j+1g/twymlVnvpQlsdS+82IY3xR8GIBB7m8bEmpYP6J1ketRToJWANDre6Xb/33JHEzekcr5Kt0F2UDkNzR5rNbviHqYH4EyHA7VZTikqSSelY+lZF7qo1xTyGRnCJZV6c2bri/rPVSjw1FYngNFh5FGCh7PmpzzeQZkhyCG3Cs=
 
 matrix:
