@@ -44,7 +44,7 @@ class Persona implements \JsonSerializable
      *
      * @return Persona
      */
-    public static function create(array $data = []): Persona
+    public static function create(array $data = []): self
     {
         return new static($data);
     }
@@ -54,7 +54,7 @@ class Persona implements \JsonSerializable
      *
      * @return Persona
      */
-    public function setId(string $id): Persona
+    public function setId(string $id): self
     {
         $this->id = $id;
 
@@ -66,7 +66,7 @@ class Persona implements \JsonSerializable
      *
      * @return Persona
      */
-    public function setName(string $name): Persona
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -78,7 +78,7 @@ class Persona implements \JsonSerializable
      *
      * @return Persona
      */
-    public function setProfilePictureUrl(string $url): Persona
+    public function setProfilePictureUrl(string $url): self
     {
         $this->isValidUrl($url);
 
