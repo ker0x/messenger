@@ -7,7 +7,6 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Tag;
 use Kerox\Messenger\Model\Data;
-use Kerox\Messenger\Response\TagResponse;
 
 class TagTest extends AbstractTestCase
 {

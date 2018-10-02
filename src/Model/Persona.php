@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Model;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
@@ -8,36 +10,125 @@ class Persona implements \JsonSerializable
 {
     use ValidatorTrait;
 
+    /**
+     * @var int|null
+     */
     protected $id;
 
+    /**
+     * @var string|null
+     */
     protected $name;
 
-    protected $profileImageUrl;
+    /**
+     * @var string|null
+     */
+    protected $profile_picture_url;
 
-    public function __construct(array $data)
+    /**
+     * Persona constructor.
+     *
+     * @param array $data
+     */
+    public function __construct(array $data = [])
     {
-        $this->id = $data['id'] ?? null;
-        $this->name = $data['name'] ?? null;
-        $this->profileImageUrl = $data['profileImageUrl'] ?? null;
+        foreach ($data as $field => $value) {
+            if (property_exists($this, $field)) {
+                $this->{$field} = $value;
+            }
+        }
     }
 
-    public static function create(array $data): Persona
+    /**
+     * @param array $data
+     *
+     * @return Persona
+     */
+    public static function create(array $data = []): Persona
     {
         return new static($data);
     }
 
+    /**
+     * @param int $id
+     *
+     * @return Persona
+     */
+    public function setId(int $id): Persona
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Persona
+     */
+    public function setName(string $name): Persona
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return Persona
+     */
+    public function setProfilePictureUrl(string $url): Persona
+    {
+        $this->isValidUrl($url);
+
+        $this->profile_picture_url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProfilePictureUrl(): ?string
+    {
+        return $this->profile_picture_url;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         $array = [
             'id' => $this->id,
             'name' => $this->name,
-            'profileImageUrl' => $this->profileImageUrl,
+            'profile_picture_url' => $this->profile_picture_url,
         ];
 
         return \array_filter($array);
     }
 
-    public function jsonSerialize()
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

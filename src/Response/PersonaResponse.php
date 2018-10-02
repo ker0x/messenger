@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Response;
 
 use Kerox\Messenger\Model\Persona;
@@ -28,5 +30,21 @@ class PersonaResponse extends AbstractResponse
     public function getPersona(): Persona
     {
         return $this->persona;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->persona->getId();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuccess(): bool
+    {
+        return $this->success === true;
     }
 }
