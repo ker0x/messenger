@@ -10,7 +10,7 @@ class PersonaTest extends AbstractTestCase
     public function testConstructor()
     {
         $data = [
-            'id' => $this->getRandomInteger(),
+            'id' => $this->randomIntegerString(),
             'name' => 'John Doe',
             'profile_picture_url' => 'https://unsplash.com/post/51492538696/download-by-alejandro-escamilla',
             'unexpected_field' => true,
@@ -25,7 +25,7 @@ class PersonaTest extends AbstractTestCase
 
     public function testSetId()
     {
-        $id = $this->getRandomInteger();
+        $id = $this->randomIntegerString();
 
         $model = new Persona();
         $this->assertAttributeEquals(null, 'id', $model);
@@ -59,7 +59,7 @@ class PersonaTest extends AbstractTestCase
     public function testGetId()
     {
         $data = [
-            'id' => $this->getRandomInteger(),
+            'id' => $this->randomIntegerString(),
         ];
 
         $model = new Persona($data);
@@ -91,7 +91,7 @@ class PersonaTest extends AbstractTestCase
 
     public function testToArray()
     {
-        $id = $this->getRandomInteger();
+        $id = $this->randomIntegerString();
         $data = [
             'id' => $id,
             'name' => 'John Doe',
@@ -110,7 +110,7 @@ class PersonaTest extends AbstractTestCase
     public function testJsonSerialize()
     {
         $data = [
-            'id' => $this->getRandomInteger(),
+            'id' => $this->randomIntegerString(),
             'name' => 'John Doe',
             'profile_picture_url' => '',
         ];
@@ -118,6 +118,6 @@ class PersonaTest extends AbstractTestCase
         $model = new Persona($data);
         $result = json_encode($model);
 
-        $this->assertEquals('{"id":' . $data['id'] . ',"name":"John Doe"}', $result);
+        $this->assertEquals('{"id":"' . $data['id'] . '","name":"John Doe"}', $result);
     }
 }

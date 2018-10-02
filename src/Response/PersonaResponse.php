@@ -33,9 +33,9 @@ class PersonaResponse extends AbstractResponse
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->persona->getId();
     }

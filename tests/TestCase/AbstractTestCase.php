@@ -6,10 +6,15 @@ use PHPUnit\Framework\TestCase;
 class AbstractTestCase extends TestCase
 {
     /**
-     * @return int
+     * @return string
      */
-    protected function getRandomInteger(): int
+    protected function randomIntegerString(): string
     {
-        return mt_rand(1, 100000);
+        $integerString = '';
+        $numbers = '1234567890';
+        for ($i = 0; $i < 16; ++$i) {
+            $integerString .= $numbers[mt_rand(0, strlen($numbers) - 1)];
+        }
+        return $integerString;
     }
 }

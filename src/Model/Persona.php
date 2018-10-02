@@ -11,7 +11,7 @@ class Persona implements \JsonSerializable
     use ValidatorTrait;
 
     /**
-     * @var int|null
+     * @var string|null
      */
     protected $id;
 
@@ -50,11 +50,11 @@ class Persona implements \JsonSerializable
     }
 
     /**
-     * @param int $id
+     * @param string $id
      *
      * @return Persona
      */
-    public function setId(int $id): Persona
+    public function setId(string $id): Persona
     {
         $this->id = $id;
 
@@ -88,9 +88,9 @@ class Persona implements \JsonSerializable
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
