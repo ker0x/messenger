@@ -39,7 +39,7 @@ class Webhook extends AbstractApi
     protected $decodedBody;
 
     /**
-     * @var \Kerox\Messenger\Model\Entry[]
+     * @var \Kerox\Messenger\Model\Callback\Entry[]
      */
     protected $hydratedEntries;
 

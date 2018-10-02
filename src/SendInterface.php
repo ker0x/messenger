@@ -9,6 +9,7 @@ interface SendInterface
     public const OPTION_MESSAGING_TYPE = 'messaging_type';
     public const OPTION_NOTIFICATION_TYPE = 'notification_type';
     public const OPTION_TAG = 'tag';
+    public const OPTION_PERSONA_ID = 'persona_id';
 
     public const SENDER_ACTION_TYPING_ON = 'typing_on';
     public const SENDER_ACTION_TYPING_OFF = 'typing_off';

@@ -125,6 +125,7 @@ class Send extends AbstractApi implements SendInterface
             self::OPTION_MESSAGING_TYPE,
             self::OPTION_NOTIFICATION_TYPE,
             self::OPTION_TAG,
+            self::OPTION_PERSONA_ID,
         ];
     }
 

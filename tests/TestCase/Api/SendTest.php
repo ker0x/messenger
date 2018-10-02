@@ -61,6 +61,18 @@ class SendTest extends AbstractTestCase
         $this->assertEquals('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
 
+    public function testSendMessageViaPersona()
+    {
+        $message = $this->getReceipt();
+
+        $response = $this->sendApi->message('1008372609250235', $message, [
+            'persona_id' => '1254477777772919'
+        ]);
+
+        $this->assertEquals('1008372609250235', $response->getRecipientId());
+        $this->assertEquals('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
+    }
+
     public function testSendAttachmentToUser()
     {
         $message = $this->getReceipt();
@@ -88,7 +100,7 @@ class SendTest extends AbstractTestCase
     public function testSendMessageWithBadOptionsKey()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Only messaging_type, notification_type, tag are allowed keys for options.');
+        $this->expectExceptionMessage('Only messaging_type, notification_type, tag, persona_id are allowed keys for options.');
         $this->sendApi->message('1008372609250235', 'Hello World!', [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'action_type' => SendRequest::REQUEST_TYPE_ACTION

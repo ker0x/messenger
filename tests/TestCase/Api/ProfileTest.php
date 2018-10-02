@@ -8,7 +8,6 @@ use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Model\ProfileSettings;
 use Kerox\Messenger\Model\ProfileSettings\Greeting;
-use Kerox\Messenger\Response\ProfileResponse;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ProfileTest extends AbstractTestCase

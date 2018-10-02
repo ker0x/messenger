@@ -68,6 +68,7 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 - [x] Thread
 - [x] User
 - [x] Webhook
+- [x] Persona
 
 ### Templates
 

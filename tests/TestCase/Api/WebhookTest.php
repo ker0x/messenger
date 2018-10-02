@@ -10,7 +10,6 @@ use Kerox\Messenger\Api\Webhook;
 use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Model\Callback\Message;
-use Kerox\Messenger\Response\WebhookResponse;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class WebhookTest extends AbstractTestCase

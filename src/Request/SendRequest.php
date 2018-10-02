@@ -43,6 +43,11 @@ class SendRequest extends AbstractRequest
     protected $messagingType;
 
     /**
+     * @var string|null
+     */
+    protected $personaId;
+
+    /**
      * Request constructor.
      *
      * @param string                                $pageToken
@@ -70,6 +75,7 @@ class SendRequest extends AbstractRequest
         $this->messagingType = $options[SendInterface::OPTION_MESSAGING_TYPE] ?? null;
         $this->notificationType = $options[SendInterface::OPTION_NOTIFICATION_TYPE] ?? null;
         $this->tag = $options[SendInterface::OPTION_TAG] ?? null;
+        $this->personaId = $options[SendInterface::OPTION_PERSONA_ID] ?? null;
     }
 
     /**
@@ -94,8 +100,9 @@ class SendRequest extends AbstractRequest
             'sender_action' => $this->senderAction,
             'notification_type' => $this->notificationType,
             'tag' => $this->tag,
+            'persona_id' => $this->personaId,
         ];
 
-        return array_filter($body);
+        return \array_filter($body);
     }
 }
