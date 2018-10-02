@@ -10,6 +10,7 @@ use Kerox\Messenger\Api\Broadcast;
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
 use Kerox\Messenger\Api\Nlp;
+use Kerox\Messenger\Api\Persona;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Api\Tag;
@@ -151,5 +152,13 @@ class Messenger
     public function broadcast(): Broadcast
     {
         return new Broadcast($this->pageToken, $this->client);
+    }
+
+    /**
+     * @return \Kerox\Messenger\Api\Persona
+     */
+    public function persona(): Persona
+    {
+        return new Persona($this->pageToken, $this->client);
     }
 }
