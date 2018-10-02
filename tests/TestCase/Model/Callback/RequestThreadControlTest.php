@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Callback;
 
 use Kerox\Messenger\Model\Callback\RequestThreadControl;
@@ -11,7 +14,7 @@ class RequestThreadControlTest extends AbstractTestCase
      */
     protected $requestThreadControl;
 
-    public function setUp()
+    public function setUp(): void
     {
         $json = file_get_contents(__DIR__ . '/../../../Mocks/Event/request_thread_control.json');
         $array = json_decode($json, true);
@@ -19,13 +22,13 @@ class RequestThreadControlTest extends AbstractTestCase
         $this->requestThreadControl = RequestThreadControl::create($array['request_thread_control']);
     }
 
-    public function testRequestThreadControlCallback()
+    public function testRequestThreadControlCallback(): void
     {
-        $this->assertEquals('123456789', $this->requestThreadControl->getRequestedOwnerAppId());
-        $this->assertEquals('additional content that the caller wants to set', $this->requestThreadControl->getMetadata());
+        $this->assertSame('123456789', $this->requestThreadControl->getRequestedOwnerAppId());
+        $this->assertSame('additional content that the caller wants to set', $this->requestThreadControl->getMetadata());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->requestThreadControl);
     }

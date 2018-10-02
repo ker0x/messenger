@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment;
 
 use Kerox\Messenger\Model\Common\Address;
@@ -17,23 +20,23 @@ use Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckInTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement;
-use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
+use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\MediaTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
-use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class TemplateTest extends AbstractTestCase
 {
-    public function testTemplateAirlineBoardingPass()
+    public function testTemplateAirlineBoardingPass(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/airline_boardingpass.json');
 
@@ -55,7 +58,6 @@ class TemplateTest extends AbstractTestCase
             ->setHeaderImageUrl('https://www.example.com/en/fb/header.png')
             ->setHeaderTextField('Boarding Pass');
 
-
         $boardingPass2 = BoardingPass::create('Jones Farbound', 'CG4X7U', 'https://www.example.com/en/logo.png', 'M1JONES FARBOUND  CG4X7U nawouehgawgnapwi3jfa0wfh', 'https://www.example.com/en/PLAT.png', $flightInfo)
             ->setTravelClass('business')
             ->setSeat('74K')
@@ -66,7 +68,7 @@ class TemplateTest extends AbstractTestCase
             ->addSecondaryFields('Seat', '74K')
             ->addSecondaryFields('Sec.Nr.', '004')
             ->setHeaderImageUrl('https://www.example.com/en/fb/header.png')
-            ->setHeaderTextField('Boarding Pass');;
+            ->setHeaderTextField('Boarding Pass');
 
         $boardingPass = [
             $boardingPass1,
@@ -79,7 +81,7 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineBoardingPass));
     }
 
-    public function testTemplateAirlineCheckIn()
+    public function testTemplateAirlineCheckIn(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/airline_checkin.json');
 
@@ -88,7 +90,7 @@ class TemplateTest extends AbstractTestCase
         $flightSchedule = FlightSchedule::create('2016-01-05T15:45')->setArrivalTime('2016-01-05T17:30')->setBoardingTime('2016-01-05T15:05');
 
         $flightInto = [
-            FlightInfo::create('f001', $departureAirport, $arrivalAirport, $flightSchedule)
+            FlightInfo::create('f001', $departureAirport, $arrivalAirport, $flightSchedule),
         ];
 
         $airlineCheckIn = AirlineCheckInTemplate::create('Check-in is available now.', 'en_US', 'ABCDEF', $flightInto, 'https://www.airline.com/check-in');
@@ -96,7 +98,7 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineCheckIn));
     }
 
-    public function testTemplateAirlineItinerary()
+    public function testTemplateAirlineItinerary(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/airline_itinerary.json');
 
@@ -108,7 +110,6 @@ class TemplateTest extends AbstractTestCase
 
         $flightSchedule1 = FlightSchedule::create('2016-01-02T19:45')->setArrivalTime('2016-01-02T21:20');
         $flightSchedule2 = FlightSchedule::create('2016-01-02T22:45')->setArrivalTime('2016-01-03T17:20');
-
 
         $passengerInfo = [
             PassengerInfo::create('p001', 'Farbound Smith Jr')->setTicketNumber('0741234567890'),
@@ -139,7 +140,7 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineItinerary));
     }
 
-    public function testTemplateAirlineUpdate()
+    public function testTemplateAirlineUpdate(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/airline_update.json');
 
@@ -155,7 +156,7 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineUpdate));
     }
 
-    public function testTemplateButton()
+    public function testTemplateButton(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/button.json');
 
@@ -167,7 +168,7 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($button));
     }
 
-    public function testTemplateGeneric()
+    public function testTemplateGeneric(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/generic.json');
 
@@ -190,10 +191,7 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($generic));
     }
 
-    /**
-     *
-     */
-    public function testTemplateList()
+    public function testTemplateList(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/list.json');
 
@@ -210,7 +208,7 @@ class TemplateTest extends AbstractTestCase
                 WebUrl::create('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=100')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
-                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
+                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/'),
             ]);
 
         $element2 = ListElement::create('Classic Blue T-Shirt')
@@ -226,7 +224,7 @@ class TemplateTest extends AbstractTestCase
                 WebUrl::create('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=101')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
-                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
+                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/'),
             ]);
 
         $element3 = ListElement::create('Classic Black T-Shirt')
@@ -242,7 +240,7 @@ class TemplateTest extends AbstractTestCase
                 WebUrl::create('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=102')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
-                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
+                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/'),
             ]);
 
         $element4 = ListElement::create('Classic Gray T-Shirt')
@@ -258,19 +256,19 @@ class TemplateTest extends AbstractTestCase
                 WebUrl::create('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=103')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
-                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
+                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/'),
             ]);
 
         $liste = ListTemplate::create([$element1, $element2, $element3, $element4])
             ->setTopElementStyle(ListTemplate::TOP_ELEMENT_STYLE_COMPACT)
             ->setButtons([
-                Postback::create('View More', 'payload')
+                Postback::create('View More', 'payload'),
             ]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($liste));
     }
 
-    public function testTemplateReceipt()
+    public function testTemplateReceipt(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/receipt.json');
 
@@ -307,14 +305,14 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($receipt));
     }
 
-    public function testTemplateOpenGraph()
+    public function testTemplateOpenGraph(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/open_graph.json');
 
         $elements = [
             OpenGraphElement::create('https://open.spotify.com/track/7GhIk7Il098yCjg4BQjzvb')
                 ->setButtons([
-                    WebUrl::create('Learn More', 'https://en.wikipedia.org/wiki/Rickrolling')
+                    WebUrl::create('Learn More', 'https://en.wikipedia.org/wiki/Rickrolling'),
                 ]),
         ];
 
@@ -323,14 +321,14 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($openGraph));
     }
 
-    public function testTemplateMedia()
+    public function testTemplateMedia(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/media.json');
 
         $elements = [
             MediaElement::create('https://www.facebook.com/ker0x/videos/1234567890/', MediaElement::TYPE_VIDEO)
                 ->setButtons([
-                    WebUrl::create('Learn More', 'https://en.wikipedia.org/wiki/Rickrolling')
+                    WebUrl::create('Learn More', 'https://en.wikipedia.org/wiki/Rickrolling'),
                 ]),
         ];
 

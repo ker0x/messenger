@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase;
 
 use GuzzleHttp\Client;
@@ -10,13 +13,12 @@ use Kerox\Messenger\Model\Data;
 
 class TagTest extends AbstractTestCase
 {
-
     /**
      * @var \Kerox\Messenger\Api\Tag
      */
     protected $tagApi;
 
-    public function setUp()
+    public function setUp(): void
     {
         $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Tag/tag.json');
         $mockedResponse = new MockHandler([
@@ -25,13 +27,13 @@ class TagTest extends AbstractTestCase
 
         $handler = HandlerStack::create($mockedResponse);
         $client = new Client([
-            'handler' => $handler
+            'handler' => $handler,
         ]);
 
         $this->tagApi = new Tag('abcd1234', $client);
     }
 
-    public function testGetTag()
+    public function testGetTag(): void
     {
         $response = $this->tagApi->get();
 

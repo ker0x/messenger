@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template\Airline;
 
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
@@ -9,13 +12,12 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class BoardingPassTest extends AbstractTestCase
 {
-
     /**
      * @var BoardingPass
      */
     protected $boardingPass;
 
-    public function setUp()
+    public function setUp(): void
     {
         $departureAirport = Airport::create('JFK', 'New York')->setTerminal('T1')->setGate('D57');
         $arrivalAirport = Airport::create('AMS', 'Amsterdam');
@@ -26,7 +28,7 @@ class BoardingPassTest extends AbstractTestCase
         $this->boardingPass = BoardingPass::create('Smith Nicolas', 'CG4X7U', 'https://www.example.com/en/logo.png', 'M1SMITH NICOLAS  CG4X7U nawouehgawgnapwi3jfa0wfh', 'https://www.example.com/en/PLAT.png', $flightInfo);
     }
 
-    public function testWithBarCode()
+    public function testWithBarCode(): void
     {
         $departureAirport = Airport::create('JFK', 'New York')->setTerminal('T1')->setGate('D57');
         $arrivalAirport = Airport::create('AMS', 'Amsterdam');
@@ -38,15 +40,14 @@ class BoardingPassTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString('{"passenger_name":"Smith Nicolas","pnr_number":"CG4X7U","logo_image_url":"https://www.example.com/en/logo.png","barcode_image_url":"https://www.example.com/barcode.jpg","above_bar_code_image_url":"https://www.example.com/en/PLAT.png","flight_info":{"flight_number":"KL0642","departure_airport":{"airport_code":"JFK","city":"New York","terminal":"T1","gate":"D57"},"arrival_airport":{"airport_code":"AMS","city":"Amsterdam"},"flight_schedule":{"departure_time":"2016-01-02T19:05","arrival_time":"2016-01-05T17:30"}}}', json_encode($boardingPass));
     }
 
-    public function testTravelClass()
+    public function testTravelClass(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$travelClass must be either economy, business, first_class');
         $this->boardingPass->setTravelClass('second_class');
-
     }
 
-    public function testAddToManyAuxiliaryFields()
+    public function testAddToManyAuxiliaryFields(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->boardingPass
@@ -58,7 +59,7 @@ class BoardingPassTest extends AbstractTestCase
             ->addAuxiliaryFields('Sec.Nr.', '003');
     }
 
-    public function testAddToManySecondaryFields()
+    public function testAddToManySecondaryFields(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->boardingPass
@@ -70,7 +71,7 @@ class BoardingPassTest extends AbstractTestCase
             ->addSecondaryFields('Sec.Nr.', '003');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->boardingPass);
     }

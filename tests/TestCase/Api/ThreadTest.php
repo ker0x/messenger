@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase;
 
 use GuzzleHttp\Client;
@@ -7,7 +10,6 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Model\ThreadControl;
-use Kerox\Messenger\Response\ThreadResponse;
 
 class ThreadTest extends AbstractTestCase
 {
@@ -16,7 +18,7 @@ class ThreadTest extends AbstractTestCase
      */
     protected $threadApi;
 
-    public function setUp()
+    public function setUp(): void
     {
         $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Thread/success.json');
         $mockedResponse = new MockHandler([
@@ -25,13 +27,13 @@ class ThreadTest extends AbstractTestCase
 
         $handler = HandlerStack::create($mockedResponse);
         $client = new Client([
-            'handler' => $handler
+            'handler' => $handler,
         ]);
 
         $this->threadApi = new Thread('abcd1234', $client);
     }
 
-    public function testPassThreadControl()
+    public function testPassThreadControl(): void
     {
         $passThreadControl = ThreadControl::create(1234567890, 123456789);
         $passThreadControl->setMetadata('additional content that the caller wants to set');
@@ -41,7 +43,7 @@ class ThreadTest extends AbstractTestCase
         $this->assertTrue($response->isSuccess());
     }
 
-    public function testTakeThreadControl()
+    public function testTakeThreadControl(): void
     {
         $takeThreadControl = ThreadControl::create(1234567890);
         $takeThreadControl->setMetadata('additional content that the caller wants to set');
@@ -51,7 +53,7 @@ class ThreadTest extends AbstractTestCase
         $this->assertTrue($response->isSuccess());
     }
 
-    public function testRequestThreadControl()
+    public function testRequestThreadControl(): void
     {
         $requestThreadControl = ThreadControl::create(1234567890);
         $requestThreadControl->setMetadata('additional content that the caller wants to set');

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template\Airline;
 
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
@@ -8,8 +11,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ExtendedFlightInfoTest extends AbstractTestCase
 {
-
-    public function testInvalidTravelClass()
+    public function testInvalidTravelClass(): void
     {
         $departureAirport = Airport::create('SFO', 'San Francisco')->setTerminal('T4')->setGate('G8');
         $arrivalAirport = Airport::create('SLC', 'Salt Lake City')->setTerminal('T4')->setGate('G8');

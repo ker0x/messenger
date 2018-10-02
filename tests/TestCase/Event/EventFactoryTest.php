@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Event;
 
 use Kerox\Messenger\Event\AccountLinkingEvent;
 use Kerox\Messenger\Event\AppRolesEvent;
 use Kerox\Messenger\Event\CheckoutUpdateEvent;
-use Kerox\Messenger\Event\EventFactory;
 use Kerox\Messenger\Event\DeliveryEvent;
+use Kerox\Messenger\Event\EventFactory;
 use Kerox\Messenger\Event\GamePlayEvent;
 use Kerox\Messenger\Event\MessageEchoEvent;
 use Kerox\Messenger\Event\MessageEvent;
@@ -41,8 +44,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class EventFactoryTest extends AbstractTestCase
 {
-
-    public function testRawEvent()
+    public function testRawEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/raw.json');
         $array = json_decode($json, true);
@@ -53,7 +55,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testMessageEvent()
+    public function testMessageEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/message.json');
         $array = json_decode($json, true);
@@ -64,7 +66,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testMessageEchoEvent()
+    public function testMessageEchoEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/message_echo.json');
         $array = json_decode($json, true);
@@ -75,7 +77,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testPostbackEvent()
+    public function testPostbackEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/postback.json');
         $array = json_decode($json, true);
@@ -86,7 +88,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testOptinEvent()
+    public function testOptinEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/optin.json');
         $array = json_decode($json, true);
@@ -97,7 +99,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testAccountLinkingEvent()
+    public function testAccountLinkingEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/account_linking.json');
         $array = json_decode($json, true);
@@ -108,7 +110,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testDeliveryEvent()
+    public function testDeliveryEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/delivery.json');
         $array = json_decode($json, true);
@@ -119,7 +121,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testReadEvent()
+    public function testReadEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/read.json');
         $array = json_decode($json, true);
@@ -130,7 +132,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testPaymentEvent()
+    public function testPaymentEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/payment.json');
         $array = json_decode($json, true);
@@ -141,7 +143,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testCheckoutUpdateEvent()
+    public function testCheckoutUpdateEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/checkout_update.json');
         $array = json_decode($json, true);
@@ -152,7 +154,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testPreCheckoutEvent()
+    public function testPreCheckoutEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/pre_checkout.json');
         $array = json_decode($json, true);
@@ -163,7 +165,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testTakeThreadControlEvent()
+    public function testTakeThreadControlEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/take_thread_control.json');
         $array = json_decode($json, true);
@@ -174,7 +176,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testPassThreadControlEvent()
+    public function testPassThreadControlEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/pass_thread_control.json');
         $array = json_decode($json, true);
@@ -185,7 +187,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testRequestThreadControlEvent()
+    public function testRequestThreadControlEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/request_thread_control.json');
         $array = json_decode($json, true);
@@ -196,7 +198,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testPolicyEnforcementEvent()
+    public function testPolicyEnforcementEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/policy_enforcement.json');
         $array = json_decode($json, true);
@@ -207,7 +209,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testAppRolesEvent()
+    public function testAppRolesEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/app_roles.json');
         $array = json_decode($json, true);
@@ -218,7 +220,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testReferralEvent()
+    public function testReferralEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/referral.json');
         $array = json_decode($json, true);
@@ -229,7 +231,7 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
-    public function testGamePlayEvent()
+    public function testGamePlayEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/game_play.json');
         $array = json_decode($json, true);
