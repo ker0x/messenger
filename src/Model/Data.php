@@ -44,6 +44,11 @@ class Data
     protected $tag;
 
     /**
+     * @var null|string
+     */
+    protected $profilePictureUrl;
+
+    /**
      * @var array
      */
     protected $data;
@@ -61,6 +66,7 @@ class Data
         $this->description = $data['description'] ?? null;
         $this->id = $data['id'] ?? null;
         $this->tag = $data['tag'] ?? null;
+        $this->profilePictureUrl = $data['profile_picture_url'] ?? null;
 
         $this->setValues($data);
     }
@@ -135,6 +141,14 @@ class Data
     public function getTag(): ?string
     {
         return $this->tag;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getProfilePictureUrl(): ?string
+    {
+        return $this->profilePictureUrl;
     }
 
     /**

@@ -4,43 +4,47 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
-use Kerox\Messenger\Model\Persona;
+use Kerox\Messenger\Model\PersonaSettings;
 
 class PersonaRequest extends AbstractRequest
 {
     /**
-     * @var Persona|null
+     * @var null|\Kerox\Messenger\Model\PersonaSettings
      */
-    protected $persona;
+    protected $personaSettings;
 
     /**
-     * PersonaRequest constructor.
+     * ProfileRequest constructor.
      *
-     * @param string       $pageToken
-     * @param Persona|null $persona
+     * @param string                                      $pageToken
+     * @param \Kerox\Messenger\Model\PersonaSettings|null $personaSettings
      */
-    public function __construct(string $pageToken, ?Persona $persona = null)
+    public function __construct(string $pageToken, PersonaSettings $personaSettings = null)
     {
         parent::__construct($pageToken);
 
-        $this->persona = $persona;
+        $this->personaSettings = $personaSettings;
     }
 
     /**
-     * @return mixed
+     * @return array|null
      */
-    protected function buildHeaders()
+    protected function buildHeaders(): ?array
     {
-        return [
+        $headers = [
             'Content-Type' => 'application/json',
         ];
+
+        return $this->personaSettings instanceof PersonaSettings ? $headers : null;
     }
 
     /**
-     * @return mixed
+     * @return \Kerox\Messenger\Model\PersonaSettings|mixed|null
      */
     protected function buildBody()
     {
-        return $this->persona ?: '';
+        if ($this->personaSettings instanceof PersonaSettings) {
+            return $this->personaSettings;
+        }
     }
 }
