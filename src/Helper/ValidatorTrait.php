@@ -283,6 +283,7 @@ trait ValidatorTrait
     public function getAllowedTag(): array
     {
         return [
+            SendInterface::TAG_BUSINESS_PRODUCTIVITY,
             SendInterface::TAG_COMMUNITY_ALERT,
             SendInterface::TAG_CONFIRMED_EVENT_REMINDER,
             SendInterface::TAG_NON_PROMOTIONAL_SUBSCRIPTION,
