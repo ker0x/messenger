@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Callback;
 
 use Kerox\Messenger\Model\Callback\Payment;
@@ -9,13 +12,12 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class PaymentTest extends AbstractTestCase
 {
-
     /**
      * @var \Kerox\Messenger\Model\Callback\Payment
      */
     protected $payment;
 
-    public function setUp()
+    public function setUp(): void
     {
         $json = file_get_contents(__DIR__ . '/../../../Mocks/Event/payment.json');
         $array = json_decode($json, true);
@@ -23,52 +25,52 @@ class PaymentTest extends AbstractTestCase
         $this->payment = Payment::create($array['payment']);
     }
 
-    public function testPaymentCallback()
+    public function testPaymentCallback(): void
     {
-        $this->assertEquals('DEVELOPER_DEFINED_PAYLOAD', $this->payment->getPayload());
-        $this->assertEquals('123', $this->payment->getShippingOptionId());
-        $this->assertEquals('USD', $this->payment->getCurrency());
-        $this->assertEquals('29.62', $this->payment->getAmount());
+        $this->assertSame('DEVELOPER_DEFINED_PAYLOAD', $this->payment->getPayload());
+        $this->assertSame('123', $this->payment->getShippingOptionId());
+        $this->assertSame('USD', $this->payment->getCurrency());
+        $this->assertSame('29.62', $this->payment->getAmount());
         $this->assertInstanceOf(RequestedUserInfo::class, $this->payment->getRequestedUserInfo());
         $this->assertInstanceOf(PaymentCredential::class, $this->payment->getPaymentCredential());
         $this->assertInstanceOf(Address::class, $this->payment->getShippingAddress());
     }
 
-    public function testPaymentRequestedUserInfo()
+    public function testPaymentRequestedUserInfo(): void
     {
         $requestedUserInfo = $this->payment->getRequestedUserInfo();
 
-        $this->assertEquals('Peter Chang', $requestedUserInfo->getContactName());
-        $this->assertEquals('peter@anemailprovider.com', $requestedUserInfo->getContactEmail());
-        $this->assertEquals('+15105551234', $requestedUserInfo->getContactPhone());
+        $this->assertSame('Peter Chang', $requestedUserInfo->getContactName());
+        $this->assertSame('peter@anemailprovider.com', $requestedUserInfo->getContactEmail());
+        $this->assertSame('+15105551234', $requestedUserInfo->getContactPhone());
     }
 
-    public function testPaymentCredential()
+    public function testPaymentCredential(): void
     {
         $paymentCredential = $this->payment->getPaymentCredential();
 
-        $this->assertEquals('token', $paymentCredential->getProviderType());
-        $this->assertEquals('ch_18tmdBEoNIH3FPJHa60ep123', $paymentCredential->getChargeId());
-        $this->assertEquals('__tokenized_card__', $paymentCredential->getTokenizedCard());
-        $this->assertEquals('tokenized cvv', $paymentCredential->getTokenizedCvv());
-        $this->assertEquals('3', $paymentCredential->getTokenExpiryMonth());
-        $this->assertEquals('2019', $paymentCredential->getTokenExpiryYear());
-        $this->assertEquals('123456789', $paymentCredential->getFbPaymentId());
+        $this->assertSame('token', $paymentCredential->getProviderType());
+        $this->assertSame('ch_18tmdBEoNIH3FPJHa60ep123', $paymentCredential->getChargeId());
+        $this->assertSame('__tokenized_card__', $paymentCredential->getTokenizedCard());
+        $this->assertSame('tokenized cvv', $paymentCredential->getTokenizedCvv());
+        $this->assertSame('3', $paymentCredential->getTokenExpiryMonth());
+        $this->assertSame('2019', $paymentCredential->getTokenExpiryYear());
+        $this->assertSame('123456789', $paymentCredential->getFbPaymentId());
     }
 
-    public function testPaymentShippingAddress()
+    public function testPaymentShippingAddress(): void
     {
         $shippingAddress = $this->payment->getShippingAddress();
 
-        $this->assertEquals('1 Hacker Way', $shippingAddress->getStreet());
-        $this->assertEquals('', $shippingAddress->getAdditionalStreet());
-        $this->assertEquals('MENLO PARK', $shippingAddress->getCity());
-        $this->assertEquals('CA', $shippingAddress->getState());
-        $this->assertEquals('US', $shippingAddress->getCountry());
-        $this->assertEquals('94025', $shippingAddress->getPostalCode());
+        $this->assertSame('1 Hacker Way', $shippingAddress->getStreet());
+        $this->assertSame('', $shippingAddress->getAdditionalStreet());
+        $this->assertSame('MENLO PARK', $shippingAddress->getCity());
+        $this->assertSame('CA', $shippingAddress->getState());
+        $this->assertSame('US', $shippingAddress->getCountry());
+        $this->assertSame('94025', $shippingAddress->getPostalCode());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->payment);
     }

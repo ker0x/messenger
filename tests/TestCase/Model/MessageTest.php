@@ -1,19 +1,21 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model;
 
 use Kerox\Messenger\Model\Common\Address;
-use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
-use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
-use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message;
+use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
+use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
+use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Model\Message\QuickReply;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class MessageTest extends AbstractTestCase
 {
-
-    public function testMessageWithText()
+    public function testMessageWithText(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Message/text.json');
         $message = Message::create('hello, world!');
@@ -21,7 +23,7 @@ class MessageTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($json, json_encode($message));
     }
 
-    public function testMessageWithReceipt()
+    public function testMessageWithReceipt(): void
     {
         $elements = [
             ReceiptElement::create('Classic White T-Shirt', 50)
@@ -60,9 +62,9 @@ class MessageTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($json, json_encode($message));
     }
 
-    public function testMessageWithQuickReplies()
+    public function testMessageWithQuickReplies(): void
     {
-        $json = file_get_contents(__DIR__ .  '/../../Mocks/Message/quick_reply.json');
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Message/quick_reply.json');
 
         $message = Message::create('Pick a color:')
             ->setQuickReplies([
@@ -73,7 +75,7 @@ class MessageTest extends AbstractTestCase
                 QuickReply::create()
                     ->setTitle('Green')
                     ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')
-                    ->setImageUrl('http://petersfantastichats.com/img/green.png')
+                    ->setImageUrl('http://petersfantastichats.com/img/green.png'),
             ])
             ->addQuickReply(QuickReply::create(QuickReply::CONTENT_TYPE_LOCATION))
             ->setMetadata('some metadata');
@@ -81,14 +83,14 @@ class MessageTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($json, json_encode($message));
     }
 
-    public function testMessageWithInvalidArgument()
+    public function testMessageWithInvalidArgument(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$message must be a string or an instance of Attachment.');
         $message = new Message(123456);
     }
 
-    public function testMessageWithInvalidQuickReplies()
+    public function testMessageWithInvalidQuickReplies(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Array can only contain instance of QuickReply.');
@@ -102,7 +104,7 @@ class MessageTest extends AbstractTestCase
                     ->setTitle('Green')
                     ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')
                     ->setImageUrl('http://petersfantastichats.com/img/green.png'),
-                'Hello'
+                'Hello',
             ]);
     }
 }

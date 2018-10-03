@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\ProfileSettings;
 
 use Kerox\Messenger\Model\Common\Button\Nested;
@@ -10,20 +13,19 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class PersistentMenuTest extends AbstractTestCase
 {
-
-    public function testInvalidButton()
+    public function testInvalidButton(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Array can only contain instance of Kerox\Messenger\Model\Common\Button\AbstractButton.');
 
         $persistentMenu = PersistentMenu::create()->setComposerInputDisabled(true)->addButtons([
             'Phone Number' => [
-                'payload' => 'PHONE_NUMBER_PAYLOAD'
+                'payload' => 'PHONE_NUMBER_PAYLOAD',
             ],
         ]);
     }
 
-    public function testInvalidButtonType()
+    public function testInvalidButtonType(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Buttons can only be an instance of web_url, postback, nested.');
@@ -35,7 +37,7 @@ class PersistentMenuTest extends AbstractTestCase
                 Postback::create('History', 'HISTORY_PAYLOAD'),
                 Postback::create('Contact Info', 'CONTACT_INFO_PAYLOAD'),
             ]),
-            WebUrl::create('Latest News', 'http://petershats.parseapp.com/hat-news')->setWebviewHeightRatio('full')
+            WebUrl::create('Latest News', 'http://petershats.parseapp.com/hat-news')->setWebviewHeightRatio('full'),
         ]);
     }
 }

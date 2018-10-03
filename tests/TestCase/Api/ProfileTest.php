@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Api;
 
 use GuzzleHttp\Client;
@@ -12,13 +15,12 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ProfileTest extends AbstractTestCase
 {
-
     /**
      * @var \Kerox\Messenger\Api\Profile
      */
     protected $profileApi;
 
-    public function setUp()
+    public function setUp(): void
     {
         $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Profile/add.json');
         $mockedResponse = new MockHandler([
@@ -27,46 +29,46 @@ class ProfileTest extends AbstractTestCase
 
         $handler = HandlerStack::create($mockedResponse);
         $client = new Client([
-            'handler' => $handler
+            'handler' => $handler,
         ]);
 
         $this->profileApi = new Profile('abcd1234', $client);
     }
 
-    public function testAddSetting()
+    public function testAddSetting(): void
     {
         $profileSettings = new ProfileSettings();
         $profileSettings->addGreetings([
-            new Greeting('Hello!')
+            new Greeting('Hello!'),
         ]);
 
         $response = $this->profileApi->add($profileSettings);
 
-        $this->assertEquals('success', $response->getResult());
+        $this->assertSame('success', $response->getResult());
     }
 
-    public function testGetSettings()
+    public function testGetSettings(): void
     {
         $response = $this->profileApi->get(['greeting', 'get_started']);
 
-        $this->assertEquals('success', $response->getResult());
+        $this->assertSame('success', $response->getResult());
     }
 
-    public function testDeleteSetting()
+    public function testDeleteSetting(): void
     {
         $this->profileApi->delete(['greeting', 'get_started']);
 
         $this->doesNotPerformAssertions();
     }
 
-    public function testBadField()
+    public function testBadField(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('menu is not a valid value. $fields must only contain persistent_menu, get_started, greeting, whitelisted_domains, account_linking_url, payment_settings, target_audience');
         $this->profileApi->delete(['menu']);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->profileApi);
     }

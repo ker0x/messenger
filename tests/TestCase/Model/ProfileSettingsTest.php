@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model;
 
 use Kerox\Messenger\Model\Common\Button\Nested;
@@ -13,21 +16,20 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ProfileSettingsTest extends AbstractTestCase
 {
-
     /**
      * @var ProfileSettings
      */
     protected $profileSettings;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->profileSettings = ProfileSettings::create();
     }
 
-    public function testPersistentMenu()
+    public function testPersistentMenu(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/persistent_menu.json');
-        $persistentMenus= $this->profileSettings->addPersistentMenus([
+        $persistentMenus = $this->profileSettings->addPersistentMenus([
             PersistentMenu::create()
                 ->setComposerInputDisabled(true)
                 ->addButtons([
@@ -37,15 +39,15 @@ class ProfileSettingsTest extends AbstractTestCase
                         Postback::create('Contact Info', 'CONTACT_INFO_PAYLOAD'),
                     ]),
                     WebUrl::create('Latest News', 'http://petershats.parseapp.com/hat-news')
-                        ->setWebviewHeightRatio('full')
+                        ->setWebviewHeightRatio('full'),
                 ]),
-            PersistentMenu::create('zh_CN')
+            PersistentMenu::create('zh_CN'),
         ]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($persistentMenus));
     }
 
-    public function testStartButton()
+    public function testStartButton(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/get_started.json');
         $startButton = $this->profileSettings->addStartButton('GET_STARTED_PAYLOAD');
@@ -53,7 +55,7 @@ class ProfileSettingsTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($startButton));
     }
 
-    public function testGreeting()
+    public function testGreeting(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/greeting.json');
         $greetings = $this->profileSettings->addGreetings([
@@ -64,17 +66,17 @@ class ProfileSettingsTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($greetings));
     }
 
-    public function testWhitelistedDomains()
+    public function testWhitelistedDomains(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/whitelisted_domains.json');
         $whitelistedDomains = $this->profileSettings->addWhitelistedDomains([
-           'https://petersfancyapparel.com'
+           'https://petersfancyapparel.com',
         ]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($whitelistedDomains));
     }
 
-    public function testAccountLinkingUrl()
+    public function testAccountLinkingUrl(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/account_linking_url.json');
         $accountLinkingUrl = $this->profileSettings->addAccountLinkingUrl('https://www.example.com/oauth?response_type=code&client_id=1234567890&scope=basic');
@@ -82,7 +84,7 @@ class ProfileSettingsTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($accountLinkingUrl));
     }
 
-    public function testPaymentSettings()
+    public function testPaymentSettings(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/payment_settings.json');
         $paymentSettings = $this->profileSettings->addPaymentSettings(
@@ -95,7 +97,7 @@ class ProfileSettingsTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($paymentSettings));
     }
 
-    public function testTargetAudience()
+    public function testTargetAudience(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/target_audience.json');
         $targetAudience = $this->profileSettings->addTargetAudience(
@@ -107,7 +109,7 @@ class ProfileSettingsTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($targetAudience));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->profileSettings);
     }

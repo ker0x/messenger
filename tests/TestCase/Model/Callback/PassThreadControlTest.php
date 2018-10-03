@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Callback;
 
 use Kerox\Messenger\Model\Callback\PassThreadControl;
@@ -11,7 +14,7 @@ class PassThreadControlTest extends AbstractTestCase
      */
     protected $passThreadControl;
 
-    public function setUp()
+    public function setUp(): void
     {
         $json = file_get_contents(__DIR__ . '/../../../Mocks/Event/pass_thread_control.json');
         $array = json_decode($json, true);
@@ -19,13 +22,13 @@ class PassThreadControlTest extends AbstractTestCase
         $this->passThreadControl = PassThreadControl::create($array['pass_thread_control']);
     }
 
-    public function testPassThreadControlCallback()
+    public function testPassThreadControlCallback(): void
     {
-        $this->assertEquals('123456789', $this->passThreadControl->getNewOwnerAppId());
-        $this->assertEquals('additional content that the caller wants to set', $this->passThreadControl->getMetadata());
+        $this->assertSame('123456789', $this->passThreadControl->getNewOwnerAppId());
+        $this->assertSame('additional content that the caller wants to set', $this->passThreadControl->getMetadata());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->passThreadControl);
     }

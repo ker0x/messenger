@@ -38,14 +38,14 @@ class SendRequest extends AbstractRequest
     protected $tag;
 
     /**
+     * @var null|string
+     */
+    protected $personaId;
+
+    /**
      * @var string
      */
     protected $messagingType;
-
-    /**
-     * @var string|null
-     */
-    protected $personaId;
 
     /**
      * Request constructor.

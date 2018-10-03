@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Api;
 
 use GuzzleHttp\Client;
@@ -14,13 +17,12 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class WebhookTest extends AbstractTestCase
 {
-
     /**
      * @var \Kerox\Messenger\Api\Webhook
      */
     protected $webhookApi;
 
-    public function setUp()
+    public function setUp(): void
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
@@ -29,7 +31,7 @@ class WebhookTest extends AbstractTestCase
         $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/message.json');
         $requestHeaders = [
             'Content-Type' => 'application/json',
-            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret)
+            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret),
         ];
 
         $request = new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
@@ -41,20 +43,20 @@ class WebhookTest extends AbstractTestCase
 
         $handler = HandlerStack::create($mockedResponse);
         $client = new Client([
-            'handler' => $handler
+            'handler' => $handler,
         ]);
 
         $this->webhookApi = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
     }
 
-    public function testSubscribe()
+    public function testSubscribe(): void
     {
         $response = $this->webhookApi->subscribe();
 
         $this->assertTrue($response->isSuccess());
     }
 
-    public function testWebhookVerification()
+    public function testWebhookVerification(): void
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
@@ -68,15 +70,15 @@ class WebhookTest extends AbstractTestCase
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
 
         $this->assertTrue($webhook->isValidToken());
-        $this->assertEquals('1234abcd', $webhook->challenge());
+        $this->assertSame('1234abcd', $webhook->challenge());
     }
 
-    public function testIsValidCallback()
+    public function testIsValidCallback(): void
     {
         $this->assertTrue($this->webhookApi->isValidCallback());
     }
 
-    public function testGetDecodedBody()
+    public function testGetDecodedBody(): void
     {
         $body = [
             'object' => 'page',
@@ -87,10 +89,10 @@ class WebhookTest extends AbstractTestCase
                     'messaging' => [
                         [
                             'sender' => [
-                                'id' => 'USER_ID'
+                                'id' => 'USER_ID',
                             ],
                             'recipient' => [
-                                'id' => 'PAGE_ID'
+                                'id' => 'PAGE_ID',
                             ],
                             'timestamp' => 1458692752478,
                             'message' => [
@@ -98,19 +100,19 @@ class WebhookTest extends AbstractTestCase
                                 'seq' => 73,
                                 'text' => 'hello, world!',
                                 'quick_reply' => [
-                                    'payload' => 'DEVELOPER_DEFINED_PAYLOAD'
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                    'payload' => 'DEVELOPER_DEFINED_PAYLOAD',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
-        $this->assertEquals($body, $this->webhookApi->getDecodedBody());
+        $this->assertSame($body, $this->webhookApi->getDecodedBody());
     }
 
-    public function testGetCallbackEntries()
+    public function testGetCallbackEntries(): void
     {
         $payload = [
             'id' => '625987814267888',
@@ -118,10 +120,10 @@ class WebhookTest extends AbstractTestCase
             'messaging' => [
                 [
                     'sender' => [
-                        'id' => 'USER_ID'
+                        'id' => 'USER_ID',
                     ],
                     'recipient' => [
-                        'id' => 'PAGE_ID'
+                        'id' => 'PAGE_ID',
                     ],
                     'timestamp' => 1458692752478,
                     'message' => [
@@ -129,11 +131,11 @@ class WebhookTest extends AbstractTestCase
                         'seq' => 73,
                         'text' => 'hello, world!',
                         'quick_reply' => [
-                            'payload' => 'DEVELOPER_DEFINED_PAYLOAD'
-                        ]
-                    ]
-                ]
-            ]
+                            'payload' => 'DEVELOPER_DEFINED_PAYLOAD',
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $entry = Entry::create($payload);
@@ -143,7 +145,7 @@ class WebhookTest extends AbstractTestCase
         $this->assertEquals([$entry], $entries);
     }
 
-    public function testGetCallbackEvents()
+    public function testGetCallbackEvents(): void
     {
         $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
 
@@ -152,7 +154,7 @@ class WebhookTest extends AbstractTestCase
         $this->assertEquals([$event], $events);
     }
 
-    public function testStandbyEntry()
+    public function testStandbyEntry(): void
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
@@ -161,7 +163,7 @@ class WebhookTest extends AbstractTestCase
         $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/stand_by.json');
         $requestHeaders = [
             'Content-Type' => 'application/json',
-            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret)
+            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret),
         ];
 
         $request = new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
@@ -173,7 +175,7 @@ class WebhookTest extends AbstractTestCase
 
         $handler = HandlerStack::create($mockedResponse);
         $client = new Client([
-            'handler' => $handler
+            'handler' => $handler,
         ]);
 
         $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
@@ -184,7 +186,7 @@ class WebhookTest extends AbstractTestCase
         $this->assertEquals([$event], $events);
     }
 
-    public function testWebhookVerificationWithInvalidRequestMethod()
+    public function testWebhookVerificationWithInvalidRequestMethod(): void
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
@@ -200,7 +202,7 @@ class WebhookTest extends AbstractTestCase
         $this->assertFalse($webhook->isValidToken());
     }
 
-    public function testWebhookVerificationWithMissingParam()
+    public function testWebhookVerificationWithMissingParam(): void
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
@@ -216,7 +218,7 @@ class WebhookTest extends AbstractTestCase
         $this->assertFalse($webhook->isValidToken());
     }
 
-    public function testWebhookWithMissingHeaders()
+    public function testWebhookWithMissingHeaders(): void
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
@@ -234,7 +236,7 @@ class WebhookTest extends AbstractTestCase
 
         $handler = HandlerStack::create($mockedResponse);
         $client = new Client([
-            'handler' => $handler
+            'handler' => $handler,
         ]);
 
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
@@ -242,7 +244,7 @@ class WebhookTest extends AbstractTestCase
         $this->assertFalse($webhook->isValidCallback());
     }
 
-    public function testWebhookWithInvalidCallback()
+    public function testWebhookWithInvalidCallback(): void
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
@@ -251,7 +253,7 @@ class WebhookTest extends AbstractTestCase
         $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/invalid_message.json');
         $requestHeaders = [
             'Content-Type' => 'application/json',
-            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret)
+            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret),
         ];
 
         $request = new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
@@ -263,15 +265,15 @@ class WebhookTest extends AbstractTestCase
 
         $handler = HandlerStack::create($mockedResponse);
         $client = new Client([
-            'handler' => $handler
+            'handler' => $handler,
         ]);
 
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
 
-        $this->assertEquals([], $webhook->getDecodedBody());
+        $this->assertSame([], $webhook->getDecodedBody());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->webhookApi);
     }

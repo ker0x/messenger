@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Callback;
 
 use Kerox\Messenger\Model\Callback\Referral;
@@ -6,13 +9,12 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ReferralTest extends AbstractTestCase
 {
-
-    public function testReferralCallback()
+    public function testReferralCallback(): void
     {
         $referral = new Referral('REF DATA PASSED IN M.ME PARAM', 'SHORTLINK', 'OPEN_THREAD');
 
-        $this->assertEquals('REF DATA PASSED IN M.ME PARAM', $referral->getRef());
-        $this->assertEquals('SHORTLINK', $referral->getSource());
-        $this->assertEquals('OPEN_THREAD', $referral->getType());
+        $this->assertSame('REF DATA PASSED IN M.ME PARAM', $referral->getRef());
+        $this->assertSame('SHORTLINK', $referral->getSource());
+        $this->assertSame('OPEN_THREAD', $referral->getType());
     }
 }

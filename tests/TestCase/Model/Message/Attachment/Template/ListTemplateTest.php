@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Common\Button\Postback;
@@ -9,8 +12,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ListTemplateTest extends AbstractTestCase
 {
-
-    public function testInvalidTopElementStyle()
+    public function testInvalidTopElementStyle(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$topElementStyle must be either large, compact');
@@ -28,7 +30,7 @@ class ListTemplateTest extends AbstractTestCase
                 WebUrl::create('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=100')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
-                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
+                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/'),
             ]);
 
         $element2 = ListElement::create('Classic Blue T-Shirt')
@@ -44,13 +46,13 @@ class ListTemplateTest extends AbstractTestCase
                 WebUrl::create('Buy', 'https://peterssendreceiveapp.ngrok.io/shop?item=101')
                     ->setMessengerExtension(true)
                     ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
-                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
+                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/'),
             ]);
 
         $liste = ListTemplate::create([$element1, $element2])
             ->setTopElementStyle('x-large')
             ->setButtons([
-                Postback::create('View More', 'payload')
+                Postback::create('View More', 'payload'),
             ]);
     }
 }

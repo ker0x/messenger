@@ -78,7 +78,7 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
      */
-    public function setIntroMessage($introMessage): self
+    public function setIntroMessage(string $introMessage): self
     {
         $this->introMessage = $introMessage;
 

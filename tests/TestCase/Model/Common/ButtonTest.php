@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase\Model\Common;
 
 use Kerox\Messenger\Model\Common\Button\AccountLink;
@@ -17,8 +20,7 @@ use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class ButtonTest extends AbstractTestCase
 {
-
-    public function testButtonAccountLink()
+    public function testButtonAccountLink(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/account_link.json');
 
@@ -27,7 +29,7 @@ class ButtonTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonAccountLink));
     }
 
-    public function testButtonAccountUnlink()
+    public function testButtonAccountUnlink(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/account_unlink.json');
 
@@ -36,7 +38,7 @@ class ButtonTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonAccountUnlink));
     }
 
-    public function testButtonPayment()
+    public function testButtonPayment(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/payment.json');
 
@@ -61,7 +63,7 @@ class ButtonTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPayment));
     }
 
-    public function testButtonPhoneNumber()
+    public function testButtonPhoneNumber(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/phone_number.json');
 
@@ -70,7 +72,7 @@ class ButtonTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPhoneNumber));
     }
 
-    public function testButtonPostback()
+    public function testButtonPostback(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/postback.json');
 
@@ -79,7 +81,7 @@ class ButtonTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPostback));
     }
 
-    public function testButtonShare()
+    public function testButtonShare(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/share.json');
 
@@ -90,7 +92,7 @@ class ButtonTest extends AbstractTestCase
                 ->setDefaultAction(new WebUrl('', 'http://m.me/petershats?ref=invited_by_24601'))
                 ->setButtons([
                     WebUrl::create('Take Quiz', 'http://m.me/petershats?ref=invited_by_24601'),
-                ])
+                ]),
         ]);
 
         $buttonShare = Share::create($generic);
@@ -98,7 +100,7 @@ class ButtonTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonShare));
     }
 
-    public function testButtonWebUrl()
+    public function testButtonWebUrl(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/weburl.json');
 
@@ -111,7 +113,7 @@ class ButtonTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonWebUrl));
     }
 
-    public function testButtonNested()
+    public function testButtonNested(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../Mocks/Button/nested.json');
 

@@ -4,76 +4,59 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\Exception\GuzzleException;
-use Kerox\Messenger\Model;
+use Kerox\Messenger\Model\PersonaSettings;
 use Kerox\Messenger\Request\PersonaRequest;
-use Kerox\Messenger\Response;
-use Kerox\Messenger\SendInterface;
+use Kerox\Messenger\Response\PersonaResponse;
 
-class Persona extends AbstractApi implements SendInterface
+class Persona extends AbstractApi
 {
-    private const URI_PATH = 'me/personas';
-
     /**
-     * @param string $name
-     * @param string $profilePictureUrl
+     * @param \Kerox\Messenger\Model\PersonaSettings $persona
      *
-     * @throws GuzzleException
-     *
-     * @return Response\PersonaResponse
+     * @return \Kerox\Messenger\Response\PersonaResponse
      */
-    public function create(string $name, string $profilePictureUrl): Response\PersonaResponse
+    public function add(PersonaSettings $persona): PersonaResponse
     {
-        $model = Model\Persona::create()
-            ->setName($name)
-            ->setProfilePictureUrl($profilePictureUrl);
+        $request = new PersonaRequest($this->pageToken, $persona);
+        $response = $this->client->post('me/personas', $request->build());
 
-        $request = new PersonaRequest($this->pageToken, $model);
-        $response = $this->client->request('post', self::URI_PATH, $request->build());
-
-        return new Response\PersonaResponse($response);
+        return new PersonaResponse($response);
     }
 
     /**
      * @param string $personaId
      *
-     * @throws GuzzleException
-     *
-     * @return Response\PersonaResponse
+     * @return \Kerox\Messenger\Response\PersonaResponse
      */
-    public function getOne(string $personaId): Response\PersonaResponse
+    public function get(string $personaId): PersonaResponse
     {
         $request = new PersonaRequest($this->pageToken);
-        $response = $this->client->request('get', $personaId, $request->build());
+        $response = $this->client->get($personaId, $request->build());
 
-        return new Response\PersonaResponse($response);
+        return new PersonaResponse($response);
     }
 
     /**
-     * @throws GuzzleException
-     *
-     * @return Response\PersonaDataResponse
+     * @return \Kerox\Messenger\Response\PersonaResponse
      */
-    public function getAll(): Response\PersonaDataResponse
+    public function getAll(): PersonaResponse
     {
         $request = new PersonaRequest($this->pageToken);
-        $response = $this->client->request('get', self::URI_PATH, $request->build());
+        $response = $this->client->get('me/personas', $request->build());
 
-        return new Response\PersonaDataResponse($response);
+        return new PersonaResponse($response);
     }
 
     /**
      * @param string $personaId
      *
-     * @throws GuzzleException
-     *
-     * @return Response\PersonaResponse
+     * @return \Kerox\Messenger\Response\PersonaResponse
      */
-    public function delete(string $personaId): Response\PersonaResponse
+    public function delete(string $personaId): PersonaResponse
     {
         $request = new PersonaRequest($this->pageToken);
-        $response = $this->client->request('delete', $personaId, $request->build());
+        $response = $this->client->delete($personaId, $request->build());
 
-        return new Response\PersonaResponse($response);
+        return new PersonaResponse($response);
     }
 }

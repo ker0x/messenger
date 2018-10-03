@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Test\TestCase;
 
 use Kerox\Messenger\Api\Broadcast;
@@ -21,7 +24,7 @@ class MessengerTest extends AbstractTestCase
      */
     protected $messenger;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->messenger = new Messenger('4321dcba', 'abcd1234', '1234abcd');
     }
@@ -41,7 +44,7 @@ class MessengerTest extends AbstractTestCase
         $this->assertInstanceOf(Persona::class, $this->messenger->persona());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->messenger);
     }
