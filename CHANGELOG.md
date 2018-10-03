@@ -4,10 +4,14 @@ The Messenger library follows [SemVer](http://semver.org/).
 
 ## 3.x
 
-Version 3 of the Messenger library is an enhancement of version 2 with major break changes.
+**Changelog** (since [`2.1.1`](https://github.com/ker0x/messenger/compare/2.1.1...3.0.0))
 
-- 3.0.0 (2018-08-)
+Version `3.0.0` of the Messenger library is an enhancement of version `2.1.1` with major break changes.
+
+- 3.0.0 (2018-10)
     - Update API version to `v3.1`.
+    - Add support for Persona API (Thanks to @misantron)
+    - Add support for the BUSINESS_PRODUCTIVITY message tag (Thanks to @atgg) 
     - Adding `$appVersion` as optional 4th argument in `\Kerox\Messenger\Messenger::__construct()` with default value to const `API_VERSION`.
     - Remove parameters `$notificationType` and `$tag` for methods `message()` and `action` in `\Kerox\Messenger\Api\Send()`.
     - Remove parameters `$notificationType` and `$tag` for methods `send()` in `\Kerox\Messenger\Api\Broadcast()`.

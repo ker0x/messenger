@@ -62,13 +62,13 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 - [x] Code
 - [x] Insights
 - [x] Nlp
+- [x] Persona
 - [x] Profile
 - [x] Send
 - [x] Tag
 - [x] Thread
 - [x] User
 - [x] Webhook
-- [x] Persona
 
 ### Templates
 
