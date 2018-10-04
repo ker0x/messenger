@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\ProfileSettings;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Helper\ValidatorTrait;
 
@@ -38,7 +39,7 @@ class TargetAudience implements \JsonSerializable
      * @param array  $whitelistCountries
      * @param array  $blacklistCountries
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(
         string $audienceType = self::AUDIENCE_TYPE_ALL,
@@ -59,7 +60,7 @@ class TargetAudience implements \JsonSerializable
      * @param array  $whitelistCountries
      * @param array  $blacklistCountries
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
@@ -74,7 +75,7 @@ class TargetAudience implements \JsonSerializable
     /**
      * @param string $country
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
@@ -90,7 +91,7 @@ class TargetAudience implements \JsonSerializable
     /**
      * @param string $country
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
      */
@@ -106,7 +107,7 @@ class TargetAudience implements \JsonSerializable
     /**
      * @param array $countries
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidCountries(array $countries): void
     {
@@ -120,13 +121,16 @@ class TargetAudience implements \JsonSerializable
     /**
      * @param string $audienceType
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidAudienceType(string $audienceType): void
     {
         $allowedAudienceType = $this->getAllowedAudienceType();
         if (!\in_array($audienceType, $allowedAudienceType, true)) {
-            throw new \InvalidArgumentException('$audienceType must be either ' . implode(', ', $allowedAudienceType));
+            throw new MessengerException(sprintf(
+                'audienceType must be either "%s".',
+                implode(', ', $allowedAudienceType)
+            ));
         }
     }
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Common\Button;
 
+use Kerox\Messenger\Exception\MessengerException;
+
 class WebUrl extends AbstractButton
 {
     public const RATIO_TYPE_COMPACT = 'compact';
@@ -46,7 +48,7 @@ class WebUrl extends AbstractButton
      * @param string $title
      * @param string $url
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title, string $url)
     {
@@ -63,7 +65,7 @@ class WebUrl extends AbstractButton
      * @param string $title
      * @param string $url
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\WebUrl
      */
@@ -75,7 +77,7 @@ class WebUrl extends AbstractButton
     /**
      * @param string $webviewHeightRatio
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return WebUrl
      */
@@ -103,7 +105,7 @@ class WebUrl extends AbstractButton
     /**
      * @param string $fallbackUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return WebUrl
      */
@@ -128,15 +130,16 @@ class WebUrl extends AbstractButton
     /**
      * @param string $webviewHeightRatio
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidWebviewHeightRatio(string $webviewHeightRatio): void
     {
         $allowedRatioType = $this->getAllowedRatioType();
         if (!\in_array($webviewHeightRatio, $allowedRatioType, true)) {
-            throw new \InvalidArgumentException(
-                '$webviewHeightRatio must be either ' . implode(', ', $allowedRatioType)
-            );
+            throw new MessengerException(sprintf(
+                'webviewHeightRatio must be either "%s".',
+                implode(', ', $allowedRatioType)
+            ));
         }
     }
 

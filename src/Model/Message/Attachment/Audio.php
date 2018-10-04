@@ -14,7 +14,7 @@ class Audio extends File
      * @param string|int $url
      * @param bool|null  $reusable
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct($url, ?bool $reusable = null)
     {
@@ -25,7 +25,7 @@ class Audio extends File
      * @param string|int $url
      * @param bool|null  $reusable
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File
      */

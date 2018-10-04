@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
+use Kerox\Messenger\Exception\MessengerException;
+
 class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterface
 {
     /**
@@ -37,7 +39,7 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
      * @param string                                                                    $travelClass
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(
         string $connectionId,
@@ -66,7 +68,7 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
      * @param string                                                                    $travelClass
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\ExtendedFlightInfo
      */
@@ -105,13 +107,16 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
     /**
      * @param string $travelClass
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
         if (!\in_array($travelClass, $allowedTravelClass, true)) {
-            throw new \InvalidArgumentException('$travelClass must be either ' . implode(', ', $allowedTravelClass));
+            throw new MessengerException(sprintf(
+                'travelClass must be either "%s".',
+                implode(', ', $allowedTravelClass)
+            ));
         }
     }
 

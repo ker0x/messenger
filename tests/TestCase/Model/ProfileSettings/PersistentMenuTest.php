@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Model\ProfileSettings;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Button\Nested;
 use Kerox\Messenger\Model\Common\Button\PhoneNumber;
 use Kerox\Messenger\Model\Common\Button\Postback;
@@ -15,7 +16,7 @@ class PersistentMenuTest extends AbstractTestCase
 {
     public function testInvalidButton(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('Array can only contain instance of Kerox\Messenger\Model\Common\Button\AbstractButton.');
 
         $persistentMenu = PersistentMenu::create()->setComposerInputDisabled(true)->addButtons([
@@ -27,7 +28,7 @@ class PersistentMenuTest extends AbstractTestCase
 
     public function testInvalidButtonType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('Buttons can only be an instance of web_url, postback, nested.');
 
         $persistentMenu = PersistentMenu::create()->setComposerInputDisabled(true)->addButtons([

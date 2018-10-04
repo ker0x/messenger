@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class ListTemplate extends Template
@@ -32,7 +33,7 @@ class ListTemplate extends Template
      *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement[] $elements
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(array $elements)
     {
@@ -46,7 +47,7 @@ class ListTemplate extends Template
     /**
      * @param array $elements
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
      */
@@ -58,7 +59,7 @@ class ListTemplate extends Template
     /**
      * @param string $topElementStyle
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
      */
@@ -74,7 +75,7 @@ class ListTemplate extends Template
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
      */
@@ -90,15 +91,16 @@ class ListTemplate extends Template
     /**
      * @param string $topElementStyle
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidTopElementStyle(string $topElementStyle): void
     {
         $allowedTopElementStyle = $this->getAllowedTopElementStyle();
         if (!\in_array($topElementStyle, $allowedTopElementStyle, true)) {
-            throw new \InvalidArgumentException(
-                '$topElementStyle must be either ' . implode(', ', $allowedTopElementStyle)
-            );
+            throw new MessengerException(sprintf(
+                'topElementStyle must be either "%s".',
+                implode(', ', $allowedTopElementStyle)
+            ));
         }
     }
 

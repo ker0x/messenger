@@ -70,7 +70,7 @@ class ReceiptTemplate extends Template
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement[] $elements
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary          $summary
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(
         string $recipientName,
@@ -100,7 +100,7 @@ class ReceiptTemplate extends Template
      * @param array                                                              $elements
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary $summary
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate
      */
@@ -130,7 +130,7 @@ class ReceiptTemplate extends Template
     /**
      * @param string $orderUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate
      */

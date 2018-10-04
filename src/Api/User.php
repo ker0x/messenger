@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Request\UserRequest;
 use Kerox\Messenger\Response\UserResponse;
 use Kerox\Messenger\UserInterface;
@@ -14,7 +15,7 @@ class User extends AbstractApi implements UserInterface
      * @param string     $userId
      * @param array|null $fields
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\UserResponse
      */
@@ -26,9 +27,11 @@ class User extends AbstractApi implements UserInterface
         if ($fields !== $allowedFields) {
             foreach ($fields as $field) {
                 if (!\in_array($field, $allowedFields, true)) {
-                    throw new \InvalidArgumentException(
-                        $field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields)
-                    );
+                    throw new MessengerException(sprintf(
+                        '%s is not a valid value. fields must only contain "%s".',
+                        $field,
+                        implode(', ', $allowedFields)
+                    ));
                 }
             }
         }

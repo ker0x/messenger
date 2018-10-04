@@ -22,7 +22,7 @@ class Nested extends AbstractButton
      * @param string                                                $title
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title, array $buttons)
     {
@@ -40,7 +40,7 @@ class Nested extends AbstractButton
      * @param string $title
      * @param array  $buttons
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Nested
      */
@@ -52,7 +52,7 @@ class Nested extends AbstractButton
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton $button
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Nested
      */

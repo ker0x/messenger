@@ -18,7 +18,7 @@ class GenericTemplate extends Template
      *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[] $elements
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(array $elements)
     {
@@ -32,7 +32,7 @@ class GenericTemplate extends Template
     /**
      * @param array $elements
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate
      */

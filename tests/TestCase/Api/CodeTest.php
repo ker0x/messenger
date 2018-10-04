@@ -9,6 +9,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Code;
+use Kerox\Messenger\Exception\MessengerException;
 
 class CodeTest extends AbstractTestCase
 {
@@ -41,29 +42,29 @@ class CodeTest extends AbstractTestCase
 
     public function testSmallImageSize(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$imageSize must be between 100 and 2000');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('imageSize must be between 100 and 2000.');
         $this->codeApi->request(99, 'standard');
     }
 
     public function testBigImageSize(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$imageSize must be between 100 and 2000');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('imageSize must be between 100 and 2000.');
         $this->codeApi->request(2001, 'standard');
     }
 
     public function testBadCodeType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$codeType must be either standard');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('codeType must be either "standard".');
         $this->codeApi->request(2000, 'stretch');
     }
 
     public function testInvalidRef(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$ref must be a string of max 250 characters. Valid characters are a-z A-Z 0-9 +/=-.:_');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('ref must be a string of max 250 characters. Valid characters are "a-z A-Z 0-9 +/=-.:_".');
         $this->codeApi->request(1000, 'standard', 'eA.2fL0-4fxK.jSpw@6ud6-=U7y=AMMiEvxK CsP\rLH:F4bUl:5bLC\p=dnytfBpHMTVrXyQ20B=O4h2S_8UGog5ruzzFwd/Ytg0I/HTg8N86WC@R591z5t0MB//ZQvsB4aKX0MIELCqr96=/+lfPqL+q1fAKBxbc+FV+l/@d35Znf+OfSOIUydXTa+YmI1hJVf38FA3L 96zn.RqB+s.:-/_:0-YMJM2jBthlwz0pg5y5y mQ=Rhho0.');
     }
 

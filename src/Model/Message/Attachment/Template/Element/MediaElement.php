@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Common\Button\AbstractButton;
 
@@ -40,7 +41,7 @@ class MediaElement implements \JsonSerializable
      * @param        $url
      * @param string $mediaType
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct($url, string $mediaType = self::TYPE_IMAGE)
     {
@@ -59,7 +60,7 @@ class MediaElement implements \JsonSerializable
      * @param        $url
      * @param string $mediaType
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement
      */
@@ -71,7 +72,7 @@ class MediaElement implements \JsonSerializable
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement
      */
@@ -108,15 +109,16 @@ class MediaElement implements \JsonSerializable
     /**
      * @param $mediaType
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidMediaType($mediaType): void
     {
         $allowedMediaType = $this->getAllowedMediaType();
         if (!\in_array($mediaType, $allowedMediaType, true)) {
-            throw new \InvalidArgumentException(
-                '$mediaType must be either ' . implode(', ', $allowedMediaType)
-            );
+            throw new MessengerException(sprintf(
+                'mediaType must be either "%s".',
+                implode(', ', $allowedMediaType)
+            ));
         }
     }
 

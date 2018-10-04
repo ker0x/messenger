@@ -36,7 +36,7 @@ class PaymentSettings implements \JsonSerializable
     /**
      * @param string $privacyUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */

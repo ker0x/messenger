@@ -30,7 +30,7 @@ class File extends Attachment
      * @param bool|null $reusable
      * @param string    $type
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct($url, ?bool $reusable = null, $type = Attachment::TYPE_FILE)
     {
@@ -50,7 +50,7 @@ class File extends Attachment
      * @param string    $url
      * @param bool|null $reusable
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File
      */

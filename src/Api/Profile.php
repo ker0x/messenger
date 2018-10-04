@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\ProfileSettings;
 use Kerox\Messenger\ProfileInterface;
 use Kerox\Messenger\Request\ProfileRequest;
@@ -27,7 +28,7 @@ class Profile extends AbstractApi implements ProfileInterface
     /**
      * @param array $profileSettings
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
@@ -46,7 +47,7 @@ class Profile extends AbstractApi implements ProfileInterface
     /**
      * @param array $profileSettings
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
@@ -63,16 +64,18 @@ class Profile extends AbstractApi implements ProfileInterface
     /**
      * @param array $fields
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidFields(array $fields): void
     {
         $allowedFields = $this->getAllowedFields();
         foreach ($fields as $field) {
             if (!\in_array($field, $allowedFields, true)) {
-                throw new \InvalidArgumentException(
-                    $field . ' is not a valid value. $fields must only contain ' . implode(', ', $allowedFields)
-                );
+                throw new MessengerException(sprintf(
+                    '%s is not a valid value. fields must only contain "%s".',
+                    $field,
+                    implode(', ', $allowedFields)
+                ));
             }
         }
     }

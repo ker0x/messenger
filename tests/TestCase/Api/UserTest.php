@@ -9,6 +9,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\User;
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Referral;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -54,8 +55,8 @@ class UserTest extends AbstractTestCase
 
     public function testGetProfileWithBadField(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('username is not a valid value. $fields must only contain first_name, last_name, profile_pic, locale, timezone, gender, is_payment_enabled');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('username is not a valid value. fields must only contain "first_name, last_name, profile_pic, locale, timezone, gender, is_payment_enabled".');
         $response = $this->userApi->profile('1234abcd', ['username']);
     }
 }

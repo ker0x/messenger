@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Model\Common\Button;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary;
 use Kerox\Messenger\Model\Common\Button\Payment\PriceList;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
@@ -12,8 +13,8 @@ class PaymentSummaryTest extends AbstractTestCase
 {
     public function testPaymentType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$paymentType must be either FIXED_AMOUNT, FLEXIBLE_AMOUNT');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('paymentType must be either "FIXED_AMOUNT, FLEXIBLE_AMOUNT".');
 
         $requestedUserInfo = [
             PaymentSummary::USER_INFO_SHIPPING_ADDRESS,
@@ -38,8 +39,8 @@ class PaymentSummaryTest extends AbstractTestCase
 
     public function testRequestedUserInfo(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('billing_address is not a valid value. Valid values are shipping_address, contact_name, contact_phone, contact_email');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('billing_address is not a valid value. Valid values are "shipping_address, contact_name, contact_phone, contact_email".');
 
         $priceList = [
             PriceList::create('Subtotal', '29.99'),

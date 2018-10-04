@@ -68,7 +68,7 @@ class PassengerSegmentInfo implements \JsonSerializable
      * @param string $title
      * @param string $value
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo
      */

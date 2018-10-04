@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template\Airline;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule;
@@ -14,8 +15,8 @@ class AirlineUpdateTest extends AbstractTestCase
 {
     public function testInvalidUpdateType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$updateType must be either delay, gate_change, cancellation');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('updateType must be either "delay, gate_change, cancellation".');
 
         $departureAirport = Airport::create('SFO', 'San Francisco')->setTerminal('T4')->setGate('G8');
         $arrivalAirport = Airport::create('AMS', 'Amsterdam')->setTerminal('T4')->setGate('G8');

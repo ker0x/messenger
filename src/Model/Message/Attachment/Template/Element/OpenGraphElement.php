@@ -26,7 +26,7 @@ class OpenGraphElement implements \JsonSerializable
      *
      * @param string $url
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $url)
     {
@@ -38,7 +38,7 @@ class OpenGraphElement implements \JsonSerializable
     /**
      * @param string $url
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement
      */
@@ -50,7 +50,7 @@ class OpenGraphElement implements \JsonSerializable
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement
      */

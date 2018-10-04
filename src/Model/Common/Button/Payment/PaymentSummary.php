@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Common\Button\Payment;
 
+use Kerox\Messenger\Exception\MessengerException;
+
 class PaymentSummary implements \JsonSerializable
 {
     public const PAYMENT_TYPE_FIXED_AMOUNT = 'FIXED_AMOUNT';
@@ -53,7 +55,7 @@ class PaymentSummary implements \JsonSerializable
      * @param array       $requestedUserInfo
      * @param PriceList[] $priceList
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(
         string $currency,
@@ -79,7 +81,7 @@ class PaymentSummary implements \JsonSerializable
      * @param array  $requestedUserInfo
      * @param array  $priceList
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary
      */
@@ -121,15 +123,16 @@ class PaymentSummary implements \JsonSerializable
     /**
      * @param string $paymentType
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidPaymentType(string $paymentType): void
     {
         $allowedPaymentType = $this->getAllowedPaymentType();
         if (!\in_array($paymentType, $allowedPaymentType, true)) {
-            throw new \InvalidArgumentException(
-                '$paymentType must be either ' . implode(', ', $allowedPaymentType)
-            );
+            throw new MessengerException(sprintf(
+                'paymentType must be either "%s".',
+                implode(', ', $allowedPaymentType)
+            ));
         }
     }
 
@@ -147,16 +150,18 @@ class PaymentSummary implements \JsonSerializable
     /**
      * @param array $requestedUserInfo
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidRequestedUserInfo(array $requestedUserInfo): void
     {
         $allowedUserInfo = $this->getAllowedUserInfo();
         foreach ($requestedUserInfo as $userInfo) {
             if (!\in_array($userInfo, $allowedUserInfo, true)) {
-                throw new \InvalidArgumentException(
-                    "$userInfo is not a valid value. Valid values are " . implode(', ', $allowedUserInfo)
-                );
+                throw new MessengerException(sprintf(
+                    '%s is not a valid value. Valid values are "%s".',
+                    $userInfo,
+                    implode(', ', $allowedUserInfo)
+                ));
             }
         }
     }

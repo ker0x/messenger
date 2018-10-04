@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Button\Postback;
 use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement;
@@ -14,8 +15,8 @@ class ListTemplateTest extends AbstractTestCase
 {
     public function testInvalidTopElementStyle(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$topElementStyle must be either large, compact');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('topElementStyle must be either "large, compact".');
 
         $element1 = ListElement::create('Classic White T-Shirt')
             ->setImageUrl('https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png')

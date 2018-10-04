@@ -16,7 +16,7 @@ class Image extends File
      * @param string    $url
      * @param bool|null $reusable
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct($url, ?bool $reusable = null)
     {
@@ -29,7 +29,7 @@ class Image extends File
      * @param string    $url
      * @param bool|null $reusable
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File
      */

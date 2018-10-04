@@ -22,7 +22,7 @@ class PhoneNumber extends AbstractButton
      * @param string $title
      * @param string $payload
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title, string $payload)
     {
@@ -39,7 +39,7 @@ class PhoneNumber extends AbstractButton
      * @param string $title
      * @param string $payload
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\PhoneNumber
      */

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\NlpInterface;
 use Kerox\Messenger\Request\NlpRequest;
 use Kerox\Messenger\Response\NlpResponse;
@@ -13,7 +14,7 @@ class Nlp extends AbstractApi implements NlpInterface
     /**
      * @param array $configs
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\NlpResponse
      */
@@ -30,7 +31,7 @@ class Nlp extends AbstractApi implements NlpInterface
     /**
      * @param array $configs
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidConfigs(array $configs): void
     {
@@ -38,9 +39,11 @@ class Nlp extends AbstractApi implements NlpInterface
         if (!empty($configs)) {
             foreach ($configs as $key => $value) {
                 if (!\in_array($key, $allowedConfigKeys, true)) {
-                    throw new \InvalidArgumentException(
-                        $key . ' is not a valid key. $configs must only contain ' . implode(', ', $allowedConfigKeys)
-                    );
+                    throw new MessengerException(sprintf(
+                        '%s is not a valid key. configs must only contain "%s".',
+                        $key,
+                        implode(', ', $allowedConfigKeys)
+                    ));
                 }
 
                 $this->isBool($key, $value);
@@ -54,14 +57,14 @@ class Nlp extends AbstractApi implements NlpInterface
      * @param string $key
      * @param mixed  $value
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isBool(string $key, $value): void
     {
         if (!\is_bool($value) &&
             \in_array($key, [self::CONFIG_KEY_NLP_ENABLED, self::CONFIG_KEY_VERBOSE], true)
         ) {
-            throw new \InvalidArgumentException($key . ' must be a boolean');
+            throw new MessengerException(sprintf('%s must be a boolean.', $key));
         }
     }
 
@@ -69,14 +72,14 @@ class Nlp extends AbstractApi implements NlpInterface
      * @param string $key
      * @param mixed  $value
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isString(string $key, $value): void
     {
         if (!\is_string($value) &&
             \in_array($key, [self::CONFIG_KEY_CUSTOM_TOKEN, self::CONFIG_KEY_MODEL], true)
         ) {
-            throw new \InvalidArgumentException($key . ' must be a string');
+            throw new MessengerException(sprintf('%s must be a string.', $key));
         }
     }
 
@@ -84,12 +87,12 @@ class Nlp extends AbstractApi implements NlpInterface
      * @param string $key
      * @param mixed  $value
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidNBest(string $key, $value): void
     {
         if ($key === self::CONFIG_KEY_N_BEST && (!\is_int($value) || $value < 1 || $value > 8)) {
-            throw new \InvalidArgumentException($key . ' must be an integer between 1 and 8');
+            throw new MessengerException(sprintf('%s must be an integer between 1 and 8.', $key));
         }
     }
 
