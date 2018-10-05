@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 
 class BoardingPass implements \JsonSerializable, TravelClassInterface
@@ -126,7 +127,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $travelClass
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
@@ -155,7 +156,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      * @param string $label
      * @param string $value
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
@@ -172,7 +173,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
      * @param string $label
      * @param string $value
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
@@ -188,7 +189,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $headerImageUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
@@ -243,13 +244,16 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * @param string $travelClass
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
         if (!\in_array($travelClass, $allowedTravelClass, true)) {
-            throw new \InvalidArgumentException('$travelClass must be either ' . implode(', ', $allowedTravelClass));
+            throw new MessengerException(sprintf(
+                'travelClass must be either "%s".',
+                implode(', ', $allowedTravelClass)
+            ));
         }
     }
 

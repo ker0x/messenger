@@ -9,6 +9,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Profile;
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\ProfileSettings;
 use Kerox\Messenger\Model\ProfileSettings\Greeting;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
@@ -63,8 +64,8 @@ class ProfileTest extends AbstractTestCase
 
     public function testBadField(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('menu is not a valid value. $fields must only contain persistent_menu, get_started, greeting, whitelisted_domains, account_linking_url, payment_settings, target_audience');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('menu is not a valid value. fields must only contain "persistent_menu, get_started, greeting, whitelisted_domains, account_linking_url, payment_settings, target_audience".');
         $this->profileApi->delete(['menu']);
     }
 

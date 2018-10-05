@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
@@ -39,6 +40,8 @@ class Send extends AbstractApi implements SendInterface
      * @param string $action
      * @param array  $options
      *
+     * @throws \Kerox\Messenger\Exception\MessengerException
+     *
      * @return \Kerox\Messenger\Response\SendResponse
      */
     public function action(string $recipient, string $action, array $options = []): SendResponse
@@ -73,7 +76,7 @@ class Send extends AbstractApi implements SendInterface
      * @param array $options
      * @param       $message
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return array
      */
@@ -82,8 +85,8 @@ class Send extends AbstractApi implements SendInterface
         $allowedOptionsKeys = $this->getAllowedOptionsKeys();
         foreach ($options as $key => $value) {
             if (!\in_array($key, $allowedOptionsKeys, true)) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Only %s are allowed keys for options.',
+                throw new MessengerException(sprintf(
+                    'Only "%s" are allowed keys for options.',
                     implode(', ', $allowedOptionsKeys)
                 ));
             }
@@ -103,14 +106,14 @@ class Send extends AbstractApi implements SendInterface
     /**
      * @param string $messagingType
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     protected function isValidMessagingType(string $messagingType): void
     {
         $allowedMessagingType = $this->getAllowedMessagingType();
         if (!\in_array($messagingType, $allowedMessagingType, true)) {
-            throw new \InvalidArgumentException(sprintf(
-                'messagingType must be either %s.',
+            throw new MessengerException(sprintf(
+                'messagingType must be either "%s".',
                 implode(', ', $allowedMessagingType)
             ));
         }

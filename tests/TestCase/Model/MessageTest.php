@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Model;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
@@ -85,15 +86,15 @@ class MessageTest extends AbstractTestCase
 
     public function testMessageWithInvalidArgument(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$message must be a string or an instance of Attachment.');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('message must be a string or an instance of Kerox\Messenger\Model\Message\Attachment.');
         $message = new Message(123456);
     }
 
     public function testMessageWithInvalidQuickReplies(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Array can only contain instance of QuickReply.');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('Array can only contain instance of Kerox\Messenger\Model\Message\QuickReply.');
         $message = Message::create('Pick a color:')
             ->setQuickReplies([
                 QuickReply::create()

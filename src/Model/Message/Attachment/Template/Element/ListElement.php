@@ -21,7 +21,7 @@ class ListElement extends AbstractElement
     /**
      * @param string $title
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */
@@ -33,7 +33,7 @@ class ListElement extends AbstractElement
     /**
      * @param string $subtitle
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */
@@ -47,7 +47,7 @@ class ListElement extends AbstractElement
     /**
      * @param string $imageUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */
@@ -73,7 +73,7 @@ class ListElement extends AbstractElement
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement
      */

@@ -13,7 +13,7 @@ interface TravelClassInterface
     /**
      * @param string $travelClass
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function isValidTravelClass(string $travelClass): void;
 

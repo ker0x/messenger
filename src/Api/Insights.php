@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\InsightsInterface;
 use Kerox\Messenger\Request\InsightsRequest;
 use Kerox\Messenger\Response\InsightsResponse;
@@ -14,6 +15,8 @@ class Insights extends AbstractApi implements InsightsInterface
      * @param array    $metrics
      * @param null|int $since
      * @param null|int $until
+     *
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\InsightsResponse
      */
@@ -30,7 +33,7 @@ class Insights extends AbstractApi implements InsightsInterface
     /**
      * @param array $metrics
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return array
      */
@@ -42,8 +45,8 @@ class Insights extends AbstractApi implements InsightsInterface
         if ($metrics !== $allowedMetrics) {
             array_map(function ($metric) use ($allowedMetrics): void {
                 if (!\in_array($metric, $allowedMetrics, true)) {
-                    throw new \InvalidArgumentException(sprintf(
-                        '%s is not a valid value. $metrics must only contain %s',
+                    throw new MessengerException(sprintf(
+                        '%s is not a valid value. Metrics must only contain "%s".',
                         $metric,
                         implode(', ', $allowedMetrics)
                     ));

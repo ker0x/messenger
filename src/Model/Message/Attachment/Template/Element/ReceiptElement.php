@@ -27,7 +27,7 @@ class ReceiptElement extends AbstractElement
      * @param string $title
      * @param float  $price
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title, float $price)
     {
@@ -40,7 +40,7 @@ class ReceiptElement extends AbstractElement
      * @param string $title
      * @param float  $price
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
@@ -52,7 +52,7 @@ class ReceiptElement extends AbstractElement
     /**
      * @param string $subtitle
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
@@ -66,7 +66,7 @@ class ReceiptElement extends AbstractElement
     /**
      * @param string $imageUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
      */
@@ -92,7 +92,7 @@ class ReceiptElement extends AbstractElement
     /**
      * @param string $currency
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return ReceiptElement
      */

@@ -29,7 +29,7 @@ class Payment extends AbstractButton
      * @param string                                                      $payload
      * @param \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary $paymentSummary
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $payload, PaymentSummary $paymentSummary)
     {
@@ -46,7 +46,7 @@ class Payment extends AbstractButton
      * @param string                                                      $payload
      * @param \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary $paymentSummary
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Payment
      */

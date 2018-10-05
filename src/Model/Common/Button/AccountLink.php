@@ -16,7 +16,7 @@ class AccountLink extends AbstractButton
      *
      * @param string $url
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $url)
     {
@@ -30,7 +30,7 @@ class AccountLink extends AbstractButton
     /**
      * @param string $url
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\AccountLink
      */

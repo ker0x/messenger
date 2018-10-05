@@ -31,7 +31,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
      *
      * @param string $locale
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $locale = self::DEFAULT_LOCALE)
     {
@@ -45,7 +45,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     /**
      * @param string $locale
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */
@@ -69,7 +69,7 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */

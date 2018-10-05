@@ -37,7 +37,7 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
      * @param array  $flightInfo
      * @param string $checkinUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(
         string $introMessage,
@@ -61,7 +61,7 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
      * @param array  $flightInfo
      * @param string $checkinUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckInTemplate
      */

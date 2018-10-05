@@ -30,7 +30,7 @@ class FlightSchedule implements \JsonSerializable
      *
      * @param string $departureTime
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $departureTime)
     {
@@ -42,7 +42,7 @@ class FlightSchedule implements \JsonSerializable
     /**
      * @param string $departureTime
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule
      */
@@ -54,7 +54,7 @@ class FlightSchedule implements \JsonSerializable
     /**
      * @param string $boardingTime
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return FlightSchedule
      */
@@ -70,7 +70,7 @@ class FlightSchedule implements \JsonSerializable
     /**
      * @param string $arrivalTime
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return FlightSchedule
      */

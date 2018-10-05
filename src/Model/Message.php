@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Model\Message\QuickReply;
@@ -50,7 +51,10 @@ class Message implements \JsonSerializable
         } elseif ($message instanceof Attachment) {
             $this->type = self::TYPE_ATTACHMENT;
         } else {
-            throw new \InvalidArgumentException('$message must be a string or an instance of Attachment.');
+            throw new MessengerException(sprintf(
+                'message must be a string or an instance of %s.',
+                Attachment::class
+            ));
         }
 
         $this->message = $message;
@@ -101,7 +105,7 @@ class Message implements \JsonSerializable
     /**
      * @param mixed $metadata
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return Message
      */
@@ -117,14 +121,17 @@ class Message implements \JsonSerializable
     /**
      * @param array $quickReplies
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidQuickReplies(array $quickReplies): void
     {
         $this->isValidArray($quickReplies, 11, 1);
         foreach ($quickReplies as $quickReply) {
             if (!$quickReply instanceof QuickReply) {
-                throw new \InvalidArgumentException('Array can only contain instance of QuickReply.');
+                throw new MessengerException(sprintf(
+                    'Array can only contain instance of %s.',
+                    QuickReply::class
+                ));
             }
         }
     }

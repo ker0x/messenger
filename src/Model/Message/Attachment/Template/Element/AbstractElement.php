@@ -30,7 +30,7 @@ abstract class AbstractElement implements \JsonSerializable
      *
      * @param string $title
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title)
     {
@@ -42,7 +42,7 @@ abstract class AbstractElement implements \JsonSerializable
     /**
      * @param mixed $subtitle
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return mixed
      */
@@ -56,7 +56,7 @@ abstract class AbstractElement implements \JsonSerializable
     /**
      * @param mixed $imageUrl
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return mixed
      */

@@ -130,7 +130,7 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
      * @param string $amount
      * @param string $currency
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
      */

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Model\Message;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Message\QuickReply;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
@@ -11,7 +12,7 @@ class QuickReplyTest extends AbstractTestCase
 {
     public function testQuickReplyWithInvalidContentType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('Invalid content type');
         $quickReply = QuickReply::create('image');
     }

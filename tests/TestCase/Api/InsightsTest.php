@@ -9,6 +9,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Insights;
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Data;
 
 class InsightsTest extends AbstractTestCase
@@ -42,8 +43,8 @@ class InsightsTest extends AbstractTestCase
 
     public function testGetInsightsWithBadMetric(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('page_fan_adds_unique is not a valid value. $metrics must only contain page_messages_active_threads_unique, page_messages_blocked_conversations_unique, page_messages_reported_conversations_unique, page_messages_reported_conversations_by_report_type_unique, page_messages_feedback_by_action_unique');
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('page_fan_adds_unique is not a valid value. Metrics must only contain "page_messages_active_threads_unique, page_messages_blocked_conversations_unique, page_messages_reported_conversations_unique, page_messages_reported_conversations_by_report_type_unique, page_messages_feedback_by_action_unique".');
         $response = $this->insightsApi->get(['page_fan_adds_unique']);
     }
 }

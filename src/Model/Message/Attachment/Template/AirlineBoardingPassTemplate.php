@@ -25,7 +25,7 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
      * @param string                                                                    $locale
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass[] $boardingPass
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $introMessage, string $locale, array $boardingPass)
     {
@@ -40,7 +40,7 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
      * @param string $locale
      * @param array  $boardingPass
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineBoardingPassTemplate
      */

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 
 class QuickReply implements \JsonSerializable
@@ -114,13 +115,13 @@ class QuickReply implements \JsonSerializable
     /**
      * @param string $contentType
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidContentType(string $contentType): void
     {
         $allowedContentType = $this->getAllowedContentType();
         if (!\in_array($contentType, $allowedContentType, true)) {
-            throw new \InvalidArgumentException('Invalid content type');
+            throw new MessengerException('Invalid content type.');
         }
     }
 
@@ -138,12 +139,12 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @throws \Exception
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function checkContentType(): void
     {
         if ($this->contentType !== self::CONTENT_TYPE_TEXT) {
-            throw new \Exception('Content type must be set to text to use title, payload and image_url');
+            throw new MessengerException('Content type must be set to text to use title, payload and image_url.');
         }
     }
 

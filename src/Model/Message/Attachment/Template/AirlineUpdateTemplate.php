@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
+use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 
@@ -41,7 +42,7 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
      * @param string                                                                $pnrNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $updateType, string $locale, string $pnrNumber, FlightInfo $updateFlightInfo)
     {
@@ -60,7 +61,7 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
      * @param string                                                                $pnrNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
      */
@@ -88,13 +89,16 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     /**
      * @param string $updateType
      *
-     * @throws \InvalidArgumentException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidUpdateType(string $updateType): void
     {
         $allowedUpdateType = $this->getAllowedUpdateType();
         if (!\in_array($updateType, $allowedUpdateType, true)) {
-            throw new \InvalidArgumentException('$updateType must be either ' . implode(', ', $allowedUpdateType));
+            throw new MessengerException(sprintf(
+                'updateType must be either "%s".',
+                implode(', ', $allowedUpdateType)
+            ));
         }
     }
 
