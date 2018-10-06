@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidClassException;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement;
 
@@ -53,7 +53,7 @@ class MediaTemplate extends Template
         $this->isValidArray($elements, 1, 1);
         foreach ($elements as $element) {
             if (!$element instanceof MediaElement) {
-                throw new MessengerException(sprintf('Array can only contain instance of %s.', MediaElement::class));
+                throw new InvalidClassException(sprintf('Array can only contain instance of %s.', MediaElement::class));
             }
         }
     }

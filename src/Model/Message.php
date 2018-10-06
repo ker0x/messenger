@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model;
 
+use Kerox\Messenger\Exception\InvalidClassException;
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message\Attachment;
@@ -128,7 +129,7 @@ class Message implements \JsonSerializable
         $this->isValidArray($quickReplies, 11, 1);
         foreach ($quickReplies as $quickReply) {
             if (!$quickReply instanceof QuickReply) {
-                throw new MessengerException(sprintf(
+                throw new InvalidClassException(sprintf(
                     'Array can only contain instance of %s.',
                     QuickReply::class
                 ));

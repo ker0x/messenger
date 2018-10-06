@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Common\Button;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidKeyException;
 
 class WebUrl extends AbstractButton
 {
@@ -136,7 +136,7 @@ class WebUrl extends AbstractButton
     {
         $allowedRatioType = $this->getAllowedRatioType();
         if (!\in_array($webviewHeightRatio, $allowedRatioType, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidKeyException(sprintf(
                 'webviewHeightRatio must be either "%s".',
                 implode(', ', $allowedRatioType)
             ));

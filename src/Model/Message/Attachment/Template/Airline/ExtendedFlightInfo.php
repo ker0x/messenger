@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidKeyException;
 
 class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterface
 {
@@ -113,7 +113,7 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
         if (!\in_array($travelClass, $allowedTravelClass, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidKeyException(sprintf(
                 'travelClass must be either "%s".',
                 implode(', ', $allowedTravelClass)
             ));

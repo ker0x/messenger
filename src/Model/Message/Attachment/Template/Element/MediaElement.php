@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Common\Button\AbstractButton;
 
@@ -115,7 +115,7 @@ class MediaElement implements \JsonSerializable
     {
         $allowedMediaType = $this->getAllowedMediaType();
         if (!\in_array($mediaType, $allowedMediaType, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidTypeException(sprintf(
                 'mediaType must be either "%s".',
                 implode(', ', $allowedMediaType)
             ));

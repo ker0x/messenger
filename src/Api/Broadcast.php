@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidOptionException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Request\BroadcastRequest;
 use Kerox\Messenger\Response\BroadcastResponse;
@@ -35,7 +35,7 @@ class Broadcast extends AbstractApi implements SendInterface
      * @param string $messageCreativeId
      * @param array  $options
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidOptionException
      *
      * @return \Kerox\Messenger\Response\BroadcastResponse
      */
@@ -61,7 +61,7 @@ class Broadcast extends AbstractApi implements SendInterface
         $allowedOptionsKeys = $this->getAllowedOptionsKeys();
         foreach ($options as $key => $value) {
             if (!\in_array($key, $allowedOptionsKeys, true)) {
-                throw new MessengerException(sprintf(
+                throw new InvalidOptionException(sprintf(
                     'Only "%s" are allowed keys for options.',
                     implode(', ', $allowedOptionsKeys)
                 ));
