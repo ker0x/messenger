@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidKeyException;
 use Kerox\Messenger\InsightsInterface;
 use Kerox\Messenger\Request\InsightsRequest;
 use Kerox\Messenger\Response\InsightsResponse;
@@ -45,7 +45,7 @@ class Insights extends AbstractApi implements InsightsInterface
         if ($metrics !== $allowedMetrics) {
             array_map(function ($metric) use ($allowedMetrics): void {
                 if (!\in_array($metric, $allowedMetrics, true)) {
-                    throw new MessengerException(sprintf(
+                    throw new InvalidKeyException(sprintf(
                         '%s is not a valid value. Metrics must only contain "%s".',
                         $metric,
                         implode(', ', $allowedMetrics)

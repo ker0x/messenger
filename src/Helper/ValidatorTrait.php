@@ -4,6 +4,18 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Helper;
 
+use Kerox\Messenger\Exception\InvalidArrayException;
+use Kerox\Messenger\Exception\InvalidClassException;
+use Kerox\Messenger\Exception\InvalidColorException;
+use Kerox\Messenger\Exception\InvalidCountryException;
+use Kerox\Messenger\Exception\InvalidCurrencyException;
+use Kerox\Messenger\Exception\InvalidDateTimeException;
+use Kerox\Messenger\Exception\InvalidExtensionException;
+use Kerox\Messenger\Exception\InvalidKeyException;
+use Kerox\Messenger\Exception\InvalidLocaleException;
+use Kerox\Messenger\Exception\InvalidStringException;
+use Kerox\Messenger\Exception\InvalidTypeException;
+use Kerox\Messenger\Exception\InvalidUrlException;
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Button\AbstractButton;
 use Kerox\Messenger\Model\Message;
@@ -21,7 +33,7 @@ trait ValidatorTrait
     protected function isValidColor(string $value): void
     {
         if (!preg_match('/^#[A-Fa-f0-9]{6}$/', $value)) {
-            throw new MessengerException('The color must be expressed in #rrggbb format.');
+            throw new InvalidColorException('The color must be expressed in #rrggbb format.');
         }
     }
 
@@ -34,7 +46,7 @@ trait ValidatorTrait
     protected function isValidString(string $value, int $length = 20): void
     {
         if (mb_strlen($value) > $length) {
-            throw new MessengerException(sprintf('String should not exceed %s characters.', $length));
+            throw new InvalidStringException(sprintf('String should not exceed %s characters.', $length));
         }
     }
 
@@ -49,7 +61,7 @@ trait ValidatorTrait
             '/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/',
             $value
         )) {
-            throw new MessengerException(sprintf('%s is not a valid url.', $value));
+            throw new InvalidUrlException(sprintf('%s is not a valid url.', $value));
         }
     }
 
@@ -61,7 +73,7 @@ trait ValidatorTrait
     protected function isValidLocale(string $value): void
     {
         if (!preg_match('/^[a-z]{2}_[A-Z]{2}$/', $value)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidLocaleException(sprintf(
                 '%s is not valid. Locale must be in ISO-639-1 and ISO-3166-1 format like fr_FR.',
                 $value
             ));
@@ -76,7 +88,7 @@ trait ValidatorTrait
     protected function isValidCountry(string $value): void
     {
         if (!preg_match('/^[A-Z]{2}$/', $value)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidCountryException(sprintf(
                 '%s is not valid. Country must be in ISO 3166 Alpha-2 format like FR.',
                 $value
             ));
@@ -91,7 +103,7 @@ trait ValidatorTrait
     protected function isValidDateTime(string $value): void
     {
         if (!preg_match('/^(\d{4})-(0[1-9]|1[0-2])-([12]\d|0[1-9]|3[01])T(0\d|1\d|2[0-3]):([0-5]\d)$/', $value)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidDateTimeException(sprintf(
                 '%s is not valid. DateTime must be in ISO-8601 AAAA-MM-JJThh:mm format.',
                 $value
             ));
@@ -109,10 +121,10 @@ trait ValidatorTrait
     {
         $countArray = \count($array);
         if ($minSize !== null && $countArray < $minSize) {
-            throw new MessengerException(sprintf('The minimum number of items for this array is %d.', $minSize));
+            throw new InvalidArrayException(sprintf('The minimum number of items for this array is %d.', $minSize));
         }
         if ($countArray > $maxSize) {
-            throw new MessengerException(sprintf('The maximum number of items for this array is %d.', $maxSize));
+            throw new InvalidArrayException(sprintf('The maximum number of items for this array is %d.', $maxSize));
         }
     }
 
@@ -127,7 +139,7 @@ trait ValidatorTrait
 
         $regex = '/^' . implode('|', $allowedCurrency) . '$/';
         if (!preg_match($regex, $value)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidCurrencyException(sprintf(
                 '%s is not a valid currency. Currency must be in ISO-4217-3 format.',
                 $value
             ));
@@ -144,7 +156,7 @@ trait ValidatorTrait
     {
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if (empty($ext) || !\in_array($ext, $allowedExtension, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidExtensionException(sprintf(
                 '%s does not have a valid extension. Allowed extensions are "%s".',
                 $filename,
                 implode(', ', $allowedExtension)
@@ -163,13 +175,13 @@ trait ValidatorTrait
         /** @var \Kerox\Messenger\Model\Common\Button\AbstractButton $button */
         foreach ($buttons as $button) {
             if (!$button instanceof AbstractButton) {
-                throw new MessengerException(
+                throw new InvalidClassException(
                     sprintf('Array can only contain instance of %s.', AbstractButton::class)
                 );
             }
 
             if (!\in_array($button->getType(), $allowedButtonsType, true)) {
-                throw new MessengerException(sprintf(
+                throw new InvalidClassException(sprintf(
                     'Buttons can only be an instance of %s.',
                     implode(', ', $allowedButtonsType)
                 ));
@@ -210,7 +222,7 @@ trait ValidatorTrait
     {
         $allowedSenderAction = $this->getAllowedSenderAction();
         if (!\in_array($action, $allowedSenderAction, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidKeyException(sprintf(
                 'action must be either "%s".',
                 implode(', ', $allowedSenderAction)
             ));
@@ -226,7 +238,7 @@ trait ValidatorTrait
     {
         $allowedNotificationType = $this->getAllowedNotificationType();
         if (!\in_array($notificationType, $allowedNotificationType, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidTypeException(sprintf(
                 'notificationType must be either "%s".',
                 implode(', ', $allowedNotificationType)
             ));
@@ -243,14 +255,14 @@ trait ValidatorTrait
     {
         $allowedTag = $this->getAllowedTag();
         if (!\in_array($tag, $allowedTag, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidKeyException(sprintf(
                 'tag must be either "%s".',
                 implode(', ', $allowedTag)
             ));
         }
 
         if ($tag === SendInterface::TAG_ISSUE_RESOLUTION && $message !== null && !$message instanceof GenericTemplate) {
-            throw new MessengerException(sprintf(
+            throw new InvalidClassException(sprintf(
                 'message must be an instance of %s if tag is set to %s.',
                 GenericTemplate::class,
                 SendInterface::TAG_ISSUE_RESOLUTION

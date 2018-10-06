@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\ProfileSettings;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Helper\ValidatorTrait;
 
@@ -127,7 +127,7 @@ class TargetAudience implements \JsonSerializable
     {
         $allowedAudienceType = $this->getAllowedAudienceType();
         if (!\in_array($audienceType, $allowedAudienceType, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidTypeException(sprintf(
                 'audienceType must be either "%s".',
                 implode(', ', $allowedAudienceType)
             ));

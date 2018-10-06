@@ -10,8 +10,8 @@ Version `3.0.0` of the Messenger library is an enhancement of version `2.1.1` wi
 
 - 3.0.0 (2018-10)
     - Update API version to `v3.1`.
-    - Add support for Persona API (Thanks to @misantron)
-    - Add support for the BUSINESS_PRODUCTIVITY message tag (Thanks to @atgg) 
+    - Add support for Persona API (Thanks to @misantron).
+    - Add support for the BUSINESS_PRODUCTIVITY message tag (Thanks to @atgg).
     - Adding `$appVersion` as optional 4th argument in `\Kerox\Messenger\Messenger::__construct()` with default value to const `API_VERSION`.
     - Remove parameters `$notificationType` and `$tag` for methods `message()` and `action` in `\Kerox\Messenger\Api\Send()`.
     - Remove parameters `$notificationType` and `$tag` for methods `send()` in `\Kerox\Messenger\Api\Broadcast()`.
@@ -25,6 +25,7 @@ Version `3.0.0` of the Messenger library is an enhancement of version `2.1.1` wi
     - Method `addQuickReply()` in `\Kerox\Messenger\Model\Message()` will throw an exception if there is already too many quick replies.
     - Parameters `$ref`, `$source` and `$type` in `\Kerox\Messenger\Model\Callback\Referral()` can now return `null`.
     - Add parameter `$sharable` in `\Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate()`.
-    - Increase limit to 640 characters for `$text` in `\Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate()`. (Thanks to @mferrara)
-    - Improve tests
-    - Refactor code
+    - Increase limit to 640 characters for `$text` in `\Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate()`. (Thanks to @mferrara).
+    - Throw new Exception for better information.
+    - Improve tests.
+    - Refactor code.

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Common\Button\Payment;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidKeyException;
+use Kerox\Messenger\Exception\InvalidTypeException;
 
 class PaymentSummary implements \JsonSerializable
 {
@@ -129,7 +130,7 @@ class PaymentSummary implements \JsonSerializable
     {
         $allowedPaymentType = $this->getAllowedPaymentType();
         if (!\in_array($paymentType, $allowedPaymentType, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidTypeException(sprintf(
                 'paymentType must be either "%s".',
                 implode(', ', $allowedPaymentType)
             ));
@@ -157,7 +158,7 @@ class PaymentSummary implements \JsonSerializable
         $allowedUserInfo = $this->getAllowedUserInfo();
         foreach ($requestedUserInfo as $userInfo) {
             if (!\in_array($userInfo, $allowedUserInfo, true)) {
-                throw new MessengerException(sprintf(
+                throw new InvalidKeyException(sprintf(
                     '%s is not a valid value. Valid values are "%s".',
                     $userInfo,
                     implode(', ', $allowedUserInfo)

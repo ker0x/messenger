@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidOptionException;
+use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
@@ -85,7 +86,7 @@ class Send extends AbstractApi implements SendInterface
         $allowedOptionsKeys = $this->getAllowedOptionsKeys();
         foreach ($options as $key => $value) {
             if (!\in_array($key, $allowedOptionsKeys, true)) {
-                throw new MessengerException(sprintf(
+                throw new InvalidOptionException(sprintf(
                     'Only "%s" are allowed keys for options.',
                     implode(', ', $allowedOptionsKeys)
                 ));
@@ -112,7 +113,7 @@ class Send extends AbstractApi implements SendInterface
     {
         $allowedMessagingType = $this->getAllowedMessagingType();
         if (!\in_array($messagingType, $allowedMessagingType, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidTypeException(sprintf(
                 'messagingType must be either "%s".',
                 implode(', ', $allowedMessagingType)
             ));

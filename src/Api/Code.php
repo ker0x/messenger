@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
+use Kerox\Messenger\Exception\InvalidStringException;
+use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Request\CodeRequest;
 use Kerox\Messenger\Response\CodeResponse;
@@ -60,7 +62,7 @@ class Code extends AbstractApi
     {
         $allowedCodeType = $this->getAllowedCodeType();
         if (!\in_array($codeType, $allowedCodeType, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidTypeException(sprintf(
                 'codeType must be either "%s".',
                 implode(', ', $allowedCodeType)
             ));
@@ -75,7 +77,7 @@ class Code extends AbstractApi
     private function isValidRef(string $ref): void
     {
         if (!preg_match('/^[a-zA-Z0-9\+\/=\-.:_ ]{1,250}$/', $ref)) {
-            throw new MessengerException(
+            throw new InvalidStringException(
                 'ref must be a string of max 250 characters. Valid characters are "a-z A-Z 0-9 +/=-.:_".'
             );
         }

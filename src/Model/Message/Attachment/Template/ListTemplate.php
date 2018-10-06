@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidKeyException;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class ListTemplate extends Template
@@ -97,7 +97,7 @@ class ListTemplate extends Template
     {
         $allowedTopElementStyle = $this->getAllowedTopElementStyle();
         if (!\in_array($topElementStyle, $allowedTopElementStyle, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidKeyException(sprintf(
                 'topElementStyle must be either "%s".',
                 implode(', ', $allowedTopElementStyle)
             ));

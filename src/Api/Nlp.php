@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidKeyException;
+use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\NlpInterface;
 use Kerox\Messenger\Request\NlpRequest;
 use Kerox\Messenger\Response\NlpResponse;
@@ -39,7 +40,7 @@ class Nlp extends AbstractApi implements NlpInterface
         if (!empty($configs)) {
             foreach ($configs as $key => $value) {
                 if (!\in_array($key, $allowedConfigKeys, true)) {
-                    throw new MessengerException(sprintf(
+                    throw new InvalidKeyException(sprintf(
                         '%s is not a valid key. configs must only contain "%s".',
                         $key,
                         implode(', ', $allowedConfigKeys)
@@ -64,7 +65,7 @@ class Nlp extends AbstractApi implements NlpInterface
         if (!\is_bool($value) &&
             \in_array($key, [self::CONFIG_KEY_NLP_ENABLED, self::CONFIG_KEY_VERBOSE], true)
         ) {
-            throw new MessengerException(sprintf('%s must be a boolean.', $key));
+            throw new InvalidTypeException(sprintf('%s must be a boolean.', $key));
         }
     }
 
@@ -79,7 +80,7 @@ class Nlp extends AbstractApi implements NlpInterface
         if (!\is_string($value) &&
             \in_array($key, [self::CONFIG_KEY_CUSTOM_TOKEN, self::CONFIG_KEY_MODEL], true)
         ) {
-            throw new MessengerException(sprintf('%s must be a string.', $key));
+            throw new InvalidTypeException(sprintf('%s must be a string.', $key));
         }
     }
 
@@ -92,7 +93,7 @@ class Nlp extends AbstractApi implements NlpInterface
     private function isValidNBest(string $key, $value): void
     {
         if ($key === self::CONFIG_KEY_N_BEST && (!\is_int($value) || $value < 1 || $value > 8)) {
-            throw new MessengerException(sprintf('%s must be an integer between 1 and 8.', $key));
+            throw new InvalidTypeException(sprintf('%s must be an integer between 1 and 8.', $key));
         }
     }
 

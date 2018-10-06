@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 
@@ -95,7 +95,7 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     {
         $allowedUpdateType = $this->getAllowedUpdateType();
         if (!\in_array($updateType, $allowedUpdateType, true)) {
-            throw new MessengerException(sprintf(
+            throw new InvalidTypeException(sprintf(
                 'updateType must be either "%s".',
                 implode(', ', $allowedUpdateType)
             ));
