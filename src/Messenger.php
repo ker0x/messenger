@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use Kerox\Messenger\Api\Broadcast;
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
@@ -17,6 +15,8 @@ use Kerox\Messenger\Api\Tag;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Api\Webhook;
+use Kerox\Messenger\Http\Client;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class Messenger
@@ -40,18 +40,18 @@ class Messenger
     protected $pageToken;
 
     /**
-     * @var \GuzzleHttp\ClientInterface
+     * @var ClientInterface
      */
     protected $client;
 
     /**
      * Messenger constructor.
      *
-     * @param string                           $appSecret
-     * @param string                           $verifyToken
-     * @param string                           $pageToken
-     * @param string                           $apiVersion
-     * @param null|\GuzzleHttp\ClientInterface $client
+     * @param string          $appSecret
+     * @param string          $verifyToken
+     * @param string          $pageToken
+     * @param string          $apiVersion
+     * @param ClientInterface $client
      */
     public function __construct(
         string $appSecret,

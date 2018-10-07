@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\ClientInterface;
+use Psr\Http\Client\ClientInterface;
 
 abstract class AbstractApi
 {
@@ -14,15 +14,15 @@ abstract class AbstractApi
     protected $pageToken;
 
     /**
-     * @var \GuzzleHttp\ClientInterface
+     * @var ClientInterface
      */
     protected $client;
 
     /**
      * AbstractApi constructor.
      *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
+     * @param string          $pageToken
+     * @param ClientInterface $client
      */
     public function __construct(string $pageToken, ClientInterface $client)
     {
