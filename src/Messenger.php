@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger;
 
+use GuzzleHttp\HandlerStack;
 use Kerox\Messenger\Api\Broadcast;
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Api\Insights;
@@ -16,6 +17,7 @@ use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Api\Webhook;
 use Kerox\Messenger\Http\Client;
+use Kerox\Messenger\Http\Middleware;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -65,11 +67,26 @@ class Messenger
         $this->pageToken = $pageToken;
 
         if ($client === null) {
-            $client = new Client([
-                'base_uri' => self::API_URL . $apiVersion . '/',
-            ]);
+            $client = $this->createClient($apiVersion);
         }
         $this->client = $client;
+    }
+
+    /**
+     * @param string $apiVersion
+     *
+     * @return Client
+     */
+    private function createClient(string $apiVersion): Client
+    {
+        $stack = HandlerStack::create();
+        $stack->push(Middleware::contentTypeHeader('application/json'));
+        $stack->push(Middleware::queryParam('access_token', $this->pageToken));
+
+        return new Client([
+            'handler' => $stack,
+            'base_uri' => self::API_URL . $apiVersion . '/',
+        ]);
     }
 
     /**
