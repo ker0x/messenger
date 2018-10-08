@@ -75,12 +75,12 @@ class Messenger
     /**
      * @param string $apiVersion
      *
-     * @return Client
+     * @return ClientInterface
      */
-    private function createClient(string $apiVersion): Client
+    private function createClient(string $apiVersion): ClientInterface
     {
         $stack = HandlerStack::create();
-        $stack->push(Middleware::contentTypeHeader('application/json'));
+        $stack->push(Middleware::header('Content-Type', 'application/json'));
         $stack->push(Middleware::queryParam('access_token', $this->pageToken));
 
         return new Client([
@@ -94,7 +94,7 @@ class Messenger
      */
     public function send(): Send
     {
-        return new Send($this->pageToken, $this->client);
+        return new Send($this->client);
     }
 
     /**
@@ -104,7 +104,7 @@ class Messenger
      */
     public function webhook(?ServerRequestInterface $request = null): Webhook
     {
-        return new Webhook($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
+        return new Webhook($this->appSecret, $this->verifyToken, $this->client, $request);
     }
 
     /**
@@ -112,7 +112,7 @@ class Messenger
      */
     public function user(): User
     {
-        return new User($this->pageToken, $this->client);
+        return new User($this->client);
     }
 
     /**
@@ -120,7 +120,7 @@ class Messenger
      */
     public function profile(): Profile
     {
-        return new Profile($this->pageToken, $this->client);
+        return new Profile($this->client);
     }
 
     /**
@@ -128,7 +128,7 @@ class Messenger
      */
     public function code(): Code
     {
-        return new Code($this->pageToken, $this->client);
+        return new Code($this->client);
     }
 
     /**
@@ -136,7 +136,7 @@ class Messenger
      */
     public function insights(): Insights
     {
-        return new Insights($this->pageToken, $this->client);
+        return new Insights($this->client);
     }
 
     /**
@@ -144,7 +144,7 @@ class Messenger
      */
     public function tag(): Tag
     {
-        return new Tag($this->pageToken, $this->client);
+        return new Tag($this->client);
     }
 
     /**
@@ -152,7 +152,7 @@ class Messenger
      */
     public function thread(): Thread
     {
-        return new Thread($this->pageToken, $this->client);
+        return new Thread($this->client);
     }
 
     /**
@@ -160,7 +160,7 @@ class Messenger
      */
     public function nlp(): Nlp
     {
-        return new Nlp($this->pageToken, $this->client);
+        return new Nlp($this->client);
     }
 
     /**
@@ -168,7 +168,7 @@ class Messenger
      */
     public function broadcast(): Broadcast
     {
-        return new Broadcast($this->pageToken, $this->client);
+        return new Broadcast($this->client);
     }
 
     /**
@@ -176,6 +176,6 @@ class Messenger
      */
     public function persona(): Persona
     {
-        return new Persona($this->pageToken, $this->client);
+        return new Persona($this->client);
     }
 }

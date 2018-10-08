@@ -10,14 +10,15 @@ class Middleware
     /**
      * Append 'Content-Type' header to each client request.
      *
-     * @param string $contentType
+     * @param string $name
+     * @param string $value
      *
      * @return callable
      */
-    public static function contentTypeHeader(string $contentType): callable
+    public static function header(string $name, string $value): callable
     {
-        return \GuzzleHttp\Middleware::mapRequest(function (RequestInterface $request) use ($contentType) {
-            return $request->withHeader('Content-Type', $contentType);
+        return \GuzzleHttp\Middleware::mapRequest(function (RequestInterface $request) use ($name, $value) {
+            return $request->withHeader($name, $value);
         });
     }
 

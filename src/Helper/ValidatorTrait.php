@@ -192,7 +192,7 @@ trait ValidatorTrait
     /**
      * @param $message
      *
-     * @throws \Exception
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message
      */
