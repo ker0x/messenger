@@ -4,54 +4,31 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\RequestInterface;
+
 abstract class AbstractRequest
 {
     /**
-     * @var string
+     * @var RequestInterface
      */
-    protected $pageToken;
+    protected $origin;
 
     /**
      * AbstractRequest constructor.
      *
-     * @param string $pageToken
+     * @param string $path
      */
-    public function __construct(string $pageToken)
+    public function __construct(string $path)
     {
-        $this->pageToken = $pageToken;
+        $this->origin = new Request('get', Uri::fromParts(['path' => $path]));
     }
 
     /**
-     * @return mixed
+     * @param string|null $method
+     *
+     * @return RequestInterface
      */
-    abstract protected function buildHeaders();
-
-    /**
-     * @return mixed
-     */
-    abstract protected function buildBody();
-
-    /**
-     * @return array
-     */
-    protected function buildQuery(): array
-    {
-        return [
-            'access_token' => $this->pageToken,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function build(): array
-    {
-        $request = [
-            'headers' => $this->buildHeaders(),
-            'json' => $this->buildBody(),
-            'query' => $this->buildQuery(),
-        ];
-
-        return array_filter($request);
-    }
+    abstract public function build(?string $method = null): RequestInterface;
 }

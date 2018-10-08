@@ -42,7 +42,7 @@ class Message implements \JsonSerializable
      *
      * @param \Kerox\Messenger\Model\Message\Attachment|string $message
      *
-     * @throws \Exception
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct($message)
     {
@@ -64,7 +64,7 @@ class Message implements \JsonSerializable
     /**
      * @param $message
      *
-     * @throws \Exception
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message
      */
@@ -93,6 +93,7 @@ class Message implements \JsonSerializable
      * @param \Kerox\Messenger\Model\Message\QuickReply $quickReply
      *
      * @return \Kerox\Messenger\Model\Message
+     * @throws MessengerException
      */
     public function addQuickReply(QuickReply $quickReply): self
     {

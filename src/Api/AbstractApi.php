@@ -9,11 +9,6 @@ use Psr\Http\Client\ClientInterface;
 abstract class AbstractApi
 {
     /**
-     * @var string
-     */
-    protected $pageToken;
-
-    /**
      * @var ClientInterface
      */
     protected $client;
@@ -21,12 +16,10 @@ abstract class AbstractApi
     /**
      * AbstractApi constructor.
      *
-     * @param string          $pageToken
      * @param ClientInterface $client
      */
-    public function __construct(string $pageToken, ClientInterface $client)
+    public function __construct(ClientInterface $client)
     {
-        $this->pageToken = $pageToken;
         $this->client = $client;
     }
 }
