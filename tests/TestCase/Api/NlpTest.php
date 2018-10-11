@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Nlp;
 use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class NlpTest extends AbstractTestCase
@@ -31,7 +31,7 @@ class NlpTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $this->nlpApi = new Nlp('abcd1234', $client);
+        $this->nlpApi = new Nlp($client);
     }
 
     public function testSetConfig(): void

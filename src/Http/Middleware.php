@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kerox\Messenger\Http;
 
 use GuzzleHttp\Psr7\Uri;
@@ -34,6 +36,7 @@ class Middleware
     {
         return \GuzzleHttp\Middleware::mapRequest(function (RequestInterface $request) use ($name, $value) {
             $uri = Uri::withQueryValue($request->getUri(), $name, $value);
+
             return $request->withUri($uri);
         });
     }

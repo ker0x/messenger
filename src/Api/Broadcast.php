@@ -17,7 +17,8 @@ class Broadcast extends AbstractApi implements SendInterface
     /**
      * @param string|\Kerox\Messenger\Model\Message $message
      *
-     * @throws \Exception
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\BroadcastResponse
      */
@@ -25,8 +26,8 @@ class Broadcast extends AbstractApi implements SendInterface
     {
         $message = $this->isValidMessage($message);
 
-        $request = new BroadcastRequest($this->pageToken, $message);
-        $response = $this->client->post('me/message_creatives', $request->build());
+        $request = new BroadcastRequest('me/message_creatives', $message);
+        $response = $this->client->sendRequest($request->build());
 
         return new BroadcastResponse($response);
     }
@@ -35,7 +36,8 @@ class Broadcast extends AbstractApi implements SendInterface
      * @param string $messageCreativeId
      * @param array  $options
      *
-     * @throws \Kerox\Messenger\Exception\InvalidOptionException
+     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\BroadcastResponse
      */
@@ -43,8 +45,8 @@ class Broadcast extends AbstractApi implements SendInterface
     {
         $options = $this->isValidOptions($options);
 
-        $request = new BroadcastRequest($this->pageToken, null, $messageCreativeId, $options);
-        $response = $this->client->post('me/broadcast_messages', $request->build());
+        $request = new BroadcastRequest('me/broadcast_messages', null, $messageCreativeId, $options);
+        $response = $this->client->sendRequest($request->build());
 
         return new BroadcastResponse($response);
     }

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use Kerox\Messenger\Api\Webhook;
 use Kerox\Messenger\Event\MessageEvent;
+use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Model\Callback\Message;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
@@ -46,7 +46,7 @@ class WebhookTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $this->webhookApi = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        $this->webhookApi = new Webhook($appSecret, $verifyToken, $client, $request);
     }
 
     public function testSubscribe(): void
@@ -67,7 +67,7 @@ class WebhookTest extends AbstractTestCase
         $params = ['hub_mode' => 'subscribe', 'hub_verify_token' => $verifyToken, 'hub_challenge' => '1234abcd'];
         $request = (new ServerRequest('GET', '/'))->withQueryParams($params);
 
-        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        $webhook = new Webhook($appSecret, $verifyToken, $client, $request);
 
         $this->assertTrue($webhook->isValidToken());
         $this->assertSame('1234abcd', $webhook->challenge());
@@ -180,7 +180,7 @@ class WebhookTest extends AbstractTestCase
 
         $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
 
-        $webhookApi = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        $webhookApi = new Webhook($appSecret, $verifyToken, $client, $request);
         $events = $webhookApi->getCallbackEvents();
 
         $this->assertEquals([$event], $events);
@@ -197,7 +197,7 @@ class WebhookTest extends AbstractTestCase
         $params = ['hub_mode' => 'subscribe', 'hub_verify_token' => $verifyToken, 'hub_challenge' => '1234abcd'];
         $request = (new ServerRequest('POST', '/'))->withQueryParams($params);
 
-        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        $webhook = new Webhook($appSecret, $verifyToken, $client, $request);
 
         $this->assertFalse($webhook->isValidToken());
     }
@@ -213,7 +213,7 @@ class WebhookTest extends AbstractTestCase
         $params = ['hub_mode' => 'subscribe', 'hub_challenge' => '1234abcd'];
         $request = (new ServerRequest('GET', '/'))->withQueryParams($params);
 
-        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        $webhook = new Webhook($appSecret, $verifyToken, $client, $request);
 
         $this->assertFalse($webhook->isValidToken());
     }
@@ -239,7 +239,7 @@ class WebhookTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        $webhook = new Webhook($appSecret, $verifyToken, $client, $request);
 
         $this->assertFalse($webhook->isValidCallback());
     }
@@ -268,7 +268,7 @@ class WebhookTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
+        $webhook = new Webhook($appSecret, $verifyToken, $client, $request);
 
         $this->assertSame([], $webhook->getDecodedBody());
     }

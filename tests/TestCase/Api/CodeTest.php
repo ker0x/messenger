@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Http\Client;
 
 class CodeTest extends AbstractTestCase
 {
@@ -30,7 +30,7 @@ class CodeTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $this->codeApi = new Code('abcd1234', $client);
+        $this->codeApi = new Code($client);
     }
 
     public function testRequestCode(): void

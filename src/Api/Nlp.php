@@ -16,6 +16,7 @@ class Nlp extends AbstractApi implements NlpInterface
      * @param array $configs
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\NlpResponse
      */
@@ -23,8 +24,8 @@ class Nlp extends AbstractApi implements NlpInterface
     {
         $this->isValidConfigs($configs);
 
-        $request = new NlpRequest($this->pageToken, $configs);
-        $response = $this->client->post('me/nlp_configs', $request->build());
+        $request = new NlpRequest('me/nlp_configs', $configs);
+        $response = $this->client->sendRequest($request->build());
 
         return new NlpResponse($response);
     }

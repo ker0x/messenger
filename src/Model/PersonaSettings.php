@@ -40,9 +40,9 @@ class PersonaSettings implements \JsonSerializable
      * @param string $name
      * @param string $profilePictureUrl
      *
-     * @return \Kerox\Messenger\Model\PersonaSettings
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     *
+     * @return \Kerox\Messenger\Model\PersonaSettings
      */
     public static function create(string $name, string $profilePictureUrl): self
     {

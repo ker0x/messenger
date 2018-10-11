@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kerox\Messenger;
 
 use GuzzleHttp\HandlerStack;
-use Kerox\Messenger\Api;
 use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Http\Middleware;
 use Psr\Http\Client\ClientInterface;
@@ -88,7 +87,7 @@ class Messenger
     }
 
     /**
-     * @param null|\Psr\Http\Message\ServerRequestInterface $request
+     * @param ServerRequestInterface|null $request
      *
      * @return Api\Webhook
      */

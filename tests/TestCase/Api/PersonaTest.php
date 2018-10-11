@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Persona;
+use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\Data;
 use Kerox\Messenger\Model\PersonaSettings;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
@@ -27,7 +27,7 @@ class PersonaTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $personaApi = new Persona('abcd1234', $client);
+        $personaApi = new Persona($client);
 
         $response = $personaApi->add(PersonaSettings::create('John Mathew', 'https://facebook.com/john_image.jpg'));
 
@@ -50,7 +50,7 @@ class PersonaTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $personaApi = new Persona('abcd1234', $client);
+        $personaApi = new Persona($client);
 
         $response = $personaApi->get('<PERSONA_ID>');
 
@@ -73,7 +73,7 @@ class PersonaTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $personaApi = new Persona('abcd1234', $client);
+        $personaApi = new Persona($client);
 
         $response = $personaApi->getAll();
 
@@ -96,7 +96,7 @@ class PersonaTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $personaApi = new Persona('abcd1234', $client);
+        $personaApi = new Persona($client);
 
         $response = $personaApi->delete('<PERSONA_ID>');
 

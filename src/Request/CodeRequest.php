@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Helper\UtilityTrait;
+use Psr\Http\Message\RequestInterface;
+use function GuzzleHttp\Psr7\stream_for;
 
-class CodeRequest extends AbstractRequest
+class CodeRequest extends AbstractRequest implements BodyRequestInterface
 {
     use UtilityTrait;
 
@@ -43,19 +45,21 @@ class CodeRequest extends AbstractRequest
     }
 
     /**
-     * @return array
+     * @param string|null $method
+     *
+     * @return RequestInterface
      */
-    protected function buildHeaders(): array
+    public function build(?string $method = null): RequestInterface
     {
-        return [
-            'Content-Type' => 'application/json',
-        ];
+        return $this->origin
+            ->withMethod('post')
+            ->withBody(stream_for($this->buildBody()));
     }
 
     /**
-     * @return array
+     * @return string
      */
-    protected function buildBody(): array
+    public function buildBody(): string
     {
         $body = [
             'type' => $this->codeType,
@@ -65,6 +69,6 @@ class CodeRequest extends AbstractRequest
             ],
         ];
 
-        return $this->arrayFilter($body);
+        return \json_encode($this->arrayFilter($body));
     }
 }

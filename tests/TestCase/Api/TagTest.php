@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Tag;
+use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\Data;
 
 class TagTest extends AbstractTestCase
@@ -30,7 +30,7 @@ class TagTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $this->tagApi = new Tag('abcd1234', $client);
+        $this->tagApi = new Tag($client);
     }
 
     public function testGetTag(): void

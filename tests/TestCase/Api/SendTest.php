@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Message\Attachment\Image;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
@@ -39,7 +39,7 @@ class SendTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $this->sendApi = new Send('abcd1234', $client);
+        $this->sendApi = new Send($client);
     }
 
     public function testSendTextToUser(): void
@@ -169,7 +169,7 @@ class SendTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $sendApi = new Send('abcd1234', $client);
+        $sendApi = new Send($client);
 
         $response = $sendApi->attachment(new Image('http://www.messenger-rocks.com/image.jpg', true));
 
@@ -183,6 +183,11 @@ class SendTest extends AbstractTestCase
         unset($this->sendApi);
     }
 
+    /**
+     * @return ReceiptTemplate
+     *
+     * @throws MessengerException
+     */
     private function getReceipt()
     {
         $elements = [

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Exception\MessengerException;
+use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\ProfileSettings;
 use Kerox\Messenger\Model\ProfileSettings\Greeting;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
@@ -33,7 +33,7 @@ class ProfileTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $this->profileApi = new Profile('abcd1234', $client);
+        $this->profileApi = new Profile($client);
     }
 
     public function testAddSetting(): void

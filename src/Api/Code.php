@@ -20,6 +20,7 @@ class Code extends AbstractApi
      * @param string|null $ref
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\CodeResponse
      */
@@ -35,8 +36,8 @@ class Code extends AbstractApi
             $this->isValidRef($ref);
         }
 
-        $request = new CodeRequest($this->pageToken, $imageSize, $codeType, $ref);
-        $response = $this->client->post('me/messenger_codes', $request->build());
+        $request = new CodeRequest('me/messenger_codes', $imageSize, $codeType, $ref);
+        $response = $this->client->sendRequest($request->build());
 
         return new CodeResponse($response);
     }

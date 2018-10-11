@@ -92,8 +92,9 @@ class Message implements \JsonSerializable
     /**
      * @param \Kerox\Messenger\Model\Message\QuickReply $quickReply
      *
-     * @return \Kerox\Messenger\Model\Message
      * @throws MessengerException
+     *
+     * @return \Kerox\Messenger\Model\Message
      */
     public function addQuickReply(QuickReply $quickReply): self
     {

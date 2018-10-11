@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
+use Psr\Http\Message\RequestInterface;
+
 class WebhookRequest extends AbstractRequest
 {
-    protected function buildHeaders(): void
+    /**
+     * @param string|null $method
+     *
+     * @return RequestInterface
+     */
+    public function build(?string $method = null): RequestInterface
     {
-    }
-
-    protected function buildBody(): void
-    {
+        return $this->origin;
     }
 }

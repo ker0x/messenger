@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Thread;
+use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\ThreadControl;
 
 class ThreadTest extends AbstractTestCase
@@ -30,7 +30,7 @@ class ThreadTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $this->threadApi = new Thread('abcd1234', $client);
+        $this->threadApi = new Thread($client);
     }
 
     public function testPassThreadControl(): void

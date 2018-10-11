@@ -22,6 +22,7 @@ class Send extends AbstractApi implements SendInterface
      * @param array                                 $options
      *
      * @throws \Exception
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -30,8 +31,8 @@ class Send extends AbstractApi implements SendInterface
         $message = $this->isValidMessage($message);
         $options = $this->isValidOptions($options, $message);
 
-        $request = new SendRequest($this->pageToken, $message, $recipient, $options);
-        $response = $this->client->post('me/messages', $request->build());
+        $request = new SendRequest('me/messages', $message, $recipient, $options);
+        $response = $this->client->sendRequest($request->build());
 
         return new SendResponse($response);
     }
@@ -42,6 +43,7 @@ class Send extends AbstractApi implements SendInterface
      * @param array  $options
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -50,8 +52,8 @@ class Send extends AbstractApi implements SendInterface
         $this->isValidSenderAction($action);
         $options = $this->isValidOptions($options, $action);
 
-        $request = new SendRequest($this->pageToken, $action, $recipient, $options, SendRequest::REQUEST_TYPE_ACTION);
-        $response = $this->client->post('me/messages', $request->build());
+        $request = new SendRequest('me/messages', $action, $recipient, $options, SendRequest::REQUEST_TYPE_ACTION);
+        $response = $this->client->sendRequest($request->build());
 
         return new SendResponse($response);
     }
@@ -60,6 +62,7 @@ class Send extends AbstractApi implements SendInterface
      * @param \Kerox\Messenger\Model\Message\Attachment $attachment
      *
      * @throws \Exception
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -67,8 +70,8 @@ class Send extends AbstractApi implements SendInterface
     {
         $message = $this->isValidMessage($attachment);
 
-        $request = new SendRequest($this->pageToken, $message);
-        $response = $this->client->post('me/message_attachments', $request->build());
+        $request = new SendRequest('me/message_attachments', $message);
+        $response = $this->client->sendRequest($request->build());
 
         return new SendResponse($response);
     }

@@ -17,6 +17,7 @@ class Insights extends AbstractApi implements InsightsInterface
      * @param null|int $until
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\InsightsResponse
      */
@@ -24,8 +25,8 @@ class Insights extends AbstractApi implements InsightsInterface
     {
         $metrics = $this->isValidMetrics($metrics);
 
-        $request = new InsightsRequest($this->pageToken, $metrics, $since, $until);
-        $response = $this->client->get('me/insights', $request->build());
+        $request = new InsightsRequest('me/insights', $metrics, $since, $until);
+        $response = $this->client->sendRequest($request->build());
 
         return new InsightsResponse($response);
     }
@@ -33,7 +34,7 @@ class Insights extends AbstractApi implements InsightsInterface
     /**
      * @param array $metrics
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidKeyException
      *
      * @return array
      */

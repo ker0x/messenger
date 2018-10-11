@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\ThreadControl;
+use Psr\Http\Message\RequestInterface;
+use function GuzzleHttp\Psr7\stream_for;
 
-class ThreadRequest extends AbstractRequest
+class ThreadRequest extends AbstractRequest implements BodyRequestInterface
 {
     /**
      * @var \Kerox\Messenger\Model\ThreadControl
@@ -16,31 +18,33 @@ class ThreadRequest extends AbstractRequest
     /**
      * TagRequest constructor.
      *
-     * @param string                               $pageToken
-     * @param \Kerox\Messenger\Model\ThreadControl $threadControl
+     * @param string        $path
+     * @param ThreadControl $threadControl
      */
-    public function __construct(string $pageToken, ThreadControl $threadControl)
+    public function __construct(string $path, ThreadControl $threadControl)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->threadControl = $threadControl;
     }
 
     /**
-     * @return array
+     * @param string|null $method
+     *
+     * @return RequestInterface
      */
-    protected function buildHeaders(): array
+    public function build(?string $method = null): RequestInterface
     {
-        return [
-            'Content-Type' => 'application/json',
-        ];
+        return $this->origin
+            ->withMethod('post')
+            ->withBody(stream_for($this->buildBody()));
     }
 
     /**
-     * @return \Kerox\Messenger\Model\ThreadControl
+     * @return string
      */
-    protected function buildBody(): ThreadControl
+    public function buildBody(): string
     {
-        return $this->threadControl;
+        return json_encode($this->threadControl);
     }
 }

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Broadcast;
-use Kerox\Messenger\Response\BroadcastResponse;
+use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class BroadcastTest extends AbstractTestCase
@@ -26,7 +25,7 @@ class BroadcastTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $broadcastApi = new Broadcast('abcd1234', $client);
+        $broadcastApi = new Broadcast($client);
 
         $response = $broadcastApi->create('Hello World');
 
@@ -45,7 +44,7 @@ class BroadcastTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $broadcastApi = new Broadcast('abcd1234', $client);
+        $broadcastApi = new Broadcast($client);
 
         $response = $broadcastApi->send('0123456789');
 

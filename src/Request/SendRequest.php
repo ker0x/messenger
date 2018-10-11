@@ -6,8 +6,10 @@ namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\SendInterface;
+use Psr\Http\Message\RequestInterface;
+use function GuzzleHttp\Psr7\stream_for;
 
-class SendRequest extends AbstractRequest
+class SendRequest extends AbstractRequest implements BodyRequestInterface
 {
     public const REQUEST_TYPE_MESSAGE = 'message';
     public const REQUEST_TYPE_ACTION = 'action';
@@ -79,19 +81,21 @@ class SendRequest extends AbstractRequest
     }
 
     /**
-     * @return array
+     * @param string|null $method
+     *
+     * @return RequestInterface
      */
-    protected function buildHeaders(): array
+    public function build(?string $method = null): RequestInterface
     {
-        return [
-            'Content-Type' => 'application/json',
-        ];
+        return $this->origin
+            ->withMethod('post')
+            ->withBody(stream_for($this->buildBody()));
     }
 
     /**
-     * @return array
+     * @return string
      */
-    protected function buildBody(): array
+    public function buildBody(): string
     {
         $body = [
             'messaging_type' => $this->messagingType,
@@ -103,6 +107,6 @@ class SendRequest extends AbstractRequest
             'persona_id' => $this->personaId,
         ];
 
-        return \array_filter($body);
+        return json_encode(\array_filter($body));
     }
 }

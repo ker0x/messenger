@@ -6,8 +6,10 @@ namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\SendInterface;
+use Psr\Http\Message\RequestInterface;
+use function GuzzleHttp\Psr7\stream_for;
 
-class BroadcastRequest extends AbstractRequest
+class BroadcastRequest extends AbstractRequest implements BodyRequestInterface
 {
     public const REQUEST_TYPE_MESSAGE = 'message';
     public const REQUEST_TYPE_ACTION = 'action';
@@ -40,18 +42,18 @@ class BroadcastRequest extends AbstractRequest
     /**
      * Request constructor.
      *
-     * @param string                              $pageToken
+     * @param string                              $path
      * @param \Kerox\Messenger\Model\Message|null $message
      * @param string|null                         $messageCreativeId
      * @param array                               $options
      */
     public function __construct(
-        string $pageToken,
+        string $path,
         ?Message $message = null,
         ?string $messageCreativeId = null,
         array $options = []
     ) {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->message = $message;
         $this->messageCreativeId = $messageCreativeId;
@@ -60,19 +62,21 @@ class BroadcastRequest extends AbstractRequest
     }
 
     /**
-     * @return array
+     * @param string|null $method
+     *
+     * @return RequestInterface
      */
-    protected function buildHeaders(): array
+    public function build(?string $method = null): RequestInterface
     {
-        return [
-            'Content-Type' => 'application/json',
-        ];
+        return $this->origin
+            ->withMethod('post')
+            ->withBody(stream_for($this->buildBody()));
     }
 
     /**
-     * @return array
+     * @return string
      */
-    protected function buildBody(): array
+    public function buildBody(): string
     {
         $body = [
             'messages' => [
@@ -83,6 +87,6 @@ class BroadcastRequest extends AbstractRequest
             'tag' => $this->tag,
         ];
 
-        return array_filter($body);
+        return json_encode(array_filter($body));
     }
 }

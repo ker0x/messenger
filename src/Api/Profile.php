@@ -15,12 +15,14 @@ class Profile extends AbstractApi implements ProfileInterface
     /**
      * @param \Kerox\Messenger\Model\ProfileSettings $profileSettings
      *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
     public function add(ProfileSettings $profileSettings): ProfileResponse
     {
-        $request = new ProfileRequest($this->pageToken, $profileSettings);
-        $response = $this->client->post('me/messenger_profile', $request->build());
+        $request = new ProfileRequest('me/messenger_profile', $profileSettings);
+        $response = $this->client->sendRequest($request->build('post'));
 
         return new ProfileResponse($response);
     }
@@ -29,6 +31,7 @@ class Profile extends AbstractApi implements ProfileInterface
      * @param array $profileSettings
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
@@ -38,8 +41,8 @@ class Profile extends AbstractApi implements ProfileInterface
 
         $profileSettings = implode(',', $profileSettings);
 
-        $request = new ProfileRequest($this->pageToken, $profileSettings);
-        $response = $this->client->get('me/messenger_profile', $request->build());
+        $request = new ProfileRequest('me/messenger_profile', $profileSettings);
+        $response = $this->client->sendRequest($request->build('get'));
 
         return new ProfileResponse($response);
     }
@@ -48,6 +51,7 @@ class Profile extends AbstractApi implements ProfileInterface
      * @param array $profileSettings
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\ProfileResponse
      */
@@ -55,8 +59,8 @@ class Profile extends AbstractApi implements ProfileInterface
     {
         $this->isValidFields($profileSettings);
 
-        $request = new ProfileRequest($this->pageToken, $profileSettings);
-        $response = $this->client->delete('me/messenger_profile', $request->build());
+        $request = new ProfileRequest('me/messenger_profile', $profileSettings);
+        $response = $this->client->sendRequest($request->build('delete'));
 
         return new ProfileResponse($response);
     }

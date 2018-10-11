@@ -26,7 +26,7 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
      * @param string $text
      * @param string $locale
      *
-     * @throws \Exception
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $text, string $locale = self::DEFAULT_LOCALE)
     {
@@ -44,7 +44,7 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
      * @param string $text
      * @param string $locale
      *
-     * @throws \Exception
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\Greeting
      */
