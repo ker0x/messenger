@@ -28,7 +28,7 @@ trait ValidatorTrait
     /**
      * @param string $value
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidColorException
      */
     protected function isValidColor(string $value): void
     {
@@ -41,7 +41,7 @@ trait ValidatorTrait
      * @param string $value
      * @param int    $length
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidStringException
      */
     protected function isValidString(string $value, int $length = 20): void
     {
@@ -53,7 +53,7 @@ trait ValidatorTrait
     /**
      * @param string $value
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidUrlException
      */
     protected function isValidUrl(string $value): void
     {
@@ -68,7 +68,7 @@ trait ValidatorTrait
     /**
      * @param string $value
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidLocaleException
      */
     protected function isValidLocale(string $value): void
     {
@@ -83,7 +83,7 @@ trait ValidatorTrait
     /**
      * @param string $value
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidCountryException
      */
     protected function isValidCountry(string $value): void
     {
@@ -98,7 +98,7 @@ trait ValidatorTrait
     /**
      * @param string $value
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidDateTimeException
      */
     protected function isValidDateTime(string $value): void
     {
@@ -115,7 +115,7 @@ trait ValidatorTrait
      * @param int   $maxSize
      * @param int   $minSize
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidArrayException
      */
     protected function isValidArray(array $array, int $maxSize, ?int $minSize = null): void
     {
@@ -131,7 +131,7 @@ trait ValidatorTrait
     /**
      * @param string $value
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidCurrencyException
      */
     protected function isValidCurrency(string $value): void
     {
@@ -150,7 +150,7 @@ trait ValidatorTrait
      * @param string $filename
      * @param array  $allowedExtension
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidExtensionException
      */
     protected function isValidExtension(string $filename, array $allowedExtension): void
     {
@@ -168,7 +168,7 @@ trait ValidatorTrait
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      * @param array                                                 $allowedButtonsType
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidClassException
      */
     protected function isValidButtons(array $buttons, array $allowedButtonsType): void
     {
@@ -216,7 +216,7 @@ trait ValidatorTrait
     /**
      * @param string $action
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidKeyException
      */
     protected function isValidSenderAction(string $action): void
     {
@@ -232,7 +232,7 @@ trait ValidatorTrait
     /**
      * @param string $notificationType
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidTypeException
      */
     protected function isValidNotificationType(string $notificationType): void
     {
@@ -249,7 +249,8 @@ trait ValidatorTrait
      * @param string                         $tag
      * @param \Kerox\Messenger\Model\Message $message
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Kerox\Messenger\Exception\InvalidClassException
+     * @throws \Kerox\Messenger\Exception\InvalidKeyException
      */
     protected function isValidTag(string $tag, Message $message = null): void
     {
