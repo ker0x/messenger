@@ -16,9 +16,9 @@ class Send extends AbstractApi implements SendInterface
     use ValidatorTrait;
 
     /**
-     * @param string $recipient
-     * @param string|\Kerox\Messenger\Model\Message $message
-     * @param array $options
+     * @param string                                $recipient
+     * @param \Kerox\Messenger\Model\Message|string $message
+     * @param array                                 $options
      *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws \Kerox\Messenger\Exception\MessengerException
