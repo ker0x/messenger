@@ -305,10 +305,10 @@ trait ValidatorTrait
     public function getAllowedMessagingType(): array
     {
         return [
-            self::MESSAGING_TYPE_RESPONSE,
-            self::MESSAGING_TYPE_MESSAGE_TAG,
-            self::MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION,
-            self::MESSAGING_TYPE_UPDATE,
+            SendInterface::MESSAGING_TYPE_RESPONSE,
+            SendInterface::MESSAGING_TYPE_MESSAGE_TAG,
+            SendInterface::MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION,
+            SendInterface::MESSAGING_TYPE_UPDATE,
         ];
     }
 
