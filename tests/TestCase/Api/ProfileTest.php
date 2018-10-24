@@ -48,9 +48,9 @@ class ProfileTest extends ResourceTestCase
 
     public function testDeleteSetting(): void
     {
-        $this->resource->delete(['greeting', 'get_started']);
+        $response = $this->resource->delete(['greeting', 'get_started']);
 
-        $this->doesNotPerformAssertions();
+        $this->assertSame('success', $response->getResult());
     }
 
     public function testBadField(): void
