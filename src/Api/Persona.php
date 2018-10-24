@@ -20,7 +20,7 @@ class Persona extends AbstractApi
     public function add(PersonaSettings $persona): PersonaResponse
     {
         $request = new PersonaRequest('me/personas', $persona);
-        $response = $this->client->sendRequest($request->build());
+        $response = $this->client->sendRequest($request->build('post'));
 
         return new PersonaResponse($response);
     }
@@ -35,7 +35,7 @@ class Persona extends AbstractApi
     public function get(string $personaId): PersonaResponse
     {
         $request = new PersonaRequest($personaId);
-        $response = $this->client->sendRequest($request->build());
+        $response = $this->client->sendRequest($request->build('get'));
 
         return new PersonaResponse($response);
     }
@@ -48,7 +48,7 @@ class Persona extends AbstractApi
     public function getAll(): PersonaResponse
     {
         $request = new PersonaRequest('me/personas');
-        $response = $this->client->sendRequest($request->build());
+        $response = $this->client->sendRequest($request->build('get'));
 
         return new PersonaResponse($response);
     }
@@ -63,7 +63,7 @@ class Persona extends AbstractApi
     public function delete(string $personaId): PersonaResponse
     {
         $request = new PersonaRequest($personaId);
-        $response = $this->client->sendRequest($request->build());
+        $response = $this->client->sendRequest($request->build('delete'));
 
         return new PersonaResponse($response);
     }

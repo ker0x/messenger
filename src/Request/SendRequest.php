@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
+use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\SendInterface;
 use Psr\Http\Message\RequestInterface;
@@ -11,6 +12,8 @@ use function GuzzleHttp\Psr7\stream_for;
 
 class SendRequest extends AbstractRequest implements BodyRequestInterface
 {
+    use UtilityTrait;
+
     public const REQUEST_TYPE_MESSAGE = 'message';
     public const REQUEST_TYPE_ACTION = 'action';
 
@@ -52,20 +55,20 @@ class SendRequest extends AbstractRequest implements BodyRequestInterface
     /**
      * Request constructor.
      *
-     * @param string                                $pageToken
+     * @param string                                $path
      * @param string|\Kerox\Messenger\Model\Message $content
      * @param string|null                           $recipient
      * @param array                                 $options
      * @param string                                $requestType
      */
     public function __construct(
-        string $pageToken,
+        string $path,
         $content,
         ?string $recipient = null,
         array $options = [],
         string $requestType = self::REQUEST_TYPE_MESSAGE
     ) {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         if ($content instanceof Message || $requestType === self::REQUEST_TYPE_MESSAGE) {
             $this->message = $content;
@@ -81,14 +84,14 @@ class SendRequest extends AbstractRequest implements BodyRequestInterface
     }
 
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
         return $this->origin
-            ->withMethod('post')
+            ->withMethod($method)
             ->withBody(stream_for($this->buildBody()));
     }
 
@@ -107,6 +110,6 @@ class SendRequest extends AbstractRequest implements BodyRequestInterface
             'persona_id' => $this->personaId,
         ];
 
-        return json_encode(\array_filter($body));
+        return json_encode($this->arrayFilter($body));
     }
 }

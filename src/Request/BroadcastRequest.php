@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
+use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\SendInterface;
 use Psr\Http\Message\RequestInterface;
@@ -11,11 +12,13 @@ use function GuzzleHttp\Psr7\stream_for;
 
 class BroadcastRequest extends AbstractRequest implements BodyRequestInterface
 {
+    use UtilityTrait;
+
     public const REQUEST_TYPE_MESSAGE = 'message';
     public const REQUEST_TYPE_ACTION = 'action';
 
     /**
-     * @var null|string|\Kerox\Messenger\Model\Message
+     * @var null|Message
      */
     protected $message;
 
@@ -35,17 +38,17 @@ class BroadcastRequest extends AbstractRequest implements BodyRequestInterface
     protected $tag;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $messagingType;
 
     /**
      * Request constructor.
      *
-     * @param string                              $path
-     * @param \Kerox\Messenger\Model\Message|null $message
-     * @param string|null                         $messageCreativeId
-     * @param array                               $options
+     * @param string       $path
+     * @param Message|null $message
+     * @param string|null  $messageCreativeId
+     * @param array        $options
      */
     public function __construct(
         string $path,
@@ -57,19 +60,20 @@ class BroadcastRequest extends AbstractRequest implements BodyRequestInterface
 
         $this->message = $message;
         $this->messageCreativeId = $messageCreativeId;
+        $this->messagingType = $options[SendInterface::OPTION_MESSAGING_TYPE] ?? null;
         $this->notificationType = $options[SendInterface::OPTION_NOTIFICATION_TYPE] ?? null;
         $this->tag = $options[SendInterface::OPTION_TAG] ?? null;
     }
 
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
         return $this->origin
-            ->withMethod('post')
+            ->withMethod($method)
             ->withBody(stream_for($this->buildBody()));
     }
 
@@ -83,10 +87,11 @@ class BroadcastRequest extends AbstractRequest implements BodyRequestInterface
                 $this->message,
             ],
             'message_creative_id' => $this->messageCreativeId,
+            'messaging_type' => $this->messagingType,
             'notification_type' => $this->notificationType,
             'tag' => $this->tag,
         ];
 
-        return json_encode(array_filter($body));
+        return \json_encode($this->arrayFilter($body));
     }
 }

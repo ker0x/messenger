@@ -106,7 +106,7 @@ class Message implements \JsonSerializable
     }
 
     /**
-     * @param mixed $metadata
+     * @param string $metadata
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *

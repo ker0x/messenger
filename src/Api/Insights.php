@@ -21,7 +21,7 @@ class Insights extends AbstractApi implements InsightsInterface
      *
      * @return \Kerox\Messenger\Response\InsightsResponse
      */
-    public function get(array $metrics = [], ?int $since = null, ?int $until = null): InsightsResponse
+    public function get(array $metrics, ?int $since = null, ?int $until = null): InsightsResponse
     {
         $metrics = $this->isValidMetrics($metrics);
 
@@ -42,18 +42,15 @@ class Insights extends AbstractApi implements InsightsInterface
     {
         $allowedMetrics = $this->getAllowedMetrics();
 
-        $metrics = empty($metrics) ? $allowedMetrics : $metrics;
-        if ($metrics !== $allowedMetrics) {
-            array_map(function ($metric) use ($allowedMetrics): void {
-                if (!\in_array($metric, $allowedMetrics, true)) {
-                    throw new InvalidKeyException(sprintf(
-                        '%s is not a valid value. Metrics must only contain "%s".',
-                        $metric,
-                        implode(', ', $allowedMetrics)
-                    ));
-                }
-            }, $metrics);
-        }
+        array_walk($metrics, function ($metric) use ($allowedMetrics): void {
+            if (!\in_array($metric, $allowedMetrics, true)) {
+                throw new InvalidKeyException(sprintf(
+                    '%s is not a valid value. Metrics must only contain "%s".',
+                    $metric,
+                    implode(', ', $allowedMetrics)
+                ));
+            }
+        });
 
         return $metrics;
     }

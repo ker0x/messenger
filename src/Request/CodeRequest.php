@@ -30,14 +30,14 @@ class CodeRequest extends AbstractRequest implements BodyRequestInterface
     /**
      * CodeRequest constructor.
      *
-     * @param string      $pageToken
+     * @param string      $path
      * @param int         $imageSize
      * @param string      $codeType
      * @param null|string $ref
      */
-    public function __construct(string $pageToken, int $imageSize, string $codeType, ?string $ref = null)
+    public function __construct(string $path, int $imageSize, string $codeType, ?string $ref = null)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->imageSize = $imageSize;
         $this->codeType = $codeType;
@@ -45,14 +45,14 @@ class CodeRequest extends AbstractRequest implements BodyRequestInterface
     }
 
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
         return $this->origin
-            ->withMethod('post')
+            ->withMethod($method)
             ->withBody(stream_for($this->buildBody()));
     }
 

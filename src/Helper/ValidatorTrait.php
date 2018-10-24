@@ -230,6 +230,22 @@ trait ValidatorTrait
     }
 
     /**
+     * @param string $messagingType
+     *
+     * @throws InvalidTypeException
+     */
+    protected function isValidMessagingType(string $messagingType): void
+    {
+        $allowedMessagingType = $this->getAllowedMessagingType();
+        if (!\in_array($messagingType, $allowedMessagingType, true)) {
+            throw new InvalidTypeException(sprintf(
+                'messagingType must be either "%s".',
+                implode(', ', $allowedMessagingType)
+            ));
+        }
+    }
+
+    /**
      * @param string $notificationType
      *
      * @throws \Kerox\Messenger\Exception\InvalidTypeException
@@ -280,6 +296,19 @@ trait ValidatorTrait
             SendInterface::SENDER_ACTION_TYPING_ON,
             SendInterface::SENDER_ACTION_TYPING_OFF,
             SendInterface::SENDER_ACTION_MARK_SEEN,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllowedMessagingType(): array
+    {
+        return [
+            self::MESSAGING_TYPE_RESPONSE,
+            self::MESSAGING_TYPE_MESSAGE_TAG,
+            self::MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION,
+            self::MESSAGING_TYPE_UPDATE,
         ];
     }
 

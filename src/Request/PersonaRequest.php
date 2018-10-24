@@ -29,16 +29,16 @@ class PersonaRequest extends AbstractRequest implements BodyRequestInterface
     }
 
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
         $request = $this->origin->withMethod($method);
         $body = $this->buildBody();
         if (!empty($body)) {
-            $request = $request->withBody(stream_for($this->buildBody()));
+            $request = $request->withBody(stream_for($body));
         }
 
         return $request;

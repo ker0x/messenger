@@ -35,14 +35,15 @@ class NlpRequest extends AbstractRequest implements QueryRequestInterface
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
         $uri = Uri::fromParts([
+            'path' => $this->origin->getUri()->getPath(),
             'query' => $this->buildQuery(),
         ]);
 
         return $this->origin
-            ->withMethod('post')
+            ->withMethod($method)
             ->withUri($uri);
     }
 

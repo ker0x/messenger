@@ -4,32 +4,31 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Persona;
-use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\Data;
 use Kerox\Messenger\Model\PersonaSettings;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use Kerox\Messenger\Test\TestCase\ResourceTestCase;
 
-class PersonaTest extends AbstractTestCase
+/**
+ * Class PersonaTest
+ *
+ * @property Persona $resource
+ */
+class PersonaTest extends ResourceTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->resource = new Persona($this->client);
+    }
+
     public function testAdd(): void
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/add.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/Persona/add.json');
+        $this->mockHandler->append($mockedResponse);
 
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
-
-        $personaApi = new Persona($client);
-
-        $response = $personaApi->add(PersonaSettings::create('John Mathew', 'https://facebook.com/john_image.jpg'));
+        $response = $this->resource->add(PersonaSettings::create('John Mathew', 'https://facebook.com/john_image.jpg'));
 
         $this->assertSame('<PERSONA_ID>', $response->getId());
         $this->assertNull($response->getName());
@@ -40,19 +39,10 @@ class PersonaTest extends AbstractTestCase
 
     public function testGet(): void
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/get.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/Persona/get.json');
+        $this->mockHandler->append($mockedResponse);
 
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
-
-        $personaApi = new Persona($client);
-
-        $response = $personaApi->get('<PERSONA_ID>');
+        $response = $this->resource->get('<PERSONA_ID>');
 
         $this->assertSame('<PERSONA_ID>', $response->getId());
         $this->assertSame('John Mathew', $response->getName());
@@ -63,19 +53,10 @@ class PersonaTest extends AbstractTestCase
 
     public function testGetAll(): void
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/get_all.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/Persona/get_all.json');
+        $this->mockHandler->append($mockedResponse);
 
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
-
-        $personaApi = new Persona($client);
-
-        $response = $personaApi->getAll();
+        $response = $this->resource->getAll();
 
         $this->assertNull($response->getId());
         $this->assertNull($response->getName());
@@ -86,19 +67,10 @@ class PersonaTest extends AbstractTestCase
 
     public function testDelete(): void
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/delete.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/Persona/delete.json');
+        $this->mockHandler->append($mockedResponse);
 
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
-
-        $personaApi = new Persona($client);
-
-        $response = $personaApi->delete('<PERSONA_ID>');
+        $response = $this->resource->delete('<PERSONA_ID>');
 
         $this->assertNull($response->getId());
         $this->assertNull($response->getName());
@@ -112,13 +84,10 @@ class PersonaTest extends AbstractTestCase
      */
     private function getData(): array
     {
-        $datas = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/get_all.json'), true);
+        $dataList = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/get_all.json'), true);
 
-        $tags = [];
-        foreach ($datas['data'] as $data) {
-            $tags[] = Data::create($data);
-        }
-
-        return $tags;
+        return array_map(function (array $row) {
+            return Data::create($row);
+        }, $dataList['data']);
     }
 }

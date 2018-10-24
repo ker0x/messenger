@@ -105,8 +105,6 @@ class Webhook extends AbstractApi
     }
 
     /**
-     * @throws \Exception
-     *
      * @return bool
      */
     public function isValidCallback(): bool

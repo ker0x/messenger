@@ -9,11 +9,11 @@ use Psr\Http\Message\RequestInterface;
 class TagRequest extends AbstractRequest
 {
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
         return $this->origin;
     }

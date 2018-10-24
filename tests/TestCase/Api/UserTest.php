@@ -4,40 +4,31 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Exception\MessengerException;
-use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\Referral;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use Kerox\Messenger\Test\TestCase\ResourceTestCase;
 
-class UserTest extends AbstractTestCase
+/**
+ * Class UserTest
+ *
+ * @property User $resource
+ */
+class UserTest extends ResourceTestCase
 {
-    /**
-     * @var \Kerox\Messenger\Api\User
-     */
-    protected $userApi;
-
     public function setUp(): void
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/User/user.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
+        parent::setUp();
 
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/User/user.json');
+        $this->mockHandler->append($mockedResponse);
 
-        $this->userApi = new User($client);
+        $this->resource = new User($this->client);
     }
 
     public function testGetProfile(): void
     {
-        $response = $this->userApi->profile('1234abcd');
+        $response = $this->resource->profile('1234abcd');
 
         $this->assertSame('Peter', $response->getFirstName());
         $this->assertSame('Chang', $response->getLastName());
@@ -58,6 +49,6 @@ class UserTest extends AbstractTestCase
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('username is not a valid value. fields must only contain "first_name, last_name, profile_pic, locale, timezone, gender, is_payment_enabled".');
 
-        $this->userApi->profile('1234abcd', ['username']);
+        $this->resource->profile('1234abcd', ['username']);
     }
 }

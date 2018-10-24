@@ -26,9 +26,9 @@ abstract class AbstractRequest
     }
 
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    abstract public function build(?string $method = null): RequestInterface;
+    abstract public function build(string $method = 'post'): RequestInterface;
 }

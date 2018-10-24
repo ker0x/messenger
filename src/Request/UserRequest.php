@@ -28,14 +28,19 @@ class UserRequest extends AbstractRequest implements QueryRequestInterface
     }
 
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
+        $uri = Uri::fromParts([
+            'path' => $this->origin->getUri()->getPath(),
+            'query' => $this->buildQuery(),
+        ]);
+
         return $this->origin
-            ->withUri(Uri::fromParts(['query' => $this->buildQuery()]));
+            ->withUri($uri);
     }
 
     /**

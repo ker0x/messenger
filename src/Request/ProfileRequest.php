@@ -30,16 +30,17 @@ class ProfileRequest extends AbstractRequest implements QueryRequestInterface, B
     }
 
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
         $request = $this->origin->withMethod($method);
 
         if ($method === 'get') {
             $uri = Uri::fromParts([
+                'path' => $this->origin->getUri()->getPath(),
                 'query' => $this->buildQuery(),
             ]);
 

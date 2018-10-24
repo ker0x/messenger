@@ -69,12 +69,15 @@ class Messenger
     private function createClient(string $apiVersion): ClientInterface
     {
         $stack = HandlerStack::create();
-        $stack->push(Middleware::header('Content-Type', 'application/json'));
         $stack->push(Middleware::queryParam('access_token', $this->pageToken));
 
         return new Client([
-            'handler' => $stack,
             'base_uri' => self::API_URL . $apiVersion . '/',
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            'handler' => $stack,
         ]);
     }
 

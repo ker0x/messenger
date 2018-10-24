@@ -4,52 +4,40 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase;
 
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Tag;
-use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\Data;
 
-class TagTest extends AbstractTestCase
+/**
+ * Class TagTest
+ *
+ * @property Tag $resource
+ */
+class TagTest extends ResourceTestCase
 {
-    /**
-     * @var \Kerox\Messenger\Api\Tag
-     */
-    protected $tagApi;
-
     public function setUp(): void
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Tag/tag.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
+        parent::setUp();
 
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/Tag/tag.json');
+        $this->mockHandler->append($mockedResponse);
 
-        $this->tagApi = new Tag($client);
+        $this->resource = new Tag($this->client);
     }
 
     public function testGetTag(): void
     {
-        $response = $this->tagApi->get();
+        $response = $this->resource->get();
 
         $this->assertContainsOnlyInstancesOf(Data::class, $response->getData());
         $this->assertEquals($this->getData(), $response->getData());
     }
 
-    private function getData()
+    private function getData(): array
     {
-        $datas = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Tag/tag.json'), true);
+        $dataList = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Tag/tag.json'), true);
 
-        $tags = [];
-        foreach ($datas['data'] as $data) {
-            $tags[] = Data::create($data);
-        }
-
-        return $tags;
+        return array_map(function (array $row) {
+            return Data::create($row);
+        }, $dataList['data']);
     }
 }

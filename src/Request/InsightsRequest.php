@@ -30,14 +30,14 @@ class InsightsRequest extends AbstractRequest implements QueryRequestInterface
     /**
      * InsightsRequest constructor.
      *
-     * @param string   $pageToken
+     * @param string   $path
      * @param array    $metrics
      * @param null|int $since
      * @param null|int $until
      */
-    public function __construct(string $pageToken, array $metrics, ?int $since = null, ?int $until = null)
+    public function __construct(string $path, array $metrics, ?int $since = null, ?int $until = null)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->metrics = $metrics;
         $this->since = $since;
@@ -45,13 +45,14 @@ class InsightsRequest extends AbstractRequest implements QueryRequestInterface
     }
 
     /**
-     * @param string|null $method
+     * @param string $method
      *
      * @return RequestInterface
      */
-    public function build(?string $method = null): RequestInterface
+    public function build(string $method = 'post'): RequestInterface
     {
         $uri = Uri::fromParts([
+            'path' => $this->origin->getUri()->getPath(),
             'query' => $this->buildQuery(),
         ]);
 

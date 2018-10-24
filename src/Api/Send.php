@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Api;
 
 use Kerox\Messenger\Exception\InvalidOptionException;
-use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
@@ -17,12 +16,12 @@ class Send extends AbstractApi implements SendInterface
     use ValidatorTrait;
 
     /**
-     * @param string                                $recipient
+     * @param string $recipient
      * @param string|\Kerox\Messenger\Model\Message $message
-     * @param array                                 $options
+     * @param array $options
      *
-     * @throws \Exception
      * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -61,8 +60,8 @@ class Send extends AbstractApi implements SendInterface
     /**
      * @param \Kerox\Messenger\Model\Message\Attachment $attachment
      *
-     * @throws \Exception
      * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -108,22 +107,6 @@ class Send extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param string $messagingType
-     *
-     * @throws \Kerox\Messenger\Exception\MessengerException
-     */
-    protected function isValidMessagingType(string $messagingType): void
-    {
-        $allowedMessagingType = $this->getAllowedMessagingType();
-        if (!\in_array($messagingType, $allowedMessagingType, true)) {
-            throw new InvalidTypeException(sprintf(
-                'messagingType must be either "%s".',
-                implode(', ', $allowedMessagingType)
-            ));
-        }
-    }
-
-    /**
      * @return array
      */
     private function getAllowedOptionsKeys(): array
@@ -133,19 +116,6 @@ class Send extends AbstractApi implements SendInterface
             self::OPTION_NOTIFICATION_TYPE,
             self::OPTION_TAG,
             self::OPTION_PERSONA_ID,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllowedMessagingType(): array
-    {
-        return [
-            self::MESSAGING_TYPE_RESPONSE,
-            self::MESSAGING_TYPE_MESSAGE_TAG,
-            self::MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION,
-            self::MESSAGING_TYPE_UPDATE,
         ];
     }
 }

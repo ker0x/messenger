@@ -13,45 +13,33 @@ use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Http\Client;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Model\Callback\Message;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use Kerox\Messenger\Test\TestCase\ResourceTestCase;
 
-class WebhookTest extends AbstractTestCase
+/**
+ * Class WebhookTest
+ *
+ * @property Webhook $resource
+ */
+class WebhookTest extends ResourceTestCase
 {
-    /**
-     * @var \Kerox\Messenger\Api\Webhook
-     */
-    protected $webhookApi;
-
     public function setUp(): void
     {
+        parent::setUp();
+
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
-        $pageToken = 'page_token';
 
-        $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/message.json');
-        $requestHeaders = [
-            'Content-Type' => 'application/json',
-            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret),
-        ];
+        $request = $this->createServerRequestMock($appSecret);
 
-        $request = new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/Webhook/success.json');
+        $this->mockHandler->append($mockedResponse);
 
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Webhook/success.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
-
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
-
-        $this->webhookApi = new Webhook($appSecret, $verifyToken, $client, $request);
+        $this->resource = new Webhook($appSecret, $verifyToken, $this->client, $request);
     }
 
     public function testSubscribe(): void
     {
-        $response = $this->webhookApi->subscribe();
+        $response = $this->resource->subscribe();
 
         $this->assertTrue($response->isSuccess());
     }
@@ -60,7 +48,6 @@ class WebhookTest extends AbstractTestCase
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
-        $pageToken = 'page_token';
 
         $client = new Client();
 
@@ -75,7 +62,7 @@ class WebhookTest extends AbstractTestCase
 
     public function testIsValidCallback(): void
     {
-        $this->assertTrue($this->webhookApi->isValidCallback());
+        $this->assertTrue($this->resource->isValidCallback());
     }
 
     public function testGetDecodedBody(): void
@@ -109,7 +96,7 @@ class WebhookTest extends AbstractTestCase
             ],
         ];
 
-        $this->assertSame($body, $this->webhookApi->getDecodedBody());
+        $this->assertSame($body, $this->resource->getDecodedBody());
     }
 
     public function testGetCallbackEntries(): void
@@ -140,7 +127,7 @@ class WebhookTest extends AbstractTestCase
 
         $entry = Entry::create($payload);
 
-        $entries = $this->webhookApi->getCallbackEntries();
+        $entries = $this->resource->getCallbackEntries();
 
         $this->assertEquals([$entry], $entries);
     }
@@ -149,7 +136,7 @@ class WebhookTest extends AbstractTestCase
     {
         $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
 
-        $events = $this->webhookApi->getCallbackEvents();
+        $events = $this->resource->getCallbackEvents();
 
         $this->assertEquals([$event], $events);
     }
@@ -158,7 +145,6 @@ class WebhookTest extends AbstractTestCase
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
-        $pageToken = 'page_token';
 
         $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/stand_by.json');
         $requestHeaders = [
@@ -190,7 +176,6 @@ class WebhookTest extends AbstractTestCase
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
-        $pageToken = 'page_token';
 
         $client = new Client();
 
@@ -206,7 +191,6 @@ class WebhookTest extends AbstractTestCase
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
-        $pageToken = 'page_token';
 
         $client = new Client();
 
@@ -222,7 +206,6 @@ class WebhookTest extends AbstractTestCase
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
-        $pageToken = 'page_token';
 
         $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/stand_by.json');
         $requestHeaders = [];
@@ -248,7 +231,6 @@ class WebhookTest extends AbstractTestCase
     {
         $appSecret = 'app_secret';
         $verifyToken = 'verify_token';
-        $pageToken = 'page_token';
 
         $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/invalid_message.json');
         $requestHeaders = [
@@ -273,8 +255,18 @@ class WebhookTest extends AbstractTestCase
         $this->assertSame([], $webhook->getDecodedBody());
     }
 
-    public function tearDown(): void
+    /**
+     * @param string $appSecret
+     * @return ServerRequest
+     */
+    private function createServerRequestMock(string $appSecret): ServerRequest
     {
-        unset($this->webhookApi);
+        $requestBody = file_get_contents(__DIR__ . '/../../Mocks/Callback/message.json');
+        $requestHeaders = [
+            'Content-Type' => 'application/json',
+            'X-Hub-Signature' => 'sha1=' . hash_hmac('sha1', $requestBody, $appSecret),
+        ];
+
+        return new ServerRequest('POST', '/app.php/facebook/webhook', $requestHeaders, $requestBody);
     }
 }

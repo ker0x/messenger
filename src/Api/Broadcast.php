@@ -69,7 +69,9 @@ class Broadcast extends AbstractApi implements SendInterface
                 ));
             }
 
-            if ($key === self::OPTION_NOTIFICATION_TYPE) {
+            if ($key === self::OPTION_MESSAGING_TYPE) {
+                $this->isValidMessagingType($value);
+            } elseif ($key === self::OPTION_NOTIFICATION_TYPE) {
                 $this->isValidNotificationType($value);
             } elseif ($key === self::OPTION_TAG) {
                 $this->isValidTag($value);
@@ -85,6 +87,7 @@ class Broadcast extends AbstractApi implements SendInterface
     private function getAllowedOptionsKeys(): array
     {
         return [
+            self::OPTION_MESSAGING_TYPE,
             self::OPTION_NOTIFICATION_TYPE,
             self::OPTION_TAG,
         ];
