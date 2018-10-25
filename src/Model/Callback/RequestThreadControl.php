@@ -20,9 +20,9 @@ class RequestThreadControl
      * TakeThreadControl constructor.
      *
      * @param $requestedOwnerAppId
-     * @param string $metadata
+     * @param string|null $metadata
      */
-    public function __construct($requestedOwnerAppId, string $metadata)
+    public function __construct($requestedOwnerAppId, ?string $metadata)
     {
         $this->requestedOwnerAppId = (string)$requestedOwnerAppId;
         $this->metadata = $metadata;
