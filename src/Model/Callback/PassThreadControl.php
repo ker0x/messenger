@@ -20,9 +20,9 @@ class PassThreadControl
      * TakeThreadControl constructor.
      *
      * @param $newOwnerAppId
-     * @param string $metadata
+     * @param string|null $metadata
      */
-    public function __construct($newOwnerAppId, string $metadata)
+    public function __construct($newOwnerAppId, ?string $metadata)
     {
         $this->newOwnerAppId = (string)$newOwnerAppId;
         $this->metadata = $metadata;
