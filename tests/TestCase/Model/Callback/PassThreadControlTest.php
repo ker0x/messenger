@@ -24,7 +24,7 @@ class PassThreadControlTest extends AbstractTestCase
 
     public function testPassThreadControlCallback(): void
     {
-        $this->assertSame('123456789', $this->passThreadControl->getNewOwnerAppId());
+        $this->assertSame(123456789, $this->passThreadControl->getNewOwnerAppId());
         $this->assertSame('additional content that the caller wants to set', $this->passThreadControl->getMetadata());
     }
 
