@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Api;
 
 use Kerox\Messenger\Exception\InvalidOptionException;
-use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message\Attachment;
 use Kerox\Messenger\Request\SendRequest;
@@ -18,10 +17,11 @@ class Send extends AbstractApi implements SendInterface
 
     /**
      * @param string                                $recipient
-     * @param string|\Kerox\Messenger\Model\Message $message
+     * @param \Kerox\Messenger\Model\Message|string $message
      * @param array                                 $options
      *
-     * @throws \Exception
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -30,8 +30,8 @@ class Send extends AbstractApi implements SendInterface
         $message = $this->isValidMessage($message);
         $options = $this->isValidOptions($options, $message);
 
-        $request = new SendRequest($this->pageToken, $message, $recipient, $options);
-        $response = $this->client->post('me/messages', $request->build());
+        $request = new SendRequest('me/messages', $message, $recipient, $options);
+        $response = $this->client->sendRequest($request->build());
 
         return new SendResponse($response);
     }
@@ -42,6 +42,7 @@ class Send extends AbstractApi implements SendInterface
      * @param array  $options
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -50,8 +51,8 @@ class Send extends AbstractApi implements SendInterface
         $this->isValidSenderAction($action);
         $options = $this->isValidOptions($options, $action);
 
-        $request = new SendRequest($this->pageToken, $action, $recipient, $options, SendRequest::REQUEST_TYPE_ACTION);
-        $response = $this->client->post('me/messages', $request->build());
+        $request = new SendRequest('me/messages', $action, $recipient, $options, SendRequest::REQUEST_TYPE_ACTION);
+        $response = $this->client->sendRequest($request->build());
 
         return new SendResponse($response);
     }
@@ -59,7 +60,8 @@ class Send extends AbstractApi implements SendInterface
     /**
      * @param \Kerox\Messenger\Model\Message\Attachment $attachment
      *
-     * @throws \Exception
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\SendResponse
      */
@@ -67,8 +69,8 @@ class Send extends AbstractApi implements SendInterface
     {
         $message = $this->isValidMessage($attachment);
 
-        $request = new SendRequest($this->pageToken, $message);
-        $response = $this->client->post('me/message_attachments', $request->build());
+        $request = new SendRequest('me/message_attachments', $message);
+        $response = $this->client->sendRequest($request->build());
 
         return new SendResponse($response);
     }
@@ -105,22 +107,6 @@ class Send extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param string $messagingType
-     *
-     * @throws \Kerox\Messenger\Exception\MessengerException
-     */
-    protected function isValidMessagingType(string $messagingType): void
-    {
-        $allowedMessagingType = $this->getAllowedMessagingType();
-        if (!\in_array($messagingType, $allowedMessagingType, true)) {
-            throw new InvalidTypeException(sprintf(
-                'messagingType must be either "%s".',
-                implode(', ', $allowedMessagingType)
-            ));
-        }
-    }
-
-    /**
      * @return array
      */
     private function getAllowedOptionsKeys(): array
@@ -130,19 +116,6 @@ class Send extends AbstractApi implements SendInterface
             self::OPTION_NOTIFICATION_TYPE,
             self::OPTION_TAG,
             self::OPTION_PERSONA_ID,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllowedMessagingType(): array
-    {
-        return [
-            self::MESSAGING_TYPE_RESPONSE,
-            self::MESSAGING_TYPE_MESSAGE_TAG,
-            self::MESSAGING_TYPE_NON_PROMOTIONAL_SUBSCRIPTION,
-            self::MESSAGING_TYPE_UPDATE,
         ];
     }
 }

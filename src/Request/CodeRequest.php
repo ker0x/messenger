@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Helper\UtilityTrait;
+use Psr\Http\Message\RequestInterface;
+use function GuzzleHttp\Psr7\stream_for;
 
-class CodeRequest extends AbstractRequest
+class CodeRequest extends AbstractRequest implements BodyRequestInterface
 {
     use UtilityTrait;
 
@@ -28,14 +30,14 @@ class CodeRequest extends AbstractRequest
     /**
      * CodeRequest constructor.
      *
-     * @param string      $pageToken
+     * @param string      $path
      * @param int         $imageSize
      * @param string      $codeType
      * @param null|string $ref
      */
-    public function __construct(string $pageToken, int $imageSize, string $codeType, ?string $ref = null)
+    public function __construct(string $path, int $imageSize, string $codeType, ?string $ref = null)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->imageSize = $imageSize;
         $this->codeType = $codeType;
@@ -43,19 +45,21 @@ class CodeRequest extends AbstractRequest
     }
 
     /**
-     * @return array
+     * @param string $method
+     *
+     * @return RequestInterface
      */
-    protected function buildHeaders(): array
+    public function build(string $method = 'post'): RequestInterface
     {
-        return [
-            'Content-Type' => 'application/json',
-        ];
+        return $this->origin
+            ->withMethod($method)
+            ->withBody(stream_for($this->buildBody()));
     }
 
     /**
-     * @return array
+     * @return string
      */
-    protected function buildBody(): array
+    public function buildBody(): string
     {
         $body = [
             'type' => $this->codeType,
@@ -65,6 +69,6 @@ class CodeRequest extends AbstractRequest
             ],
         ];
 
-        return $this->arrayFilter($body);
+        return \json_encode($this->arrayFilter($body));
     }
 }

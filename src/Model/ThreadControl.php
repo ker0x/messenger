@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model;
 
+use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Helper\ValidatorTrait;
 
 class ThreadControl implements \JsonSerializable
 {
-    use ValidatorTrait;
+    use ValidatorTrait, UtilityTrait;
 
     /**
      * @var int
@@ -73,7 +74,7 @@ class ThreadControl implements \JsonSerializable
             'metadata' => $this->metadata,
         ];
 
-        return array_filter($array);
+        return $this->arrayFilter($array);
     }
 
     /**

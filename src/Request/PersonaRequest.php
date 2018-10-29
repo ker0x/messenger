@@ -5,46 +5,54 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Request;
 
 use Kerox\Messenger\Model\PersonaSettings;
+use Psr\Http\Message\RequestInterface;
+use function GuzzleHttp\Psr7\stream_for;
 
-class PersonaRequest extends AbstractRequest
+class PersonaRequest extends AbstractRequest implements BodyRequestInterface
 {
     /**
-     * @var null|\Kerox\Messenger\Model\PersonaSettings
+     * @var PersonaSettings|null
      */
     protected $personaSettings;
 
     /**
      * ProfileRequest constructor.
      *
-     * @param string                                      $pageToken
-     * @param \Kerox\Messenger\Model\PersonaSettings|null $personaSettings
+     * @param string               $path
+     * @param PersonaSettings|null $personaSettings
      */
-    public function __construct(string $pageToken, PersonaSettings $personaSettings = null)
+    public function __construct(string $path, PersonaSettings $personaSettings = null)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->personaSettings = $personaSettings;
     }
 
     /**
-     * @return array|null
+     * @param string $method
+     *
+     * @return RequestInterface
      */
-    protected function buildHeaders(): ?array
+    public function build(string $method = 'post'): RequestInterface
     {
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
+        $request = $this->origin->withMethod($method);
+        $body = $this->buildBody();
+        if (!empty($body)) {
+            $request = $request->withBody(stream_for($body));
+        }
 
-        return $this->personaSettings instanceof PersonaSettings ? $headers : null;
+        return $request;
     }
 
     /**
-     * @return \Kerox\Messenger\Model\PersonaSettings|mixed|null
+     * @return string
      */
-    protected function buildBody()
+    public function buildBody(): string
     {
         if ($this->personaSettings instanceof PersonaSettings) {
-            return $this->personaSettings;
+            return json_encode($this->personaSettings);
         }
+
+        return '';
     }
 }

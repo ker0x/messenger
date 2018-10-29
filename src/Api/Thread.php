@@ -13,25 +13,29 @@ class Thread extends AbstractApi
     /**
      * @param \Kerox\Messenger\Model\ThreadControl $threadControl
      *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     *
      * @return \Kerox\Messenger\Response\ThreadResponse
      */
     public function pass(ThreadControl $threadControl): ThreadResponse
     {
-        $request = new ThreadRequest($this->pageToken, $threadControl);
-        $response = $this->client->post('me/pass_thread_control', $request->build());
+        $request = new ThreadRequest('me/pass_thread_control', $threadControl);
+        $response = $this->client->sendRequest($request->build());
 
         return new ThreadResponse($response);
     }
 
     /**
      * @param \Kerox\Messenger\Model\ThreadControl $threadControl
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\ThreadResponse
      */
     public function take(ThreadControl $threadControl): ThreadResponse
     {
-        $request = new ThreadRequest($this->pageToken, $threadControl);
-        $response = $this->client->post('me/take_thread_control', $request->build());
+        $request = new ThreadRequest('me/take_thread_control', $threadControl);
+        $response = $this->client->sendRequest($request->build());
 
         return new ThreadResponse($response);
     }
@@ -39,12 +43,14 @@ class Thread extends AbstractApi
     /**
      * @param \Kerox\Messenger\Model\ThreadControl $threadControl
      *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     *
      * @return \Kerox\Messenger\Response\ThreadResponse
      */
     public function request(ThreadControl $threadControl): ThreadResponse
     {
-        $request = new ThreadRequest($this->pageToken, $threadControl);
-        $response = $this->client->post('me/request_thread_control', $request->build());
+        $request = new ThreadRequest('me/request_thread_control', $threadControl);
+        $response = $this->client->sendRequest($request->build());
 
         return new ThreadResponse($response);
     }

@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Test\TestCase\Api;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Send;
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Address;
@@ -18,33 +14,27 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Request\SendRequest;
 use Kerox\Messenger\SendInterface;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use Kerox\Messenger\Test\TestCase\ResourceTestCase;
 
-class SendTest extends AbstractTestCase
+/**
+ * Class SendTest
+ *
+ * @property Send $resource
+ */
+class SendTest extends ResourceTestCase
 {
-    /**
-     * @var \Kerox\Messenger\Api\Send
-     */
-    protected $sendApi;
-
     public function setUp(): void
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/basic.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
+        parent::setUp();
 
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
-
-        $this->sendApi = new Send('abcd1234', $client);
+        $this->resource = new Send($this->client);
     }
 
     public function testSendTextToUser(): void
     {
-        $response = $this->sendApi->message('1008372609250235', 'Hello World!');
+        $this->appendBasicResponseMock();
+
+        $response = $this->resource->message('1008372609250235', 'Hello World!');
 
         $this->assertSame('1008372609250235', $response->getRecipientId());
         $this->assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
@@ -52,9 +42,11 @@ class SendTest extends AbstractTestCase
 
     public function testSendMessageToUser(): void
     {
+        $this->appendBasicResponseMock();
+
         $message = $this->getReceipt();
 
-        $response = $this->sendApi->message('1008372609250235', $message, [
+        $response = $this->resource->message('1008372609250235', $message, [
             'messaging_type' => SendInterface::MESSAGING_TYPE_RESPONSE,
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'tag' => SendInterface::TAG_ACCOUNT_UPDATE,
@@ -66,9 +58,11 @@ class SendTest extends AbstractTestCase
 
     public function testSendMessageViaPersona(): void
     {
+        $this->appendBasicResponseMock();
+
         $message = $this->getReceipt();
 
-        $response = $this->sendApi->message('1008372609250235', $message, [
+        $response = $this->resource->message('1008372609250235', $message, [
             'persona_id' => '1254477777772919'
         ]);
 
@@ -78,9 +72,11 @@ class SendTest extends AbstractTestCase
 
     public function testSendAttachmentToUser(): void
     {
+        $this->appendBasicResponseMock();
+
         $message = $this->getReceipt();
 
-        $response = $this->sendApi->message('1008372609250235', $message);
+        $response = $this->resource->message('1008372609250235', $message);
 
         $this->assertSame('1008372609250235', $response->getRecipientId());
         $this->assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
@@ -90,12 +86,14 @@ class SendTest extends AbstractTestCase
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('message must be a string or an instance of Kerox\Messenger\Model\Message or Kerox\Messenger\Model\Message\Attachment.');
-        $this->sendApi->message('1008372609250235', 1234);
+        $this->resource->message('1008372609250235', 1234);
     }
 
     public function testSendActionToUser(): void
     {
-        $response = $this->sendApi->action('1008372609250235', 'typing_on');
+        $this->appendBasicResponseMock();
+
+        $response = $this->resource->action('1008372609250235', 'typing_on');
 
         $this->assertSame('1008372609250235', $response->getRecipientId());
     }
@@ -104,7 +102,7 @@ class SendTest extends AbstractTestCase
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('Only "messaging_type, notification_type, tag, persona_id" are allowed keys for options.');
-        $this->sendApi->message('1008372609250235', 'Hello World!', [
+        $this->resource->message('1008372609250235', 'Hello World!', [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'action_type' => SendRequest::REQUEST_TYPE_ACTION,
         ]);
@@ -114,14 +112,14 @@ class SendTest extends AbstractTestCase
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('action must be either "typing_on, typing_off, mark_seen".');
-        $this->sendApi->action('1008372609250235', 'typing_seen');
+        $this->resource->action('1008372609250235', 'typing_seen');
     }
 
     public function testBadMessagingType(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('messagingType must be either "RESPONSE, MESSAGE_TAG, NON_PROMOTIONAL_SUBSCRIPTION, UPDATE".');
-        $this->sendApi->message('1008372609250235', 'Hello World!', [
+        $this->resource->message('1008372609250235', 'Hello World!', [
             'messaging_type' => 'PROMOTIONAL_SUBSCRIPTION',
         ]);
     }
@@ -130,7 +128,7 @@ class SendTest extends AbstractTestCase
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('notificationType must be either "REGULAR, SILENT_PUSH, NO_PUSH".');
-        $this->sendApi->message('1008372609250235', 'Hello World!', [
+        $this->resource->message('1008372609250235', 'Hello World!', [
             'notification_type' => 'UPDATE',
         ]);
     }
@@ -139,7 +137,7 @@ class SendTest extends AbstractTestCase
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('tag must be either "BUSINESS_PRODUCTIVITY, COMMUNITY_ALERT, CONFIRMED_EVENT_REMINDER, NON_PROMOTIONAL_SUBSCRIPTION, PAIRING_UPDATE, APPLICATION_UPDATE, ACCOUNT_UPDATE, PAYMENT_UPDATE, PERSONAL_FINANCE_UPDATE, SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION, APPOINTMENT_UPDATE, GAME_EVENT, TRANSPORTATION_UPDATE, FEATURE_FUNCTIONALITY_UPDATE, TICKET_UPDATE".');
-        $this->sendApi->message('1008372609250235', 'Hello World!', [
+        $this->resource->message('1008372609250235', 'Hello World!', [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'tag' => 'INVOICE_UPDATE',
         ]);
@@ -151,7 +149,7 @@ class SendTest extends AbstractTestCase
 
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('message must be an instance of Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate if tag is set to ISSUE_RESOLUTION.');
-        $this->sendApi->message('1008372609250235', $message, [
+        $this->resource->message('1008372609250235', $message, [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'tag' => SendInterface::TAG_ISSUE_RESOLUTION,
         ]);
@@ -159,30 +157,27 @@ class SendTest extends AbstractTestCase
 
     public function testSendAttachment(): void
     {
-        $bodyResponse = file_get_contents(__DIR__ . '/../../Mocks/Response/Send/attachment.json');
-        $mockedResponse = new MockHandler([
-            new Response(200, [], $bodyResponse),
-        ]);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/Send/attachment.json');
+        $this->mockHandler->append($mockedResponse);
 
-        $handler = HandlerStack::create($mockedResponse);
-        $client = new Client([
-            'handler' => $handler,
-        ]);
-
-        $sendApi = new Send('abcd1234', $client);
-
-        $response = $sendApi->attachment(new Image('http://www.messenger-rocks.com/image.jpg', true));
+        $response = $this->resource->attachment(new Image('http://www.messenger-rocks.com/image.jpg', true));
 
         $this->assertSame('1854626884821032', $response->getAttachmentId());
         $this->assertNull($response->getRecipientId());
         $this->assertNull($response->getMessageId());
     }
 
-    public function tearDown(): void
+    private function appendBasicResponseMock()
     {
-        unset($this->sendApi);
+        $mockedResponse = $this->createMockedResponse(__DIR__ . '/../../Mocks/Response/Send/basic.json');
+        $this->mockHandler->append($mockedResponse);
     }
 
+    /**
+     * @return ReceiptTemplate
+     *
+     * @throws MessengerException
+     */
     private function getReceipt()
     {
         $elements = [

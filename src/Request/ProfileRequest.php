@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
+use GuzzleHttp\Psr7\Uri;
 use Kerox\Messenger\Model\ProfileSettings;
+use Psr\Http\Message\RequestInterface;
+use function GuzzleHttp\Psr7\stream_for;
 
-class ProfileRequest extends AbstractRequest
+class ProfileRequest extends AbstractRequest implements QueryRequestInterface, BodyRequestInterface
 {
     /**
      * @var mixed
@@ -16,34 +19,43 @@ class ProfileRequest extends AbstractRequest
     /**
      * ProfileRequest constructor.
      *
-     * @param string $pageToken
+     * @param string $path
      * @param mixed  $profileSettings
      */
-    public function __construct(string $pageToken, $profileSettings)
+    public function __construct(string $path, $profileSettings)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->profileSettings = $profileSettings;
     }
 
     /**
-     * @return null|array
+     * @param string $method
+     *
+     * @return RequestInterface
      */
-    protected function buildHeaders(): ?array
+    public function build(string $method = 'post'): RequestInterface
     {
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
+        $request = $this->origin->withMethod($method);
 
-        return \is_string($this->profileSettings) ? null : $headers;
+        if ($method === 'get') {
+            $uri = Uri::fromParts([
+                'path' => $this->origin->getUri()->getPath(),
+                'query' => $this->buildQuery(),
+            ]);
+
+            return $request->withUri($uri);
+        }
+
+        return $request->withBody(stream_for($this->buildBody()));
     }
 
     /**
-     * @return null|array|\Kerox\Messenger\Model\ProfileSettings
+     * @return string
      */
-    protected function buildBody()
+    public function buildBody(): string
     {
-        $body = null;
+        $body = [];
         if ($this->profileSettings instanceof ProfileSettings) {
             $body = $this->profileSettings;
         } elseif (\is_array($this->profileSettings)) {
@@ -52,22 +64,20 @@ class ProfileRequest extends AbstractRequest
             ];
         }
 
-        return $body;
+        return json_encode($body);
     }
 
     /**
-     * @return array
+     * @return string
      */
-    protected function buildQuery(): array
+    public function buildQuery(): string
     {
-        $query = parent::buildQuery();
-
         if (\is_string($this->profileSettings)) {
-            $query += [
+            return http_build_query([
                 'fields' => $this->profileSettings,
-            ];
+            ]);
         }
 
-        return $query;
+        return '';
     }
 }

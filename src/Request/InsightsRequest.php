@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
+use GuzzleHttp\Psr7\Uri;
 use Kerox\Messenger\Helper\UtilityTrait;
+use Psr\Http\Message\RequestInterface;
 
-class InsightsRequest extends AbstractRequest
+class InsightsRequest extends AbstractRequest implements QueryRequestInterface
 {
     use UtilityTrait;
 
@@ -26,44 +28,48 @@ class InsightsRequest extends AbstractRequest
     protected $until;
 
     /**
-     * UserRequest constructor.
+     * InsightsRequest constructor.
      *
-     * @param string   $pageToken
+     * @param string   $path
      * @param array    $metrics
      * @param null|int $since
      * @param null|int $until
      */
-    public function __construct(string $pageToken, array $metrics, ?int $since = null, ?int $until = null)
+    public function __construct(string $path, array $metrics, ?int $since = null, ?int $until = null)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->metrics = $metrics;
         $this->since = $since;
         $this->until = $until;
     }
 
-    protected function buildHeaders(): void
+    /**
+     * @param string $method
+     *
+     * @return RequestInterface
+     */
+    public function build(string $method = 'post'): RequestInterface
     {
-    }
+        $uri = Uri::fromParts([
+            'path' => $this->origin->getUri()->getPath(),
+            'query' => $this->buildQuery(),
+        ]);
 
-    protected function buildBody(): void
-    {
+        return $this->origin->withUri($uri);
     }
 
     /**
-     * @return array
+     * @return string
      */
-    protected function buildQuery(): array
+    public function buildQuery(): string
     {
-        $metrics = implode(',', $this->metrics);
-
-        $query = parent::buildQuery();
-        $query += [
-            'metric' => $metrics,
+        $query = [
+            'metric' => implode(',', $this->metrics),
             'since' => $this->since,
             'until' => $this->until,
         ];
 
-        return $this->arrayFilter($query);
+        return http_build_query($this->arrayFilter($query));
     }
 }

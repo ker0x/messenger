@@ -25,6 +25,8 @@ class PersonaSettings implements \JsonSerializable
      *
      * @param string $name
      * @param string $profilePictureUrl
+     *
+     * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $name, string $profilePictureUrl)
     {
@@ -37,6 +39,8 @@ class PersonaSettings implements \JsonSerializable
     /**
      * @param string $name
      * @param string $profilePictureUrl
+     *
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\PersonaSettings
      */

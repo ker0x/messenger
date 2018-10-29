@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
+use GuzzleHttp\Psr7\Uri;
 use Kerox\Messenger\Helper\UtilityTrait;
+use Psr\Http\Message\RequestInterface;
 
-class NlpRequest extends AbstractRequest
+class NlpRequest extends AbstractRequest implements QueryRequestInterface
 {
     use UtilityTrait;
 
@@ -18,31 +20,39 @@ class NlpRequest extends AbstractRequest
     /**
      * CodeRequest constructor.
      *
-     * @param string $pageToken
+     * @param string $path
      * @param array  $configs
      */
-    public function __construct(string $pageToken, array $configs)
+    public function __construct(string $path, array $configs)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->configs = $configs;
     }
 
-    protected function buildHeaders(): void
+    /**
+     * @param string|null $method
+     *
+     * @return RequestInterface
+     */
+    public function build(string $method = 'post'): RequestInterface
     {
-    }
+        $uri = Uri::fromParts([
+            'path' => $this->origin->getUri()->getPath(),
+            'query' => $this->buildQuery(),
+        ]);
 
-    protected function buildBody(): void
-    {
+        return $this->origin
+            ->withMethod($method)
+            ->withUri($uri);
     }
 
     /**
-     * @return array
+     * @return string
      */
-    protected function buildQuery(): array
+    public function buildQuery(): string
     {
-        $query = parent::buildQuery();
-        $query += [
+        $query = [
             'nlp_enabled' => $this->configs['nlp_enabled'] ?? null,
             'model' => $this->configs['model'] ?? null,
             'custom_token' => $this->configs['custom_token'] ?? null,
@@ -50,6 +60,6 @@ class NlpRequest extends AbstractRequest
             'n_best' => $this->configs['n_best'] ?? null,
         ];
 
-        return $this->arrayFilter($query);
+        return http_build_query($this->arrayFilter($query));
     }
 }

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Request;
 
-class UserRequest extends AbstractRequest
+use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\RequestInterface;
+
+class UserRequest extends AbstractRequest implements QueryRequestInterface
 {
     /**
      * @var array
@@ -14,36 +17,43 @@ class UserRequest extends AbstractRequest
     /**
      * UserRequest constructor.
      *
-     * @param string $pageToken
+     * @param string $path
      * @param array  $fields
      */
-    public function __construct(string $pageToken, array $fields)
+    public function __construct(string $path, array $fields)
     {
-        parent::__construct($pageToken);
+        parent::__construct($path);
 
         $this->fields = $fields;
     }
 
-    protected function buildHeaders(): void
+    /**
+     * @param string $method
+     *
+     * @return RequestInterface
+     */
+    public function build(string $method = 'post'): RequestInterface
     {
-    }
+        $uri = Uri::fromParts([
+            'path' => $this->origin->getUri()->getPath(),
+            'query' => $this->buildQuery(),
+        ]);
 
-    protected function buildBody(): void
-    {
+        return $this->origin
+            ->withUri($uri);
     }
 
     /**
-     * @return array
+     * @return string
      */
-    protected function buildQuery(): array
+    public function buildQuery(): string
     {
         $fields = implode(',', $this->fields);
 
-        $query = parent::buildQuery();
-        $query += [
+        $query = [
             'fields' => $fields,
         ];
 
-        return $query;
+        return http_build_query($query);
     }
 }

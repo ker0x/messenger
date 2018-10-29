@@ -16,6 +16,7 @@ class User extends AbstractApi implements UserInterface
      * @param array|null $fields
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      *
      * @return \Kerox\Messenger\Response\UserResponse
      */
@@ -36,8 +37,8 @@ class User extends AbstractApi implements UserInterface
             }
         }
 
-        $request = new UserRequest($this->pageToken, $fields);
-        $response = $this->client->get($userId, $request->build());
+        $request = new UserRequest($userId, $fields);
+        $response = $this->client->sendRequest($request->build());
 
         return new UserResponse($response);
     }

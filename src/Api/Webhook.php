@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Api;
 
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\ServerRequest;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Request\WebhookRequest;
 use Kerox\Messenger\Response\WebhookResponse;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class Webhook extends AbstractApi
@@ -48,18 +48,16 @@ class Webhook extends AbstractApi
      *
      * @param string                                   $appSecret
      * @param string                                   $verifyToken
-     * @param string                                   $pageToken
-     * @param \GuzzleHttp\ClientInterface              $client
+     * @param ClientInterface                          $client
      * @param \Psr\Http\Message\ServerRequestInterface $request
      */
     public function __construct(
         string $appSecret,
         string $verifyToken,
-        string $pageToken,
         ClientInterface $client,
         ?ServerRequestInterface $request = null
     ) {
-        parent::__construct($pageToken, $client);
+        parent::__construct($client);
 
         $this->appSecret = $appSecret;
         $this->verifyToken = $verifyToken;
@@ -94,19 +92,19 @@ class Webhook extends AbstractApi
     }
 
     /**
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     *
      * @return \Kerox\Messenger\Response\WebhookResponse
      */
     public function subscribe(): WebhookResponse
     {
-        $request = new WebhookRequest($this->pageToken);
-        $response = $this->client->post('me/subscribed_apps', $request->build());
+        $request = new WebhookRequest('me/subscribed_apps');
+        $response = $this->client->sendRequest($request->build());
 
         return new WebhookResponse($response);
     }
 
     /**
-     * @throws \Exception
-     *
      * @return bool
      */
     public function isValidCallback(): bool
@@ -136,8 +134,6 @@ class Webhook extends AbstractApi
     }
 
     /**
-     * @throws \Exception
-     *
      * @return array
      */
     public function getDecodedBody(): array
@@ -155,8 +151,6 @@ class Webhook extends AbstractApi
     }
 
     /**
-     * @throws \Exception
-     *
      * @return \Kerox\Messenger\Model\Callback\Entry[]
      */
     public function getCallbackEntries(): array
@@ -173,7 +167,6 @@ class Webhook extends AbstractApi
     {
         $events = [];
         foreach ($this->getHydratedEntries() as $hydratedEntry) {
-            /** @var \Kerox\Messenger\Model\Callback\Entry $hydratedEntry */
             $events = array_merge($events, $hydratedEntry->getEvents());
         }
 
@@ -181,8 +174,6 @@ class Webhook extends AbstractApi
     }
 
     /**
-     * @throws \Exception
-     *
      * @return \Kerox\Messenger\Model\Callback\Entry[]
      */
     private function getHydratedEntries(): array

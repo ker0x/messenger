@@ -4,19 +4,10 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use Kerox\Messenger\Api\Broadcast;
-use Kerox\Messenger\Api\Code;
-use Kerox\Messenger\Api\Insights;
-use Kerox\Messenger\Api\Nlp;
-use Kerox\Messenger\Api\Persona;
-use Kerox\Messenger\Api\Profile;
-use Kerox\Messenger\Api\Send;
-use Kerox\Messenger\Api\Tag;
-use Kerox\Messenger\Api\Thread;
-use Kerox\Messenger\Api\User;
-use Kerox\Messenger\Api\Webhook;
+use GuzzleHttp\HandlerStack;
+use Kerox\Messenger\Http\Client;
+use Kerox\Messenger\Http\Middleware;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class Messenger
@@ -40,18 +31,18 @@ class Messenger
     protected $pageToken;
 
     /**
-     * @var \GuzzleHttp\ClientInterface
+     * @var ClientInterface
      */
     protected $client;
 
     /**
      * Messenger constructor.
      *
-     * @param string                           $appSecret
-     * @param string                           $verifyToken
-     * @param string                           $pageToken
-     * @param string                           $apiVersion
-     * @param null|\GuzzleHttp\ClientInterface $client
+     * @param string          $appSecret
+     * @param string          $verifyToken
+     * @param string          $pageToken
+     * @param string          $apiVersion
+     * @param ClientInterface $client
      */
     public function __construct(
         string $appSecret,
@@ -65,100 +56,118 @@ class Messenger
         $this->pageToken = $pageToken;
 
         if ($client === null) {
-            $client = new Client([
-                'base_uri' => self::API_URL . $apiVersion . '/',
-            ]);
+            $client = $this->createClient($apiVersion);
         }
         $this->client = $client;
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Send
-     */
-    public function send(): Send
-    {
-        return new Send($this->pageToken, $this->client);
-    }
-
-    /**
-     * @param null|\Psr\Http\Message\ServerRequestInterface $request
+     * @param string $apiVersion
      *
-     * @return \Kerox\Messenger\Api\Webhook
+     * @return ClientInterface
      */
-    public function webhook(?ServerRequestInterface $request = null): Webhook
+    private function createClient(string $apiVersion): ClientInterface
     {
-        return new Webhook($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
+        $stack = HandlerStack::create();
+        $stack->push(Middleware::queryParam('access_token', $this->pageToken));
+
+        return new Client([
+            'base_uri' => self::API_URL . $apiVersion . '/',
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            'handler' => $stack,
+        ]);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\User
+     * @return Api\Send
      */
-    public function user(): User
+    public function send(): Api\Send
     {
-        return new User($this->pageToken, $this->client);
+        return new Api\Send($this->client);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Profile
+     * @param ServerRequestInterface|null $request
+     *
+     * @return Api\Webhook
      */
-    public function profile(): Profile
+    public function webhook(?ServerRequestInterface $request = null): Api\Webhook
     {
-        return new Profile($this->pageToken, $this->client);
+        return new Api\Webhook($this->appSecret, $this->verifyToken, $this->client, $request);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Code
+     * @return Api\User
      */
-    public function code(): Code
+    public function user(): Api\User
     {
-        return new Code($this->pageToken, $this->client);
+        return new Api\User($this->client);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Insights
+     * @return Api\Profile
      */
-    public function insights(): Insights
+    public function profile(): Api\Profile
     {
-        return new Insights($this->pageToken, $this->client);
+        return new Api\Profile($this->client);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Tag
+     * @return Api\Code
      */
-    public function tag(): Tag
+    public function code(): Api\Code
     {
-        return new Tag($this->pageToken, $this->client);
+        return new Api\Code($this->client);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Thread
+     * @return Api\Insights
      */
-    public function thread(): Thread
+    public function insights(): Api\Insights
     {
-        return new Thread($this->pageToken, $this->client);
+        return new Api\Insights($this->client);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Nlp
+     * @return Api\Tag
      */
-    public function nlp(): Nlp
+    public function tag(): Api\Tag
     {
-        return new Nlp($this->pageToken, $this->client);
+        return new Api\Tag($this->client);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Broadcast
+     * @return Api\Thread
      */
-    public function broadcast(): Broadcast
+    public function thread(): Api\Thread
     {
-        return new Broadcast($this->pageToken, $this->client);
+        return new Api\Thread($this->client);
     }
 
     /**
-     * @return \Kerox\Messenger\Api\Persona
+     * @return Api\Nlp
      */
-    public function persona(): Persona
+    public function nlp(): Api\Nlp
     {
-        return new Persona($this->pageToken, $this->client);
+        return new Api\Nlp($this->client);
+    }
+
+    /**
+     * @return Api\Broadcast
+     */
+    public function broadcast(): Api\Broadcast
+    {
+        return new Api\Broadcast($this->client);
+    }
+
+    /**
+     * @return Api\Persona
+     */
+    public function persona(): Api\Persona
+    {
+        return new Api\Persona($this->client);
     }
 }
