@@ -24,7 +24,7 @@ class RequestThreadControlTest extends AbstractTestCase
 
     public function testRequestThreadControlCallback(): void
     {
-        $this->assertSame('123456789', $this->requestThreadControl->getRequestedOwnerAppId());
+        $this->assertSame(123456789, $this->requestThreadControl->getRequestedOwnerAppId());
         $this->assertSame('additional content that the caller wants to set', $this->requestThreadControl->getMetadata());
     }
 

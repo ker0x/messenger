@@ -57,9 +57,9 @@ class ProfileTest extends AbstractTestCase
 
     public function testDeleteSetting(): void
     {
-        $this->profileApi->delete(['greeting', 'get_started']);
+        $response = $this->profileApi->delete(['greeting', 'get_started']);
 
-        $this->doesNotPerformAssertions();
+        $this->assertSame('success', $response->getResult());
     }
 
     public function testBadField(): void
