@@ -12,34 +12,34 @@ class RequestThreadControl
     protected $requestedOwnerAppId;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $metadata;
 
     /**
      * TakeThreadControl constructor.
      *
-     * @param $requestedOwnerAppId
+     * @param int         $requestedOwnerAppId
      * @param string|null $metadata
      */
-    public function __construct($requestedOwnerAppId, ?string $metadata)
+    public function __construct(int $requestedOwnerAppId, ?string $metadata)
     {
-        $this->requestedOwnerAppId = (string)$requestedOwnerAppId;
+        $this->requestedOwnerAppId = $requestedOwnerAppId;
         $this->metadata = $metadata;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getRequestedOwnerAppId(): string
+    public function getRequestedOwnerAppId(): int
     {
         return $this->requestedOwnerAppId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMetadata(): string
+    public function getMetadata(): ?string
     {
         return $this->metadata;
     }

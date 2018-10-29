@@ -7,39 +7,39 @@ namespace Kerox\Messenger\Model\Callback;
 class TakeThreadControl
 {
     /**
-     * @var string
+     * @var int
      */
     protected $previousOwnerAppId;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $metadata;
 
     /**
      * TakeThreadControl constructor.
      *
-     * @param string $previousOwnerAppId
-     * @param string $metadata
+     * @param int         $previousOwnerAppId
+     * @param string|null $metadata
      */
-    public function __construct(string $previousOwnerAppId, string $metadata)
+    public function __construct(int $previousOwnerAppId, ?string $metadata)
     {
         $this->previousOwnerAppId = $previousOwnerAppId;
         $this->metadata = $metadata;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getPreviousOwnerAppId(): string
+    public function getPreviousOwnerAppId(): int
     {
         return $this->previousOwnerAppId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMetadata(): string
+    public function getMetadata(): ?string
     {
         return $this->metadata;
     }
