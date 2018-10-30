@@ -54,7 +54,6 @@ class User extends AbstractApi implements UserInterface
             self::LOCALE,
             self::TIMEZONE,
             self::GENDER,
-            self::IS_PAYMENT_ENABLED,
         ];
     }
 }

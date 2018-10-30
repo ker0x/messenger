@@ -4,6 +4,14 @@ The Messenger library follows [SemVer](http://semver.org/).
 
 ## 3.x
 
+**Changelog** (since [`3.0.0`](https://github.com/ker0x/messenger/compare/3.0.0...3.1.0))
+
+- 3.1.0 (2018-10)
+    - Update API version to `v3.2`.
+    - Fix type for properties *AppId in `\Kerox\Messenger\Model\Callback\PassThreadControl::class`, `\Kerox\Messenger\Model\Callback\RequestThreadControl::class` and `\Kerox\Messenger\Model\Callback\TakeThreadControl::class`. (Thanks to @dbknet)
+    - Change method visibility from `public` to `protected` in `\Kerox\Messenger\Helper\ValidatorTrait::class`
+    - Remove methods `isPaymentEnabled` and `getLastAdReferral` from `\Kerox\Messenger\Response\UserResponse::class` as there are been removed from the API (see [CHANGELOG](https://developers.facebook.com/docs/graph-api/changelog/version3.1#messenger-platform))
+
 **Changelog** (since [`2.1.1`](https://github.com/ker0x/messenger/compare/2.1.1...3.0.0))
 
 Version `3.0.0` of the Messenger library is an enhancement of version `2.1.1` with major break changes.

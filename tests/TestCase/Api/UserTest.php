@@ -45,18 +45,12 @@ class UserTest extends AbstractTestCase
         $this->assertSame('en_US', $response->getLocale());
         $this->assertSame(-7., $response->getTimezone());
         $this->assertSame('male', $response->getGender());
-        $this->assertTrue($response->isPaymentEnabled());
-        $this->assertInstanceOf(Referral::class, $response->getLastAdReferral());
-        $this->assertSame('ADS', $response->getLastAdReferral()->getSource());
-        $this->assertSame('OPEN_THREAD', $response->getLastAdReferral()->getType());
-        $this->assertSame('6045246247433', $response->getLastAdReferral()->getAdId());
-        $this->assertSame('myparam', $response->getLastAdReferral()->getRef());
     }
 
     public function testGetProfileWithBadField(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('username is not a valid value. fields must only contain "first_name, last_name, profile_pic, locale, timezone, gender, is_payment_enabled".');
+        $this->expectExceptionMessage('username is not a valid value. fields must only contain "first_name, last_name, profile_pic, locale, timezone, gender".');
         $response = $this->userApi->profile('1234abcd', ['username']);
     }
 }
