@@ -274,7 +274,7 @@ trait ValidatorTrait
     /**
      * @return array
      */
-    public function getAllowedSenderAction(): array
+    protected function getAllowedSenderAction(): array
     {
         return [
             SendInterface::SENDER_ACTION_TYPING_ON,
@@ -286,7 +286,7 @@ trait ValidatorTrait
     /**
      * @return array
      */
-    public function getAllowedNotificationType(): array
+    protected function getAllowedNotificationType(): array
     {
         return [
             SendInterface::NOTIFICATION_TYPE_REGULAR,
@@ -298,7 +298,7 @@ trait ValidatorTrait
     /**
      * @return array
      */
-    public function getAllowedTag(): array
+    protected function getAllowedTag(): array
     {
         return [
             SendInterface::TAG_BUSINESS_PRODUCTIVITY,
@@ -324,7 +324,7 @@ trait ValidatorTrait
     /**
      * @return array
      */
-    public function getAllowedCurrency(): array
+    protected function getAllowedCurrency(): array
     {
         return [
             'SGD',

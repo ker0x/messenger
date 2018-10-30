@@ -7,7 +7,7 @@ namespace Kerox\Messenger\Model\Callback;
 class RequestThreadControl
 {
     /**
-     * @var string
+     * @var int
      */
     protected $requestedOwnerAppId;
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Response;
 
-use Kerox\Messenger\Model\Referral;
 use Kerox\Messenger\UserInterface;
 
 class UserResponse extends AbstractResponse implements UserInterface
@@ -40,16 +39,6 @@ class UserResponse extends AbstractResponse implements UserInterface
     protected $gender;
 
     /**
-     * @var null|bool
-     */
-    protected $paymentEnabled;
-
-    /**
-     * @var null|\Kerox\Messenger\Model\Referral
-     */
-    protected $lastAdReferral;
-
-    /**
      * @param array $response
      */
     protected function parseResponse(array $response): void
@@ -60,9 +49,6 @@ class UserResponse extends AbstractResponse implements UserInterface
         $this->locale = $response[UserInterface::LOCALE] ?? null;
         $this->timezone = $response[UserInterface::TIMEZONE] ?? null;
         $this->gender = $response[UserInterface::GENDER] ?? null;
-        $this->paymentEnabled = $response[UserInterface::IS_PAYMENT_ENABLED] ?? null;
-
-        $this->setLastAdReferral($response);
     }
 
     /**
@@ -111,31 +97,5 @@ class UserResponse extends AbstractResponse implements UserInterface
     public function getGender(): ?string
     {
         return $this->gender;
-    }
-
-    /**
-     * @return null|bool
-     */
-    public function isPaymentEnabled(): ?bool
-    {
-        return $this->paymentEnabled;
-    }
-
-    /**
-     * @return null|\Kerox\Messenger\Model\Referral
-     */
-    public function getLastAdReferral(): ?Referral
-    {
-        return $this->lastAdReferral;
-    }
-
-    /**
-     * @param array $response
-     */
-    private function setLastAdReferral(array $response): void
-    {
-        if (isset($response[UserInterface::LAST_AD_REFERRAL])) {
-            $this->lastAdReferral = Referral::create($response[UserInterface::LAST_AD_REFERRAL]);
-        }
     }
 }
