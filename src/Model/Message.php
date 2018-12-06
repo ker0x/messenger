@@ -126,7 +126,7 @@ class Message implements \JsonSerializable
      */
     private function isValidQuickReplies(array $quickReplies): void
     {
-        $this->isValidArray($quickReplies, 11, 1);
+        $this->isValidArray($quickReplies, 11);
         foreach ($quickReplies as $quickReply) {
             if (!$quickReply instanceof QuickReply) {
                 throw new InvalidClassException(sprintf(
