@@ -92,11 +92,13 @@ class Message implements \JsonSerializable
     /**
      * @param \Kerox\Messenger\Model\Message\QuickReply $quickReply
      *
+     * @throws \Kerox\Messenger\Exception\MessengerException
+     *
      * @return \Kerox\Messenger\Model\Message
      */
     public function addQuickReply(QuickReply $quickReply): self
     {
-        $this->isValidQuickReplies($this->quickReplies);
+        $this->isValidArray($this->quickReplies, 11);
 
         $this->quickReplies[] = $quickReply;
 
@@ -126,7 +128,7 @@ class Message implements \JsonSerializable
      */
     private function isValidQuickReplies(array $quickReplies): void
     {
-        $this->isValidArray($quickReplies, 11);
+        $this->isValidArray($quickReplies, 11, 1);
         foreach ($quickReplies as $quickReply) {
             if (!$quickReply instanceof QuickReply) {
                 throw new InvalidClassException(sprintf(

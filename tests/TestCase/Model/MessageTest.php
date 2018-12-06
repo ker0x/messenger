@@ -84,6 +84,26 @@ class MessageTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($json, json_encode($message));
     }
 
+    public function testMessageWithQuickRepliesUsingOnlyAddQuickReply(): void
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Message/quick_reply.json');
+
+        $message = Message::create('Pick a color:')
+            ->addQuickReply(QuickReply::create()
+                ->setTitle('Red')
+                ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')
+                ->setImageUrl('http://petersfantastichats.com/img/red.png')
+            )->addQuickReply(QuickReply::create()
+                ->setTitle('Green')
+                ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN')
+                ->setImageUrl('http://petersfantastichats.com/img/green.png')
+            )
+            ->addQuickReply(QuickReply::create(QuickReply::CONTENT_TYPE_LOCATION))
+            ->setMetadata('some metadata');
+
+        $this->assertJsonStringEqualsJsonString($json, json_encode($message));
+    }
+
     public function testMessageWithInvalidArgument(): void
     {
         $this->expectException(MessengerException::class);
@@ -107,5 +127,30 @@ class MessageTest extends AbstractTestCase
                     ->setImageUrl('http://petersfantastichats.com/img/green.png'),
                 'Hello',
             ]);
+    }
+
+    public function testMessageWithoutQuickReplies(): void
+    {
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('The minimum number of items for this array is 1.');
+        $message = Message::create('Pick a color:')
+            ->setQuickReplies([]);
+    }
+
+    public function testMessageWithToManyQuickReplies(): void
+    {
+        $quickReplies = [];
+        for ($i = 0; $i <= 11; $i++) {
+            $quickReplies[] = QuickReply::create()
+                ->setTitle('Red')
+                ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')
+                ->setImageUrl('http://petersfantastichats.com/img/red.png');
+        }
+
+        $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('The maximum number of items for this array is 11.');
+        $message = Message::create('Pick a color:')
+            ->setQuickReplies($quickReplies)
+            ->addQuickReply(QuickReply::create(QuickReply::CONTENT_TYPE_LOCATION));
     }
 }
