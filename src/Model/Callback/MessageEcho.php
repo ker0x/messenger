@@ -12,12 +12,12 @@ class MessageEcho extends Message
     protected $isEcho;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $appId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $metadata;
 
@@ -25,7 +25,7 @@ class MessageEcho extends Message
      * MessageEcho constructor.
      *
      * @param bool        $isEcho
-     * @param null|int    $appId
+     * @param int|null    $appId
      * @param string      $messageId
      * @param int         $sequence
      * @param string|null $metadata
@@ -59,7 +59,7 @@ class MessageEcho extends Message
     }
 
     /**
-     * @return null|int
+     * @return int|null
      */
     public function getAppId(): ?int
     {
@@ -67,7 +67,7 @@ class MessageEcho extends Message
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getMetadata(): ?string
     {

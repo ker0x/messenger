@@ -9,7 +9,7 @@ use Kerox\Messenger\Model\PersonaSettings;
 class PersonaRequest extends AbstractRequest
 {
     /**
-     * @var null|\Kerox\Messenger\Model\PersonaSettings
+     * @var \Kerox\Messenger\Model\PersonaSettings|null
      */
     protected $personaSettings;
 

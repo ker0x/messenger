@@ -17,12 +17,12 @@ class Message
     protected $sequence;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $text;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $quickReply;
 
@@ -79,7 +79,7 @@ class Message
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getText(): ?string
     {
@@ -95,7 +95,7 @@ class Message
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getQuickReply(): ?string
     {

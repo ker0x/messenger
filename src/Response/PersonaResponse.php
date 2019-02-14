@@ -16,17 +16,17 @@ class PersonaResponse extends AbstractResponse
     private const PAGING = 'paging';
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $profilePictureUrl;
 
@@ -36,7 +36,7 @@ class PersonaResponse extends AbstractResponse
     protected $data = [];
 
     /**
-     * @var null|array
+     * @var array|null
      */
     protected $paging;
 
@@ -60,7 +60,7 @@ class PersonaResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getId(): ?string
     {
@@ -68,7 +68,7 @@ class PersonaResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -76,7 +76,7 @@ class PersonaResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getProfilePictureUrl(): ?string
     {

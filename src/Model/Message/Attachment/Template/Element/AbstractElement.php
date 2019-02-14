@@ -16,12 +16,12 @@ abstract class AbstractElement implements \JsonSerializable
     protected $title;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $subtitle;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $imageUrl;
 

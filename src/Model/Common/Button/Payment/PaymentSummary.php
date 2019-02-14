@@ -23,7 +23,7 @@ class PaymentSummary implements \JsonSerializable
     protected $currency;
 
     /**
-     * @var null|bool
+     * @var bool|null
      */
     protected $isTestPayment;
 

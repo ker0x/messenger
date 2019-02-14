@@ -12,7 +12,7 @@ class AccountLinking
     protected $status;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $authorizationCode;
 
@@ -45,7 +45,7 @@ class AccountLinking
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAuthorizationCode(): ?string
     {

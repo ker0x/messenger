@@ -17,7 +17,7 @@ abstract class AbstractAirlineTemplate extends Template
     protected $locale;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $themeColor;
 

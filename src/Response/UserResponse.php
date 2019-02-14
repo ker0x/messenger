@@ -9,32 +9,32 @@ use Kerox\Messenger\UserInterface;
 class UserResponse extends AbstractResponse implements UserInterface
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $firstName;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $lastName;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $profilePic;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $locale;
 
     /**
-     * @var null|float
+     * @var float|null
      */
     protected $timezone;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $gender;
 
@@ -52,7 +52,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getFirstName(): ?string
     {
@@ -60,7 +60,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getLastName(): ?string
     {
@@ -68,7 +68,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getProfilePic(): ?string
     {
@@ -76,7 +76,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getLocale(): ?string
     {
@@ -84,7 +84,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return null|float
+     * @return float|null
      */
     public function getTimezone(): ?float
     {
@@ -92,7 +92,7 @@ class UserResponse extends AbstractResponse implements UserInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getGender(): ?string
     {

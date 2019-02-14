@@ -9,7 +9,7 @@ class CodeResponse extends AbstractResponse
     private const URI = 'uri';
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $uri;
 
@@ -22,7 +22,7 @@ class CodeResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getUri(): ?string
     {

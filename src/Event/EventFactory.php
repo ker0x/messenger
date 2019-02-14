@@ -33,7 +33,7 @@ class EventFactory
     public static function create(array $payload): AbstractEvent
     {
         foreach (array_keys($payload) as $key) {
-            if (array_key_exists($key, self::EVENTS)) {
+            if (\array_key_exists($key, self::EVENTS)) {
                 $className = self::EVENTS[$key];
                 if (isset($payload['message']['is_echo'])) {
                     $className = MessageEchoEvent::class;

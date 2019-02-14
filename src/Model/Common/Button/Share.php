@@ -12,14 +12,14 @@ class Share extends AbstractButton
     use UtilityTrait;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate
+     * @var \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate|null
      */
     protected $content;
 
     /**
      * Share constructor.
      *
-     * @param null|\Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate $content
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate|null $content
      */
     public function __construct(?GenericTemplate $content = null)
     {

@@ -17,22 +17,22 @@ class PaymentCredential
     protected $chargeId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $tokenizedCard;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $tokenizedCvv;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $tokenExpiryMonth;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $tokenExpiryYear;
 
@@ -87,7 +87,7 @@ class PaymentCredential
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTokenizedCard(): ?string
     {
@@ -95,7 +95,7 @@ class PaymentCredential
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTokenizedCvv(): ?string
     {
@@ -103,7 +103,7 @@ class PaymentCredential
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTokenExpiryMonth(): ?string
     {
@@ -111,7 +111,7 @@ class PaymentCredential
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTokenExpiryYear(): ?string
     {

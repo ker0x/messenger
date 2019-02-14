@@ -16,12 +16,12 @@ class InsightsRequest extends AbstractRequest
     protected $metrics;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $since;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $until;
 
@@ -30,8 +30,8 @@ class InsightsRequest extends AbstractRequest
      *
      * @param string   $pageToken
      * @param array    $metrics
-     * @param null|int $since
-     * @param null|int $until
+     * @param int|null $since
+     * @param int|null $until
      */
     public function __construct(string $pageToken, array $metrics, ?int $since = null, ?int $until = null)
     {

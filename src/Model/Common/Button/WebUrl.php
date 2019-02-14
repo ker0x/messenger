@@ -28,17 +28,17 @@ class WebUrl extends AbstractButton
     protected $webviewHeightRatio;
 
     /**
-     * @var null|bool
+     * @var bool|null
      */
     protected $messengerExtension;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $fallbackUrl;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $webviewShareButton;
 

@@ -13,8 +13,8 @@ class Insights extends AbstractApi implements InsightsInterface
 {
     /**
      * @param array    $metrics
-     * @param null|int $since
-     * @param null|int $until
+     * @param int|null $since
+     * @param int|null $until
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *

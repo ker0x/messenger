@@ -16,12 +16,12 @@ class ThreadControl implements \JsonSerializable
     protected $recipientId;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $targetAppId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $metadata;
 

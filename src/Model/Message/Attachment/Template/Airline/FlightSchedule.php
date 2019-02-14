@@ -11,7 +11,7 @@ class FlightSchedule implements \JsonSerializable
     use ValidatorTrait;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $boardingTime;
 
@@ -21,7 +21,7 @@ class FlightSchedule implements \JsonSerializable
     protected $departureTime;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $arrivalTime;
 

@@ -12,7 +12,7 @@ class PolicyEnforcement
     protected $action;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $reason;
 
@@ -20,7 +20,7 @@ class PolicyEnforcement
      * PolicyEnforcement constructor.
      *
      * @param string      $action
-     * @param null|string $reason
+     * @param string|null $reason
      */
     public function __construct(string $action, ?string $reason = null)
     {
@@ -37,7 +37,7 @@ class PolicyEnforcement
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getReason(): ?string
     {

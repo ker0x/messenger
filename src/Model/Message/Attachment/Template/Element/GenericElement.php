@@ -14,7 +14,7 @@ class GenericElement extends AbstractElement
     protected $defaultAction;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Common\Button\AbstractButton[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]|null
      */
     protected $buttons = [];
 

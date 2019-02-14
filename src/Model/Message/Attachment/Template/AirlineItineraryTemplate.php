@@ -39,12 +39,12 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     protected $priceInfo = [];
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $basePrice;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $tax;
 

@@ -21,17 +21,17 @@ class MediaElement implements \JsonSerializable
     protected $mediaType;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $attachmentId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $url;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Common\Button\AbstractButton[]
+     * @var \Kerox\Messenger\Model\Common\Button\AbstractButton[]|null
      */
     protected $buttons;
 

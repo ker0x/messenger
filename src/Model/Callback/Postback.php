@@ -12,12 +12,12 @@ class Postback
     protected $title;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $payload;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Callback\Referral
+     * @var \Kerox\Messenger\Model\Callback\Referral|null
      */
     protected $referral;
 
@@ -25,7 +25,7 @@ class Postback
      * Postback constructor.
      *
      * @param string                                   $title
-     * @param null|string                              $payload
+     * @param string|null                              $payload
      * @param \Kerox\Messenger\Model\Callback\Referral $referral
      */
     public function __construct(string $title, ?string $payload = null, ?Referral $referral = null)
@@ -52,7 +52,7 @@ class Postback
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getPayload(): ?string
     {
@@ -68,7 +68,7 @@ class Postback
     }
 
     /**
-     * @return null|\Kerox\Messenger\Model\Callback\Referral
+     * @return \Kerox\Messenger\Model\Callback\Referral|null
      */
     public function getReferral(): ?Referral
     {

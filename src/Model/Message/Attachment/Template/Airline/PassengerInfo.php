@@ -12,7 +12,7 @@ class PassengerInfo implements \JsonSerializable
     protected $passengerId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $ticketNumber;
 

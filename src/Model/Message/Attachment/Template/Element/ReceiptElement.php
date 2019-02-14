@@ -7,17 +7,17 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Element;
 class ReceiptElement extends AbstractElement
 {
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $quantity;
 
     /**
-     * @var null|float
+     * @var float|null
      */
     protected $price;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $currency;
 

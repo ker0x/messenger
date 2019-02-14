@@ -15,7 +15,7 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     public const UPDATE_TYPE_CANCELLATION = 'cancellation';
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $introMessage;
 
