@@ -13,22 +13,22 @@ class BroadcastRequest extends AbstractRequest
     public const REQUEST_TYPE_ACTION = 'action';
 
     /**
-     * @var null|string|\Kerox\Messenger\Model\Message
+     * @var string|\Kerox\Messenger\Model\Message|null
      */
     protected $message;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $messageCreativeId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $notificationType;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $tag;
 

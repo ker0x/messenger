@@ -11,12 +11,12 @@ class PaymentSettings implements \JsonSerializable
     use ValidatorTrait;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $privacyUrl;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $publicKey;
 

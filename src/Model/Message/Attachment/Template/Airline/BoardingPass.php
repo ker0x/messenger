@@ -22,12 +22,12 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     protected $pnrNumber;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $travelClass;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $seat;
 
@@ -47,22 +47,22 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     protected $logoImageUrl;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $headerImageUrl;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $headerTextField;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $qrCode;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $barcodeImageUrl;
 

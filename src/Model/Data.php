@@ -9,12 +9,12 @@ use Kerox\Messenger\Model\Data\Value;
 class Data
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $period;
 
@@ -24,27 +24,27 @@ class Data
     protected $values = [];
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $title;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $description;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $tag;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $profilePictureUrl;
 
@@ -72,7 +72,7 @@ class Data
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -80,7 +80,7 @@ class Data
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getPeriod(): ?string
     {
@@ -112,7 +112,7 @@ class Data
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTitle(): ?string
     {
@@ -120,7 +120,7 @@ class Data
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getDescription(): ?string
     {
@@ -128,7 +128,7 @@ class Data
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getId(): ?string
     {
@@ -136,7 +136,7 @@ class Data
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTag(): ?string
     {
@@ -144,7 +144,7 @@ class Data
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getProfilePictureUrl(): ?string
     {

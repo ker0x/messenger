@@ -18,42 +18,42 @@ class SendResponse extends AbstractResponse
     private const ERROR_FBTRACE_ID = 'fbtrace_id';
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $recipientId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $messageId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $attachmentId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $errorMessage;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $errorType;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $errorCode;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $errorSubcode;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $errorFbtraceId;
 
@@ -90,7 +90,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getRecipientId(): ?string
     {
@@ -98,7 +98,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getMessageId(): ?string
     {
@@ -106,7 +106,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAttachmentId(): ?string
     {
@@ -114,7 +114,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getErrorMessage(): ?string
     {
@@ -122,7 +122,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getErrorType(): ?string
     {
@@ -130,7 +130,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return null|int
+     * @return int|null
      */
     public function getErrorCode(): ?int
     {
@@ -138,7 +138,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return null|int
+     * @return int|null
      */
     public function getErrorSubcode(): ?int
     {
@@ -146,7 +146,7 @@ class SendResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getErrorFbtraceId(): ?string
     {

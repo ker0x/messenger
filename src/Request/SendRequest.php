@@ -13,32 +13,32 @@ class SendRequest extends AbstractRequest
     public const REQUEST_TYPE_ACTION = 'action';
 
     /**
-     * @var null|array
+     * @var array|null
      */
     protected $recipient;
 
     /**
-     * @var null|string|\Kerox\Messenger\Model\Message
+     * @var string|\Kerox\Messenger\Model\Message|null
      */
     protected $message;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $senderAction;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $notificationType;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $tag;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $personaId;
 
@@ -103,6 +103,6 @@ class SendRequest extends AbstractRequest
             'persona_id' => $this->personaId,
         ];
 
-        return \array_filter($body);
+        return array_filter($body);
     }
 }

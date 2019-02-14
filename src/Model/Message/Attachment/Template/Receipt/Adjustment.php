@@ -7,12 +7,12 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Receipt;
 class Adjustment implements \JsonSerializable
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var null|float
+     * @var float|null
      */
     protected $amount;
 

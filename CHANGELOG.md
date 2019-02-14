@@ -6,7 +6,7 @@ The Messenger library follows [SemVer](http://semver.org/).
 
 **Changelog** (since [`3.1.0`](https://github.com/ker0x/messenger/compare/3.1.0...3.1.1))
 
-- 3.1.0 (2018-10)
+- 3.1.1 (2018-12)
     - Method `addQuickReply` will no longer thrown an exception if no quick replies were previously set (Thanks to @Khodl)
     - Add new tests for QuickReplies
     - Update `phpunit/phpunit` version to `7.4`.

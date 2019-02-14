@@ -27,7 +27,7 @@ class ProfileRequest extends AbstractRequest
     }
 
     /**
-     * @return null|array
+     * @return array|null
      */
     protected function buildHeaders(): ?array
     {
@@ -39,7 +39,7 @@ class ProfileRequest extends AbstractRequest
     }
 
     /**
-     * @return null|array|\Kerox\Messenger\Model\ProfileSettings
+     * @return array|\Kerox\Messenger\Model\ProfileSettings|null
      */
     protected function buildBody()
     {

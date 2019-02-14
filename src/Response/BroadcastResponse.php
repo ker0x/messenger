@@ -10,12 +10,12 @@ class BroadcastResponse extends AbstractResponse
     private const BROADCAST_ID = 'broadcast_id';
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $messageCreativeId;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $broadcastId;
 
@@ -29,7 +29,7 @@ class BroadcastResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getMessageCreativeId(): ?string
     {
@@ -37,7 +37,7 @@ class BroadcastResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getBroadcastId(): ?string
     {

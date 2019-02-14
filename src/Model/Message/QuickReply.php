@@ -22,17 +22,17 @@ class QuickReply implements \JsonSerializable
     protected $contentType;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $title;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $payload;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $imageUrl;
 

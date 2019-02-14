@@ -19,12 +19,12 @@ class RequestedUserInfo
     protected $contactName;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $contactEmail;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $contactPhone;
 
@@ -33,8 +33,8 @@ class RequestedUserInfo
      *
      * @param \Kerox\Messenger\Model\Common\Address $shippingAddress
      * @param string                                $contactName
-     * @param null|string                           $contactEmail
-     * @param null|string                           $contactPhone
+     * @param string|null                           $contactEmail
+     * @param string|null                           $contactPhone
      */
     public function __construct(
         Address $shippingAddress,
@@ -65,7 +65,7 @@ class RequestedUserInfo
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getContactEmail(): ?string
     {
@@ -73,7 +73,7 @@ class RequestedUserInfo
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getContactPhone(): ?string
     {

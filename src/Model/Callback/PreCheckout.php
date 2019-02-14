@@ -63,7 +63,7 @@ class PreCheckout
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getCurrency(): ?string
     {
@@ -71,7 +71,7 @@ class PreCheckout
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAmount(): ?string
     {

@@ -46,7 +46,7 @@ class ReceiptTemplate extends Template
     protected $elements;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Common\Address
+     * @var \Kerox\Messenger\Model\Common\Address|null
      */
     protected $address;
 
@@ -56,7 +56,7 @@ class ReceiptTemplate extends Template
     protected $summary;
 
     /**
-     * @var null|\Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment[]
+     * @var \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment[]|null
      */
     protected $adjustments;
 

@@ -9,17 +9,17 @@ use Kerox\Messenger\Model\Message\Attachment;
 class File extends Attachment
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $url;
 
     /**
-     * @var null|bool
+     * @var bool|null
      */
     protected $reusable;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $attachmentId;
 

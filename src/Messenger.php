@@ -51,7 +51,7 @@ class Messenger
      * @param string                           $verifyToken
      * @param string                           $pageToken
      * @param string                           $apiVersion
-     * @param null|\GuzzleHttp\ClientInterface $client
+     * @param \GuzzleHttp\ClientInterface|null $client
      */
     public function __construct(
         string $appSecret,
@@ -81,7 +81,7 @@ class Messenger
     }
 
     /**
-     * @param null|\Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ServerRequestInterface|null $request
      *
      * @return \Kerox\Messenger\Api\Webhook
      */

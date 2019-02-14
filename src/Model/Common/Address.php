@@ -7,7 +7,7 @@ namespace Kerox\Messenger\Model\Common;
 class Address implements \JsonSerializable
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $name;
 
@@ -17,7 +17,7 @@ class Address implements \JsonSerializable
     protected $street;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $additionalStreet;
 
@@ -42,7 +42,7 @@ class Address implements \JsonSerializable
     protected $country;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $id;
 
@@ -101,7 +101,7 @@ class Address implements \JsonSerializable
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -129,7 +129,7 @@ class Address implements \JsonSerializable
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAdditionalStreet(): ?string
     {
@@ -181,7 +181,7 @@ class Address implements \JsonSerializable
     }
 
     /**
-     * @return null|int
+     * @return int|null
      */
     public function getId(): ?int
     {

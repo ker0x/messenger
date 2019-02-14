@@ -13,37 +13,37 @@ class ProfileSettings implements \JsonSerializable
     use ValidatorTrait;
 
     /**
-     * @var null|\Kerox\Messenger\Model\ProfileSettings\PersistentMenu[]
+     * @var \Kerox\Messenger\Model\ProfileSettings\PersistentMenu[]|null
      */
     protected $persistentMenus;
 
     /**
-     * @var null|array
+     * @var array|null
      */
     protected $startButton;
 
     /**
-     * @var null|\Kerox\Messenger\Model\ProfileSettings\Greeting[]
+     * @var \Kerox\Messenger\Model\ProfileSettings\Greeting[]|null
      */
     protected $greetings;
 
     /**
-     * @var null|array
+     * @var array|null
      */
     protected $whitelistedDomains;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $accountLinkingUrl;
 
     /**
-     * @var null|\Kerox\Messenger\Model\ProfileSettings\PaymentSettings
+     * @var \Kerox\Messenger\Model\ProfileSettings\PaymentSettings|null
      */
     protected $paymentSettings;
 
     /**
-     * @var null|\Kerox\Messenger\Model\ProfileSettings\TargetAudience
+     * @var \Kerox\Messenger\Model\ProfileSettings\TargetAudience|null
      */
     protected $targetAudience;
 

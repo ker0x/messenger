@@ -9,7 +9,7 @@ class ProfileResponse extends AbstractResponse
     private const RESULT = 'result';
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $result;
 
@@ -22,7 +22,7 @@ class ProfileResponse extends AbstractResponse
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getResult(): ?string
     {

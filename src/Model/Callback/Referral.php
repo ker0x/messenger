@@ -12,12 +12,12 @@ class Referral
     protected $ref;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $source;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $type;
 
@@ -25,8 +25,8 @@ class Referral
      * Referral constructor.
      *
      * @param $ref
-     * @param null|string $source
-     * @param null|string $type
+     * @param string|null $source
+     * @param string|null $type
      */
     public function __construct($ref, ?string $source, ?string $type)
     {
@@ -44,7 +44,7 @@ class Referral
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSource(): ?string
     {
@@ -52,7 +52,7 @@ class Referral
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getType(): ?string
     {
