@@ -7,10 +7,12 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template;
 use Kerox\Messenger\Exception\InvalidKeyException;
 use Kerox\Messenger\Model\Message\Attachment\Template;
 
+/**
+ * @deprecated Since version 3.2.0 and will be removed in version 4.0.0.
+ */
 class ListTemplate extends Template
 {
     public const TOP_ELEMENT_STYLE_LARGE = 'large';
-
     public const TOP_ELEMENT_STYLE_COMPACT = 'compact';
 
     /**
@@ -19,7 +21,7 @@ class ListTemplate extends Template
     protected $topElementStyle;
 
     /**
-     * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement[]
+     * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement[]
      */
     protected $elements = [];
 
@@ -31,7 +33,7 @@ class ListTemplate extends Template
     /**
      * Liste constructor.
      *
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListeElement[] $elements
+     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement[] $elements
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */

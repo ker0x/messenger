@@ -12,11 +12,6 @@ class Delivery
     protected $watermark;
 
     /**
-     * @var int
-     */
-    protected $sequence;
-
-    /**
      * @var array
      */
     protected $messageIds;
@@ -26,12 +21,10 @@ class Delivery
      *
      * @param array $messageIds
      * @param int   $watermark
-     * @param int   $sequence
      */
-    public function __construct(int $watermark, int $sequence, array $messageIds = [])
+    public function __construct(int $watermark, array $messageIds = [])
     {
         $this->watermark = $watermark;
-        $this->sequence = $sequence;
         $this->messageIds = $messageIds;
     }
 
@@ -41,14 +34,6 @@ class Delivery
     public function getWatermark(): int
     {
         return $this->watermark;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSequence(): int
-    {
-        return $this->sequence;
     }
 
     /**
@@ -68,6 +53,6 @@ class Delivery
     {
         $messageIds = $callbackData['mids'] ?? [];
 
-        return new self($callbackData['watermark'], $callbackData['seq'], $messageIds);
+        return new self($callbackData['watermark'], $messageIds);
     }
 }

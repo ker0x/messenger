@@ -1,0 +1,9 @@
+parameters:
+	paths:
+		- src
+
+	ignoreErrors:
+	    - '#Call to an undefined method GuzzleHttp\\ClientInterface::[a-zA-Z0-9_]+\(\)#'
+
+	fileExtensions:
+		- php

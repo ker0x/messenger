@@ -10,6 +10,9 @@ use Kerox\Messenger\Request\BroadcastRequest;
 use Kerox\Messenger\Response\BroadcastResponse;
 use Kerox\Messenger\SendInterface;
 
+/**
+ * @deprecated Since version 3.2.0 and will be removed in version 4.0.0.
+ */
 class Broadcast extends AbstractApi implements SendInterface
 {
     use ValidatorTrait;
@@ -35,13 +38,13 @@ class Broadcast extends AbstractApi implements SendInterface
      * @param string $messageCreativeId
      * @param array  $options
      *
-     * @throws \Kerox\Messenger\Exception\InvalidOptionException
+     * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Response\BroadcastResponse
      */
     public function send(string $messageCreativeId, array $options = []): BroadcastResponse
     {
-        $options = $this->isValidOptions($options);
+        $this->isValidOptions($options);
 
         $request = new BroadcastRequest($this->pageToken, null, $messageCreativeId, $options);
         $response = $this->client->post('me/broadcast_messages', $request->build());
@@ -53,10 +56,8 @@ class Broadcast extends AbstractApi implements SendInterface
      * @param array $options
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return array
      */
-    private function isValidOptions(array $options): array
+    private function isValidOptions(array $options): void
     {
         $allowedOptionsKeys = $this->getAllowedOptionsKeys();
         foreach ($options as $key => $value) {
@@ -73,8 +74,6 @@ class Broadcast extends AbstractApi implements SendInterface
                 $this->isValidTag($value);
             }
         }
-
-        return $options;
     }
 
     /**

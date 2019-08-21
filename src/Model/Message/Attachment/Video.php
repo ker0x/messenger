@@ -29,7 +29,7 @@ class Video extends File
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File
      */
-    public static function create($url, ?bool $reusable = null): File
+    public static function create(string $url, ?bool $reusable = null): File
     {
         return new self($url, $reusable);
     }

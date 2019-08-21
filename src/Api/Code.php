@@ -10,6 +10,9 @@ use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Request\CodeRequest;
 use Kerox\Messenger\Response\CodeResponse;
 
+/**
+ * @deprecated Since version 3.2.0 and will be removed in version 4.0.0.
+ */
 class Code extends AbstractApi
 {
     private const CODE_TYPE_STANDARD = 'standard';

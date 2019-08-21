@@ -4,6 +4,16 @@ The Messenger library follows [SemVer](http://semver.org/).
 
 ## 3.x
 
+**Changelog** (since [`3.2.0`](https://github.com/ker0x/messenger/compare/3.1.1...3.2.0))
+
+- 3.2.0 (2019-08)
+    - Update API version to `v3.3`
+    - Remove parameter `seq` from webhook Events (Thanks to @SoleneLms)
+    - Api Broadcast and Code are now deprecated (see [CHANGELOG](https://developers.facebook.com/docs/messenger-platform/changelog))
+    - Template List and Open Graph are now deprecated (see [CHANGELOG](https://developers.facebook.com/docs/messenger-platform/changelog))
+    - Button Share, Nested and Location for Quickreply are now deprecated (see [CHANGELOG](https://developers.facebook.com/docs/messenger-platform/changelog))
+    - Add PHPStan for tests
+
 **Changelog** (since [`3.1.0`](https://github.com/ker0x/messenger/compare/3.1.0...3.1.1))
 
 - 3.1.1 (2018-12)

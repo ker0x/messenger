@@ -12,11 +12,6 @@ class Message
     protected $messageId;
 
     /**
-     * @var int
-     */
-    protected $sequence;
-
-    /**
      * @var string|null
      */
     protected $text;
@@ -40,7 +35,6 @@ class Message
      * Message constructor.
      *
      * @param string $messageId
-     * @param int    $sequence
      * @param string $text
      * @param string $quickReply
      * @param array  $attachments
@@ -48,14 +42,12 @@ class Message
      */
     public function __construct(
         string $messageId,
-        int $sequence,
         ?string $text = null,
         ?string $quickReply = null,
         array $attachments = [],
         array $entities = []
     ) {
         $this->messageId = $messageId;
-        $this->sequence = $sequence;
         $this->text = $text;
         $this->quickReply = $quickReply;
         $this->attachments = $attachments;
@@ -68,14 +60,6 @@ class Message
     public function getMessageId(): string
     {
         return $this->messageId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSequence(): int
-    {
-        return $this->sequence;
     }
 
     /**
@@ -154,6 +138,6 @@ class Message
         $attachments = $callbackData['attachments'] ?? [];
         $entities = $callbackData['nlp']['entities'] ?? [];
 
-        return new self($callbackData['mid'], $callbackData['seq'], $text, $quickReply, $attachments, $entities);
+        return new self($callbackData['mid'], $text, $quickReply, $attachments, $entities);
     }
 }

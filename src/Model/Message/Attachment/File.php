@@ -32,7 +32,7 @@ class File extends Attachment
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    public function __construct($url, ?bool $reusable = null, $type = Attachment::TYPE_FILE)
+    public function __construct(string $url, ?bool $reusable = null, $type = Attachment::TYPE_FILE)
     {
         parent::__construct($type);
 
@@ -54,17 +54,17 @@ class File extends Attachment
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File
      */
-    public static function create($url, ?bool $reusable = null): self
+    public static function create(string $url, ?bool $reusable = null): self
     {
         return new self($url, $reusable);
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
      * @return bool
      */
-    private function isAttachmentId($value): bool
+    private function isAttachmentId(string $value): bool
     {
         return (bool) preg_match('/^[\d]+$/', $value);
     }

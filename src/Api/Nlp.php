@@ -55,12 +55,12 @@ class Nlp extends AbstractApi implements NlpInterface
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param int|string $key
+     * @param mixed      $value
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    private function isBool(string $key, $value): void
+    private function isBool($key, $value): void
     {
         if (!\is_bool($value) &&
             \in_array($key, [self::CONFIG_KEY_NLP_ENABLED, self::CONFIG_KEY_VERBOSE], true)
@@ -70,12 +70,12 @@ class Nlp extends AbstractApi implements NlpInterface
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param int|string $key
+     * @param mixed      $value
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    private function isString(string $key, $value): void
+    private function isString($key, $value): void
     {
         if (!\is_string($value) &&
             \in_array($key, [self::CONFIG_KEY_CUSTOM_TOKEN, self::CONFIG_KEY_MODEL], true)
@@ -85,12 +85,12 @@ class Nlp extends AbstractApi implements NlpInterface
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param int|string $key
+     * @param mixed      $value
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    private function isValidNBest(string $key, $value): void
+    private function isValidNBest($key, $value): void
     {
         if ($key === self::CONFIG_KEY_N_BEST && (!\is_int($value) || $value < 1 || $value > 8)) {
             throw new InvalidTypeException(sprintf('%s must be an integer between 1 and 8.', $key));

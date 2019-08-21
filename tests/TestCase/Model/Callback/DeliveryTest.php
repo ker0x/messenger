@@ -11,10 +11,9 @@ class DeliveryTest extends AbstractTestCase
 {
     public function testDeliveryCallback(): void
     {
-        $delivery = new Delivery(1458668856253, 35, ['mid.1458668856218:ed81099e15d3f4f233']);
+        $delivery = new Delivery(1458668856253, ['mid.1458668856218:ed81099e15d3f4f233']);
 
         $this->assertSame(1458668856253, $delivery->getWatermark());
-        $this->assertSame(35, $delivery->getSequence());
         $this->assertSame(['mid.1458668856218:ed81099e15d3f4f233'], $delivery->getMessageIds());
     }
 }

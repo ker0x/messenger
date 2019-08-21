@@ -18,7 +18,7 @@ class Image extends File
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    public function __construct($url, ?bool $reusable = null)
+    public function __construct(string $url, ?bool $reusable = null)
     {
         $this->isValidExtension($url, $this->getAllowedExtensions());
 
@@ -33,7 +33,7 @@ class Image extends File
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File
      */
-    public static function create($url, ?bool $reusable = null): File
+    public static function create(string $url, ?bool $reusable = null): File
     {
         return new self($url, $reusable);
     }

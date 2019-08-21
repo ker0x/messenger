@@ -40,7 +40,7 @@ abstract class AbstractElement implements \JsonSerializable
     }
 
     /**
-     * @param mixed $subtitle
+     * @param string $subtitle
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
@@ -54,7 +54,7 @@ abstract class AbstractElement implements \JsonSerializable
     }
 
     /**
-     * @param mixed $imageUrl
+     * @param string $imageUrl
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
@@ -72,11 +72,9 @@ abstract class AbstractElement implements \JsonSerializable
      */
     public function toArray(): array
     {
-        $array = [
+        return [
             'title' => $this->title,
         ];
-
-        return $array;
     }
 
     /**

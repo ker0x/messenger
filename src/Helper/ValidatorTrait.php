@@ -190,7 +190,7 @@ trait ValidatorTrait
     }
 
     /**
-     * @param $message
+     * @param mixed $message
      *
      * @throws \Exception
      *
@@ -246,13 +246,13 @@ trait ValidatorTrait
     }
 
     /**
-     * @param string                         $tag
-     * @param \Kerox\Messenger\Model\Message $message
+     * @param string $tag
+     * @param mixed  $message
      *
      * @throws \Kerox\Messenger\Exception\InvalidClassException
      * @throws \Kerox\Messenger\Exception\InvalidKeyException
      */
-    protected function isValidTag(string $tag, Message $message = null): void
+    protected function isValidTag(string $tag, $message = null): void
     {
         $allowedTag = $this->getAllowedTag();
         if (!\in_array($tag, $allowedTag, true)) {
