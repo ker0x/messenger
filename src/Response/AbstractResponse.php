@@ -32,7 +32,7 @@ abstract class AbstractResponse
      */
     private function decodeResponse(ResponseInterface $response): array
     {
-        return json_decode($response->getBody()->__toString(), true);
+        return json_decode((string) $response->getBody(), true);
     }
 
     /**

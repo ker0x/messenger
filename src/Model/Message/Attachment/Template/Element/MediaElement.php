@@ -38,12 +38,12 @@ class MediaElement implements \JsonSerializable
     /**
      * MediaElement constructor.
      *
-     * @param        $url
+     * @param string $url
      * @param string $mediaType
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    public function __construct($url, string $mediaType = self::TYPE_IMAGE)
+    public function __construct(string $url, string $mediaType = self::TYPE_IMAGE)
     {
         if ($this->isAttachmentId($url)) {
             $this->attachmentId = $url;
@@ -57,14 +57,14 @@ class MediaElement implements \JsonSerializable
     }
 
     /**
-     * @param        $url
+     * @param string $url
      * @param string $mediaType
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement
      */
-    public static function create($url, string $mediaType = self::TYPE_IMAGE): self
+    public static function create(string $url, string $mediaType = self::TYPE_IMAGE): self
     {
         return new self($url, $mediaType);
     }
@@ -97,21 +97,21 @@ class MediaElement implements \JsonSerializable
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
      * @return bool
      */
-    private function isAttachmentId($value): bool
+    private function isAttachmentId(string $value): bool
     {
         return (bool) preg_match('/^[\d]+$/', $value);
     }
 
     /**
-     * @param $mediaType
+     * @param string $mediaType
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    private function isValidMediaType($mediaType): void
+    private function isValidMediaType(string $mediaType): void
     {
         $allowedMediaType = $this->getAllowedMediaType();
         if (!\in_array($mediaType, $allowedMediaType, true)) {

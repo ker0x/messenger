@@ -61,7 +61,7 @@ class AccountLinkingEvent extends AbstractEvent
     }
 
     /**
-     * @param $payload
+     * @param array $payload
      *
      * @return \Kerox\Messenger\Event\AccountLinkingEvent
      */

@@ -12,9 +12,11 @@ class QuickReply implements \JsonSerializable
     use ValidatorTrait;
 
     public const CONTENT_TYPE_TEXT = 'text';
-    public const CONTENT_TYPE_LOCATION = 'location';
     public const CONTENT_TYPE_PHONE = 'user_phone_number';
     public const CONTENT_TYPE_EMAIL = 'user_email';
+
+    /** @deprecated Since version 3.2.0 and will be removed in version 4.0.0. */
+    public const CONTENT_TYPE_LOCATION = 'location';
 
     /**
      * @var string

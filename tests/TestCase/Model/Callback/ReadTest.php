@@ -11,9 +11,8 @@ class ReadTest extends AbstractTestCase
 {
     public function testReadCallback(): void
     {
-        $read = new Read(1458668856253, 38);
+        $read = new Read(1458668856253);
 
         $this->assertSame(1458668856253, $read->getWatermark());
-        $this->assertSame(38, $read->getSequence());
     }
 }

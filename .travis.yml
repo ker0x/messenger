@@ -17,8 +17,6 @@ env:
 
 matrix:
   fast_finish: true
-  allow_failures:
-      - php: 7.2
 
 before_install:
   - composer self-update
@@ -32,10 +30,8 @@ before_script:
 
 script:
   - vendor/bin/php-cs-fixer fix --diff --dry-run
+  - vendor/bin/phpstan --level=max --memory-limit="-1" --no-progress analyze
   - vendor/bin/phpunit --stderr --coverage-clover build/coverage/xml
-
-after_script:
-  - vendor/bin/codacycoverage clover build/coverage/xml
 
 notifications:
   email: false

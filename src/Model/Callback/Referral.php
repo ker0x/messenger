@@ -7,7 +7,7 @@ namespace Kerox\Messenger\Model\Callback;
 class Referral
 {
     /**
-     * @var mixed
+     * @var string|null
      */
     protected $ref;
 
@@ -24,11 +24,11 @@ class Referral
     /**
      * Referral constructor.
      *
-     * @param $ref
+     * @param string|null $ref
      * @param string|null $source
      * @param string|null $type
      */
-    public function __construct($ref, ?string $source, ?string $type)
+    public function __construct(?string $ref, ?string $source, ?string $type)
     {
         $this->ref = $ref;
         $this->source = $source;
@@ -36,9 +36,9 @@ class Referral
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getRef()
+    public function getRef(): ?string
     {
         return $this->ref;
     }

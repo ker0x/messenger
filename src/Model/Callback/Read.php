@@ -12,20 +12,13 @@ class Read
     protected $watermark;
 
     /**
-     * @var int
-     */
-    protected $sequence;
-
-    /**
      * Read constructor.
      *
      * @param int $watermark
-     * @param int $sequence
      */
-    public function __construct(int $watermark, int $sequence)
+    public function __construct(int $watermark)
     {
         $this->watermark = $watermark;
-        $this->sequence = $sequence;
     }
 
     /**
@@ -37,20 +30,12 @@ class Read
     }
 
     /**
-     * @return int
-     */
-    public function getSequence(): int
-    {
-        return $this->sequence;
-    }
-
-    /**
      * @param array $callbackData
      *
      * @return \Kerox\Messenger\Model\Callback\Read
      */
     public static function create(array $callbackData): self
     {
-        return new self($callbackData['watermark'], $callbackData['seq']);
+        return new self($callbackData['watermark']);
     }
 }

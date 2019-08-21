@@ -97,7 +97,6 @@ class WebhookTest extends AbstractTestCase
                             'timestamp' => 1458692752478,
                             'message' => [
                                 'mid' => 'mid.1457764197618:41d102a3e1ae206a38',
-                                'seq' => 73,
                                 'text' => 'hello, world!',
                                 'quick_reply' => [
                                     'payload' => 'DEVELOPER_DEFINED_PAYLOAD',
@@ -128,7 +127,6 @@ class WebhookTest extends AbstractTestCase
                     'timestamp' => 1458692752478,
                     'message' => [
                         'mid' => 'mid.1457764197618:41d102a3e1ae206a38',
-                        'seq' => 73,
                         'text' => 'hello, world!',
                         'quick_reply' => [
                             'payload' => 'DEVELOPER_DEFINED_PAYLOAD',
@@ -147,7 +145,7 @@ class WebhookTest extends AbstractTestCase
 
     public function testGetCallbackEvents(): void
     {
-        $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
+        $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
 
         $events = $this->webhookApi->getCallbackEvents();
 
@@ -178,7 +176,7 @@ class WebhookTest extends AbstractTestCase
             'handler' => $handler,
         ]);
 
-        $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
+        $event = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
 
         $webhookApi = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
         $events = $webhookApi->getCallbackEvents();

@@ -61,7 +61,7 @@ class AppRolesEvent extends AbstractEvent
     }
 
     /**
-     * @param $payload
+     * @param array $payload
      *
      * @return \Kerox\Messenger\Event\AppRolesEvent
      */

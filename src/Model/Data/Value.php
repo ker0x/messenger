@@ -29,8 +29,8 @@ class Value
     }
 
     /**
-     * @param        $value
-     * @param string $endTime
+     * @param int|array $value
+     * @param string    $endTime
      *
      * @return \Kerox\Messenger\Model\Data\Value
      */

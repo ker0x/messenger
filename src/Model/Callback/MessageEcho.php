@@ -27,7 +27,6 @@ class MessageEcho extends Message
      * @param bool        $isEcho
      * @param int|null    $appId
      * @param string      $messageId
-     * @param int         $sequence
      * @param string|null $metadata
      * @param string|null $text
      * @param string|null $quickReply
@@ -37,13 +36,12 @@ class MessageEcho extends Message
         bool $isEcho,
         ?int $appId,
         string $messageId,
-        int $sequence,
         ?string $metadata = null,
         ?string $text = null,
         ?string $quickReply = null,
         array $attachments = []
     ) {
-        parent::__construct($messageId, $sequence, $text, $quickReply, $attachments);
+        parent::__construct($messageId, $text, $quickReply, $attachments);
 
         $this->isEcho = $isEcho;
         $this->appId = $appId;
@@ -91,7 +89,6 @@ class MessageEcho extends Message
             true,
             $appId,
             $callbackData['mid'],
-            $callbackData['seq'],
             $metadata,
             $text,
             $quickReply,

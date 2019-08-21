@@ -61,7 +61,7 @@ class ReadEvent extends AbstractEvent
     }
 
     /**
-     * @param $payload
+     * @param array $payload
      *
      * @return \Kerox\Messenger\Event\ReadEvent
      */

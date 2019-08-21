@@ -15,5 +15,7 @@ trim_trailing_whitespace = true
 trim_trailing_whitespace = false
 
 [*.{json,yml}]
-indent_style = space
 indent_size = 2
+
+[*.neon]
+indent_style = tab

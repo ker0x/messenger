@@ -27,7 +27,6 @@ class EntryTest extends AbstractTestCase
                     'timestamp' => 1458692752478,
                     'message' => [
                         'mid' => 'mid.1457764197618:41d102a3e1ae206a38',
-                        'seq' => 73,
                         'text' => 'hello, world!',
                         'quick_reply' => [
                             'payload' => 'DEVELOPER_DEFINED_PAYLOAD',
@@ -37,7 +36,7 @@ class EntryTest extends AbstractTestCase
             ],
         ];
 
-        $messageEvent = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 73, 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
+        $messageEvent = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
         $entry = Entry::create($payload);
 
         $this->assertSame('PAGE_ID', $entry->getId());

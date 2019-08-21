@@ -12,8 +12,8 @@ use Kerox\Messenger\UserInterface;
 class User extends AbstractApi implements UserInterface
 {
     /**
-     * @param string     $userId
-     * @param array|null $fields
+     * @param string $userId
+     * @param array  $fields
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *

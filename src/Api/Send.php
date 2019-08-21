@@ -17,9 +17,9 @@ class Send extends AbstractApi implements SendInterface
     use ValidatorTrait;
 
     /**
-     * @param string                                $recipient
-     * @param string|\Kerox\Messenger\Model\Message $message
-     * @param array                                 $options
+     * @param string $recipient
+     * @param mixed  $message
+     * @param array  $options
      *
      * @throws \Exception
      *
@@ -27,8 +27,8 @@ class Send extends AbstractApi implements SendInterface
      */
     public function message(string $recipient, $message, array $options = []): SendResponse
     {
+        $this->isValidOptions($options, $message);
         $message = $this->isValidMessage($message);
-        $options = $this->isValidOptions($options, $message);
 
         $request = new SendRequest($this->pageToken, $message, $recipient, $options);
         $response = $this->client->post('me/messages', $request->build());
@@ -48,7 +48,7 @@ class Send extends AbstractApi implements SendInterface
     public function action(string $recipient, string $action, array $options = []): SendResponse
     {
         $this->isValidSenderAction($action);
-        $options = $this->isValidOptions($options, $action);
+        $this->isValidOptions($options);
 
         $request = new SendRequest($this->pageToken, $action, $recipient, $options, SendRequest::REQUEST_TYPE_ACTION);
         $response = $this->client->post('me/messages', $request->build());
@@ -75,13 +75,11 @@ class Send extends AbstractApi implements SendInterface
 
     /**
      * @param array $options
-     * @param       $message
+     * @param mixed $message
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return array
      */
-    private function isValidOptions(array $options, $message): array
+    private function isValidOptions(array $options, $message = null): void
     {
         $allowedOptionsKeys = $this->getAllowedOptionsKeys();
         foreach ($options as $key => $value) {
@@ -100,8 +98,6 @@ class Send extends AbstractApi implements SendInterface
                 $this->isValidTag($value, $message);
             }
         }
-
-        return $options;
     }
 
     /**

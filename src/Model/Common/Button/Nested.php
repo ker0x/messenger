@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Common\Button;
 
+/**
+ * @deprecated Since version 3.2.0 and will be removed in version 4.0.0.
+ */
 class Nested extends AbstractButton
 {
     /**
