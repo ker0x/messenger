@@ -22,11 +22,6 @@ class OptinEvent extends AbstractEvent
 
     /**
      * OptinEvent constructor.
-     *
-     * @param string                                $senderId
-     * @param string                                $recipientId
-     * @param int                                   $timestamp
-     * @param \Kerox\Messenger\Model\Callback\Optin $optin
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Optin $optin)
     {
@@ -36,33 +31,22 @@ class OptinEvent extends AbstractEvent
         $this->optin = $optin;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\Optin
-     */
     public function getOptin(): Optin
     {
         return $this->optin;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\OptinEvent
      */
     public static function create(array $payload): self

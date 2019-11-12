@@ -22,11 +22,6 @@ class PreCheckoutEvent extends AbstractEvent
 
     /**
      * PaymentEvent constructor.
-     *
-     * @param string                                      $senderId
-     * @param string                                      $recipientId
-     * @param int                                         $timestamp
-     * @param \Kerox\Messenger\Model\Callback\PreCheckout $preCheckout
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, PreCheckout $preCheckout)
     {
@@ -36,33 +31,22 @@ class PreCheckoutEvent extends AbstractEvent
         $this->preCheckout = $preCheckout;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\PreCheckout
-     */
     public function getPreCheckout(): PreCheckout
     {
         return $this->preCheckout;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\PreCheckoutEvent
      */
     public static function create(array $payload): self

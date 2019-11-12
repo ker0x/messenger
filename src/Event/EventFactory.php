@@ -26,8 +26,6 @@ class EventFactory
     ];
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\AbstractEvent
      */
     public static function create(array $payload): AbstractEvent

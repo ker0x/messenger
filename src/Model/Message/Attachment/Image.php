@@ -13,9 +13,6 @@ class Image extends File
     /**
      * Image constructor.
      *
-     * @param string    $url
-     * @param bool|null $reusable
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $url, ?bool $reusable = null)
@@ -26,9 +23,6 @@ class Image extends File
     }
 
     /**
-     * @param string    $url
-     * @param bool|null $reusable
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File
@@ -38,9 +32,6 @@ class Image extends File
         return new self($url, $reusable);
     }
 
-    /**
-     * @return array
-     */
     protected function getAllowedExtensions(): array
     {
         return self::ALLOWED_EXTENSIONS;

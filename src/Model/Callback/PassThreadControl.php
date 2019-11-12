@@ -18,9 +18,6 @@ class PassThreadControl
 
     /**
      * TakeThreadControl constructor.
-     *
-     * @param int         $newOwnerAppId
-     * @param string|null $metadata
      */
     public function __construct(int $newOwnerAppId, ?string $metadata)
     {
@@ -28,25 +25,17 @@ class PassThreadControl
         $this->metadata = $metadata;
     }
 
-    /**
-     * @return int
-     */
     public function getNewOwnerAppId(): int
     {
         return $this->newOwnerAppId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMetadata(): ?string
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\PassThreadControl
      */
     public static function create(array $callbackData): self

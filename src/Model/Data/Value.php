@@ -20,7 +20,6 @@ class Value
      * Value constructor.
      *
      * @param int|array $value
-     * @param string    $endTime
      */
     public function __construct($value, string $endTime)
     {
@@ -30,7 +29,6 @@ class Value
 
     /**
      * @param int|array $value
-     * @param string    $endTime
      *
      * @return \Kerox\Messenger\Model\Data\Value
      */
@@ -48,8 +46,6 @@ class Value
     }
 
     /**
-     * @param bool $asDateTime
-     *
      * @return \DateTime|string
      */
     public function getEndTime(bool $asDateTime = true)

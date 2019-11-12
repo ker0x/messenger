@@ -15,10 +15,6 @@ class RawEvent extends AbstractEvent
 
     /**
      * RawEvent constructor.
-     *
-     * @param string $senderId
-     * @param string $recipientId
-     * @param array  $raw
      */
     public function __construct(string $senderId, string $recipientId, array $raw)
     {
@@ -27,25 +23,17 @@ class RawEvent extends AbstractEvent
         $this->raw = $raw;
     }
 
-    /**
-     * @return array
-     */
     public function getRaw(): array
     {
         return $this->raw;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\RawEvent
      */
     public static function create(array $payload): self

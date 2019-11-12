@@ -25,17 +25,12 @@ abstract class Attachment implements \JsonSerializable
 
     /**
      * Attachment constructor.
-     *
-     * @param string $type
      */
     public function __construct(string $type)
     {
         $this->type = $type;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return [
@@ -43,9 +38,6 @@ abstract class Attachment implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

@@ -45,9 +45,6 @@ class PersonaResponse extends AbstractResponse
      */
     protected $success;
 
-    /**
-     * @param array $response
-     */
     protected function parseResponse(array $response): void
     {
         $this->id = $response[self::ID] ?? null;
@@ -59,25 +56,16 @@ class PersonaResponse extends AbstractResponse
         $this->setData($response);
     }
 
-    /**
-     * @return string|null
-     */
     public function getId(): ?string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProfilePictureUrl(): ?string
     {
         return $this->profilePictureUrl;
@@ -91,17 +79,11 @@ class PersonaResponse extends AbstractResponse
         return $this->data;
     }
 
-    /**
-     * @return bool
-     */
     public function isSuccess(): bool
     {
         return $this->success === true;
     }
 
-    /**
-     * @param array $response
-     */
     private function setData(array $response): void
     {
         if (isset($response[self::DATA]) && !empty($response[self::DATA])) {

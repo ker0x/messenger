@@ -20,9 +20,6 @@ class CheckoutUpdate
 
     /**
      * CheckoutUpdate constructor.
-     *
-     * @param string                                $payload
-     * @param \Kerox\Messenger\Model\Common\Address $shippingAddress
      */
     public function __construct(string $payload, Address $shippingAddress)
     {
@@ -30,25 +27,17 @@ class CheckoutUpdate
         $this->shippingAddress = $shippingAddress;
     }
 
-    /**
-     * @return string
-     */
     public function getPayload(): string
     {
         return $this->payload;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Common\Address
-     */
     public function getShippingAddress(): Address
     {
         return $this->shippingAddress;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\CheckoutUpdate
      */
     public static function create(array $callbackData): self

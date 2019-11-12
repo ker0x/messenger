@@ -28,8 +28,6 @@ class FlightSchedule implements \JsonSerializable
     /**
      * FlightSchedule constructor.
      *
-     * @param string $departureTime
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $departureTime)
@@ -40,8 +38,6 @@ class FlightSchedule implements \JsonSerializable
     }
 
     /**
-     * @param string $departureTime
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule
@@ -52,8 +48,6 @@ class FlightSchedule implements \JsonSerializable
     }
 
     /**
-     * @param string $boardingTime
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return FlightSchedule
@@ -68,8 +62,6 @@ class FlightSchedule implements \JsonSerializable
     }
 
     /**
-     * @param string $arrivalTime
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return FlightSchedule
@@ -83,9 +75,6 @@ class FlightSchedule implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -97,9 +86,6 @@ class FlightSchedule implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

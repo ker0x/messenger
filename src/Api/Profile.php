@@ -12,11 +12,6 @@ use Kerox\Messenger\Response\ProfileResponse;
 
 class Profile extends AbstractApi implements ProfileInterface
 {
-    /**
-     * @param \Kerox\Messenger\Model\ProfileSettings $profileSettings
-     *
-     * @return \Kerox\Messenger\Response\ProfileResponse
-     */
     public function add(ProfileSettings $profileSettings): ProfileResponse
     {
         $request = new ProfileRequest($this->pageToken, $profileSettings);
@@ -26,11 +21,7 @@ class Profile extends AbstractApi implements ProfileInterface
     }
 
     /**
-     * @param array $profileSettings
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return \Kerox\Messenger\Response\ProfileResponse
      */
     public function get(array $profileSettings): ProfileResponse
     {
@@ -45,11 +36,7 @@ class Profile extends AbstractApi implements ProfileInterface
     }
 
     /**
-     * @param array $profileSettings
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return \Kerox\Messenger\Response\ProfileResponse
      */
     public function delete(array $profileSettings): ProfileResponse
     {
@@ -62,8 +49,6 @@ class Profile extends AbstractApi implements ProfileInterface
     }
 
     /**
-     * @param array $fields
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidFields(array $fields): void
@@ -71,18 +56,11 @@ class Profile extends AbstractApi implements ProfileInterface
         $allowedFields = $this->getAllowedFields();
         foreach ($fields as $field) {
             if (!\in_array($field, $allowedFields, true)) {
-                throw new InvalidKeyException(sprintf(
-                    '%s is not a valid value. fields must only contain "%s".',
-                    $field,
-                    implode(', ', $allowedFields)
-                ));
+                throw new InvalidKeyException(sprintf('%s is not a valid value. fields must only contain "%s".', $field, implode(', ', $allowedFields)));
             }
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedFields(): array
     {
         return [

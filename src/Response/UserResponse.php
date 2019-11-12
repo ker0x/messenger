@@ -38,9 +38,6 @@ class UserResponse extends AbstractResponse implements UserInterface
      */
     protected $gender;
 
-    /**
-     * @param array $response
-     */
     protected function parseResponse(array $response): void
     {
         $this->firstName = $response[UserInterface::FIRST_NAME] ?? null;
@@ -51,49 +48,31 @@ class UserResponse extends AbstractResponse implements UserInterface
         $this->gender = $response[UserInterface::GENDER] ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProfilePic(): ?string
     {
         return $this->profilePic;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLocale(): ?string
     {
         return $this->locale;
     }
 
-    /**
-     * @return float|null
-     */
     public function getTimezone(): ?float
     {
         return $this->timezone;
     }
 
-    /**
-     * @return string|null
-     */
     public function getGender(): ?string
     {
         return $this->gender;

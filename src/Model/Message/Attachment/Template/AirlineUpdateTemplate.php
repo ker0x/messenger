@@ -37,11 +37,6 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     /**
      * AirlineUpdate constructor.
      *
-     * @param string                                                                $updateType
-     * @param string                                                                $locale
-     * @param string                                                                $pnrNumber
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $updateType, string $locale, string $pnrNumber, FlightInfo $updateFlightInfo)
@@ -56,11 +51,6 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string                                                                $updateType
-     * @param string                                                                $locale
-     * @param string                                                                $pnrNumber
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $updateFlightInfo
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
@@ -75,8 +65,6 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string $introMessage
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
      */
     public function setIntroMessage(string $introMessage): self
@@ -87,24 +75,16 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string $updateType
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidUpdateType(string $updateType): void
     {
         $allowedUpdateType = $this->getAllowedUpdateType();
         if (!\in_array($updateType, $allowedUpdateType, true)) {
-            throw new InvalidTypeException(sprintf(
-                'updateType must be either "%s".',
-                implode(', ', $allowedUpdateType)
-            ));
+            throw new InvalidTypeException(sprintf('updateType must be either "%s".', implode(', ', $allowedUpdateType)));
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedUpdateType(): array
     {
         return [
@@ -114,9 +94,6 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

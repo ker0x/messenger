@@ -27,9 +27,6 @@ class ThreadControl implements \JsonSerializable
 
     /**
      * PassThreadControl constructor.
-     *
-     * @param int      $recipientId
-     * @param int|null $targetAppId
      */
     public function __construct(int $recipientId, ?int $targetAppId = null)
     {
@@ -38,9 +35,6 @@ class ThreadControl implements \JsonSerializable
     }
 
     /**
-     * @param int      $recipientId
-     * @param int|null $targetAppId
-     *
      * @return \Kerox\Messenger\Model\ThreadControl
      */
     public static function create(int $recipientId, ?int $targetAppId = null): self
@@ -49,8 +43,6 @@ class ThreadControl implements \JsonSerializable
     }
 
     /**
-     * @param string $metadata
-     *
      * @throws \Exception
      */
     public function setMetadata(string $metadata): void
@@ -60,9 +52,6 @@ class ThreadControl implements \JsonSerializable
         $this->metadata = $metadata;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -76,9 +65,6 @@ class ThreadControl implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

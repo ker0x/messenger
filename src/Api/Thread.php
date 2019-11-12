@@ -10,11 +10,6 @@ use Kerox\Messenger\Response\ThreadResponse;
 
 class Thread extends AbstractApi
 {
-    /**
-     * @param \Kerox\Messenger\Model\ThreadControl $threadControl
-     *
-     * @return \Kerox\Messenger\Response\ThreadResponse
-     */
     public function pass(ThreadControl $threadControl): ThreadResponse
     {
         $request = new ThreadRequest($this->pageToken, $threadControl);
@@ -23,11 +18,6 @@ class Thread extends AbstractApi
         return new ThreadResponse($response);
     }
 
-    /**
-     * @param \Kerox\Messenger\Model\ThreadControl $threadControl
-     *
-     * @return \Kerox\Messenger\Response\ThreadResponse
-     */
     public function take(ThreadControl $threadControl): ThreadResponse
     {
         $request = new ThreadRequest($this->pageToken, $threadControl);
@@ -36,11 +26,6 @@ class Thread extends AbstractApi
         return new ThreadResponse($response);
     }
 
-    /**
-     * @param \Kerox\Messenger\Model\ThreadControl $threadControl
-     *
-     * @return \Kerox\Messenger\Response\ThreadResponse
-     */
     public function request(ThreadControl $threadControl): ThreadResponse
     {
         $request = new ThreadRequest($this->pageToken, $threadControl);

@@ -50,10 +50,6 @@ class PaymentSummary implements \JsonSerializable
     /**
      * PaymentSummary constructor.
      *
-     * @param string      $currency
-     * @param string      $paymentType
-     * @param string      $merchantName
-     * @param array       $requestedUserInfo
      * @param PriceList[] $priceList
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
@@ -76,12 +72,6 @@ class PaymentSummary implements \JsonSerializable
     }
 
     /**
-     * @param string $currency
-     * @param string $paymentType
-     * @param string $merchantName
-     * @param array  $requestedUserInfo
-     * @param array  $priceList
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary
@@ -97,8 +87,6 @@ class PaymentSummary implements \JsonSerializable
     }
 
     /**
-     * @param bool $isTestPayment
-     *
      * @return PaymentSummary
      */
     public function isTestPayment(bool $isTestPayment): self
@@ -109,9 +97,6 @@ class PaymentSummary implements \JsonSerializable
     }
 
     /**
-     * @param string $label
-     * @param string $amount
-     *
      * @return PaymentSummary
      */
     public function addPriceList(string $label, string $amount): self
@@ -122,24 +107,16 @@ class PaymentSummary implements \JsonSerializable
     }
 
     /**
-     * @param string $paymentType
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidPaymentType(string $paymentType): void
     {
         $allowedPaymentType = $this->getAllowedPaymentType();
         if (!\in_array($paymentType, $allowedPaymentType, true)) {
-            throw new InvalidTypeException(sprintf(
-                'paymentType must be either "%s".',
-                implode(', ', $allowedPaymentType)
-            ));
+            throw new InvalidTypeException(sprintf('paymentType must be either "%s".', implode(', ', $allowedPaymentType)));
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedPaymentType(): array
     {
         return [
@@ -149,8 +126,6 @@ class PaymentSummary implements \JsonSerializable
     }
 
     /**
-     * @param array $requestedUserInfo
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidRequestedUserInfo(array $requestedUserInfo): void
@@ -158,18 +133,11 @@ class PaymentSummary implements \JsonSerializable
         $allowedUserInfo = $this->getAllowedUserInfo();
         foreach ($requestedUserInfo as $userInfo) {
             if (!\in_array($userInfo, $allowedUserInfo, true)) {
-                throw new InvalidKeyException(sprintf(
-                    '%s is not a valid value. Valid values are "%s".',
-                    $userInfo,
-                    implode(', ', $allowedUserInfo)
-                ));
+                throw new InvalidKeyException(sprintf('%s is not a valid value. Valid values are "%s".', $userInfo, implode(', ', $allowedUserInfo)));
             }
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedUserInfo(): array
     {
         return [
@@ -180,9 +148,6 @@ class PaymentSummary implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -197,9 +162,6 @@ class PaymentSummary implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

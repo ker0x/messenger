@@ -21,8 +21,6 @@ class Broadcast extends AbstractApi implements SendInterface
      * @param string|\Kerox\Messenger\Model\Message $message
      *
      * @throws \Exception
-     *
-     * @return \Kerox\Messenger\Response\BroadcastResponse
      */
     public function create($message): BroadcastResponse
     {
@@ -35,12 +33,7 @@ class Broadcast extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param string $messageCreativeId
-     * @param array  $options
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return \Kerox\Messenger\Response\BroadcastResponse
      */
     public function send(string $messageCreativeId, array $options = []): BroadcastResponse
     {
@@ -53,8 +46,6 @@ class Broadcast extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param array $options
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidOptions(array $options): void
@@ -62,10 +53,7 @@ class Broadcast extends AbstractApi implements SendInterface
         $allowedOptionsKeys = $this->getAllowedOptionsKeys();
         foreach ($options as $key => $value) {
             if (!\in_array($key, $allowedOptionsKeys, true)) {
-                throw new InvalidOptionException(sprintf(
-                    'Only "%s" are allowed keys for options.',
-                    implode(', ', $allowedOptionsKeys)
-                ));
+                throw new InvalidOptionException(sprintf('Only "%s" are allowed keys for options.', implode(', ', $allowedOptionsKeys)));
             }
 
             if ($key === self::OPTION_NOTIFICATION_TYPE) {
@@ -76,9 +64,6 @@ class Broadcast extends AbstractApi implements SendInterface
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedOptionsKeys(): array
     {
         return [

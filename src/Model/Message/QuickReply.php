@@ -41,8 +41,6 @@ class QuickReply implements \JsonSerializable
     /**
      * QuickReply constructor.
      *
-     * @param string $contentType
-     *
      * @throws \Exception
      */
     public function __construct(string $contentType = self::CONTENT_TYPE_TEXT)
@@ -53,8 +51,6 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @param string $contentType
-     *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
@@ -65,8 +61,6 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @param string $title
-     *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
@@ -82,8 +76,6 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @param string $payload
-     *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
@@ -99,8 +91,6 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @param string $imageUrl
-     *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\Message\QuickReply
@@ -115,8 +105,6 @@ class QuickReply implements \JsonSerializable
     }
 
     /**
-     * @param string $contentType
-     *
      * @throws \Kerox\Messenger\Exception\InvalidTypeException
      */
     private function isValidContentType(string $contentType): void
@@ -127,9 +115,6 @@ class QuickReply implements \JsonSerializable
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedContentType(): array
     {
         return [
@@ -150,9 +135,6 @@ class QuickReply implements \JsonSerializable
         }
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $quickReply = [
@@ -165,9 +147,6 @@ class QuickReply implements \JsonSerializable
         return array_filter($quickReply);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

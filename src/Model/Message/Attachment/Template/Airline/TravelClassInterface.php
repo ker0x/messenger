@@ -11,14 +11,9 @@ interface TravelClassInterface
     public const FIRST_CLASS = 'first_class';
 
     /**
-     * @param string $travelClass
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function isValidTravelClass(string $travelClass): void;
 
-    /**
-     * @return array
-     */
     public function getAllowedTravelClass(): array;
 }

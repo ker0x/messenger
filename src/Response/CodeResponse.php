@@ -13,17 +13,11 @@ class CodeResponse extends AbstractResponse
      */
     protected $uri;
 
-    /**
-     * @param array $response
-     */
     protected function parseResponse(array $response): void
     {
         $this->uri = $response[self::URI] ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUri(): ?string
     {
         return $this->uri;

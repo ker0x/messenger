@@ -37,11 +37,6 @@ class PassengerSegmentInfo implements \JsonSerializable
 
     /**
      * PassengerSegmentInfo constructor.
-     *
-     * @param string $segmentId
-     * @param string $passengerId
-     * @param string $seat
-     * @param string $seatType
      */
     public function __construct(string $segmentId, string $passengerId, string $seat, string $seatType)
     {
@@ -52,11 +47,6 @@ class PassengerSegmentInfo implements \JsonSerializable
     }
 
     /**
-     * @param string $segmentId
-     * @param string $passengerId
-     * @param string $seat
-     * @param string $seatType
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo
      */
     public static function create(string $segmentId, string $passengerId, string $seat, string $seatType): self
@@ -65,9 +55,6 @@ class PassengerSegmentInfo implements \JsonSerializable
     }
 
     /**
-     * @param string $title
-     * @param string $value
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo
@@ -84,9 +71,6 @@ class PassengerSegmentInfo implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -100,9 +84,6 @@ class PassengerSegmentInfo implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

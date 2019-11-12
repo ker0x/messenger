@@ -34,8 +34,6 @@ class PaymentSettings implements \JsonSerializable
     }
 
     /**
-     * @param string $privacyUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
@@ -49,8 +47,6 @@ class PaymentSettings implements \JsonSerializable
     }
 
     /**
-     * @param string $publicKey
-     *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
     public function setPublicKey(string $publicKey): self
@@ -61,8 +57,6 @@ class PaymentSettings implements \JsonSerializable
     }
 
     /**
-     * @param int $testUser
-     *
      * @return \Kerox\Messenger\Model\ProfileSettings\PaymentSettings
      */
     public function addTestUser(int $testUser): self
@@ -72,9 +66,6 @@ class PaymentSettings implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -86,9 +77,6 @@ class PaymentSettings implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

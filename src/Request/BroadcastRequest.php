@@ -39,11 +39,6 @@ class BroadcastRequest extends AbstractRequest
 
     /**
      * Request constructor.
-     *
-     * @param string                              $pageToken
-     * @param \Kerox\Messenger\Model\Message|null $message
-     * @param string|null                         $messageCreativeId
-     * @param array                               $options
      */
     public function __construct(
         string $pageToken,
@@ -59,9 +54,6 @@ class BroadcastRequest extends AbstractRequest
         $this->tag = $options[SendInterface::OPTION_TAG] ?? null;
     }
 
-    /**
-     * @return array
-     */
     protected function buildHeaders(): array
     {
         return [
@@ -69,9 +61,6 @@ class BroadcastRequest extends AbstractRequest
         ];
     }
 
-    /**
-     * @return array
-     */
     protected function buildBody(): array
     {
         $body = [

@@ -22,11 +22,6 @@ class RequestThreadControlEvent extends AbstractEvent
 
     /**
      * TakeThreadControlEvent constructor.
-     *
-     * @param string                                               $senderId
-     * @param string                                               $recipientId
-     * @param int                                                  $timestamp
-     * @param \Kerox\Messenger\Model\Callback\RequestThreadControl $requestThreadControl
      */
     public function __construct(
         string $senderId,
@@ -40,33 +35,22 @@ class RequestThreadControlEvent extends AbstractEvent
         $this->requestThreadControl = $requestThreadControl;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\RequestThreadControl
-     */
     public function getRequestThreadControl(): RequestThreadControl
     {
         return $this->requestThreadControl;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\RequestThreadControlEvent
      */
     public static function create(array $payload): self

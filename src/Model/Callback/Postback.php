@@ -24,8 +24,6 @@ class Postback
     /**
      * Postback constructor.
      *
-     * @param string                                   $title
-     * @param string|null                              $payload
      * @param \Kerox\Messenger\Model\Callback\Referral $referral
      */
     public function __construct(string $title, ?string $payload = null, ?Referral $referral = null)
@@ -35,33 +33,21 @@ class Postback
         $this->referral = $referral;
     }
 
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @return bool
-     */
     public function hasPayload(): bool
     {
         return $this->payload !== null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPayload(): ?string
     {
         return $this->payload;
     }
 
-    /**
-     * @return bool
-     */
     public function hasReferral(): bool
     {
         return $this->referral !== null;
@@ -76,8 +62,6 @@ class Postback
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\Postback
      */
     public static function create(array $callbackData): self

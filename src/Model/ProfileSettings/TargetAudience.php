@@ -35,10 +35,6 @@ class TargetAudience implements \JsonSerializable
     /**
      * TargetAudience constructor.
      *
-     * @param string $audienceType
-     * @param array  $whitelistCountries
-     * @param array  $blacklistCountries
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(
@@ -56,10 +52,6 @@ class TargetAudience implements \JsonSerializable
     }
 
     /**
-     * @param string $audienceType
-     * @param array  $whitelistCountries
-     * @param array  $blacklistCountries
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
@@ -73,8 +65,6 @@ class TargetAudience implements \JsonSerializable
     }
 
     /**
-     * @param string $country
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
@@ -89,8 +79,6 @@ class TargetAudience implements \JsonSerializable
     }
 
     /**
-     * @param string $country
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\TargetAudience
@@ -105,8 +93,6 @@ class TargetAudience implements \JsonSerializable
     }
 
     /**
-     * @param array $countries
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidCountries(array $countries): void
@@ -119,24 +105,16 @@ class TargetAudience implements \JsonSerializable
     }
 
     /**
-     * @param string $audienceType
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidAudienceType(string $audienceType): void
     {
         $allowedAudienceType = $this->getAllowedAudienceType();
         if (!\in_array($audienceType, $allowedAudienceType, true)) {
-            throw new InvalidTypeException(sprintf(
-                'audienceType must be either "%s".',
-                implode(', ', $allowedAudienceType)
-            ));
+            throw new InvalidTypeException(sprintf('audienceType must be either "%s".', implode(', ', $allowedAudienceType)));
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedAudienceType(): array
     {
         return [
@@ -146,9 +124,6 @@ class TargetAudience implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -162,9 +137,6 @@ class TargetAudience implements \JsonSerializable
         return $this->arrayFilter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

@@ -13,9 +13,6 @@ class UserRequest extends AbstractRequest
 
     /**
      * UserRequest constructor.
-     *
-     * @param string $pageToken
-     * @param array  $fields
      */
     public function __construct(string $pageToken, array $fields)
     {
@@ -32,9 +29,6 @@ class UserRequest extends AbstractRequest
     {
     }
 
-    /**
-     * @return array
-     */
     protected function buildQuery(): array
     {
         $fields = implode(',', $this->fields);

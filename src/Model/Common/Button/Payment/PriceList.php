@@ -18,9 +18,6 @@ class PriceList implements \JsonSerializable
 
     /**
      * PriceList constructor.
-     *
-     * @param string $label
-     * @param string $amount
      */
     public function __construct(string $label, string $amount)
     {
@@ -29,9 +26,6 @@ class PriceList implements \JsonSerializable
     }
 
     /**
-     * @param string $label
-     * @param string $amount
-     *
      * @return \Kerox\Messenger\Model\Common\Button\Payment\PriceList
      */
     public static function create(string $label, string $amount): self
@@ -39,9 +33,6 @@ class PriceList implements \JsonSerializable
         return new self($label, $amount);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return [
@@ -50,9 +41,6 @@ class PriceList implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

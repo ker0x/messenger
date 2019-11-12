@@ -38,13 +38,6 @@ class GamePlay
 
     /**
      * GamePlay constructor.
-     *
-     * @param string $gameId
-     * @param string $playerId
-     * @param string $contextType
-     * @param string $contextId
-     * @param int    $score
-     * @param string $payload
      */
     public function __construct(
         string $gameId,
@@ -62,57 +55,37 @@ class GamePlay
         $this->payload = $payload;
     }
 
-    /**
-     * @return string
-     */
     public function getGameId(): string
     {
         return $this->gameId;
     }
 
-    /**
-     * @return string
-     */
     public function getPlayerId(): string
     {
         return $this->playerId;
     }
 
-    /**
-     * @return string
-     */
     public function getContextType(): string
     {
         return $this->contextType;
     }
 
-    /**
-     * @return string
-     */
     public function getContextId(): string
     {
         return $this->contextId;
     }
 
-    /**
-     * @return int
-     */
     public function getScore(): int
     {
         return $this->score;
     }
 
-    /**
-     * @return string
-     */
     public function getPayload(): string
     {
         return $this->payload;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\GamePlay
      */
     public static function create(array $callbackData): self

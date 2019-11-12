@@ -28,8 +28,6 @@ class Summary implements \JsonSerializable
 
     /**
      * Summary constructor.
-     *
-     * @param float $totalCost
      */
     public function __construct(float $totalCost)
     {
@@ -37,8 +35,6 @@ class Summary implements \JsonSerializable
     }
 
     /**
-     * @param float $totalCost
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary
      */
     public static function create(float $totalCost): self
@@ -47,8 +43,6 @@ class Summary implements \JsonSerializable
     }
 
     /**
-     * @param float $subtotal
-     *
      * @return Summary
      */
     public function setSubtotal(float $subtotal): self
@@ -59,8 +53,6 @@ class Summary implements \JsonSerializable
     }
 
     /**
-     * @param float $shippingCost
-     *
      * @return Summary
      */
     public function setShippingCost(float $shippingCost): self
@@ -71,8 +63,6 @@ class Summary implements \JsonSerializable
     }
 
     /**
-     * @param float $totalTax
-     *
      * @return Summary
      */
     public function setTotalTax(float $totalTax): self
@@ -82,9 +72,6 @@ class Summary implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -97,9 +84,6 @@ class Summary implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

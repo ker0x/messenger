@@ -15,9 +15,6 @@ class PersonaRequest extends AbstractRequest
 
     /**
      * ProfileRequest constructor.
-     *
-     * @param string                                      $pageToken
-     * @param \Kerox\Messenger\Model\PersonaSettings|null $personaSettings
      */
     public function __construct(string $pageToken, PersonaSettings $personaSettings = null)
     {
@@ -26,9 +23,6 @@ class PersonaRequest extends AbstractRequest
         $this->personaSettings = $personaSettings;
     }
 
-    /**
-     * @return array|null
-     */
     protected function buildHeaders(): ?array
     {
         $headers = [

@@ -23,9 +23,6 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
     /**
      * Greeting constructor.
      *
-     * @param string $text
-     * @param string $locale
-     *
      * @throws \Exception
      */
     public function __construct(string $text, string $locale = self::DEFAULT_LOCALE)
@@ -41,9 +38,6 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
     }
 
     /**
-     * @param string $text
-     * @param string $locale
-     *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\Greeting
@@ -53,9 +47,6 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
         return new self($text, $locale);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -66,9 +57,6 @@ class Greeting implements ProfileSettingsInterface, \JsonSerializable
         return $array;
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

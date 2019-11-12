@@ -28,8 +28,6 @@ abstract class AbstractElement implements \JsonSerializable
     /**
      * AbstractElement constructor.
      *
-     * @param string $title
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title)
@@ -40,8 +38,6 @@ abstract class AbstractElement implements \JsonSerializable
     }
 
     /**
-     * @param string $subtitle
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return mixed
@@ -54,8 +50,6 @@ abstract class AbstractElement implements \JsonSerializable
     }
 
     /**
-     * @param string $imageUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return mixed
@@ -67,9 +61,6 @@ abstract class AbstractElement implements \JsonSerializable
         $this->imageUrl = $imageUrl;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return [
@@ -77,9 +68,6 @@ abstract class AbstractElement implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

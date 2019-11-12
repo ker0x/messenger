@@ -27,11 +27,6 @@ class CodeRequest extends AbstractRequest
 
     /**
      * CodeRequest constructor.
-     *
-     * @param string      $pageToken
-     * @param int         $imageSize
-     * @param string      $codeType
-     * @param string|null $ref
      */
     public function __construct(string $pageToken, int $imageSize, string $codeType, ?string $ref = null)
     {
@@ -42,9 +37,6 @@ class CodeRequest extends AbstractRequest
         $this->ref = $ref;
     }
 
-    /**
-     * @return array
-     */
     protected function buildHeaders(): array
     {
         return [
@@ -52,9 +44,6 @@ class CodeRequest extends AbstractRequest
         ];
     }
 
-    /**
-     * @return array
-     */
     protected function buildBody(): array
     {
         $body = [

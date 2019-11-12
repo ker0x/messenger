@@ -13,11 +13,7 @@ use Kerox\Messenger\Response\NlpResponse;
 class Nlp extends AbstractApi implements NlpInterface
 {
     /**
-     * @param array $configs
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return \Kerox\Messenger\Response\NlpResponse
      */
     public function config(array $configs = []): NlpResponse
     {
@@ -30,8 +26,6 @@ class Nlp extends AbstractApi implements NlpInterface
     }
 
     /**
-     * @param array $configs
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidConfigs(array $configs): void
@@ -40,11 +34,7 @@ class Nlp extends AbstractApi implements NlpInterface
         if (!empty($configs)) {
             foreach ($configs as $key => $value) {
                 if (!\in_array($key, $allowedConfigKeys, true)) {
-                    throw new InvalidKeyException(sprintf(
-                        '%s is not a valid key. configs must only contain "%s".',
-                        $key,
-                        implode(', ', $allowedConfigKeys)
-                    ));
+                    throw new InvalidKeyException(sprintf('%s is not a valid key. configs must only contain "%s".', $key, implode(', ', $allowedConfigKeys)));
                 }
 
                 $this->isBool($key, $value);
@@ -97,9 +87,6 @@ class Nlp extends AbstractApi implements NlpInterface
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedConfigKeys(): array
     {
         return [

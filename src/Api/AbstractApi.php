@@ -20,9 +20,6 @@ abstract class AbstractApi
 
     /**
      * AbstractApi constructor.
-     *
-     * @param string                      $pageToken
-     * @param \GuzzleHttp\ClientInterface $client
      */
     public function __construct(string $pageToken, ClientInterface $client)
     {

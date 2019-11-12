@@ -8,8 +8,8 @@ use Kerox\Messenger\Model\Message\Attachment\Template;
 
 class GenericTemplate extends Template
 {
-    const IMAGE_RATIO_HORIZONTAL  = 'horizontal';
-    const IMAGE_RATIO_SQUARE  = 'square';
+    public const IMAGE_RATIO_HORIZONTAL = 'horizontal';
+    public const IMAGE_RATIO_SQUARE = 'square';
 
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[]
@@ -25,7 +25,7 @@ class GenericTemplate extends Template
      * Generic constructor.
      *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[] $elements
-     * @param  string $imageRatio
+     * @param string                                                                      $imageRatio
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
@@ -40,8 +40,7 @@ class GenericTemplate extends Template
     }
 
     /**
-     * @param array $elements
-     * @param  string $imageRatio
+     * @param string $imageRatio
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
@@ -52,9 +51,6 @@ class GenericTemplate extends Template
         return new self($elements, $imageRatio);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

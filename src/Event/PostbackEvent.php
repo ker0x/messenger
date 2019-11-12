@@ -22,11 +22,6 @@ class PostbackEvent extends AbstractEvent
 
     /**
      * PostbackEvent constructor.
-     *
-     * @param string                                   $senderId
-     * @param string                                   $recipientId
-     * @param int                                      $timestamp
-     * @param \Kerox\Messenger\Model\Callback\Postback $postback
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Postback $postback)
     {
@@ -36,33 +31,22 @@ class PostbackEvent extends AbstractEvent
         $this->postback = $postback;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\Postback
-     */
     public function getPostback(): Postback
     {
         return $this->postback;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\PostbackEvent
      */
     public static function create(array $payload): self

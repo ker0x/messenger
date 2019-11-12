@@ -45,9 +45,6 @@ class WebUrl extends AbstractButton
     /**
      * WebUrl constructor.
      *
-     * @param string $title
-     * @param string $url
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title, string $url)
@@ -62,9 +59,6 @@ class WebUrl extends AbstractButton
     }
 
     /**
-     * @param string $title
-     * @param string $url
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\WebUrl
@@ -75,8 +69,6 @@ class WebUrl extends AbstractButton
     }
 
     /**
-     * @param string $webviewHeightRatio
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return WebUrl
@@ -91,8 +83,6 @@ class WebUrl extends AbstractButton
     }
 
     /**
-     * @param bool $messengerExtension
-     *
      * @return WebUrl
      */
     public function setMessengerExtension(bool $messengerExtension): self
@@ -103,8 +93,6 @@ class WebUrl extends AbstractButton
     }
 
     /**
-     * @param string $fallbackUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return WebUrl
@@ -128,24 +116,16 @@ class WebUrl extends AbstractButton
     }
 
     /**
-     * @param string $webviewHeightRatio
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidWebviewHeightRatio(string $webviewHeightRatio): void
     {
         $allowedRatioType = $this->getAllowedRatioType();
         if (!\in_array($webviewHeightRatio, $allowedRatioType, true)) {
-            throw new InvalidKeyException(sprintf(
-                'webviewHeightRatio must be either "%s".',
-                implode(', ', $allowedRatioType)
-            ));
+            throw new InvalidKeyException(sprintf('webviewHeightRatio must be either "%s".', implode(', ', $allowedRatioType)));
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedRatioType(): array
     {
         return [
@@ -155,9 +135,6 @@ class WebUrl extends AbstractButton
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();
