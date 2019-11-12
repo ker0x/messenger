@@ -42,8 +42,8 @@
   },
   "scripts": {
     "php-stan": "vendor/bin/phpstan --level=max --memory-limit=\"-1\" --no-progress analyze",
-    "php-cs-fixer": "php-cs-fixer fix --diff --verbose --config=.php_cs",
-    "test": "phpunit"
+    "php-cs-fixer": "vendor/bin/php-cs-fixer fix --diff --verbose --config=.php_cs",
+    "php-unit": "vendor/bin/phpunit"
   },
   "config": {
     "optimize-autoloader": true,

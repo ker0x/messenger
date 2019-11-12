@@ -1,0 +1,8 @@
+{
+  "home_url":{
+    "url": "https://chat.example.com",
+    "webview_height_ration": "tall",
+    "webview_share_button": "show",
+    "in_test": true
+  }
+}

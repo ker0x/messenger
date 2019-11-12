@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Model;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
+use Kerox\Messenger\Model\ProfileSettings\HomeUrl;
 use Kerox\Messenger\Model\ProfileSettings\PaymentSettings;
 use Kerox\Messenger\Model\ProfileSettings\TargetAudience;
 
 class ProfileSettings implements \JsonSerializable
 {
     use ValidatorTrait;
-
-    /**
-     * @var \Kerox\Messenger\Model\ProfileSettings\PersistentMenu[]|null
-     */
-    protected $persistentMenus;
 
     /**
      * @var array|null
@@ -26,6 +22,16 @@ class ProfileSettings implements \JsonSerializable
      * @var \Kerox\Messenger\Model\ProfileSettings\Greeting[]|null
      */
     protected $greetings;
+
+    /**
+     * @var \Kerox\Messenger\Model\ProfileSettings\IceBreakers[]|null
+     */
+    protected $iceBreakers;
+
+    /**
+     * @var \Kerox\Messenger\Model\ProfileSettings\PersistentMenu[]|null
+     */
+    protected $persistentMenus;
 
     /**
      * @var array|null
@@ -41,6 +47,11 @@ class ProfileSettings implements \JsonSerializable
      * @var \Kerox\Messenger\Model\ProfileSettings\PaymentSettings|null
      */
     protected $paymentSettings;
+
+    /**
+     * @var \Kerox\Messenger\Model\ProfileSettings\HomeUrl|null
+     */
+    protected $homeUrl;
 
     /**
      * @var \Kerox\Messenger\Model\ProfileSettings\TargetAudience|null
@@ -96,6 +107,18 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
+     * @param \Kerox\Messenger\Model\ProfileSettings\IceBreakers[] $iceBreakers
+     *
+     * @return \Kerox\Messenger\Model\ProfileSettings
+     */
+    public function addIceBreakers(array $iceBreakers): self
+    {
+        $this->iceBreakers = $iceBreakers;
+
+        return $this;
+    }
+
+    /**
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
@@ -124,6 +147,8 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
+     * @deprecated Since version 3.3.0 and will be removed in version 4.0.0.
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addPaymentSettings(PaymentSettings $paymentSettings): self
@@ -134,6 +159,18 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
+     * @return \Kerox\Messenger\Model\ProfileSettings
+     */
+    public function addHomeUrl(HomeUrl $homeUrl): self
+    {
+        $this->homeUrl = $homeUrl;
+
+        return $this;
+    }
+
+    /**
+     * @deprecated Since version 3.3.0 and will be removed in version 4.0.0.
+     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addTargetAudience(TargetAudience $targetAudience): self
@@ -158,12 +195,14 @@ class ProfileSettings implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'persistent_menu' => $this->persistentMenus,
             'get_started' => $this->startButton,
             'greeting' => $this->greetings,
+            'ice_breakers' => $this->iceBreakers,
+            'persistent_menu' => $this->persistentMenus,
+            'payment_settings' => $this->paymentSettings,
             'whitelisted_domains' => $this->whitelistedDomains,
             'account_linking_url' => $this->accountLinkingUrl,
-            'payment_settings' => $this->paymentSettings,
+            'home_url' => $this->homeUrl,
             'target_audience' => $this->targetAudience,
         ];
 

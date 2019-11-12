@@ -9,6 +9,8 @@ use Kerox\Messenger\Model\Common\Button\Postback;
 use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\ProfileSettings;
 use Kerox\Messenger\Model\ProfileSettings\Greeting;
+use Kerox\Messenger\Model\ProfileSettings\HomeUrl;
+use Kerox\Messenger\Model\ProfileSettings\IceBreakers;
 use Kerox\Messenger\Model\ProfileSettings\PaymentSettings;
 use Kerox\Messenger\Model\ProfileSettings\PersistentMenu;
 use Kerox\Messenger\Model\ProfileSettings\TargetAudience;
@@ -66,11 +68,24 @@ class ProfileSettingsTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($greetings));
     }
 
+    public function testIceBreakers(): void
+    {
+        $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/ice_breakers.json');
+        $iceBreakers = $this->profileSettings->addIceBreakers([
+            IceBreakers::create('Where are you located?', 'LOCATION_POSTBACK_PAYLOAD'),
+            IceBreakers::create('What are your hours?', 'HOURS_POSTBACK_PAYLOAD'),
+            IceBreakers::create('Can you tell me more about your business?', 'MORE_POSTBACK_PAYLOAD'),
+            IceBreakers::create('What services do you offer?', 'SERVICES_POSTBACK_PAYLOAD'),
+        ]);
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($iceBreakers));
+    }
+
     public function testWhitelistedDomains(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/whitelisted_domains.json');
         $whitelistedDomains = $this->profileSettings->addWhitelistedDomains([
-           'https://petersfancyapparel.com',
+            'https://petersfancyapparel.com',
         ]);
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($whitelistedDomains));
@@ -95,6 +110,18 @@ class ProfileSettingsTest extends AbstractTestCase
         );
 
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($paymentSettings));
+    }
+
+    public function testHomeUrl(): void
+    {
+        $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/home_url.json');
+        $homeUrl = $this->profileSettings->addHomeUrl(HomeUrl::create(
+            'https://chat.example.com',
+            'tall',
+            'show'
+        ));
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($homeUrl));
     }
 
     public function testTargetAudience(): void

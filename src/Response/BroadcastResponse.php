@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Response;
 
+/**
+ * @deprecated Since version 3.2.0 and will be removed in version 4.0.0.
+ */
 class BroadcastResponse extends AbstractResponse
 {
     private const MESSAGE_CREATIVE_ID = 'message_creative_id';

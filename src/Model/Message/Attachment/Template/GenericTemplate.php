@@ -25,11 +25,10 @@ class GenericTemplate extends Template
      * Generic constructor.
      *
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement[] $elements
-     * @param string                                                                      $imageRatio
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    public function __construct(array $elements, $imageRatio = self::IMAGE_RATIO_HORIZONTAL)
+    public function __construct(array $elements, string $imageRatio = self::IMAGE_RATIO_HORIZONTAL)
     {
         parent::__construct();
 
@@ -40,13 +39,11 @@ class GenericTemplate extends Template
     }
 
     /**
-     * @param string $imageRatio
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate
      */
-    public static function create(array $elements, $imageRatio = self::IMAGE_RATIO_HORIZONTAL): self
+    public static function create(array $elements, string $imageRatio = self::IMAGE_RATIO_HORIZONTAL): self
     {
         return new self($elements, $imageRatio);
     }

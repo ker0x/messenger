@@ -1,0 +1,15 @@
+{
+  "sender": {
+    "id": "USER_ID"
+  },
+  "recipient": {
+    "id": "PAGE_ID"
+  },
+  "timestamp": 1458668856463,
+  "reaction": {
+    "reaction": "smile",
+    "emoji": "\u2764\uFE0F",
+    "action": "react",
+    "mid": "<MID>"
+  }
+}
