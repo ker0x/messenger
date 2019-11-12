@@ -7,7 +7,6 @@ namespace Kerox\Messenger\Model\Message\Attachment\Template\Airline;
 class FlightInfo extends AbstractFlightInfo
 {
     /**
-     * @param string                                                                    $flightNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $departureAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $arrivalAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule

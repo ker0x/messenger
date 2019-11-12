@@ -33,8 +33,6 @@ class OpenGraphTemplate extends Template
     }
 
     /**
-     * @param array $elements
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate
@@ -44,9 +42,6 @@ class OpenGraphTemplate extends Template
         return new self($elements);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

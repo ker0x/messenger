@@ -12,12 +12,7 @@ use Kerox\Messenger\UserInterface;
 class User extends AbstractApi implements UserInterface
 {
     /**
-     * @param string $userId
-     * @param array  $fields
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return \Kerox\Messenger\Response\UserResponse
      */
     public function profile(string $userId, array $fields = []): UserResponse
     {
@@ -27,11 +22,7 @@ class User extends AbstractApi implements UserInterface
         if ($fields !== $allowedFields) {
             foreach ($fields as $field) {
                 if (!\in_array($field, $allowedFields, true)) {
-                    throw new InvalidKeyException(sprintf(
-                        '%s is not a valid value. fields must only contain "%s".',
-                        $field,
-                        implode(', ', $allowedFields)
-                    ));
+                    throw new InvalidKeyException(sprintf('%s is not a valid value. fields must only contain "%s".', $field, implode(', ', $allowedFields)));
                 }
             }
         }
@@ -42,9 +33,6 @@ class User extends AbstractApi implements UserInterface
         return new UserResponse($response);
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedFields(): array
     {
         return [

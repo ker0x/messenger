@@ -55,8 +55,6 @@ class Data
 
     /**
      * Data constructor.
-     *
-     * @param array $data
      */
     public function __construct(array $data)
     {
@@ -71,17 +69,11 @@ class Data
         $this->setValues($data);
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPeriod(): ?string
     {
         return $this->period;
@@ -96,8 +88,6 @@ class Data
     }
 
     /**
-     * @param array $data
-     *
      * @return \Kerox\Messenger\Model\Data
      */
     public function setValues(array $data): self
@@ -111,49 +101,32 @@ class Data
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @return string|null
-     */
     public function getId(): ?string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTag(): ?string
     {
         return $this->tag;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProfilePictureUrl(): ?string
     {
         return $this->profilePictureUrl;
     }
 
     /**
-     * @param array $data
-     *
      * @return \Kerox\Messenger\Model\Data
      */
     public static function create(array $data): self

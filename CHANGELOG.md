@@ -3,7 +3,10 @@
 The Messenger library follows [SemVer](http://semver.org/).
 
 ## 3.x
-
+**Changelog** (since [`3.3.0`](https://github.com/ker0x/messenger/compare/3.2.0...3.3.0))
+- 3.3.0 (2019-11)
+    - Support of `image_aspect_ratio` for Generic Template
+    
 **Changelog** (since [`3.2.0`](https://github.com/ker0x/messenger/compare/3.1.1...3.2.0))
 
 - 3.2.0 (2019-08)

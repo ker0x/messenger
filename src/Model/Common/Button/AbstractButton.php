@@ -26,25 +26,17 @@ abstract class AbstractButton implements \JsonSerializable
 
     /**
      * AbstractButton constructor.
-     *
-     * @param string $type
      */
     public function __construct(string $type)
     {
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return [
@@ -52,9 +44,6 @@ abstract class AbstractButton implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

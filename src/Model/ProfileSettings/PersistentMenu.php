@@ -29,8 +29,6 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     /**
      * PersistentMenu constructor.
      *
-     * @param string $locale
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $locale = self::DEFAULT_LOCALE)
@@ -43,8 +41,6 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     }
 
     /**
-     * @param string $locale
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
@@ -55,8 +51,6 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
     }
 
     /**
-     * @param bool $composerInputDisabled
-     *
      * @return \Kerox\Messenger\Model\ProfileSettings\PersistentMenu
      */
     public function setComposerInputDisabled(bool $composerInputDisabled): self
@@ -83,9 +77,6 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     protected function getAllowedButtonsType(): array
     {
         return [
@@ -95,9 +86,6 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -109,9 +97,6 @@ class PersistentMenu implements ProfileSettingsInterface, \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

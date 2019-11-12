@@ -30,10 +30,6 @@ class Entry
 
     /**
      * Entry constructor.
-     *
-     * @param string $id
-     * @param int    $time
-     * @param array  $events
      */
     public function __construct(string $id, int $time, array $events)
     {
@@ -42,33 +38,22 @@ class Entry
         $this->events = $events;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return int
-     */
     public function getTime(): int
     {
         return $this->time;
     }
 
-    /**
-     * @return array
-     */
     public function getEvents(): array
     {
         return $this->events;
     }
 
     /**
-     * @param array $entry
-     *
      * @return \Kerox\Messenger\Model\Callback\Entry
      */
     public static function create(array $entry): self

@@ -22,9 +22,6 @@ class PersonaSettings implements \JsonSerializable
 
     /**
      * Persona constructor.
-     *
-     * @param string $name
-     * @param string $profilePictureUrl
      */
     public function __construct(string $name, string $profilePictureUrl)
     {
@@ -35,9 +32,6 @@ class PersonaSettings implements \JsonSerializable
     }
 
     /**
-     * @param string $name
-     * @param string $profilePictureUrl
-     *
      * @return \Kerox\Messenger\Model\PersonaSettings
      */
     public static function create(string $name, string $profilePictureUrl): self
@@ -45,9 +39,6 @@ class PersonaSettings implements \JsonSerializable
         return new self($name, $profilePictureUrl);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -58,9 +49,6 @@ class PersonaSettings implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

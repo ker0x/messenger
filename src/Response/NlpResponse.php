@@ -13,17 +13,11 @@ class NlpResponse extends AbstractResponse
      */
     protected $success;
 
-    /**
-     * @param array $response
-     */
     protected function parseResponse(array $response): void
     {
         $this->success = $response[self::SUCCESS] ?? false;
     }
 
-    /**
-     * @return bool
-     */
     public function isSuccess(): bool
     {
         return $this->success === true;

@@ -30,11 +30,6 @@ class RequestedUserInfo
 
     /**
      * RequestedUserInfo constructor.
-     *
-     * @param \Kerox\Messenger\Model\Common\Address $shippingAddress
-     * @param string                                $contactName
-     * @param string|null                           $contactEmail
-     * @param string|null                           $contactPhone
      */
     public function __construct(
         Address $shippingAddress,
@@ -48,41 +43,27 @@ class RequestedUserInfo
         $this->contactPhone = $contactPhone;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Common\Address
-     */
     public function getShippingAddress(): Address
     {
         return $this->shippingAddress;
     }
 
-    /**
-     * @return string
-     */
     public function getContactName(): string
     {
         return $this->contactName;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContactEmail(): ?string
     {
         return $this->contactEmail;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContactPhone(): ?string
     {
         return $this->contactPhone;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo
      */
     public static function create(array $callbackData): self

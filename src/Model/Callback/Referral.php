@@ -23,10 +23,6 @@ class Referral
 
     /**
      * Referral constructor.
-     *
-     * @param string|null $ref
-     * @param string|null $source
-     * @param string|null $type
      */
     public function __construct(?string $ref, ?string $source, ?string $type)
     {
@@ -35,33 +31,22 @@ class Referral
         $this->type = $type;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRef(): ?string
     {
         return $this->ref;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSource(): ?string
     {
         return $this->source;
     }
 
-    /**
-     * @return string|null
-     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\Referral
      */
     public static function create(array $callbackData): self

@@ -22,11 +22,6 @@ class MessageEchoEvent extends AbstractEvent
 
     /**
      * MessageEvent constructor.
-     *
-     * @param string                                      $senderId
-     * @param string                                      $recipientId
-     * @param int                                         $timestamp
-     * @param \Kerox\Messenger\Model\Callback\MessageEcho $messageEcho
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, MessageEcho $messageEcho)
     {
@@ -36,33 +31,22 @@ class MessageEchoEvent extends AbstractEvent
         $this->messageEcho = $messageEcho;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\MessageEcho
-     */
     public function getMessageEcho(): MessageEcho
     {
         return $this->messageEcho;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\MessageEchoEvent
      */
     public static function create(array $payload): self

@@ -13,17 +13,11 @@ class ProfileResponse extends AbstractResponse
      */
     protected $result;
 
-    /**
-     * @param array $response
-     */
     protected function parseResponse(array $response): void
     {
         $this->result = $response[self::RESULT] ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getResult(): ?string
     {
         return $this->result;

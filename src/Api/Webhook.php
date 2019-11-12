@@ -46,10 +46,6 @@ class Webhook extends AbstractApi
     /**
      * Webhook constructor.
      *
-     * @param string                                   $appSecret
-     * @param string                                   $verifyToken
-     * @param string                                   $pageToken
-     * @param \GuzzleHttp\ClientInterface              $client
      * @param \Psr\Http\Message\ServerRequestInterface $request
      */
     public function __construct(
@@ -66,9 +62,6 @@ class Webhook extends AbstractApi
         $this->request = $request ?: ServerRequest::fromGlobals();
     }
 
-    /**
-     * @return bool
-     */
     public function isValidToken(): bool
     {
         if ($this->request->getMethod() !== 'GET') {
@@ -83,9 +76,6 @@ class Webhook extends AbstractApi
         return $params['hub_mode'] === 'subscribe' && $params['hub_verify_token'] === $this->verifyToken;
     }
 
-    /**
-     * @return string|null
-     */
     public function challenge(): ?string
     {
         $params = $this->request->getQueryParams();
@@ -93,9 +83,6 @@ class Webhook extends AbstractApi
         return $params['hub_challenge'] ?? null;
     }
 
-    /**
-     * @return \Kerox\Messenger\Response\WebhookResponse
-     */
     public function subscribe(): WebhookResponse
     {
         $request = new WebhookRequest($this->pageToken);
@@ -106,8 +93,6 @@ class Webhook extends AbstractApi
 
     /**
      * @throws \Exception
-     *
-     * @return bool
      */
     public function isValidCallback(): bool
     {
@@ -123,9 +108,6 @@ class Webhook extends AbstractApi
         return $object === 'page' && $entry !== null;
     }
 
-    /**
-     * @return string
-     */
     public function getBody(): string
     {
         if ($this->body === null) {
@@ -137,8 +119,6 @@ class Webhook extends AbstractApi
 
     /**
      * @throws \Exception
-     *
-     * @return array
      */
     public function getDecodedBody(): array
     {
@@ -166,8 +146,6 @@ class Webhook extends AbstractApi
 
     /**
      * @throws \Exception
-     *
-     * @return array
      */
     public function getCallbackEvents(): array
     {
@@ -201,9 +179,6 @@ class Webhook extends AbstractApi
         return $this->hydratedEntries;
     }
 
-    /**
-     * @return bool
-     */
     private function isValidHubSignature(): bool
     {
         $headers = $this->request->getHeader('X-Hub-Signature');

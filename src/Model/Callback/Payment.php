@@ -37,12 +37,6 @@ class Payment
 
     /**
      * Payment constructor.
-     *
-     * @param string                                                    $payload
-     * @param \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo $requestedUserInfo
-     * @param \Kerox\Messenger\Model\Callback\Payment\PaymentCredential $paymentCredential
-     * @param array                                                     $amount
-     * @param string                                                    $shippingOptionId
      */
     public function __construct(
         string $payload,
@@ -58,65 +52,42 @@ class Payment
         $this->shippingOptionId = $shippingOptionId;
     }
 
-    /**
-     * @return string
-     */
     public function getPayload(): string
     {
         return $this->payload;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo
-     */
     public function getRequestedUserInfo(): RequestedUserInfo
     {
         return $this->requestedUserInfo;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Common\Address
-     */
     public function getShippingAddress(): Address
     {
         return $this->requestedUserInfo->getShippingAddress();
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\Payment\PaymentCredential
-     */
     public function getPaymentCredential(): PaymentCredential
     {
         return $this->paymentCredential;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCurrency(): ?string
     {
         return $this->amount['currency'] ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAmount(): ?string
     {
         return $this->amount['amount'] ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getShippingOptionId(): string
     {
         return $this->shippingOptionId;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\Payment
      */
     public static function create(array $callbackData): self

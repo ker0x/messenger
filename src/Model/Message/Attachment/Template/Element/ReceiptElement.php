@@ -24,9 +24,6 @@ class ReceiptElement extends AbstractElement
     /**
      * Element constructor.
      *
-     * @param string $title
-     * @param float  $price
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title, float $price)
@@ -37,9 +34,6 @@ class ReceiptElement extends AbstractElement
     }
 
     /**
-     * @param string $title
-     * @param float  $price
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
@@ -50,8 +44,6 @@ class ReceiptElement extends AbstractElement
     }
 
     /**
-     * @param string $subtitle
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
@@ -64,8 +56,6 @@ class ReceiptElement extends AbstractElement
     }
 
     /**
-     * @param string $imageUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement
@@ -78,8 +68,6 @@ class ReceiptElement extends AbstractElement
     }
 
     /**
-     * @param int $quantity
-     *
      * @return ReceiptElement
      */
     public function setQuantity(int $quantity): self
@@ -90,8 +78,6 @@ class ReceiptElement extends AbstractElement
     }
 
     /**
-     * @param string $currency
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return ReceiptElement
@@ -105,9 +91,6 @@ class ReceiptElement extends AbstractElement
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

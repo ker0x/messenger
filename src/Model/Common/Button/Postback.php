@@ -19,9 +19,6 @@ class Postback extends AbstractButton
     /**
      * Postback constructor.
      *
-     * @param string $title
-     * @param string $payload
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $title, string $payload)
@@ -36,9 +33,6 @@ class Postback extends AbstractButton
     }
 
     /**
-     * @param string $title
-     * @param string $payload
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Postback
@@ -48,9 +42,6 @@ class Postback extends AbstractButton
         return new self($title, $payload);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

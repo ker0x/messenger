@@ -18,9 +18,6 @@ class PolicyEnforcement
 
     /**
      * PolicyEnforcement constructor.
-     *
-     * @param string      $action
-     * @param string|null $reason
      */
     public function __construct(string $action, ?string $reason = null)
     {
@@ -28,25 +25,17 @@ class PolicyEnforcement
         $this->reason = $reason;
     }
 
-    /**
-     * @return string
-     */
     public function getAction(): string
     {
         return $this->action;
     }
 
-    /**
-     * @return string|null
-     */
     public function getReason(): ?string
     {
         return $this->reason;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\PolicyEnforcement
      */
     public static function create(array $callbackData): self

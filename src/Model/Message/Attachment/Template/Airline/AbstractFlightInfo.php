@@ -29,7 +29,6 @@ abstract class AbstractFlightInfo implements \JsonSerializable
     /**
      * AbstractFlightInfo constructor.
      *
-     * @param string                                                                    $flightNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $departureAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $arrivalAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
@@ -46,9 +45,6 @@ abstract class AbstractFlightInfo implements \JsonSerializable
         $this->flightSchedule = $flightSchedule;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return [
@@ -59,9 +55,6 @@ abstract class AbstractFlightInfo implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

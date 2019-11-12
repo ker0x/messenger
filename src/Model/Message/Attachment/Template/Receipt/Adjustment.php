@@ -32,8 +32,6 @@ class Adjustment implements \JsonSerializable
     }
 
     /**
-     * @param string $name
-     *
      * @return Adjustment
      */
     public function setName(string $name): self
@@ -44,8 +42,6 @@ class Adjustment implements \JsonSerializable
     }
 
     /**
-     * @param float $amount
-     *
      * @return Adjustment
      */
     public function setAmount(float $amount): self
@@ -55,9 +51,6 @@ class Adjustment implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -68,9 +61,6 @@ class Adjustment implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

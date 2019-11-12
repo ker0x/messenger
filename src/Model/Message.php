@@ -52,10 +52,7 @@ class Message implements \JsonSerializable
         } elseif ($message instanceof Attachment) {
             $this->type = self::TYPE_ATTACHMENT;
         } else {
-            throw new MessengerException(sprintf(
-                'message must be a string or an instance of %s.',
-                Attachment::class
-            ));
+            throw new MessengerException(sprintf('message must be a string or an instance of %s.', Attachment::class));
         }
 
         $this->message = $message;
@@ -90,8 +87,6 @@ class Message implements \JsonSerializable
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Message\QuickReply $quickReply
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message
@@ -106,8 +101,6 @@ class Message implements \JsonSerializable
     }
 
     /**
-     * @param string $metadata
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return Message
@@ -122,8 +115,6 @@ class Message implements \JsonSerializable
     }
 
     /**
-     * @param array $quickReplies
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidQuickReplies(array $quickReplies): void
@@ -131,17 +122,11 @@ class Message implements \JsonSerializable
         $this->isValidArray($quickReplies, 11, 1);
         foreach ($quickReplies as $quickReply) {
             if (!$quickReply instanceof QuickReply) {
-                throw new InvalidClassException(sprintf(
-                    'Array can only contain instance of %s.',
-                    QuickReply::class
-                ));
+                throw new InvalidClassException(sprintf('Array can only contain instance of %s.', QuickReply::class));
             }
         }
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -153,9 +138,6 @@ class Message implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

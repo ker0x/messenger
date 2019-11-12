@@ -44,13 +44,10 @@ class PaymentCredential
     /**
      * PaymentCredential constructor.
      *
-     * @param string $providerType
-     * @param string $chargeId
      * @param string $tokenizedCard
      * @param string $tokenizedCvv
      * @param string $tokenExpiryMonth
      * @param string $tokenExpiryYear
-     * @param string $fbPaymentId
      */
     public function __construct(
         string $providerType,
@@ -70,65 +67,42 @@ class PaymentCredential
         $this->fbPaymentId = $fbPaymentId;
     }
 
-    /**
-     * @return string
-     */
     public function getProviderType(): string
     {
         return $this->providerType;
     }
 
-    /**
-     * @return string
-     */
     public function getChargeId(): string
     {
         return $this->chargeId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTokenizedCard(): ?string
     {
         return $this->tokenizedCard;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTokenizedCvv(): ?string
     {
         return $this->tokenizedCvv;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTokenExpiryMonth(): ?string
     {
         return $this->tokenExpiryMonth;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTokenExpiryYear(): ?string
     {
         return $this->tokenExpiryYear;
     }
 
-    /**
-     * @return string
-     */
     public function getFbPaymentId(): string
     {
         return $this->fbPaymentId;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\Payment\PaymentCredential
      */
     public static function create(array $callbackData): self

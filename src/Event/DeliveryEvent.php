@@ -17,10 +17,6 @@ class DeliveryEvent extends AbstractEvent
 
     /**
      * DeliveryEvent constructor.
-     *
-     * @param string                                   $senderId
-     * @param string                                   $recipientId
-     * @param \Kerox\Messenger\Model\Callback\Delivery $delivery
      */
     public function __construct(string $senderId, string $recipientId, Delivery $delivery)
     {
@@ -29,25 +25,17 @@ class DeliveryEvent extends AbstractEvent
         $this->delivery = $delivery;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\Delivery
-     */
     public function getDelivery(): Delivery
     {
         return $this->delivery;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\DeliveryEvent
      */
     public static function create(array $payload): self

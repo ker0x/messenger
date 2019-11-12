@@ -79,11 +79,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     /**
      * BoardingPass constructor.
      *
-     * @param string                                                                $passengerName
-     * @param string                                                                $pnrNumber
-     * @param string                                                                $logoImageUrl
-     * @param string                                                                $code
-     * @param string                                                                $aboveBarcodeImageUrl
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $flightInfo
      */
     public function __construct(
@@ -104,11 +99,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
-     * @param string                                                                $passengerName
-     * @param string                                                                $pnrNumber
-     * @param string                                                                $logoImageUrl
-     * @param string                                                                $code
-     * @param string                                                                $aboveBarcodeImageUrl
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo $flightInfo
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
@@ -125,8 +115,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
-     * @param string $travelClass
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
@@ -141,8 +129,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
-     * @param string $seat
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
     public function setSeat(string $seat): self
@@ -153,9 +139,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
-     * @param string $label
-     * @param string $value
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
@@ -170,9 +153,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
-     * @param string $label
-     * @param string $value
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
@@ -187,8 +167,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
-     * @param string $headerImageUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
@@ -203,8 +181,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
-     * @param string $headerTextField
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass
      */
     public function setHeaderTextField(string $headerTextField): self
@@ -214,12 +190,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
         return $this;
     }
 
-    /**
-     * @param string $label
-     * @param string $value
-     *
-     * @return array
-     */
     private function setLabelValue(string $label, string $value): array
     {
         return [
@@ -228,9 +198,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
         ];
     }
 
-    /**
-     * @param string $code
-     */
     private function setCode(string $code): void
     {
         if (filter_var($code, FILTER_VALIDATE_URL)) {
@@ -242,24 +209,16 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
     }
 
     /**
-     * @param string $travelClass
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
         if (!\in_array($travelClass, $allowedTravelClass, true)) {
-            throw new InvalidKeyException(sprintf(
-                'travelClass must be either "%s".',
-                implode(', ', $allowedTravelClass)
-            ));
+            throw new InvalidKeyException(sprintf('travelClass must be either "%s".', implode(', ', $allowedTravelClass)));
         }
     }
 
-    /**
-     * @return array
-     */
     public function getAllowedTravelClass(): array
     {
         return [
@@ -269,9 +228,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -293,9 +249,6 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

@@ -26,9 +26,7 @@ class File extends Attachment
     /**
      * File constructor.
      *
-     * @param string    $url
-     * @param bool|null $reusable
-     * @param string    $type
+     * @param string $type
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
@@ -47,9 +45,6 @@ class File extends Attachment
     }
 
     /**
-     * @param string    $url
-     * @param bool|null $reusable
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File
@@ -59,19 +54,11 @@ class File extends Attachment
         return new self($url, $reusable);
     }
 
-    /**
-     * @param string $value
-     *
-     * @return bool
-     */
     private function isAttachmentId(string $value): bool
     {
         return (bool) preg_match('/^[\d]+$/', $value);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

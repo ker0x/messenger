@@ -13,8 +13,6 @@ abstract class AbstractRequest
 
     /**
      * AbstractRequest constructor.
-     *
-     * @param string $pageToken
      */
     public function __construct(string $pageToken)
     {
@@ -31,9 +29,6 @@ abstract class AbstractRequest
      */
     abstract protected function buildBody();
 
-    /**
-     * @return array
-     */
     protected function buildQuery(): array
     {
         return [
@@ -41,9 +36,6 @@ abstract class AbstractRequest
         ];
     }
 
-    /**
-     * @return array
-     */
     public function build(): array
     {
         $request = [

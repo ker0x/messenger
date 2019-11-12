@@ -13,25 +13,18 @@ class Optin
 
     /**
      * Optin constructor.
-     *
-     * @param string $ref
      */
     public function __construct(string $ref)
     {
         $this->ref = $ref;
     }
 
-    /**
-     * @return string
-     */
     public function getRef(): string
     {
         return $this->ref;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\Optin
      */
     public static function create(array $callbackData): self

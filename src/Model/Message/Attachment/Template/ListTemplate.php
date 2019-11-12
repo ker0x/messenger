@@ -47,8 +47,6 @@ class ListTemplate extends Template
     }
 
     /**
-     * @param array $elements
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
@@ -59,8 +57,6 @@ class ListTemplate extends Template
     }
 
     /**
-     * @param string $topElementStyle
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
@@ -91,24 +87,16 @@ class ListTemplate extends Template
     }
 
     /**
-     * @param string $topElementStyle
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidTopElementStyle(string $topElementStyle): void
     {
         $allowedTopElementStyle = $this->getAllowedTopElementStyle();
         if (!\in_array($topElementStyle, $allowedTopElementStyle, true)) {
-            throw new InvalidKeyException(sprintf(
-                'topElementStyle must be either "%s".',
-                implode(', ', $allowedTopElementStyle)
-            ));
+            throw new InvalidKeyException(sprintf('topElementStyle must be either "%s".', implode(', ', $allowedTopElementStyle)));
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedTopElementStyle(): array
     {
         return [
@@ -117,9 +105,6 @@ class ListTemplate extends Template
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

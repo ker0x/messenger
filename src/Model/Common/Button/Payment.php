@@ -26,9 +26,6 @@ class Payment extends AbstractButton
     /**
      * Payment constructor.
      *
-     * @param string                                                      $payload
-     * @param \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary $paymentSummary
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $payload, PaymentSummary $paymentSummary)
@@ -43,9 +40,6 @@ class Payment extends AbstractButton
     }
 
     /**
-     * @param string                                                      $payload
-     * @param \Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary $paymentSummary
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Payment
@@ -55,9 +49,6 @@ class Payment extends AbstractButton
         return new self($payload, $paymentSummary);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

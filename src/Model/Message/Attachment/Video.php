@@ -11,9 +11,6 @@ class Video extends File
     /**
      * Video constructor.
      *
-     * @param string    $url
-     * @param bool|null $reusable
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $url, ?bool $reusable = null)
@@ -22,9 +19,6 @@ class Video extends File
     }
 
     /**
-     * @param string    $url
-     * @param bool|null $reusable
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\File

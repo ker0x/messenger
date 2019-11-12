@@ -21,8 +21,6 @@ class Share extends AbstractButton
 
     /**
      * Share constructor.
-     *
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate|null $content
      */
     public function __construct(?GenericTemplate $content = null)
     {
@@ -32,8 +30,6 @@ class Share extends AbstractButton
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate|null $content
-     *
      * @return \Kerox\Messenger\Model\Common\Button\Share
      */
     public static function create(?GenericTemplate $content = null): self
@@ -41,9 +37,6 @@ class Share extends AbstractButton
         return new self($content);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

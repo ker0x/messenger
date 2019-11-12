@@ -22,11 +22,6 @@ class PassThreadControlEvent extends AbstractEvent
 
     /**
      * PassThreadControlEvent constructor.
-     *
-     * @param string                                            $senderId
-     * @param string                                            $recipientId
-     * @param int                                               $timestamp
-     * @param \Kerox\Messenger\Model\Callback\PassThreadControl $passThreadControl
      */
     public function __construct(
         string $senderId,
@@ -40,33 +35,22 @@ class PassThreadControlEvent extends AbstractEvent
         $this->passThreadControl = $passThreadControl;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\PassThreadControl
-     */
     public function getPassThreadControl(): PassThreadControl
     {
         return $this->passThreadControl;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\PassThreadControlEvent
      */
     public static function create(array $payload): self

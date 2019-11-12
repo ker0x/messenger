@@ -31,13 +31,9 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
     /**
      * ExtendedFlightInfo constructor.
      *
-     * @param string                                                                    $connectionId
-     * @param string                                                                    $segmentId
-     * @param string                                                                    $flightNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $departureAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $arrivalAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
-     * @param string                                                                    $travelClass
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
@@ -60,13 +56,9 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
     }
 
     /**
-     * @param string                                                                    $connectionId
-     * @param string                                                                    $segmentId
-     * @param string                                                                    $flightNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $departureAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport        $arrivalAirport
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule $flightSchedule
-     * @param string                                                                    $travelClass
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
@@ -93,8 +85,6 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
     }
 
     /**
-     * @param string $aircraftType
-     *
      * @return ExtendedFlightInfo
      */
     public function setAircraftType(string $aircraftType): self
@@ -105,24 +95,16 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
     }
 
     /**
-     * @param string $travelClass
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function isValidTravelClass(string $travelClass): void
     {
         $allowedTravelClass = $this->getAllowedTravelClass();
         if (!\in_array($travelClass, $allowedTravelClass, true)) {
-            throw new InvalidKeyException(sprintf(
-                'travelClass must be either "%s".',
-                implode(', ', $allowedTravelClass)
-            ));
+            throw new InvalidKeyException(sprintf('travelClass must be either "%s".', implode(', ', $allowedTravelClass)));
         }
     }
 
-    /**
-     * @return array
-     */
     public function getAllowedTravelClass(): array
     {
         return [
@@ -132,9 +114,6 @@ class ExtendedFlightInfo extends AbstractFlightInfo implements TravelClassInterf
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [

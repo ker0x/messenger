@@ -22,11 +22,6 @@ class PolicyEnforcementEvent extends AbstractEvent
 
     /**
      * ReadEvent constructor.
-     *
-     * @param string                                            $senderId
-     * @param string                                            $recipientId
-     * @param int                                               $timestamp
-     * @param \Kerox\Messenger\Model\Callback\PolicyEnforcement $policyEnforcement
      */
     public function __construct(
         string $senderId,
@@ -40,33 +35,22 @@ class PolicyEnforcementEvent extends AbstractEvent
         $this->policyEnforcement = $policyEnforcement;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\PolicyEnforcement
-     */
     public function getPolicyEnforcement(): PolicyEnforcement
     {
         return $this->policyEnforcement;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\PolicyEnforcementEvent
      */
     public static function create(array $payload): self

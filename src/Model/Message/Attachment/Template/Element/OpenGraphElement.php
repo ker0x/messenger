@@ -24,8 +24,6 @@ class OpenGraphElement implements \JsonSerializable
     /**
      * OpenGraphElement constructor.
      *
-     * @param string $url
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $url)
@@ -36,8 +34,6 @@ class OpenGraphElement implements \JsonSerializable
     }
 
     /**
-     * @param string $url
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement
@@ -64,9 +60,6 @@ class OpenGraphElement implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     protected function getAllowedButtonsType(): array
     {
         return [
@@ -74,9 +67,6 @@ class OpenGraphElement implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -87,9 +77,6 @@ class OpenGraphElement implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

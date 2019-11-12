@@ -18,8 +18,6 @@ class MediaTemplate extends Template
     /**
      * MediaTemplate constructor.
      *
-     * @param array $elements
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(array $elements)
@@ -32,8 +30,6 @@ class MediaTemplate extends Template
     }
 
     /**
-     * @param array $elements
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\MediaTemplate
@@ -44,8 +40,6 @@ class MediaTemplate extends Template
     }
 
     /**
-     * @param array $elements
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidElements(array $elements): void
@@ -58,9 +52,6 @@ class MediaTemplate extends Template
         }
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

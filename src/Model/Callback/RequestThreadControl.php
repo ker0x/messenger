@@ -18,9 +18,6 @@ class RequestThreadControl
 
     /**
      * TakeThreadControl constructor.
-     *
-     * @param int         $requestedOwnerAppId
-     * @param string|null $metadata
      */
     public function __construct(int $requestedOwnerAppId, ?string $metadata)
     {
@@ -28,25 +25,17 @@ class RequestThreadControl
         $this->metadata = $metadata;
     }
 
-    /**
-     * @return int
-     */
     public function getRequestedOwnerAppId(): int
     {
         return $this->requestedOwnerAppId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMetadata(): ?string
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\RequestThreadControl
      */
     public static function create(array $callbackData): self

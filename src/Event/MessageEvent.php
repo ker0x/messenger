@@ -22,11 +22,6 @@ class MessageEvent extends AbstractEvent
 
     /**
      * MessageEvent constructor.
-     *
-     * @param string                                  $senderId
-     * @param string                                  $recipientId
-     * @param int                                     $timestamp
-     * @param \Kerox\Messenger\Model\Callback\Message $message
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, Message $message)
     {
@@ -36,41 +31,27 @@ class MessageEvent extends AbstractEvent
         $this->message = $message;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\Message
-     */
     public function getMessage(): Message
     {
         return $this->message;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
-    /**
-     * @return bool
-     */
     public function isQuickReply(): bool
     {
         return $this->message->hasQuickReply();
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\MessageEvent
      */
     public static function create(array $payload): self

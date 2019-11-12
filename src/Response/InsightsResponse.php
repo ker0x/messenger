@@ -15,9 +15,6 @@ class InsightsResponse extends AbstractResponse
      */
     protected $data = [];
 
-    /**
-     * @param array $response
-     */
     protected function parseResponse(array $response): void
     {
         $this->setData($response);
@@ -31,9 +28,6 @@ class InsightsResponse extends AbstractResponse
         return $this->data;
     }
 
-    /**
-     * @param array $response
-     */
     private function setData(array $response): void
     {
         if (isset($response[self::DATA]) && !empty($response[self::DATA])) {

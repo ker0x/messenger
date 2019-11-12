@@ -31,12 +31,6 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
     /**
      * AirlineCheckIn constructor.
      *
-     * @param string $introMessage
-     * @param string $locale
-     * @param string $pnrNumber
-     * @param array  $flightInfo
-     * @param string $checkinUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(
@@ -55,12 +49,6 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string $introMessage
-     * @param string $locale
-     * @param string $pnrNumber
-     * @param array  $flightInfo
-     * @param string $checkinUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckInTemplate
@@ -75,9 +63,6 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
         return new self($introMessage, $locale, $pnrNumber, $flightInfo, $checkinUrl);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

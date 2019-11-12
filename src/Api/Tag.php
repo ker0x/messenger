@@ -9,9 +9,6 @@ use Kerox\Messenger\Response\TagResponse;
 
 class Tag extends AbstractApi
 {
-    /**
-     * @return \Kerox\Messenger\Response\TagResponse
-     */
     public function get(): TagResponse
     {
         $request = new TagRequest($this->pageToken);

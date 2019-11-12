@@ -26,9 +26,7 @@ class ButtonTemplate extends Template
     /**
      * Buttons constructor.
      *
-     * @param string                                                $text
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
-     * @param bool                                                  $sharable
      */
     public function __construct(string $text, array $buttons, bool $sharable = false)
     {
@@ -43,10 +41,6 @@ class ButtonTemplate extends Template
     }
 
     /**
-     * @param string $text
-     * @param array  $buttons
-     * @param bool   $sharable
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ButtonTemplate
      */
     public static function create(string $text, array $buttons, bool $sharable = false): self
@@ -54,9 +48,6 @@ class ButtonTemplate extends Template
         return new self($text, $buttons, $sharable);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

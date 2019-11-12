@@ -18,13 +18,7 @@ class Code extends AbstractApi
     private const CODE_TYPE_STANDARD = 'standard';
 
     /**
-     * @param int         $imageSize
-     * @param string      $codeType
-     * @param string|null $ref
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return \Kerox\Messenger\Response\CodeResponse
      */
     public function request(
         int $imageSize = 1000,
@@ -45,8 +39,6 @@ class Code extends AbstractApi
     }
 
     /**
-     * @param int $imageSize
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidCodeImageSize(int $imageSize): void
@@ -57,38 +49,26 @@ class Code extends AbstractApi
     }
 
     /**
-     * @param string $codeType
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidCodeType(string $codeType): void
     {
         $allowedCodeType = $this->getAllowedCodeType();
         if (!\in_array($codeType, $allowedCodeType, true)) {
-            throw new InvalidTypeException(sprintf(
-                'codeType must be either "%s".',
-                implode(', ', $allowedCodeType)
-            ));
+            throw new InvalidTypeException(sprintf('codeType must be either "%s".', implode(', ', $allowedCodeType)));
         }
     }
 
     /**
-     * @param string $ref
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidRef(string $ref): void
     {
         if (!preg_match('/^[a-zA-Z0-9\+\/=\-.:_ ]{1,250}$/', $ref)) {
-            throw new InvalidStringException(
-                'ref must be a string of max 250 characters. Valid characters are "a-z A-Z 0-9 +/=-.:_".'
-            );
+            throw new InvalidStringException('ref must be a string of max 250 characters. Valid characters are "a-z A-Z 0-9 +/=-.:_".');
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedCodeType(): array
     {
         return [

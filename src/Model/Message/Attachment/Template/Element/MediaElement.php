@@ -38,9 +38,6 @@ class MediaElement implements \JsonSerializable
     /**
      * MediaElement constructor.
      *
-     * @param string $url
-     * @param string $mediaType
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     public function __construct(string $url, string $mediaType = self::TYPE_IMAGE)
@@ -57,9 +54,6 @@ class MediaElement implements \JsonSerializable
     }
 
     /**
-     * @param string $url
-     * @param string $mediaType
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement
@@ -86,9 +80,6 @@ class MediaElement implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     protected function getAllowedButtonsType(): array
     {
         return [
@@ -96,35 +87,22 @@ class MediaElement implements \JsonSerializable
         ];
     }
 
-    /**
-     * @param string $value
-     *
-     * @return bool
-     */
     private function isAttachmentId(string $value): bool
     {
         return (bool) preg_match('/^[\d]+$/', $value);
     }
 
     /**
-     * @param string $mediaType
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     private function isValidMediaType(string $mediaType): void
     {
         $allowedMediaType = $this->getAllowedMediaType();
         if (!\in_array($mediaType, $allowedMediaType, true)) {
-            throw new InvalidTypeException(sprintf(
-                'mediaType must be either "%s".',
-                implode(', ', $allowedMediaType)
-            ));
+            throw new InvalidTypeException(sprintf('mediaType must be either "%s".', implode(', ', $allowedMediaType)));
         }
     }
 
-    /**
-     * @return array
-     */
     protected function getAllowedMediaType(): array
     {
         return [
@@ -133,9 +111,6 @@ class MediaElement implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -148,9 +123,6 @@ class MediaElement implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

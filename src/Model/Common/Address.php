@@ -48,12 +48,6 @@ class Address implements \JsonSerializable
 
     /**
      * Address constructor.
-     *
-     * @param string $street
-     * @param string $city
-     * @param string $postalCode
-     * @param string $state
-     * @param string $country
      */
     public function __construct(
         string $street,
@@ -70,12 +64,6 @@ class Address implements \JsonSerializable
     }
 
     /**
-     * @param string $street
-     * @param string $city
-     * @param string $postalCode
-     * @param string $state
-     * @param string $country
-     *
      * @return \Kerox\Messenger\Model\Common\Address
      */
     public static function create(
@@ -89,8 +77,6 @@ class Address implements \JsonSerializable
     }
 
     /**
-     * @param string $name
-     *
      * @return \Kerox\Messenger\Model\Common\Address
      */
     public function setName(string $name): self
@@ -100,25 +86,17 @@ class Address implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getStreet(): string
     {
         return $this->street;
     }
 
     /**
-     * @param string $additionalStreet
-     *
      * @return Address
      */
     public function setAdditionalStreet(string $additionalStreet): self
@@ -128,49 +106,32 @@ class Address implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAdditionalStreet(): ?string
     {
         return $this->additionalStreet;
     }
 
-    /**
-     * @return string
-     */
     public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * @return string
-     */
     public function getPostalCode(): string
     {
         return $this->postalCode;
     }
 
-    /**
-     * @return string
-     */
     public function getState(): string
     {
         return $this->state;
     }
 
-    /**
-     * @return string
-     */
     public function getCountry(): string
     {
         return $this->country;
     }
 
     /**
-     * @param int $id
-     *
      * @return Address
      */
     public function setId(int $id): self
@@ -180,17 +141,11 @@ class Address implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -207,17 +162,12 @@ class Address implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Model\Common\Address
      */
     public static function fromPayload(array $payload): self

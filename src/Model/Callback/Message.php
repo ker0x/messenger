@@ -34,11 +34,8 @@ class Message
     /**
      * Message constructor.
      *
-     * @param string $messageId
      * @param string $text
      * @param string $quickReply
-     * @param array  $attachments
-     * @param array  $entities
      */
     public function __construct(
         string $messageId,
@@ -54,81 +51,52 @@ class Message
         $this->entities = $entities;
     }
 
-    /**
-     * @return string
-     */
     public function getMessageId(): string
     {
         return $this->messageId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getText(): ?string
     {
         return $this->text;
     }
 
-    /**
-     * @return bool
-     */
     public function hasText(): bool
     {
         return $this->text !== null && $this->text !== '';
     }
 
-    /**
-     * @return string|null
-     */
     public function getQuickReply(): ?string
     {
         return $this->quickReply;
     }
 
-    /**
-     * @return bool
-     */
     public function hasQuickReply(): bool
     {
         return $this->quickReply !== null && $this->quickReply !== '';
     }
 
-    /**
-     * @return array
-     */
     public function getAttachments(): array
     {
         return $this->attachments;
     }
 
-    /**
-     * @return bool
-     */
     public function hasAttachments(): bool
     {
         return !empty($this->attachments);
     }
 
-    /**
-     * @return array
-     */
     public function getEntities(): array
     {
         return $this->entities;
     }
 
-    /**
-     * @return bool
-     */
     public function hasEntities(): bool
     {
         return !empty($this->entities);
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\Message
      */
     public static function create(array $callbackData)

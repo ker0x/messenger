@@ -15,9 +15,6 @@ class ThreadRequest extends AbstractRequest
 
     /**
      * TagRequest constructor.
-     *
-     * @param string                               $pageToken
-     * @param \Kerox\Messenger\Model\ThreadControl $threadControl
      */
     public function __construct(string $pageToken, ThreadControl $threadControl)
     {
@@ -26,9 +23,6 @@ class ThreadRequest extends AbstractRequest
         $this->threadControl = $threadControl;
     }
 
-    /**
-     * @return array
-     */
     protected function buildHeaders(): array
     {
         return [
@@ -36,9 +30,6 @@ class ThreadRequest extends AbstractRequest
         ];
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\ThreadControl
-     */
     protected function buildBody(): ThreadControl
     {
         return $this->threadControl;

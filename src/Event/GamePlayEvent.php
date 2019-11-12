@@ -22,11 +22,6 @@ class GamePlayEvent extends AbstractEvent
 
     /**
      * GamePlayEvent constructor.
-     *
-     * @param string                                   $senderId
-     * @param string                                   $recipientId
-     * @param int                                      $timestamp
-     * @param \Kerox\Messenger\Model\Callback\GamePlay $gamePlay
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, GamePlay $gamePlay)
     {
@@ -36,33 +31,22 @@ class GamePlayEvent extends AbstractEvent
         $this->gamePlay = $gamePlay;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\GamePlay
-     */
     public function getGamePlay(): GamePlay
     {
         return $this->gamePlay;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return mixed
      */
     public static function create(array $payload)

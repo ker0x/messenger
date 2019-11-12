@@ -50,11 +50,7 @@ class SendRequest extends AbstractRequest
     /**
      * Request constructor.
      *
-     * @param string                                $pageToken
      * @param string|\Kerox\Messenger\Model\Message $content
-     * @param string|null                           $recipient
-     * @param array                                 $options
-     * @param string                                $requestType
      */
     public function __construct(
         string $pageToken,
@@ -78,9 +74,6 @@ class SendRequest extends AbstractRequest
         $this->personaId = $options[SendInterface::OPTION_PERSONA_ID] ?? null;
     }
 
-    /**
-     * @return array
-     */
     protected function buildHeaders(): array
     {
         return [
@@ -88,9 +81,6 @@ class SendRequest extends AbstractRequest
         ];
     }
 
-    /**
-     * @return array
-     */
     protected function buildBody(): array
     {
         $body = [

@@ -22,11 +22,6 @@ class AccountLinkingEvent extends AbstractEvent
 
     /**
      * AccountLinkingEvent constructor.
-     *
-     * @param string                                         $senderId
-     * @param string                                         $recipientId
-     * @param int                                            $timestamp
-     * @param \Kerox\Messenger\Model\Callback\AccountLinking $accountLinking
      */
     public function __construct(string $senderId, string $recipientId, int $timestamp, AccountLinking $accountLinking)
     {
@@ -36,33 +31,22 @@ class AccountLinkingEvent extends AbstractEvent
         $this->accountLinking = $accountLinking;
     }
 
-    /**
-     * @return int
-     */
     public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @return \Kerox\Messenger\Model\Callback\AccountLinking
-     */
     public function getAccountLinking(): AccountLinking
     {
         return $this->accountLinking;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
     /**
-     * @param array $payload
-     *
      * @return \Kerox\Messenger\Event\AccountLinkingEvent
      */
     public static function create(array $payload): self

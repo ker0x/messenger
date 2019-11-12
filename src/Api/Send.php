@@ -17,13 +17,9 @@ class Send extends AbstractApi implements SendInterface
     use ValidatorTrait;
 
     /**
-     * @param string $recipient
-     * @param mixed  $message
-     * @param array  $options
+     * @param mixed $message
      *
      * @throws \Exception
-     *
-     * @return \Kerox\Messenger\Response\SendResponse
      */
     public function message(string $recipient, $message, array $options = []): SendResponse
     {
@@ -37,13 +33,7 @@ class Send extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param string $recipient
-     * @param string $action
-     * @param array  $options
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return \Kerox\Messenger\Response\SendResponse
      */
     public function action(string $recipient, string $action, array $options = []): SendResponse
     {
@@ -57,11 +47,7 @@ class Send extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Message\Attachment $attachment
-     *
      * @throws \Exception
-     *
-     * @return \Kerox\Messenger\Response\SendResponse
      */
     public function attachment(Attachment $attachment): SendResponse
     {
@@ -74,7 +60,6 @@ class Send extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param array $options
      * @param mixed $message
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
@@ -84,10 +69,7 @@ class Send extends AbstractApi implements SendInterface
         $allowedOptionsKeys = $this->getAllowedOptionsKeys();
         foreach ($options as $key => $value) {
             if (!\in_array($key, $allowedOptionsKeys, true)) {
-                throw new InvalidOptionException(sprintf(
-                    'Only "%s" are allowed keys for options.',
-                    implode(', ', $allowedOptionsKeys)
-                ));
+                throw new InvalidOptionException(sprintf('Only "%s" are allowed keys for options.', implode(', ', $allowedOptionsKeys)));
             }
 
             if ($key === self::OPTION_MESSAGING_TYPE) {
@@ -101,24 +83,16 @@ class Send extends AbstractApi implements SendInterface
     }
 
     /**
-     * @param string $messagingType
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
     protected function isValidMessagingType(string $messagingType): void
     {
         $allowedMessagingType = $this->getAllowedMessagingType();
         if (!\in_array($messagingType, $allowedMessagingType, true)) {
-            throw new InvalidTypeException(sprintf(
-                'messagingType must be either "%s".',
-                implode(', ', $allowedMessagingType)
-            ));
+            throw new InvalidTypeException(sprintf('messagingType must be either "%s".', implode(', ', $allowedMessagingType)));
         }
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedOptionsKeys(): array
     {
         return [
@@ -129,9 +103,6 @@ class Send extends AbstractApi implements SendInterface
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getAllowedMessagingType(): array
     {
         return [

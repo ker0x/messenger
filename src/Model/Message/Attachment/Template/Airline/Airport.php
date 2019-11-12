@@ -28,9 +28,6 @@ class Airport implements \JsonSerializable
 
     /**
      * Airport constructor.
-     *
-     * @param string $airportCode
-     * @param string $city
      */
     public function __construct(string $airportCode, string $city)
     {
@@ -39,9 +36,6 @@ class Airport implements \JsonSerializable
     }
 
     /**
-     * @param string $airportCode
-     * @param string $city
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport
      */
     public static function create(string $airportCode, string $city): self
@@ -50,8 +44,6 @@ class Airport implements \JsonSerializable
     }
 
     /**
-     * @param string $terminal
-     *
      * @return Airport
      */
     public function setTerminal(string $terminal): self
@@ -62,8 +54,6 @@ class Airport implements \JsonSerializable
     }
 
     /**
-     * @param string $gate
-     *
      * @return Airport
      */
     public function setGate(string $gate): self
@@ -73,9 +63,6 @@ class Airport implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -88,9 +75,6 @@ class Airport implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

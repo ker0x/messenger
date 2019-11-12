@@ -46,12 +46,6 @@ class Messenger
 
     /**
      * Messenger constructor.
-     *
-     * @param string                           $appSecret
-     * @param string                           $verifyToken
-     * @param string                           $pageToken
-     * @param string                           $apiVersion
-     * @param \GuzzleHttp\ClientInterface|null $client
      */
     public function __construct(
         string $appSecret,
@@ -72,91 +66,56 @@ class Messenger
         $this->client = $client;
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Send
-     */
     public function send(): Send
     {
         return new Send($this->pageToken, $this->client);
     }
 
-    /**
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request
-     *
-     * @return \Kerox\Messenger\Api\Webhook
-     */
     public function webhook(?ServerRequestInterface $request = null): Webhook
     {
         return new Webhook($this->appSecret, $this->verifyToken, $this->pageToken, $this->client, $request);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\User
-     */
     public function user(): User
     {
         return new User($this->pageToken, $this->client);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Profile
-     */
     public function profile(): Profile
     {
         return new Profile($this->pageToken, $this->client);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Code
-     */
     public function code(): Code
     {
         return new Code($this->pageToken, $this->client);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Insights
-     */
     public function insights(): Insights
     {
         return new Insights($this->pageToken, $this->client);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Tag
-     */
     public function tag(): Tag
     {
         return new Tag($this->pageToken, $this->client);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Thread
-     */
     public function thread(): Thread
     {
         return new Thread($this->pageToken, $this->client);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Nlp
-     */
     public function nlp(): Nlp
     {
         return new Nlp($this->pageToken, $this->client);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Broadcast
-     */
     public function broadcast(): Broadcast
     {
         return new Broadcast($this->pageToken, $this->client);
     }
 
-    /**
-     * @return \Kerox\Messenger\Api\Persona
-     */
     public function persona(): Persona
     {
         return new Persona($this->pageToken, $this->client);

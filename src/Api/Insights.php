@@ -12,13 +12,7 @@ use Kerox\Messenger\Response\InsightsResponse;
 class Insights extends AbstractApi implements InsightsInterface
 {
     /**
-     * @param array    $metrics
-     * @param int|null $since
-     * @param int|null $until
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return \Kerox\Messenger\Response\InsightsResponse
      */
     public function get(array $metrics = [], ?int $since = null, ?int $until = null): InsightsResponse
     {
@@ -31,11 +25,7 @@ class Insights extends AbstractApi implements InsightsInterface
     }
 
     /**
-     * @param array $metrics
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
-     *
-     * @return array
      */
     private function isValidMetrics(array $metrics): array
     {
@@ -45,11 +35,7 @@ class Insights extends AbstractApi implements InsightsInterface
         if ($metrics !== $allowedMetrics) {
             array_map(function ($metric) use ($allowedMetrics): void {
                 if (!\in_array($metric, $allowedMetrics, true)) {
-                    throw new InvalidKeyException(sprintf(
-                        '%s is not a valid value. Metrics must only contain "%s".',
-                        $metric,
-                        implode(', ', $allowedMetrics)
-                    ));
+                    throw new InvalidKeyException(sprintf('%s is not a valid value. Metrics must only contain "%s".', $metric, implode(', ', $allowedMetrics)));
                 }
             }, $metrics);
         }
@@ -57,9 +43,6 @@ class Insights extends AbstractApi implements InsightsInterface
         return $metrics;
     }
 
-    /**
-     * @return array
-     */
     private function getAllowedMetrics(): array
     {
         return [

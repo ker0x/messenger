@@ -18,9 +18,6 @@ class AccountLinking
 
     /**
      * AccountLinking constructor.
-     *
-     * @param string      $status
-     * @param string|null $authorizationCode
      */
     public function __construct(string $status, ?string $authorizationCode = null)
     {
@@ -28,33 +25,22 @@ class AccountLinking
         $this->authorizationCode = $authorizationCode;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @return bool
-     */
     public function hasAuthorizationCode(): bool
     {
         return $this->authorizationCode !== null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAuthorizationCode(): ?string
     {
         return $this->authorizationCode;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\AccountLinking
      */
     public static function create(array $callbackData): self

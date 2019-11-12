@@ -16,8 +16,7 @@ class ProfileRequest extends AbstractRequest
     /**
      * ProfileRequest constructor.
      *
-     * @param string $pageToken
-     * @param mixed  $profileSettings
+     * @param mixed $profileSettings
      */
     public function __construct(string $pageToken, $profileSettings)
     {
@@ -26,9 +25,6 @@ class ProfileRequest extends AbstractRequest
         $this->profileSettings = $profileSettings;
     }
 
-    /**
-     * @return array|null
-     */
     protected function buildHeaders(): ?array
     {
         $headers = [
@@ -55,9 +51,6 @@ class ProfileRequest extends AbstractRequest
         return $body;
     }
 
-    /**
-     * @return array
-     */
     protected function buildQuery(): array
     {
         $query = parent::buildQuery();

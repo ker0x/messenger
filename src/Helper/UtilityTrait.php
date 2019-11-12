@@ -9,10 +9,7 @@ trait UtilityTrait
     /**
      * Enhanced version of array_filter which allow to filter recursively.
      *
-     * @param array $array
      * @param mixed $callback
-     *
-     * @return array
      */
     public function arrayFilter(array $array, $callback = ['self', 'filter']): array
     {
@@ -29,8 +26,6 @@ trait UtilityTrait
      * Callback function for filtering.
      *
      * @param mixed $var array to filter
-     *
-     * @return bool
      */
     protected static function filter($var): bool
     {

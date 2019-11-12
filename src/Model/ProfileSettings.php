@@ -68,8 +68,6 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
-     * @param string $payload
-     *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
@@ -98,8 +96,6 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
-     * @param array $whitelistedDomains
-     *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
@@ -114,8 +110,6 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
-     * @param string $accountLinkingUrl
-     *
      * @throws \Exception
      *
      * @return \Kerox\Messenger\Model\ProfileSettings
@@ -130,8 +124,6 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
-     * @param \Kerox\Messenger\Model\ProfileSettings\PaymentSettings $paymentSettings
-     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addPaymentSettings(PaymentSettings $paymentSettings): self
@@ -142,8 +134,6 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
-     * @param \Kerox\Messenger\Model\ProfileSettings\TargetAudience $targetAudience
-     *
      * @return \Kerox\Messenger\Model\ProfileSettings
      */
     public function addTargetAudience(TargetAudience $targetAudience): self
@@ -154,8 +144,6 @@ class ProfileSettings implements \JsonSerializable
     }
 
     /**
-     * @param array $domains
-     *
      * @throws \Exception
      */
     private function isValidDomains(array $domains): void
@@ -167,9 +155,6 @@ class ProfileSettings implements \JsonSerializable
         }
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [
@@ -185,9 +170,6 @@ class ProfileSettings implements \JsonSerializable
         return array_filter($array);
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return $this->toArray();

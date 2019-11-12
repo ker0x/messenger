@@ -57,9 +57,6 @@ class SendResponse extends AbstractResponse
      */
     protected $errorFbtraceId;
 
-    /**
-     * @param array $response
-     */
     protected function parseResponse(array $response): void
     {
         if (!$this->hasError($response)) {
@@ -69,11 +66,6 @@ class SendResponse extends AbstractResponse
         }
     }
 
-    /**
-     * @param array $response
-     *
-     * @return bool
-     */
     private function hasError(array $response): bool
     {
         if (isset($response[self::ERROR])) {
@@ -89,65 +81,41 @@ class SendResponse extends AbstractResponse
         return false;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRecipientId(): ?string
     {
         return $this->recipientId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessageId(): ?string
     {
         return $this->messageId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAttachmentId(): ?string
     {
         return $this->attachmentId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getErrorMessage(): ?string
     {
         return $this->errorMessage;
     }
 
-    /**
-     * @return string|null
-     */
     public function getErrorType(): ?string
     {
         return $this->errorType;
     }
 
-    /**
-     * @return int|null
-     */
     public function getErrorCode(): ?int
     {
         return $this->errorCode;
     }
 
-    /**
-     * @return int|null
-     */
     public function getErrorSubcode(): ?int
     {
         return $this->errorSubcode;
     }
 
-    /**
-     * @return string|null
-     */
     public function getErrorFbtraceId(): ?string
     {
         return $this->errorFbtraceId;

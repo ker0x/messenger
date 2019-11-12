@@ -17,9 +17,6 @@ class NlpRequest extends AbstractRequest
 
     /**
      * CodeRequest constructor.
-     *
-     * @param string $pageToken
-     * @param array  $configs
      */
     public function __construct(string $pageToken, array $configs)
     {
@@ -36,9 +33,6 @@ class NlpRequest extends AbstractRequest
     {
     }
 
-    /**
-     * @return array
-     */
     protected function buildQuery(): array
     {
         $query = parent::buildQuery();

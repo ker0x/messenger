@@ -19,8 +19,6 @@ class GenericElement extends AbstractElement
     protected $buttons = [];
 
     /**
-     * @param string $title
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
@@ -31,8 +29,6 @@ class GenericElement extends AbstractElement
     }
 
     /**
-     * @param string $subtitle
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
@@ -45,8 +41,6 @@ class GenericElement extends AbstractElement
     }
 
     /**
-     * @param string $imageUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
@@ -59,8 +53,6 @@ class GenericElement extends AbstractElement
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Button\WebUrl $defaultAction
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement
      */
     public function setDefaultAction(WebUrl $defaultAction): self
@@ -86,9 +78,6 @@ class GenericElement extends AbstractElement
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

@@ -5,6 +5,7 @@
       "type": "template",
       "payload": {
         "template_type": "generic",
+        "image_aspect_ratio": "horizontal",
         "elements": [
           {
             "title": "I took Peter's 'Which Hat Are You?' Quiz",

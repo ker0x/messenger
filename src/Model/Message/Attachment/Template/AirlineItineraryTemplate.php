@@ -61,14 +61,9 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     /**
      * AirlineItinerary constructor.
      *
-     * @param string                                                                            $introMessage
-     * @param string                                                                            $locale
-     * @param string                                                                            $pnrNumber
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerInfo[]        $passengerInfo
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\ExtendedFlightInfo[]   $flightInfo
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\PassengerSegmentInfo[] $passengerSegmentInfo
-     * @param string                                                                            $totalPrice
-     * @param string                                                                            $currency
      */
     public function __construct(
         string $introMessage,
@@ -92,15 +87,6 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string $introMessage
-     * @param string $locale
-     * @param string $pnrNumber
-     * @param array  $passengerInfo
-     * @param array  $flightInfo
-     * @param array  $passengerSegmentInfo
-     * @param string $totalPrice
-     * @param string $currency
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
      */
     public static function create(
@@ -126,8 +112,6 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string $title
-     * @param string $amount
      * @param string $currency
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
@@ -154,8 +138,6 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string $basePrice
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
      */
     public function setBasePrice(string $basePrice): self
@@ -166,8 +148,6 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string $tax
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
      */
     public function setTax(string $tax): self
@@ -177,9 +157,6 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

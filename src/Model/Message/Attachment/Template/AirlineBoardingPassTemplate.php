@@ -21,8 +21,6 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
     /**
      * AirlineBoardingPass constructor.
      *
-     * @param string                                                                    $introMessage
-     * @param string                                                                    $locale
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass[] $boardingPass
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
@@ -36,10 +34,6 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @param string $introMessage
-     * @param string $locale
-     * @param array  $boardingPass
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineBoardingPassTemplate
@@ -49,9 +43,6 @@ class AirlineBoardingPassTemplate extends AbstractAirlineTemplate
         return new self($introMessage, $locale, $boardingPass);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

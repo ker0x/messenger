@@ -23,14 +23,6 @@ class MessageEcho extends Message
 
     /**
      * MessageEcho constructor.
-     *
-     * @param bool        $isEcho
-     * @param int|null    $appId
-     * @param string      $messageId
-     * @param string|null $metadata
-     * @param string|null $text
-     * @param string|null $quickReply
-     * @param array       $attachments
      */
     public function __construct(
         bool $isEcho,
@@ -48,33 +40,22 @@ class MessageEcho extends Message
         $this->metadata = $metadata;
     }
 
-    /**
-     * @return bool
-     */
     public function isEcho(): bool
     {
         return $this->isEcho;
     }
 
-    /**
-     * @return int|null
-     */
     public function getAppId(): ?int
     {
         return $this->appId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMetadata(): ?string
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\MessageEcho
      */
     public static function create(array $callbackData)

@@ -27,11 +27,6 @@ class InsightsRequest extends AbstractRequest
 
     /**
      * UserRequest constructor.
-     *
-     * @param string   $pageToken
-     * @param array    $metrics
-     * @param int|null $since
-     * @param int|null $until
      */
     public function __construct(string $pageToken, array $metrics, ?int $since = null, ?int $until = null)
     {
@@ -50,9 +45,6 @@ class InsightsRequest extends AbstractRequest
     {
     }
 
-    /**
-     * @return array
-     */
     protected function buildQuery(): array
     {
         $metrics = implode(',', $this->metrics);

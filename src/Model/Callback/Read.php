@@ -13,25 +13,18 @@ class Read
 
     /**
      * Read constructor.
-     *
-     * @param int $watermark
      */
     public function __construct(int $watermark)
     {
         $this->watermark = $watermark;
     }
 
-    /**
-     * @return int
-     */
     public function getWatermark(): int
     {
         return $this->watermark;
     }
 
     /**
-     * @param array $callbackData
-     *
      * @return \Kerox\Messenger\Model\Callback\Read
      */
     public static function create(array $callbackData): self

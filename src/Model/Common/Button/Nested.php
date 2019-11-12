@@ -22,7 +22,6 @@ class Nested extends AbstractButton
     /**
      * Nested constructor.
      *
-     * @param string                                                $title
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
@@ -40,9 +39,6 @@ class Nested extends AbstractButton
     }
 
     /**
-     * @param string $title
-     * @param array  $buttons
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Common\Button\Nested
@@ -68,9 +64,6 @@ class Nested extends AbstractButton
         return $this;
     }
 
-    /**
-     * @return array
-     */
     protected function getAllowedButtonsType(): array
     {
         return [
@@ -80,9 +73,6 @@ class Nested extends AbstractButton
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

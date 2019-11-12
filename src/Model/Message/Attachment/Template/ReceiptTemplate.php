@@ -63,12 +63,7 @@ class ReceiptTemplate extends Template
     /**
      * Receipt constructor.
      *
-     * @param string                                                                      $recipientName
-     * @param string                                                                      $orderNumber
-     * @param string                                                                      $currency
-     * @param string                                                                      $paymentMethod
      * @param \Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement[] $elements
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary          $summary
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
@@ -93,13 +88,6 @@ class ReceiptTemplate extends Template
     }
 
     /**
-     * @param string                                                             $recipientName
-     * @param string                                                             $orderNumber
-     * @param string                                                             $currency
-     * @param string                                                             $paymentMethod
-     * @param array                                                              $elements
-     * @param \Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary $summary
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate
@@ -116,8 +104,6 @@ class ReceiptTemplate extends Template
     }
 
     /**
-     * @param string $timestamp
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate
      */
     public function setTimestamp(string $timestamp): self
@@ -128,8 +114,6 @@ class ReceiptTemplate extends Template
     }
 
     /**
-     * @param string $orderUrl
-     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate
@@ -144,8 +128,6 @@ class ReceiptTemplate extends Template
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Common\Address $address
-     *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate
      */
     public function setAddress(Address $address): self
@@ -167,9 +149,6 @@ class ReceiptTemplate extends Template
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();
