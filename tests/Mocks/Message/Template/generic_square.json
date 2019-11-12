@@ -2,7 +2,7 @@
   "type": "template",
   "payload": {
     "template_type": "generic",
-    "image_aspect_ratio": "horizontal",
+    "image_aspect_ratio": "square",
     "elements": [
       {
         "title": "Welcome to Peter's Hats",

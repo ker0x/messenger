@@ -191,6 +191,29 @@ class TemplateTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($generic));
     }
 
+    public function testTemplateGenericSquareImage(): void
+    {
+        $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/generic_square.json');
+
+        $element = GenericElement::create('Welcome to Peter\'s Hats')
+            ->setImageUrl('https://petersfancybrownhats.com/company_image.png')
+            ->setSubtitle('We\'ve got the right hat for everyone.')
+            ->setDefaultAction(
+                WebUrl::create('', 'https://peterssendreceiveapp.ngrok.io/view?item=103')
+                    ->setMessengerExtension(true)
+                    ->setWebviewHeightRatio(WebUrl::RATIO_TYPE_TALL)
+                    ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/')
+            )
+            ->setButtons([
+                WebUrl::create('View Website', 'https://petersfancybrownhats.com'),
+                Postback::create('Start Chatting', 'DEVELOPER_DEFINED_PAYLOAD'),
+            ]);
+
+        $generic = GenericTemplate::create([$element], GenericTemplate::IMAGE_RATIO_SQUARE);
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($generic));
+    }
+
     public function testTemplateList(): void
     {
         $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/list.json');
