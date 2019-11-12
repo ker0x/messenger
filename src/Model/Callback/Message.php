@@ -27,6 +27,11 @@ class Message
     protected $attachments;
 
     /**
+     * @var string|null
+     */
+    protected $replyTo;
+
+    /**
      * @var array
      */
     protected $entities;
@@ -42,12 +47,14 @@ class Message
         ?string $text = null,
         ?string $quickReply = null,
         array $attachments = [],
+        ?string $replyTo = null,
         array $entities = []
     ) {
         $this->messageId = $messageId;
         $this->text = $text;
         $this->quickReply = $quickReply;
         $this->attachments = $attachments;
+        $this->replyTo = $replyTo;
         $this->entities = $entities;
     }
 
@@ -86,6 +93,16 @@ class Message
         return !empty($this->attachments);
     }
 
+    public function getReplyTo(): ?string
+    {
+        return $this->replyTo;
+    }
+
+    public function isReply(): bool
+    {
+        return $this->replyTo !== null && $this->replyTo !== '';
+    }
+
     public function getEntities(): array
     {
         return $this->entities;
@@ -102,10 +119,11 @@ class Message
     public static function create(array $callbackData)
     {
         $text = $callbackData['text'] ?? null;
-        $quickReply = $callbackData['quick_reply']['payload'] ?? null;
         $attachments = $callbackData['attachments'] ?? [];
+        $quickReply = $callbackData['quick_reply']['payload'] ?? null;
+        $replyTo = $callbackData['reply_to']['mid'] ?? null;
         $entities = $callbackData['nlp']['entities'] ?? [];
 
-        return new self($callbackData['mid'], $text, $quickReply, $attachments, $entities);
+        return new self($callbackData['mid'], $text, $quickReply, $attachments, $replyTo, $entities);
     }
 }

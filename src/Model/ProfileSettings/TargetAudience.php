@@ -8,6 +8,9 @@ use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Helper\UtilityTrait;
 use Kerox\Messenger\Helper\ValidatorTrait;
 
+/**
+ * @deprecated Since version 3.3.0 and will be removed in version 4.0.0.
+ */
 class TargetAudience implements \JsonSerializable
 {
     use UtilityTrait;

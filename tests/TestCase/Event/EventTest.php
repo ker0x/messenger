@@ -18,6 +18,7 @@ use Kerox\Messenger\Event\PolicyEnforcementEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\PreCheckoutEvent;
 use Kerox\Messenger\Event\RawEvent;
+use Kerox\Messenger\Event\ReactionEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Event\ReferralEvent;
 use Kerox\Messenger\Event\RequestThreadControlEvent;
@@ -35,6 +36,7 @@ use Kerox\Messenger\Model\Callback\Payment;
 use Kerox\Messenger\Model\Callback\PolicyEnforcement;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\PreCheckout;
+use Kerox\Messenger\Model\Callback\Reaction;
 use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Model\Callback\Referral;
 use Kerox\Messenger\Model\Callback\RequestThreadControl;
@@ -255,5 +257,17 @@ class EventTest extends AbstractTestCase
         $this->assertSame(123456, $event->getTimestamp());
         $this->assertSame($mockedReferral, $event->getReferral());
         $this->assertSame('referral', $event->getName());
+    }
+
+    public function testReactionEvent(): void
+    {
+        $mockedReferral = $this->createMock(Reaction::class);
+        $event = new ReactionEvent('sender_id', 'recipient_id', 123456, $mockedReferral);
+
+        $this->assertSame('sender_id', $event->getSenderId());
+        $this->assertSame('recipient_id', $event->getRecipientId());
+        $this->assertSame(123456, $event->getTimestamp());
+        $this->assertSame($mockedReferral, $event->getReaction());
+        $this->assertSame('reaction', $event->getName());
     }
 }

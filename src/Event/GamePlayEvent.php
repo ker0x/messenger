@@ -47,7 +47,7 @@ class GamePlayEvent extends AbstractEvent
     }
 
     /**
-     * @return mixed
+     * @return \Kerox\Messenger\Event\GamePlayEvent
      */
     public static function create(array $payload)
     {

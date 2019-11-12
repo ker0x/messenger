@@ -23,6 +23,7 @@ class EventFactory
         'app_roles' => AppRolesEvent::class,
         'referral' => ReferralEvent::class,
         'game_play' => GamePlayEvent::class,
+        'reaction' => ReactionEvent::class,
     ];
 
     /**

@@ -65,7 +65,7 @@ class ProfileTest extends AbstractTestCase
     public function testBadField(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('menu is not a valid value. fields must only contain "persistent_menu, get_started, greeting, whitelisted_domains, account_linking_url, payment_settings, target_audience".');
+        $this->expectExceptionMessage('menu is not a valid value. fields must only contain "get_started, greeting, ice_breakers, persistent_menu, whitelisted_domains, account_linking_url, payment_settings, home_url, target_audience".');
         $this->profileApi->delete(['menu']);
     }
 

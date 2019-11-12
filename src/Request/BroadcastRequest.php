@@ -7,6 +7,9 @@ namespace Kerox\Messenger\Request;
 use Kerox\Messenger\Model\Message;
 use Kerox\Messenger\SendInterface;
 
+/**
+ * @deprecated Since version 3.2.0 and will be removed in version 4.0.0.
+ */
 class BroadcastRequest extends AbstractRequest
 {
     public const REQUEST_TYPE_MESSAGE = 'message';

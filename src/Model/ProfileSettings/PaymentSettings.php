@@ -6,6 +6,9 @@ namespace Kerox\Messenger\Model\ProfileSettings;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
 
+/**
+ * @deprecated Since version 3.3.0 and will be removed in version 4.0.0.
+ */
 class PaymentSettings implements \JsonSerializable
 {
     use ValidatorTrait;

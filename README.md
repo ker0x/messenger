@@ -20,9 +20,6 @@
     <a href="https://packagist.org/packages/kerox/messenger" title="License">
         <img src="https://img.shields.io/packagist/l/kerox/messenger.svg?style=for-the-badge" alt="License">
     </a>
-    <a href="https://gitter.im/ker0x/messenger" title="Chat">
-        <img src="https://img.shields.io/badge/chat-gitter-46bc99.svg?style=for-the-badge" alt="Chat">
-    </a>
 </div>
 
 # Messenger
@@ -58,8 +55,8 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 
 ### API
 
-- [x] Broadcast
-- [x] Code
+- [x] Broadcast (deprecated)
+- [x] Code (deprecated)
 - [x] Insights
 - [x] Nlp
 - [x] Persona
@@ -79,14 +76,14 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 - [x] Buttons
     - [x] Account Link
     - [x] Account Unlink
-    - [x] Nested
+    - [x] Nested (deprecated)
     - [x] Payment
     - [x] Phone Number
     - [x] Postback
-    - [x] Share
+    - [x] Share (deprecated)
     - [x] Web Url
 - [x] Generic
-- [x] List
+- [x] List (deprecated)
 - [x] Media
 - [x] Receipt
 
@@ -106,6 +103,7 @@ Please, refer to the [wiki](https://github.com/ker0x/messenger/wiki) to learn ho
 - [x] Postback
 - [x] Pre Checkout
 - [x] Read
+- [x] Reaction
 - [x] Referral
 - [x] RequestThreadControl
 - [x] TakeThreadControl

@@ -19,6 +19,7 @@ use Kerox\Messenger\Event\PolicyEnforcementEvent;
 use Kerox\Messenger\Event\PostbackEvent;
 use Kerox\Messenger\Event\PreCheckoutEvent;
 use Kerox\Messenger\Event\RawEvent;
+use Kerox\Messenger\Event\ReactionEvent;
 use Kerox\Messenger\Event\ReadEvent;
 use Kerox\Messenger\Event\ReferralEvent;
 use Kerox\Messenger\Event\RequestThreadControlEvent;
@@ -36,6 +37,7 @@ use Kerox\Messenger\Model\Callback\Payment;
 use Kerox\Messenger\Model\Callback\PolicyEnforcement;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\PreCheckout;
+use Kerox\Messenger\Model\Callback\Reaction;
 use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Model\Callback\Referral;
 use Kerox\Messenger\Model\Callback\RequestThreadControl;
@@ -237,6 +239,17 @@ class EventFactoryTest extends AbstractTestCase
         $array = json_decode($json, true);
 
         $expectedEvent = new GamePlayEvent('USER_ID', 'PAGE_ID', 1458692752478, GamePlay::create($array['game_play']));
+        $event = EventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+    }
+
+    public function testReactionEvent(): void
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Event/reaction.json');
+        $array = json_decode($json, true);
+
+        $expectedEvent = new ReactionEvent('USER_ID', 'PAGE_ID', 1458668856463, Reaction::create($array['reaction']));
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);

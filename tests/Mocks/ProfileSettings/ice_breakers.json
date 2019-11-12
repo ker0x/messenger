@@ -1,0 +1,20 @@
+{
+  "ice_breakers": [
+    {
+      "question": "Where are you located?",
+      "payload": "LOCATION_POSTBACK_PAYLOAD"
+    },
+    {
+      "question": "What are your hours?",
+      "payload": "HOURS_POSTBACK_PAYLOAD"
+    },
+    {
+      "question": "Can you tell me more about your business?",
+      "payload": "MORE_POSTBACK_PAYLOAD"
+    },
+    {
+      "question": "What services do you offer?",
+      "payload": "SERVICES_POSTBACK_PAYLOAD"
+    }
+  ]
+}
