@@ -196,8 +196,18 @@ trait ValidatorTrait
     protected function isValidTag(string $tag, $message = null): void
     {
         $allowedTag = $this->getAllowedTag();
+        $deprecatedTag = $this->getDeprecatedTags();
         if (!\in_array($tag, $allowedTag, true)) {
             throw new InvalidKeyException(sprintf('tag must be either "%s".', implode(', ', $allowedTag)));
+        }
+
+        if (\in_array($tag, $deprecatedTag, true)) {
+            $message = sprintf('The %s tag is deprecated, use %s, %s, %s instead.',
+                $tag,
+                SendInterface::TAG_CONFIRMED_EVENT_UPDATE,
+                SendInterface::TAG_POST_PURCHASE_UPDATE,
+                SendInterface::TAG_ACCOUNT_UPDATE);
+            @trigger_error($message, E_USER_DEPRECATED);
         }
 
         if ($tag === SendInterface::TAG_ISSUE_RESOLUTION && $message !== null && !$message instanceof GenericTemplate) {
@@ -226,13 +236,38 @@ trait ValidatorTrait
     protected function getAllowedTag(): array
     {
         return [
+            SendInterface::TAG_CONFIRMED_EVENT_UPDATE,
+            SendInterface::TAG_POST_PURCHASE_UPDATE,
+            SendInterface::TAG_ACCOUNT_UPDATE,
+            //Tags supported until March 4th, 2020.
             SendInterface::TAG_BUSINESS_PRODUCTIVITY,
             SendInterface::TAG_COMMUNITY_ALERT,
             SendInterface::TAG_CONFIRMED_EVENT_REMINDER,
             SendInterface::TAG_NON_PROMOTIONAL_SUBSCRIPTION,
             SendInterface::TAG_PAIRING_UPDATE,
             SendInterface::TAG_APPLICATION_UPDATE,
-            SendInterface::TAG_ACCOUNT_UPDATE,
+            SendInterface::TAG_PAYMENT_UPDATE,
+            SendInterface::TAG_PERSONAL_FINANCE_UPDATE,
+            SendInterface::TAG_SHIPPING_UPDATE,
+            SendInterface::TAG_RESERVATION_UPDATE,
+            SendInterface::TAG_ISSUE_RESOLUTION,
+            SendInterface::TAG_APPOINTMENT_UPDATE,
+            SendInterface::TAG_GAME_EVENT,
+            SendInterface::TAG_TRANSPORTATION_UPDATE,
+            SendInterface::TAG_FEATURE_FUNCTIONALITY_UPDATE,
+            SendInterface::TAG_TICKET_UPDATE,
+        ];
+    }
+
+    protected function getDeprecatedTags(): array
+    {
+        return [
+            SendInterface::TAG_BUSINESS_PRODUCTIVITY,
+            SendInterface::TAG_COMMUNITY_ALERT,
+            SendInterface::TAG_CONFIRMED_EVENT_REMINDER,
+            SendInterface::TAG_NON_PROMOTIONAL_SUBSCRIPTION,
+            SendInterface::TAG_PAIRING_UPDATE,
+            SendInterface::TAG_APPLICATION_UPDATE,
             SendInterface::TAG_PAYMENT_UPDATE,
             SendInterface::TAG_PERSONAL_FINANCE_UPDATE,
             SendInterface::TAG_SHIPPING_UPDATE,
