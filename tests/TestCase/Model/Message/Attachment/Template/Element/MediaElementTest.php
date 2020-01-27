@@ -14,7 +14,7 @@ class MediaElementTest extends AbstractTestCase
     public function testInvalidButton(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('Buttons can only be an instance of web_url.');
+        $this->expectExceptionMessage('Buttons can only be an instance of "web_url".');
 
         $element = MediaElement::create('https://www.facebook.com/photo.php?fbid=1234567890')
             ->setButtons([

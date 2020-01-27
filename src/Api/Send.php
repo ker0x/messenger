@@ -89,7 +89,7 @@ class Send extends AbstractApi implements SendInterface
     {
         $allowedMessagingType = $this->getAllowedMessagingType();
         if (!\in_array($messagingType, $allowedMessagingType, true)) {
-            throw new InvalidTypeException(sprintf('messagingType must be either "%s".', implode(', ', $allowedMessagingType)));
+            throw new InvalidTypeException(sprintf('"messagingType" must be either "%s".', implode(', ', $allowedMessagingType)));
         }
     }
 

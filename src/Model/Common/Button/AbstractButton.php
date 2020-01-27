@@ -13,10 +13,14 @@ abstract class AbstractButton implements \JsonSerializable
     public const TYPE_POSTBACK = 'postback';
     public const TYPE_PHONE_NUMBER = 'phone_number';
     public const TYPE_WEB_URL = 'web_url';
-    public const TYPE_SHARE = 'element_share';
     public const TYPE_PAYMENT = 'payment';
     public const TYPE_ACCOUNT_LINK = 'account_link';
     public const TYPE_ACCOUNT_UNLINK = 'account_unlink';
+
+    /** @deprecated Since version 3.3.1 and will be removed in version 4.0.0. */
+    public const TYPE_SHARE = 'element_share';
+
+    /** @deprecated Since version 3.3.1 and will be removed in version 4.0.0. */
     public const TYPE_NESTED = 'nested';
 
     /**

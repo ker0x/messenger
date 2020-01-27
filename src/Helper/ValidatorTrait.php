@@ -54,7 +54,7 @@ trait ValidatorTrait
             '/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/',
             $value
         )) {
-            throw new InvalidUrlException(sprintf('%s is not a valid url.', $value));
+            throw new InvalidUrlException(sprintf('"%s" is not a valid url.', $value));
         }
     }
 
@@ -64,7 +64,7 @@ trait ValidatorTrait
     protected function isValidLocale(string $value): void
     {
         if (!preg_match('/^[a-z]{2}_[A-Z]{2}$/', $value)) {
-            throw new InvalidLocaleException(sprintf('%s is not valid. Locale must be in ISO-639-1 and ISO-3166-1 format like fr_FR.', $value));
+            throw new InvalidLocaleException(sprintf('"%s" is not valid. Locale must be in ISO-639-1 and ISO-3166-1 format like fr_FR.', $value));
         }
     }
 
@@ -74,7 +74,7 @@ trait ValidatorTrait
     protected function isValidCountry(string $value): void
     {
         if (!preg_match('/^[A-Z]{2}$/', $value)) {
-            throw new InvalidCountryException(sprintf('%s is not valid. Country must be in ISO 3166 Alpha-2 format like FR.', $value));
+            throw new InvalidCountryException(sprintf('"%s" is not valid. Country must be in ISO 3166 Alpha-2 format like FR.', $value));
         }
     }
 
@@ -84,7 +84,7 @@ trait ValidatorTrait
     protected function isValidDateTime(string $value): void
     {
         if (!preg_match('/^(\d{4})-(0[1-9]|1[0-2])-([12]\d|0[1-9]|3[01])T(0\d|1\d|2[0-3]):([0-5]\d)$/', $value)) {
-            throw new InvalidDateTimeException(sprintf('%s is not valid. DateTime must be in ISO-8601 AAAA-MM-JJThh:mm format.', $value));
+            throw new InvalidDateTimeException(sprintf('"%s" is not valid. DateTime must be in ISO-8601 AAAA-MM-JJThh:mm format.', $value));
         }
     }
 
@@ -113,7 +113,7 @@ trait ValidatorTrait
 
         $regex = '/^' . implode('|', $allowedCurrency) . '$/';
         if (!preg_match($regex, $value)) {
-            throw new InvalidCurrencyException(sprintf('%s is not a valid currency. Currency must be in ISO-4217-3 format.', $value));
+            throw new InvalidCurrencyException(sprintf('"%s" is not a valid currency. Currency must be in ISO-4217-3 format.', $value));
         }
     }
 
@@ -124,7 +124,7 @@ trait ValidatorTrait
     {
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if (empty($ext) || !\in_array($ext, $allowedExtension, true)) {
-            throw new InvalidExtensionException(sprintf('%s does not have a valid extension. Allowed extensions are "%s".', $filename, implode(', ', $allowedExtension)));
+            throw new InvalidExtensionException(sprintf('"%s" does not have a valid extension. Allowed extensions are "%s".', $filename, implode(', ', $allowedExtension)));
         }
     }
 
@@ -138,11 +138,11 @@ trait ValidatorTrait
         /** @var \Kerox\Messenger\Model\Common\Button\AbstractButton $button */
         foreach ($buttons as $button) {
             if (!$button instanceof AbstractButton) {
-                throw new InvalidClassException(sprintf('Array can only contain instance of %s.', AbstractButton::class));
+                throw new InvalidClassException(sprintf('Array can only contain instance of "%s".', AbstractButton::class));
             }
 
             if (!\in_array($button->getType(), $allowedButtonsType, true)) {
-                throw new InvalidClassException(sprintf('Buttons can only be an instance of %s.', implode(', ', $allowedButtonsType)));
+                throw new InvalidClassException(sprintf('Buttons can only be an instance of "%s".', implode(', ', $allowedButtonsType)));
             }
         }
     }
@@ -162,7 +162,7 @@ trait ValidatorTrait
             return Message::create($message);
         }
 
-        throw new MessengerException(sprintf('message must be a string or an instance of %s or %s.', Message::class, Attachment::class));
+        throw new MessengerException(sprintf('"message" must be a string or an instance of "%s" or "%s".', Message::class, Attachment::class));
     }
 
     /**
@@ -172,7 +172,7 @@ trait ValidatorTrait
     {
         $allowedSenderAction = $this->getAllowedSenderAction();
         if (!\in_array($action, $allowedSenderAction, true)) {
-            throw new InvalidKeyException(sprintf('action must be either "%s".', implode(', ', $allowedSenderAction)));
+            throw new InvalidKeyException(sprintf('"action" must be either "%s".', implode(', ', $allowedSenderAction)));
         }
     }
 
@@ -183,7 +183,7 @@ trait ValidatorTrait
     {
         $allowedNotificationType = $this->getAllowedNotificationType();
         if (!\in_array($notificationType, $allowedNotificationType, true)) {
-            throw new InvalidTypeException(sprintf('notificationType must be either "%s".', implode(', ', $allowedNotificationType)));
+            throw new InvalidTypeException(sprintf('"notificationType" must be either "%s".', implode(', ', $allowedNotificationType)));
         }
     }
 
@@ -198,20 +198,23 @@ trait ValidatorTrait
         $allowedTag = $this->getAllowedTag();
         $deprecatedTag = $this->getDeprecatedTags();
         if (!\in_array($tag, $allowedTag, true)) {
-            throw new InvalidKeyException(sprintf('tag must be either "%s".', implode(', ', $allowedTag)));
+            throw new InvalidKeyException(sprintf('"tag" must be either "%s".', implode(', ', $allowedTag)));
         }
 
         if (\in_array($tag, $deprecatedTag, true)) {
-            $message = sprintf('The %s tag is deprecated, use %s, %s, %s instead.',
+            $message = sprintf('Tag "%s" is deprecated, use one of "%s" instead.',
                 $tag,
-                SendInterface::TAG_CONFIRMED_EVENT_UPDATE,
-                SendInterface::TAG_POST_PURCHASE_UPDATE,
-                SendInterface::TAG_ACCOUNT_UPDATE);
+                implode(',', [
+                    SendInterface::TAG_CONFIRMED_EVENT_UPDATE,
+                    SendInterface::TAG_POST_PURCHASE_UPDATE,
+                    SendInterface::TAG_ACCOUNT_UPDATE,
+                ])
+            );
             @trigger_error($message, E_USER_DEPRECATED);
         }
 
         if ($tag === SendInterface::TAG_ISSUE_RESOLUTION && $message !== null && !$message instanceof GenericTemplate) {
-            throw new InvalidClassException(sprintf('message must be an instance of %s if tag is set to %s.', GenericTemplate::class, SendInterface::TAG_ISSUE_RESOLUTION));
+            throw new InvalidClassException(sprintf('"message" must be an instance of "%s" if tag is set to "%s".', GenericTemplate::class, SendInterface::TAG_ISSUE_RESOLUTION));
         }
     }
 

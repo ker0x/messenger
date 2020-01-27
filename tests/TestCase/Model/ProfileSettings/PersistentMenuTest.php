@@ -17,7 +17,7 @@ class PersistentMenuTest extends AbstractTestCase
     public function testInvalidButton(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('Array can only contain instance of Kerox\Messenger\Model\Common\Button\AbstractButton.');
+        $this->expectExceptionMessage('Array can only contain instance of "Kerox\Messenger\Model\Common\Button\AbstractButton".');
 
         $persistentMenu = PersistentMenu::create()->setComposerInputDisabled(true)->addButtons([
             'Phone Number' => [
@@ -29,7 +29,7 @@ class PersistentMenuTest extends AbstractTestCase
     public function testInvalidButtonType(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('Buttons can only be an instance of web_url, postback, nested.');
+        $this->expectExceptionMessage('Buttons can only be an instance of "web_url, postback, nested".');
 
         $persistentMenu = PersistentMenu::create()->setComposerInputDisabled(true)->addButtons([
             PhoneNumber::create('Phone number', 'PHONE_NUMBER_PAYLOAD'),
