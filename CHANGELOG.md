@@ -4,6 +4,12 @@ The Messenger library follows [SemVer](http://semver.org/).
 
 ## 3.x
 
+**Changelog** (since [`3.3.0`](https://github.com/ker0x/messenger/compare/3.3.0...3.3.1))
+
+- 3.3.1 (2020-01)
+    - Add Support of `CONFIRMED_EVENT_UPDATE` and  `POST_PURCHASE_UPDATE` message tags.
+    - Deprecated old message tags which will be disabled on March 4th, 2020 (see: [Current Supported Tags](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags#current_supported_tags))
+
 **Changelog** (since [`3.2.0`](https://github.com/ker0x/messenger/compare/3.2.0...3.3.0))
 
 - 3.3.0 (2019-11)
