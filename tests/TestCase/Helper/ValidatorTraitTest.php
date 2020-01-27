@@ -28,28 +28,28 @@ class ValidatorTraitTest extends AbstractTestCase
     public function testInvalidUrl(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('./img/image.png is not a valid url.');
+        $this->expectExceptionMessage('"./img/image.png" is not a valid url.');
         $this->isValidUrl('./img/image.png');
     }
 
     public function testInvalidLocale(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('FR_fr is not valid. Locale must be in ISO-639-1 and ISO-3166-1 format like fr_FR.');
+        $this->expectExceptionMessage('"FR_fr" is not valid. Locale must be in ISO-639-1 and ISO-3166-1 format like fr_FR.');
         $this->isValidLocale('FR_fr');
     }
 
     public function testInvalidCountry(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('us is not valid. Country must be in ISO 3166 Alpha-2 format like FR.');
+        $this->expectExceptionMessage('"us" is not valid. Country must be in ISO 3166 Alpha-2 format like FR.');
         $this->isValidCountry('us');
     }
 
     public function testInvalidDateTime(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('20-11-2016T15:00 is not valid. DateTime must be in ISO-8601 AAAA-MM-JJThh:mm format.');
+        $this->expectExceptionMessage('"20-11-2016T15:00" is not valid. DateTime must be in ISO-8601 AAAA-MM-JJThh:mm format.');
         $this->isValidDateTime('20-11-2016T15:00');
     }
 
@@ -70,14 +70,14 @@ class ValidatorTraitTest extends AbstractTestCase
     public function testInvalidCurrency(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('€ is not a valid currency. Currency must be in ISO-4217-3 format.');
+        $this->expectExceptionMessage('"€" is not a valid currency. Currency must be in ISO-4217-3 format.');
         $this->isValidCurrency('€');
     }
 
     public function testInvalidExtension(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('http://example.com/img/image.bmp does not have a valid extension. Allowed extensions are "jpg, png, gif".');
+        $this->expectExceptionMessage('"http://example.com/img/image.bmp" does not have a valid extension. Allowed extensions are "jpg, png, gif".');
         $this->isValidExtension('http://example.com/img/image.bmp', ['jpg', 'png', 'gif']);
     }
 }

@@ -89,7 +89,7 @@ class SendTest extends AbstractTestCase
     public function testBadMessage(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('message must be a string or an instance of Kerox\Messenger\Model\Message or Kerox\Messenger\Model\Message\Attachment.');
+        $this->expectExceptionMessage('"message" must be a string or an instance of "Kerox\Messenger\Model\Message" or "Kerox\Messenger\Model\Message\Attachment".');
         $this->sendApi->message('1008372609250235', 1234);
     }
 
@@ -113,14 +113,14 @@ class SendTest extends AbstractTestCase
     public function testBadActionType(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('action must be either "typing_on, typing_off, mark_seen".');
+        $this->expectExceptionMessage('"action" must be either "typing_on, typing_off, mark_seen".');
         $this->sendApi->action('1008372609250235', 'typing_seen');
     }
 
     public function testBadMessagingType(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('messagingType must be either "RESPONSE, MESSAGE_TAG, NON_PROMOTIONAL_SUBSCRIPTION, UPDATE".');
+        $this->expectExceptionMessage('"messagingType" must be either "RESPONSE, MESSAGE_TAG, NON_PROMOTIONAL_SUBSCRIPTION, UPDATE".');
         $this->sendApi->message('1008372609250235', 'Hello World!', [
             'messaging_type' => 'PROMOTIONAL_SUBSCRIPTION',
         ]);
@@ -129,7 +129,7 @@ class SendTest extends AbstractTestCase
     public function testBadNotificationType(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('notificationType must be either "REGULAR, SILENT_PUSH, NO_PUSH".');
+        $this->expectExceptionMessage('"notificationType" must be either "REGULAR, SILENT_PUSH, NO_PUSH".');
         $this->sendApi->message('1008372609250235', 'Hello World!', [
             'notification_type' => 'UPDATE',
         ]);
@@ -138,7 +138,7 @@ class SendTest extends AbstractTestCase
     public function testBadTagType(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('tag must be either "CONFIRMED_EVENT_UPDATE, POST_PURCHASE_UPDATE, ACCOUNT_UPDATE, BUSINESS_PRODUCTIVITY, COMMUNITY_ALERT, CONFIRMED_EVENT_REMINDER, NON_PROMOTIONAL_SUBSCRIPTION, PAIRING_UPDATE, APPLICATION_UPDATE, PAYMENT_UPDATE, PERSONAL_FINANCE_UPDATE, SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION, APPOINTMENT_UPDATE, GAME_EVENT, TRANSPORTATION_UPDATE, FEATURE_FUNCTIONALITY_UPDATE, TICKET_UPDATE".');
+        $this->expectExceptionMessage('"tag" must be either "CONFIRMED_EVENT_UPDATE, POST_PURCHASE_UPDATE, ACCOUNT_UPDATE, BUSINESS_PRODUCTIVITY, COMMUNITY_ALERT, CONFIRMED_EVENT_REMINDER, NON_PROMOTIONAL_SUBSCRIPTION, PAIRING_UPDATE, APPLICATION_UPDATE, PAYMENT_UPDATE, PERSONAL_FINANCE_UPDATE, SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION, APPOINTMENT_UPDATE, GAME_EVENT, TRANSPORTATION_UPDATE, FEATURE_FUNCTIONALITY_UPDATE, TICKET_UPDATE".');
         $this->sendApi->message('1008372609250235', 'Hello World!', [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'tag' => 'INVOICE_UPDATE',
@@ -150,7 +150,7 @@ class SendTest extends AbstractTestCase
         $message = $this->getReceipt();
 
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('message must be an instance of Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate if tag is set to ISSUE_RESOLUTION.');
+        $this->expectExceptionMessage('"message" must be an instance of "Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate" if tag is set to "ISSUE_RESOLUTION".');
         $this->sendApi->message('1008372609250235', $message, [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
             'tag' => SendInterface::TAG_ISSUE_RESOLUTION,

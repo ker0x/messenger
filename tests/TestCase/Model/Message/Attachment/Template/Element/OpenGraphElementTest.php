@@ -14,7 +14,7 @@ class OpenGraphElementTest extends AbstractTestCase
     public function testInvalidButton(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('Buttons can only be an instance of web_url');
+        $this->expectExceptionMessage('Buttons can only be an instance of "web_url"');
 
         $element = OpenGraphElement::create('https://open.spotify.com/track/7GhIk7Il098yCjg4BQjzvb')
             ->setButtons([

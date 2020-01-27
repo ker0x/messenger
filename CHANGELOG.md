@@ -7,8 +7,10 @@ The Messenger library follows [SemVer](http://semver.org/).
 **Changelog** (since [`3.3.0`](https://github.com/ker0x/messenger/compare/3.3.0...3.3.1))
 
 - 3.3.1 (2020-01)
-    - Add Support of `CONFIRMED_EVENT_UPDATE` and  `POST_PURCHASE_UPDATE` message tags.
-    - Deprecated old message tags which will be disabled on March 4th, 2020 (see: [Current Supported Tags](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags#current_supported_tags))
+    - Add PHP 7.4 to Travis
+    - Add Support of `CONFIRMED_EVENT_UPDATE` and `POST_PURCHASE_UPDATE` message tags. (Thanks to @BFoucher)
+    - Deprecated old message tags which will be disabled on March 4th, 2020 (see [Current Supported Tags](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags#current_supported_tags))
+    - Buttons type `element_share` and `nested` are now deprecated
 
 **Changelog** (since [`3.2.0`](https://github.com/ker0x/messenger/compare/3.2.0...3.3.0))
 
