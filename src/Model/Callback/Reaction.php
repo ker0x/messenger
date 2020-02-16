@@ -18,9 +18,24 @@ class Reaction
     public const ACTION_REACT = 'react';
     public const ACTION_UNREACT = 'unreact';
 
+    /**
+     * @var string
+     */
     protected $reaction;
+
+    /**
+     * @var string
+     */
     protected $emoji;
+
+    /**
+     * @var string
+     */
     protected $action;
+
+    /**
+     * @var string
+     */
     protected $mid;
 
     /**

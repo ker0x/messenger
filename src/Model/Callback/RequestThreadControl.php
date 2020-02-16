@@ -40,6 +40,6 @@ class RequestThreadControl
      */
     public static function create(array $callbackData): self
     {
-        return new self($callbackData['requested_owner_app_id'], $callbackData['metadata']);
+        return new self($callbackData['requested_owner_app_id'], $callbackData['metadata'] ?? null);
     }
 }

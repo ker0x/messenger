@@ -10,7 +10,14 @@ class ReactionEvent extends AbstractEvent
 {
     public const NAME = 'reaction';
 
+    /**
+     * @var int
+     */
     protected $timestamp;
+
+    /**
+     * @var \Kerox\Messenger\Model\Callback\Reaction
+     */
     protected $reaction;
 
     public function __construct(string $senderId, string $recipientId, int $timestamp, Reaction $reaction)

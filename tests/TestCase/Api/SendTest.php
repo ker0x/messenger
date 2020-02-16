@@ -9,6 +9,8 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Send;
+use Kerox\Messenger\Exception\InvalidOptionException;
+use Kerox\Messenger\Exception\InvalidRecipientException;
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Message\Attachment\Image;
@@ -86,13 +88,6 @@ class SendTest extends AbstractTestCase
         $this->assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
 
-    public function testBadMessage(): void
-    {
-        $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('"message" must be a string or an instance of "Kerox\Messenger\Model\Message" or "Kerox\Messenger\Model\Message\Attachment".');
-        $this->sendApi->message('1008372609250235', 1234);
-    }
-
     public function testSendActionToUser(): void
     {
         $response = $this->sendApi->action('1008372609250235', 'typing_on');
@@ -100,9 +95,23 @@ class SendTest extends AbstractTestCase
         $this->assertSame('1008372609250235', $response->getRecipientId());
     }
 
-    public function testSendMessageWithBadOptionsKey(): void
+    public function testInvalidRecipient(): void
+    {
+        $this->expectException(InvalidRecipientException::class);
+        $this->expectExceptionMessage('"recipient" must be either a string or an array.');
+        $this->sendApi->message(12345, 'Hello world');
+    }
+
+    public function testInvalidMessage(): void
     {
         $this->expectException(MessengerException::class);
+        $this->expectExceptionMessage('"message" must be a string or an instance of "Kerox\Messenger\Model\Message" or "Kerox\Messenger\Model\Message\Attachment".');
+        $this->sendApi->message('1008372609250235', 1234);
+    }
+
+    public function testSendMessageWithInvalidOptionsKey(): void
+    {
+        $this->expectException(InvalidOptionException::class);
         $this->expectExceptionMessage('Only "messaging_type, notification_type, tag, persona_id" are allowed keys for options.');
         $this->sendApi->message('1008372609250235', 'Hello World!', [
             'notification_type' => SendInterface::NOTIFICATION_TYPE_REGULAR,
@@ -110,14 +119,14 @@ class SendTest extends AbstractTestCase
         ]);
     }
 
-    public function testBadActionType(): void
+    public function testInvalidActionType(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('"action" must be either "typing_on, typing_off, mark_seen".');
         $this->sendApi->action('1008372609250235', 'typing_seen');
     }
 
-    public function testBadMessagingType(): void
+    public function testInvalidMessagingType(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('"messagingType" must be either "RESPONSE, MESSAGE_TAG, NON_PROMOTIONAL_SUBSCRIPTION, UPDATE".');
@@ -126,7 +135,7 @@ class SendTest extends AbstractTestCase
         ]);
     }
 
-    public function testBadNotificationType(): void
+    public function testInvalidNotificationType(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('"notificationType" must be either "REGULAR, SILENT_PUSH, NO_PUSH".');
@@ -135,7 +144,7 @@ class SendTest extends AbstractTestCase
         ]);
     }
 
-    public function testBadTagType(): void
+    public function testInvalidTagType(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('"tag" must be either "CONFIRMED_EVENT_UPDATE, POST_PURCHASE_UPDATE, ACCOUNT_UPDATE, BUSINESS_PRODUCTIVITY, COMMUNITY_ALERT, CONFIRMED_EVENT_REMINDER, NON_PROMOTIONAL_SUBSCRIPTION, PAIRING_UPDATE, APPLICATION_UPDATE, PAYMENT_UPDATE, PERSONAL_FINANCE_UPDATE, SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION, APPOINTMENT_UPDATE, GAME_EVENT, TRANSPORTATION_UPDATE, FEATURE_FUNCTIONALITY_UPDATE, TICKET_UPDATE".');
@@ -145,7 +154,7 @@ class SendTest extends AbstractTestCase
         ]);
     }
 
-    public function testBadMessageForTagIssueResolution(): void
+    public function testInvalidMessageForTagIssueResolution(): void
     {
         $message = $this->getReceipt();
 
@@ -183,7 +192,7 @@ class SendTest extends AbstractTestCase
         unset($this->sendApi);
     }
 
-    private function getReceipt()
+    private function getReceipt(): ReceiptTemplate
     {
         $elements = [
             ReceiptElement::create('Classic White T-Shirt', 50)
@@ -203,7 +212,7 @@ class SendTest extends AbstractTestCase
             ->setShippingCost(4.95)
             ->setTotalTax(6.19);
 
-        $receipt = ReceiptTemplate::create('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary)
+        return ReceiptTemplate::create('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345', $elements, $summary)
             ->setTimestamp('1428444852')
             ->setOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')
             ->setAddress(new Address('1 Hacker Way', 'Menlo Park', '94025', 'CA', 'US'))
@@ -211,7 +220,5 @@ class SendTest extends AbstractTestCase
                 Adjustment::create()->setName('New Customer Discount')->setAmount(20),
                 Adjustment::create()->setName('$10 Off Coupon')->setAmount(10),
             ]);
-
-        return $receipt;
     }
 }
