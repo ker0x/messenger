@@ -54,7 +54,7 @@ class CodeTest extends AbstractTestCase
         $this->codeApi->request(2001, 'standard');
     }
 
-    public function testBadCodeType(): void
+    public function testInvalidCodeType(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('codeType must be either "standard".');

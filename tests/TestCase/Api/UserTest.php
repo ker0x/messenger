@@ -47,7 +47,7 @@ class UserTest extends AbstractTestCase
         $this->assertSame('male', $response->getGender());
     }
 
-    public function testGetProfileWithBadField(): void
+    public function testGetProfileWithInvalidField(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('username is not a valid value. fields must only contain "first_name, last_name, profile_pic, locale, timezone, gender".');

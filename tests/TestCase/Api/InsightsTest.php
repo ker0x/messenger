@@ -41,7 +41,7 @@ class InsightsTest extends AbstractTestCase
         $this->assertContainsOnlyInstancesOf(Data::class, $response->getData());
     }
 
-    public function testGetInsightsWithBadMetric(): void
+    public function testGetInsightsWithInvalidMetric(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('page_fan_adds_unique is not a valid value. Metrics must only contain "page_messages_active_threads_unique, page_messages_blocked_conversations_unique, page_messages_reported_conversations_unique, page_messages_reported_conversations_by_report_type_unique, page_messages_feedback_by_action_unique".');

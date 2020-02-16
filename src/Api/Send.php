@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Api;
 
 use Kerox\Messenger\Exception\InvalidOptionException;
+use Kerox\Messenger\Exception\InvalidRecipientException;
 use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Helper\ValidatorTrait;
 use Kerox\Messenger\Model\Message\Attachment;
@@ -17,12 +18,14 @@ class Send extends AbstractApi implements SendInterface
     use ValidatorTrait;
 
     /**
-     * @param mixed $message
+     * @param string|array $recipient
+     * @param mixed        $message
      *
      * @throws \Exception
      */
-    public function message(string $recipient, $message, array $options = []): SendResponse
+    public function message($recipient, $message, array $options = []): SendResponse
     {
+        $this->isValidRecipient($recipient);
         $this->isValidOptions($options, $message);
         $message = $this->isValidMessage($message);
 
@@ -33,10 +36,13 @@ class Send extends AbstractApi implements SendInterface
     }
 
     /**
+     * @param string|array $recipient
+     *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    public function action(string $recipient, string $action, array $options = []): SendResponse
+    public function action($recipient, string $action, array $options = []): SendResponse
     {
+        $this->isValidRecipient($recipient);
         $this->isValidSenderAction($action);
         $this->isValidOptions($options);
 
@@ -57,6 +63,18 @@ class Send extends AbstractApi implements SendInterface
         $response = $this->client->post('me/message_attachments', $request->build());
 
         return new SendResponse($response);
+    }
+
+    /**
+     * @param mixed $recipient
+     *
+     * @throws \Kerox\Messenger\Exception\InvalidRecipientException
+     */
+    private function isValidRecipient($recipient): void
+    {
+        if (!\is_string($recipient) && !\is_array($recipient)) {
+            throw new InvalidRecipientException('"recipient" must be either a string or an array.');
+        }
     }
 
     /**
@@ -85,7 +103,7 @@ class Send extends AbstractApi implements SendInterface
     /**
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    protected function isValidMessagingType(string $messagingType): void
+    private function isValidMessagingType(string $messagingType): void
     {
         $allowedMessagingType = $this->getAllowedMessagingType();
         if (!\in_array($messagingType, $allowedMessagingType, true)) {
