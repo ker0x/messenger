@@ -34,6 +34,8 @@ use Kerox\Messenger\Model\Callback\MessageEcho;
 use Kerox\Messenger\Model\Callback\Optin;
 use Kerox\Messenger\Model\Callback\PassThreadControl;
 use Kerox\Messenger\Model\Callback\Payment;
+use Kerox\Messenger\Model\Callback\Payment\PaymentCredential;
+use Kerox\Messenger\Model\Callback\Payment\RequestedUserInfo;
 use Kerox\Messenger\Model\Callback\PolicyEnforcement;
 use Kerox\Messenger\Model\Callback\Postback;
 use Kerox\Messenger\Model\Callback\PreCheckout;
@@ -42,6 +44,7 @@ use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Model\Callback\Referral;
 use Kerox\Messenger\Model\Callback\RequestThreadControl;
 use Kerox\Messenger\Model\Callback\TakeThreadControl;
+use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Test\TestCase\AbstractTestCase;
 
 class EventFactoryTest extends AbstractTestCase
@@ -57,6 +60,11 @@ class EventFactoryTest extends AbstractTestCase
         $this->assertEquals($expectedEvent, $event);
     }
 
+    public function testEntryEvent(): void
+    {
+
+    }
+
     public function testMessageEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/message.json');
@@ -66,6 +74,24 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $message = $event->getMessage();
+        $this->assertSame('mid.1457764197618:41d102a3e1ae206a38', $message->getMessageId());
+        $this->assertTrue($message->hasText());
+        $this->assertSame('hello, world!', $message->getText());
+        $this->assertTrue($message->hasQuickReply());
+        $this->assertSame('DEVELOPER_DEFINED_PAYLOAD', $message->getQuickReply());
+        $this->assertTrue($message->hasAttachments());
+        $this->assertSame([['type' => 'image', 'payload' => ['url' => 'IMAGE_URL']]], $message->getAttachments());
+        $this->assertTrue($message->hasEntities());
+        $this->assertSame([
+            'datetime' => [
+                ['confidence' => 0.97249440664957, 'values' => ['...'], 'value' => '2017-05-10T14:00:00.000-07:00', 'grain' => 'hour', 'type' => 'value']
+            ],
+            'greetings' => [
+                ['confidence' => 1, 'value' => 'true']
+            ]
+        ], $message->getEntities());
     }
 
     public function testMessageEchoEvent(): void
@@ -77,6 +103,12 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $messageEcho = $event->getMessageEcho();
+        $this->assertTrue($messageEcho->isEcho());
+        $this->assertSame(1517776481860111, $messageEcho->getAppId());
+        $this->assertSame('DEVELOPER_DEFINED_METADATA_STRING', $messageEcho->getMetadata());
+        $this->assertSame('mid.1457764197618:41d102a3e1ae206a38', $messageEcho->getMessageId());
     }
 
     public function testPostbackEvent(): void
@@ -88,6 +120,31 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $postback = $event->getPostback();
+        $this->assertSame('TITLE_FOR_THE_CTA', $postback->getTitle());
+        $this->assertTrue($postback->hasPayload());
+        $this->assertSame('USER_DEFINED_PAYLOAD', $postback->getPayload());
+        $this->assertTrue($postback->hasReferral());
+        $this->assertInstanceOf(Referral::class, $postback->getReferral());
+    }
+
+    public function testPostbackEventFromStandBy(): void
+    {
+        $json = file_get_contents(__DIR__ . '/../../Mocks/Event/postback_from_stand_by.json');
+        $array = json_decode($json, true);
+
+        $expectedEvent = new PostbackEvent('USER_ID', 'PAGE_ID', 1458692752478, Postback::create($array['postback']));
+        $event = EventFactory::create($array);
+
+        $this->assertEquals($expectedEvent, $event);
+
+        $postback = $event->getPostback();
+        $this->assertSame('TITLE_FOR_THE_CTA', $postback->getTitle());
+        $this->assertFalse($postback->hasPayload());
+        $this->assertNull($postback->getPayload());
+        $this->assertFalse($postback->hasReferral());
+        $this->assertNull($postback->getReferral());
     }
 
     public function testOptinEvent(): void
@@ -99,6 +156,9 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $optin = $event->getOptin();
+        $this->assertSame('PASS_THROUGH_PARAM', $optin->getRef());
     }
 
     public function testAccountLinkingEvent(): void
@@ -110,6 +170,11 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $accountLinking = $event->getAccountLinking();
+        $this->assertSame('linked', $accountLinking->getStatus());
+        $this->assertTrue($accountLinking->hasAuthorizationCode());
+        $this->assertSame('PASS_THROUGH_AUTHORIZATION_CODE', $accountLinking->getAuthorizationCode());
     }
 
     public function testDeliveryEvent(): void
@@ -121,6 +186,10 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $delivery = $event->getDelivery();
+        $this->assertSame(1458668856253, $delivery->getWatermark());
+        $this->assertSame(['mid.1458668856218:ed81099e15d3f4f233'], $delivery->getMessageIds());
     }
 
     public function testReadEvent(): void
@@ -132,6 +201,9 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $read = $event->getRead();
+        $this->assertSame(1458668856253, $read->getWatermark());
     }
 
     public function testPaymentEvent(): void
@@ -143,6 +215,37 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $payment = $event->getPayment();
+        $this->assertSame('DEVELOPER_DEFINED_PAYLOAD', $payment->getPayload());
+        $this->assertSame('123', $payment->getShippingOptionId());
+        $this->assertSame('USD', $payment->getCurrency());
+        $this->assertSame('29.62', $payment->getAmount());
+        $this->assertInstanceOf(RequestedUserInfo::class, $payment->getRequestedUserInfo());
+        $this->assertInstanceOf(PaymentCredential::class, $payment->getPaymentCredential());
+        $this->assertInstanceOf(Address::class, $payment->getShippingAddress());
+
+        $requestedUserInfo = $payment->getRequestedUserInfo();
+        $this->assertSame('Peter Chang', $requestedUserInfo->getContactName());
+        $this->assertSame('peter@anemailprovider.com', $requestedUserInfo->getContactEmail());
+        $this->assertSame('+15105551234', $requestedUserInfo->getContactPhone());
+
+        $paymentCredential = $payment->getPaymentCredential();
+        $this->assertSame('token', $paymentCredential->getProviderType());
+        $this->assertSame('ch_18tmdBEoNIH3FPJHa60ep123', $paymentCredential->getChargeId());
+        $this->assertSame('__tokenized_card__', $paymentCredential->getTokenizedCard());
+        $this->assertSame('tokenized cvv', $paymentCredential->getTokenizedCvv());
+        $this->assertSame('3', $paymentCredential->getTokenExpiryMonth());
+        $this->assertSame('2019', $paymentCredential->getTokenExpiryYear());
+        $this->assertSame('123456789', $paymentCredential->getFbPaymentId());
+
+        $shippingAddress = $payment->getShippingAddress();
+        $this->assertSame('1 Hacker Way', $shippingAddress->getStreet());
+        $this->assertSame('', $shippingAddress->getAdditionalStreet());
+        $this->assertSame('MENLO PARK', $shippingAddress->getCity());
+        $this->assertSame('CA', $shippingAddress->getState());
+        $this->assertSame('US', $shippingAddress->getCountry());
+        $this->assertSame('94025', $shippingAddress->getPostalCode());
     }
 
     public function testCheckoutUpdateEvent(): void
@@ -154,6 +257,19 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $checkoutUpdate = $event->getCheckoutUpdate();
+        $this->assertSame('DEVELOPER_DEFINED_PAYLOAD', $checkoutUpdate->getPayload());
+        $this->assertInstanceOf(Address::class, $checkoutUpdate->getShippingAddress());
+
+        $shippingAddress = $checkoutUpdate->getShippingAddress();
+        $this->assertSame('1 Hacker Way', $shippingAddress->getStreet());
+        $this->assertSame('', $shippingAddress->getAdditionalStreet());
+        $this->assertSame('MENLO PARK', $shippingAddress->getCity());
+        $this->assertSame('CA', $shippingAddress->getState());
+        $this->assertSame('US', $shippingAddress->getCountry());
+        $this->assertSame('94025', $shippingAddress->getPostalCode());
+        $this->assertSame(10105655000959552, $shippingAddress->getId());
     }
 
     public function testPreCheckoutEvent(): void
@@ -165,6 +281,25 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $preCheckout = $event->getPreCheckout();
+        $this->assertSame('DEVELOPER_DEFINED_PAYLOAD', $preCheckout->getPayload());
+        $this->assertSame('USD', $preCheckout->getCurrency());
+        $this->assertSame('29.62', $preCheckout->getAmount());
+        $this->assertInstanceOf(RequestedUserInfo::class, $preCheckout->getRequestedUserInfo());
+        $this->assertInstanceOf(Address::class, $preCheckout->getShippingAddress());
+
+        $requestedUserInfo = $preCheckout->getRequestedUserInfo();
+        $this->assertSame('Peter Chang', $requestedUserInfo->getContactName());
+
+        $shippingAddress = $preCheckout->getShippingAddress();
+        $this->assertSame('Peter Chang', $shippingAddress->getName());
+        $this->assertSame('1 Hacker Way', $shippingAddress->getStreet());
+        $this->assertSame('', $shippingAddress->getAdditionalStreet());
+        $this->assertSame('MENLO PARK', $shippingAddress->getCity());
+        $this->assertSame('CA', $shippingAddress->getState());
+        $this->assertSame('US', $shippingAddress->getCountry());
+        $this->assertSame('94025', $shippingAddress->getPostalCode());
     }
 
     public function testTakeThreadControlEvent(): void
@@ -176,6 +311,10 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $takeThreadControl = $event->getTakeThreadControl();
+        $this->assertSame(123456789, $takeThreadControl->getPreviousOwnerAppId());
+        $this->assertSame('additional content that the caller wants to set', $takeThreadControl->getMetadata());
     }
 
     public function testPassThreadControlEvent(): void
@@ -187,6 +326,10 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $passThreadControl = $event->getPassThreadControl();
+        $this->assertSame(123456789, $passThreadControl->getNewOwnerAppId());
+        $this->assertSame('additional content that the caller wants to set', $passThreadControl->getMetadata());
     }
 
     public function testRequestThreadControlEvent(): void
@@ -198,6 +341,10 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $requestThreadControl = $event->getRequestThreadControl();
+        $this->assertSame(123456789, $requestThreadControl->getRequestedOwnerAppId());
+        $this->assertSame('additional content that the caller wants to set', $requestThreadControl->getMetadata());
     }
 
     public function testPolicyEnforcementEvent(): void
@@ -209,6 +356,11 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $policyEnforcement = $event->getPolicyEnforcement();
+        $this->assertSame('block', $policyEnforcement->getAction());
+        $this->assertSame('The bot violated our Platform Policies (https://developers.facebook.com/policy/#messengerplatform). Common violations include sending out excessive spammy messages or being non-functional.', $policyEnforcement->getReason());
+
     }
 
     public function testAppRolesEvent(): void
@@ -220,6 +372,9 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $appRoles = $event->getAppRoles();
+        $this->assertSame(['123456789' => ['automation']], $appRoles->getAppRoles());
     }
 
     public function testReferralEvent(): void
@@ -231,6 +386,11 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $referral = $event->getReferral();
+        $this->assertSame('REF DATA PASSED IN M.ME PARAM', $referral->getRef());
+        $this->assertSame('SHORTLINK', $referral->getSource());
+        $this->assertSame('OPEN_THREAD', $referral->getType());
     }
 
     public function testGamePlayEvent(): void
@@ -242,6 +402,14 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $gamePlay = $event->getGamePlay();
+        $this->assertSame('1234', $gamePlay->getGameId());
+        $this->assertSame('666', $gamePlay->getPlayerId());
+        $this->assertSame('SOLO|THREAD', $gamePlay->getContextType());
+        $this->assertSame('123', $gamePlay->getContextId());
+        $this->assertSame(1234567890, $gamePlay->getScore());
+        $this->assertSame('DEVELOPER_DEFINED_PAYLOAD', $gamePlay->getPayload());
     }
 
     public function testReactionEvent(): void
@@ -253,5 +421,11 @@ class EventFactoryTest extends AbstractTestCase
         $event = EventFactory::create($array);
 
         $this->assertEquals($expectedEvent, $event);
+
+        $reaction = $event->getReaction();
+        $this->assertSame('smile', $reaction->getReaction());
+        $this->assertSame("❤️", $reaction->getEmoji());
+        $this->assertSame('react', $reaction->getAction());
+        $this->assertSame('<MID>', $reaction->getMid());
     }
 }

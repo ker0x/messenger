@@ -261,13 +261,13 @@ class EventTest extends AbstractTestCase
 
     public function testReactionEvent(): void
     {
-        $mockedReferral = $this->createMock(Reaction::class);
-        $event = new ReactionEvent('sender_id', 'recipient_id', 123456, $mockedReferral);
+        $mockedReaction = $this->createMock(Reaction::class);
+        $event = new ReactionEvent('sender_id', 'recipient_id', 123456, $mockedReaction);
 
         $this->assertSame('sender_id', $event->getSenderId());
         $this->assertSame('recipient_id', $event->getRecipientId());
         $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedReferral, $event->getReaction());
+        $this->assertSame($mockedReaction, $event->getReaction());
         $this->assertSame('reaction', $event->getName());
     }
 }

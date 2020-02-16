@@ -13,6 +13,14 @@
     "quick_reply": {
       "payload": "DEVELOPER_DEFINED_PAYLOAD"
     },
+    "attachments": [
+      {
+        "type": "image",
+        "payload": {
+          "url": "IMAGE_URL"
+        }
+      }
+    ],
     "nlp": {
       "entities": {
         "datetime": [
