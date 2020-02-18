@@ -1,10 +1,8 @@
 language: php
 
-sudo: false
-
 cache:
   directories:
-    - $HOME/.composer/cache/files
+    - $HOME/.composer/cache
 
 php:
   - 7.1
@@ -12,27 +10,23 @@ php:
   - 7.3
   - 7.4
 
-env:
-  global:
-    - secure: j+1g/twymlVnvpQlsdS+82IY3xR8GIBB7m8bEmpYP6J1ketRToJWANDre6Xb/33JHEzekcr5Kt0F2UDkNzR5rNbviHqYH4EyHA7VZTikqSSelY+lZF7qo1xTyGRnCJZV6c2bri/rPVSjw1FYngNFh5FGCh7PmpzzeQZkhyCG3Cs=
-
 matrix:
   fast_finish: true
 
 before_install:
   - composer self-update
-  - if [ "$GITHUB_COMPOSER_AUTH" ]; then composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH; fi
 
 install:
-  - composer install --prefer-dist --no-interaction
-
-before_script:
-  - mkdir -p build/logs
+  - composer update --prefer-dist --prefer-stable --no-interaction
 
 script:
-  - vendor/bin/php-cs-fixer fix --diff --dry-run
   - vendor/bin/phpstan --level=max --memory-limit="-1" --no-progress analyze
-  - vendor/bin/phpunit --stderr --coverage-clover build/coverage/xml
+  - vendor/bin/php-cs-fixer fix --diff --dry-run
+  - vendor/bin/phpunit --stderr --coverage-clover=build/coverage.xml
+
+after_success:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml
 
 notifications:
   email: false
