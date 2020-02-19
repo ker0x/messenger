@@ -12,6 +12,10 @@ php:
 
 matrix:
   fast_finish: true
+  include:
+    # Run test with code coverage
+    - php: 7.1
+      env: COVERAGE=true
 
 before_install:
   - composer self-update
@@ -25,8 +29,8 @@ script:
   - vendor/bin/phpunit --stderr --coverage-clover=build/coverage.xml
 
 after_success:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml
+  - if [[ $COVERAGE = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [[ $COVERAGE = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi
 
 notifications:
   email: false
