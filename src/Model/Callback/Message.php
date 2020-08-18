@@ -37,6 +37,16 @@ class Message
     protected $entities;
 
     /**
+     * @var array
+     */
+    protected $traits;
+
+    /**
+     * @var array
+     */
+    protected $detectedLocales;
+
+    /**
      * Message constructor.
      *
      * @param string $text
@@ -48,7 +58,9 @@ class Message
         ?string $quickReply = null,
         array $attachments = [],
         ?string $replyTo = null,
-        array $entities = []
+        array $entities = [],
+        array $traits = [],
+        array $detectedLocales = []
     ) {
         $this->messageId = $messageId;
         $this->text = $text;
@@ -56,6 +68,8 @@ class Message
         $this->attachments = $attachments;
         $this->replyTo = $replyTo;
         $this->entities = $entities;
+        $this->traits = $traits;
+        $this->detectedLocales = $detectedLocales;
     }
 
     public function getMessageId(): string
@@ -113,6 +127,26 @@ class Message
         return !empty($this->entities);
     }
 
+    public function getTraits(): array
+    {
+        return $this->traits;
+    }
+
+    public function hasTraits(): bool
+    {
+        return !empty($this->traits);
+    }
+
+    public function getDetectedLocales(): array
+    {
+        return $this->detectedLocales;
+    }
+
+    public function hasDetectedLocales(): bool
+    {
+        return !empty($this->detectedLocales);
+    }
+
     /**
      * @return \Kerox\Messenger\Model\Callback\Message
      */
@@ -123,7 +157,9 @@ class Message
         $quickReply = $callbackData['quick_reply']['payload'] ?? null;
         $replyTo = $callbackData['reply_to']['mid'] ?? null;
         $entities = $callbackData['nlp']['entities'] ?? [];
+        $traits = $callbackData['nlp']['traits'] ?? [];
+        $detectedLocales = $callbackData['nlp']['detected_locales'] ?? [];
 
-        return new self($callbackData['mid'], $text, $quickReply, $attachments, $replyTo, $entities);
+        return new self($callbackData['mid'], $text, $quickReply, $attachments, $replyTo, $entities, $traits, $detectedLocales);
     }
 }
