@@ -4,10 +4,12 @@ The Messenger library follows [SemVer](http://semver.org/).
 
 ## 3.x
 
-**Changelog** (since [`3.3.1`](https://github.com/ker0x/messenger/compare/3.3.1...3.3.2))
+**Changelog** (since [`3.3.2`](https://github.com/ker0x/messenger/compare/3.3.2...3.3.3))
 
 - 3.3.3 (2020-08)
-    - add nlp traits and detected locales to callback message
+    - Add nlp traits and detected locales to callback message. (Thanks to @htaoufikallah)
+
+**Changelog** (since [`3.3.1`](https://github.com/ker0x/messenger/compare/3.3.1...3.3.2))
 
 - 3.3.2 (2020-02)
     - Allow to pass an array as recipient to send message

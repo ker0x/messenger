@@ -19,6 +19,8 @@ class MessageTest extends AbstractTestCase
             ],
             'attachments' => [],
             'entities' => [],
+            'traits' => [],
+            'detected_locales' => [],
         ]);
 
         $this->assertSame('mid.1457764197618:41d102a3e1ae206a38', $message->getMessageId());
@@ -26,9 +28,13 @@ class MessageTest extends AbstractTestCase
         $this->assertSame('', $message->getQuickReply());
         $this->assertSame([], $message->getAttachments());
         $this->assertSame([], $message->getEntities());
+        $this->assertSame([], $message->getTraits());
+        $this->assertSame([], $message->getDetectedLocales());
         $this->assertFalse($message->hasText());
         $this->assertFalse($message->hasQuickReply());
         $this->assertFalse($message->hasAttachments());
         $this->assertFalse($message->hasEntities());
+        $this->assertFalse($message->hasTraits());
+        $this->assertFalse($message->hasDetectedLocales());
     }
 }
