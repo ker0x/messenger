@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Api;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -10,9 +10,9 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Nlp;
 use Kerox\Messenger\Exception\MessengerException;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class NlpTest extends AbstractTestCase
+class NlpTest extends TestCase
 {
     /**
      * @var \Kerox\Messenger\Api\Nlp
@@ -38,7 +38,7 @@ class NlpTest extends AbstractTestCase
     {
         $response = $this->nlpApi->config(['nlp_enabled' => true, 'verbose' => false, 'custom_token' => 'abcdef', 'model' => 'fr', 'n_best' => 2]);
 
-        $this->assertTrue($response->isSuccess());
+        self::assertTrue($response->isSuccess());
     }
 
     public function testSetConfigWithInvalidKey(): void

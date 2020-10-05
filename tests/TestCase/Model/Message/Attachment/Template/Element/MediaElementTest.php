@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Element;
+namespace Kerox\Messenger\Tests\TestCase\Model\Message\Attachment\Template\Element;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Button\Postback;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class MediaElementTest extends AbstractTestCase
+class MediaElementTest extends TestCase
 {
     public function testInvalidButton(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('Buttons can only be an instance of "web_url".');
 
-        $element = MediaElement::create('https://www.facebook.com/photo.php?fbid=1234567890')
+        MediaElement::create('https://www.facebook.com/photo.php?fbid=1234567890')
             ->setButtons([
                 Postback::create('Learn More', 'LEARN_MORE'),
             ]);
@@ -27,7 +27,7 @@ class MediaElementTest extends AbstractTestCase
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('mediaType must be either "image, video".');
 
-        $element = MediaElement::create('https://www.facebook.com/photo.php?fbid=1234567890', 'file')
+        MediaElement::create('https://www.facebook.com/photo.php?fbid=1234567890', 'file')
             ->setButtons([
                 Postback::create('Learn More', 'LEARN_MORE'),
             ]);

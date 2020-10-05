@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Api;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -20,9 +20,9 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Request\SendRequest;
 use Kerox\Messenger\SendInterface;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class SendTest extends AbstractTestCase
+class SendTest extends TestCase
 {
     /**
      * @var \Kerox\Messenger\Api\Send
@@ -48,8 +48,8 @@ class SendTest extends AbstractTestCase
     {
         $response = $this->sendApi->message('1008372609250235', 'Hello World!');
 
-        $this->assertSame('1008372609250235', $response->getRecipientId());
-        $this->assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
+        self::assertSame('1008372609250235', $response->getRecipientId());
+        self::assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
 
     public function testSendMessageToUser(): void
@@ -62,8 +62,8 @@ class SendTest extends AbstractTestCase
             'tag' => SendInterface::TAG_ACCOUNT_UPDATE,
         ]);
 
-        $this->assertSame('1008372609250235', $response->getRecipientId());
-        $this->assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
+        self::assertSame('1008372609250235', $response->getRecipientId());
+        self::assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
 
     public function testSendMessageViaPersona(): void
@@ -74,8 +74,8 @@ class SendTest extends AbstractTestCase
             'persona_id' => '1254477777772919'
         ]);
 
-        $this->assertEquals('1008372609250235', $response->getRecipientId());
-        $this->assertEquals('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
+        self::assertEquals('1008372609250235', $response->getRecipientId());
+        self::assertEquals('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
 
     public function testSendAttachmentToUser(): void
@@ -84,15 +84,15 @@ class SendTest extends AbstractTestCase
 
         $response = $this->sendApi->message('1008372609250235', $message);
 
-        $this->assertSame('1008372609250235', $response->getRecipientId());
-        $this->assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
+        self::assertSame('1008372609250235', $response->getRecipientId());
+        self::assertSame('mid.1456970487936:c34767dfe57ee6e339', $response->getMessageId());
     }
 
     public function testSendActionToUser(): void
     {
         $response = $this->sendApi->action('1008372609250235', 'typing_on');
 
-        $this->assertSame('1008372609250235', $response->getRecipientId());
+        self::assertSame('1008372609250235', $response->getRecipientId());
     }
 
     public function testInvalidRecipient(): void
@@ -182,9 +182,9 @@ class SendTest extends AbstractTestCase
 
         $response = $sendApi->attachment(new Image('http://www.messenger-rocks.com/image.jpg', true));
 
-        $this->assertSame('1854626884821032', $response->getAttachmentId());
-        $this->assertNull($response->getRecipientId());
-        $this->assertNull($response->getMessageId());
+        self::assertSame('1854626884821032', $response->getAttachmentId());
+        self::assertNull($response->getRecipientId());
+        self::assertNull($response->getMessageId());
     }
 
     public function tearDown(): void

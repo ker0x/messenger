@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase;
+namespace Kerox\Messenger\Tests\TestCase\Helper;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\ValidatorTrait;
+use PHPUnit\Framework\TestCase;
 
-class ValidatorTraitTest extends AbstractTestCase
+class ValidatorTraitTest extends TestCase
 {
     use ValidatorTrait;
 

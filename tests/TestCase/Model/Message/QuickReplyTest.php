@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Message;
+namespace Kerox\Messenger\Tests\TestCase\Model\Message;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Message\QuickReply;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class QuickReplyTest extends AbstractTestCase
+class QuickReplyTest extends TestCase
 {
     public function testQuickReplyWithInvalidContentType(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('Invalid content type');
-        $quickReply = QuickReply::create('image');
+        QuickReply::create('image');
     }
 
     public function testQuickReplyWithLocationAndTitle(): void
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Content type must be set to text to use title, payload and image_url');
-        $quickReply = QuickReply::create('location')->setTitle('Foo');
+        QuickReply::create('location')->setTitle('Foo');
     }
 }

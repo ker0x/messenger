@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -10,8 +10,9 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Code;
 use Kerox\Messenger\Exception\MessengerException;
+use PHPUnit\Framework\TestCase;
 
-class CodeTest extends AbstractTestCase
+class CodeTest extends TestCase
 {
     /**
      * @var \Kerox\Messenger\Api\Code
@@ -37,7 +38,7 @@ class CodeTest extends AbstractTestCase
     {
         $response = $this->codeApi->request(500, 'standard', 'BQCp:J7F._fImVNMkIBpwN+gZfO_9-BNcB:mi licpWD/y9VS=3niM.uFpZ=OR.mmsKSG 0T_d7949R/Y 9xsIuxyzI5U+QozJ-iz0gU38Qf6-xEueGOIrxbOwbH-MR11mByfU/Q.cTA044QdqJaoerjjY-L+L.lYycB4Cv:7 oSUKY3xqrGTYpNu:bfp9+JoNHuQ9gz 0l7R-3994-o7lIq=09IhXFeF.27v9RJXZG.7p/bnSmDSn1G+');
 
-        $this->assertSame('https://scontent.xx.fbcdn.net/v/t39.8917-6/16685555_1672240442792330_5569294125766803456_n.png?oh=eb8cf65a7a7a5808b24e55527b366dd0&oe=592BBFCC', $response->getUri());
+        self::assertSame('https://scontent.xx.fbcdn.net/v/t39.8917-6/16685555_1672240442792330_5569294125766803456_n.png?oh=eb8cf65a7a7a5808b24e55527b366dd0&oe=592BBFCC', $response->getUri());
     }
 
     public function testSmallImageSize(): void

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Common;
+namespace Kerox\Messenger\Tests\TestCase\Model\Common;
 
 use Kerox\Messenger\Model\Common\Button\AccountLink;
 use Kerox\Messenger\Model\Common\Button\AccountUnlink;
@@ -16,9 +16,9 @@ use Kerox\Messenger\Model\Common\Button\Share;
 use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ButtonTest extends AbstractTestCase
+class ButtonTest extends TestCase
 {
     public function testButtonAccountLink(): void
     {
@@ -26,7 +26,7 @@ class ButtonTest extends AbstractTestCase
 
         $buttonAccountLink = AccountLink::create('https://www.example.com/authorize');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonAccountLink));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonAccountLink, JSON_THROW_ON_ERROR));
     }
 
     public function testButtonAccountUnlink(): void
@@ -35,7 +35,7 @@ class ButtonTest extends AbstractTestCase
 
         $buttonAccountUnlink = AccountUnlink::create();
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonAccountUnlink));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonAccountUnlink, JSON_THROW_ON_ERROR));
     }
 
     public function testButtonPayment(): void
@@ -60,7 +60,7 @@ class ButtonTest extends AbstractTestCase
 
         $buttonPayment = Payment::create('DEVELOPER_DEFINED_PAYLOAD', $paymentSummary);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPayment));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPayment, JSON_THROW_ON_ERROR));
     }
 
     public function testButtonPhoneNumber(): void
@@ -69,7 +69,7 @@ class ButtonTest extends AbstractTestCase
 
         $buttonPhoneNumber = PhoneNumber::create('Call Representative', '+15105551234');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPhoneNumber));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPhoneNumber, JSON_THROW_ON_ERROR));
     }
 
     public function testButtonPostback(): void
@@ -78,7 +78,7 @@ class ButtonTest extends AbstractTestCase
 
         $buttonPostback = Postback::create('Bookmark Item', 'DEVELOPER_DEFINED_PAYLOAD');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPostback));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonPostback, JSON_THROW_ON_ERROR));
     }
 
     public function testButtonShare(): void
@@ -97,7 +97,7 @@ class ButtonTest extends AbstractTestCase
 
         $buttonShare = Share::create($generic);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonShare));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonShare, JSON_THROW_ON_ERROR));
     }
 
     public function testButtonWebUrl(): void
@@ -110,7 +110,7 @@ class ButtonTest extends AbstractTestCase
             ->setFallbackUrl('https://petersfancyapparel.com/fallback')
             ->setWebviewShareButton(false);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonWebUrl));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonWebUrl, JSON_THROW_ON_ERROR));
     }
 
     public function testButtonNested(): void
@@ -121,6 +121,6 @@ class ButtonTest extends AbstractTestCase
             ->addButton(Postback::create('History', 'HISTORY_PAYLOAD'))
             ->addButton(Postback::create('Contact Info', 'CONTACT_INFO_PAYLOAD'));
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonNested));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($buttonNested, JSON_THROW_ON_ERROR));
     }
 }

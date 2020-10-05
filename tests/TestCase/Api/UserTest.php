@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Api;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -10,10 +10,9 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Exception\MessengerException;
-use Kerox\Messenger\Model\Referral;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class UserTest extends AbstractTestCase
+class UserTest extends TestCase
 {
     /**
      * @var \Kerox\Messenger\Api\User
@@ -39,18 +38,18 @@ class UserTest extends AbstractTestCase
     {
         $response = $this->userApi->profile('1234abcd');
 
-        $this->assertSame('Peter', $response->getFirstName());
-        $this->assertSame('Chang', $response->getLastName());
-        $this->assertSame('https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p200x200/13055603_10105219398495383_8237637584159975445_n.jpg?oh=1d241d4b6d4dac50eaf9bb73288ea192&oe=57AF5C03&__gda__=1470213755_ab17c8c8e3a0a447fed3f272fa2179ce', $response->getProfilePic());
-        $this->assertSame('en_US', $response->getLocale());
-        $this->assertSame(-7., $response->getTimezone());
-        $this->assertSame('male', $response->getGender());
+        self::assertSame('Peter', $response->getFirstName());
+        self::assertSame('Chang', $response->getLastName());
+        self::assertSame('https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p200x200/13055603_10105219398495383_8237637584159975445_n.jpg?oh=1d241d4b6d4dac50eaf9bb73288ea192&oe=57AF5C03&__gda__=1470213755_ab17c8c8e3a0a447fed3f272fa2179ce', $response->getProfilePic());
+        self::assertSame('en_US', $response->getLocale());
+        self::assertSame(-7., $response->getTimezone());
+        self::assertSame('male', $response->getGender());
     }
 
     public function testGetProfileWithInvalidField(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('username is not a valid value. fields must only contain "first_name, last_name, profile_pic, locale, timezone, gender".');
-        $response = $this->userApi->profile('1234abcd', ['username']);
+        $this->userApi->profile('1234abcd', ['username']);
     }
 }

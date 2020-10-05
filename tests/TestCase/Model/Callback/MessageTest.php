@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Callback;
+namespace Kerox\Messenger\Tests\TestCase\Model\Callback;
 
 use Kerox\Messenger\Model\Callback\Message;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class MessageTest extends AbstractTestCase
+class MessageTest extends TestCase
 {
     public function testMessageModelWithEmptyStringAndEmptyQuickReply(): void
     {
@@ -23,18 +23,18 @@ class MessageTest extends AbstractTestCase
             'detected_locales' => [],
         ]);
 
-        $this->assertSame('mid.1457764197618:41d102a3e1ae206a38', $message->getMessageId());
-        $this->assertSame('', $message->getText());
-        $this->assertSame('', $message->getQuickReply());
-        $this->assertSame([], $message->getAttachments());
-        $this->assertSame([], $message->getEntities());
-        $this->assertSame([], $message->getTraits());
-        $this->assertSame([], $message->getDetectedLocales());
-        $this->assertFalse($message->hasText());
-        $this->assertFalse($message->hasQuickReply());
-        $this->assertFalse($message->hasAttachments());
-        $this->assertFalse($message->hasEntities());
-        $this->assertFalse($message->hasTraits());
-        $this->assertFalse($message->hasDetectedLocales());
+        self::assertSame('mid.1457764197618:41d102a3e1ae206a38', $message->getMessageId());
+        self::assertSame('', $message->getText());
+        self::assertSame('', $message->getQuickReply());
+        self::assertSame([], $message->getAttachments());
+        self::assertSame([], $message->getEntities());
+        self::assertSame([], $message->getTraits());
+        self::assertSame([], $message->getDetectedLocales());
+        self::assertFalse($message->hasText());
+        self::assertFalse($message->hasQuickReply());
+        self::assertFalse($message->hasAttachments());
+        self::assertFalse($message->hasEntities());
+        self::assertFalse($message->hasTraits());
+        self::assertFalse($message->hasDetectedLocales());
     }
 }

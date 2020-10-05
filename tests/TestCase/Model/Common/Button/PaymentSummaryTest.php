@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Common\Button;
+namespace Kerox\Messenger\Tests\TestCase\Model\Common\Button;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Button\Payment\PaymentSummary;
 use Kerox\Messenger\Model\Common\Button\Payment\PriceList;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class PaymentSummaryTest extends AbstractTestCase
+class PaymentSummaryTest extends TestCase
 {
     public function testPaymentType(): void
     {
@@ -28,7 +28,7 @@ class PaymentSummaryTest extends AbstractTestCase
             PriceList::create('Taxes', '2.47'),
         ];
 
-        $paymentSummary = PaymentSummary::create(
+        PaymentSummary::create(
             'USD',
             'MOVING_AMOUNT',
             'Peter\'s Apparel',
@@ -47,7 +47,7 @@ class PaymentSummaryTest extends AbstractTestCase
             PriceList::create('Taxes', '2.47'),
         ];
 
-        $paymentSummary = new PaymentSummary(
+        PaymentSummary::create(
             'USD',
             PaymentSummary::PAYMENT_TYPE_FIXED_AMOUNT,
             'Peter\'s Apparel',

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template\Airline;
+namespace Kerox\Messenger\Tests\TestCase\Model\Message\Attachment\Template\Airline;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\ExtendedFlightInfo;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ExtendedFlightInfoTest extends AbstractTestCase
+class ExtendedFlightInfoTest extends TestCase
 {
     public function testInvalidTravelClass(): void
     {

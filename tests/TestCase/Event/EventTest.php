@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Callback;
+namespace Kerox\Messenger\Tests\TestCase\Event;
 
 use Kerox\Messenger\Event\AccountLinkingEvent;
 use Kerox\Messenger\Event\AppRolesEvent;
@@ -41,21 +41,21 @@ use Kerox\Messenger\Model\Callback\Read;
 use Kerox\Messenger\Model\Callback\Referral;
 use Kerox\Messenger\Model\Callback\RequestThreadControl;
 use Kerox\Messenger\Model\Callback\TakeThreadControl;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class EventTest extends AbstractTestCase
+class EventTest extends TestCase
 {
     public function testMessageEvent(): void
     {
         $mockedMessage = $this->createMock(Message::class);
         $event = new MessageEvent('sender_id', 'recipient_id', 123456, $mockedMessage);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedMessage, $event->getMessage());
-        $this->assertSame('message', $event->getName());
-        $this->assertFalse($event->isQuickReply());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedMessage, $event->getMessage());
+        self::assertSame('message', $event->getName());
+        self::assertFalse($event->isQuickReply());
     }
 
     public function testMessageEchoEvent(): void
@@ -63,11 +63,11 @@ class EventTest extends AbstractTestCase
         $mockedMessageEcho = $this->createMock(MessageEcho::class);
         $event = new MessageEchoEvent('sender_id', 'recipient_id', 123456, $mockedMessageEcho);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedMessageEcho, $event->getMessageEcho());
-        $this->assertSame('message_echo', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedMessageEcho, $event->getMessageEcho());
+        self::assertSame('message_echo', $event->getName());
     }
 
     public function testReadEvent(): void
@@ -75,11 +75,11 @@ class EventTest extends AbstractTestCase
         $mockedRead = $this->createMock(Read::class);
         $event = new ReadEvent('sender_id', 'recipient_id', 123456, $mockedRead);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedRead, $event->getRead());
-        $this->assertSame('read', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedRead, $event->getRead());
+        self::assertSame('read', $event->getName());
     }
 
     public function testDeliveryEvent(): void
@@ -87,10 +87,10 @@ class EventTest extends AbstractTestCase
         $mockedDelivery = $this->createMock(Delivery::class);
         $event = new DeliveryEvent('sender_id', 'recipient_id', $mockedDelivery);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame($mockedDelivery, $event->getDelivery());
-        $this->assertSame('delivery', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame($mockedDelivery, $event->getDelivery());
+        self::assertSame('delivery', $event->getName());
     }
 
     public function testPostbackEvent(): void
@@ -98,11 +98,11 @@ class EventTest extends AbstractTestCase
         $mockedPostback = $this->createMock(Postback::class);
         $event = new PostbackEvent('sender_id', 'recipient_id', 123456, $mockedPostback);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedPostback, $event->getPostback());
-        $this->assertSame('postback', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedPostback, $event->getPostback());
+        self::assertSame('postback', $event->getName());
     }
 
     public function testOptinEvent(): void
@@ -110,11 +110,11 @@ class EventTest extends AbstractTestCase
         $mockedOptin = $this->createMock(Optin::class);
         $event = new OptinEvent('sender_id', 'recipient_id', 123456, $mockedOptin);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedOptin, $event->getOptin());
-        $this->assertSame('optin', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedOptin, $event->getOptin());
+        self::assertSame('optin', $event->getName());
     }
 
     public function testAccountLinkingEvent(): void
@@ -122,11 +122,11 @@ class EventTest extends AbstractTestCase
         $mockedAccountLinking = $this->createMock(AccountLinking::class);
         $event = new AccountLinkingEvent('sender_id', 'recipient_id', 123456, $mockedAccountLinking);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedAccountLinking, $event->getAccountLinking());
-        $this->assertSame('account_linking', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedAccountLinking, $event->getAccountLinking());
+        self::assertSame('account_linking', $event->getName());
     }
 
     public function testPaymentEvent(): void
@@ -134,11 +134,11 @@ class EventTest extends AbstractTestCase
         $mockedPayment = $this->createMock(Payment::class);
         $event = new PaymentEvent('sender_id', 'recipient_id', 123456, $mockedPayment);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedPayment, $event->getPayment());
-        $this->assertSame('payment', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedPayment, $event->getPayment());
+        self::assertSame('payment', $event->getName());
     }
 
     public function testCheckoutUpdate(): void
@@ -146,11 +146,11 @@ class EventTest extends AbstractTestCase
         $mockedCheckoutUpdate = $this->createMock(CheckoutUpdate::class);
         $event = new CheckoutUpdateEvent('sender_id', 'recipient_id', 123456, $mockedCheckoutUpdate);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedCheckoutUpdate, $event->getCheckoutUpdate());
-        $this->assertSame('checkout_update', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedCheckoutUpdate, $event->getCheckoutUpdate());
+        self::assertSame('checkout_update', $event->getName());
     }
 
     public function testPreCheckout(): void
@@ -158,11 +158,11 @@ class EventTest extends AbstractTestCase
         $mockedPreCheckout = $this->createMock(PreCheckout::class);
         $event = new PreCheckoutEvent('sender_id', 'recipient_id', 123456, $mockedPreCheckout);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedPreCheckout, $event->getPreCheckout());
-        $this->assertSame('pre_checkout', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedPreCheckout, $event->getPreCheckout());
+        self::assertSame('pre_checkout', $event->getName());
     }
 
     public function testPassThreadControl(): void
@@ -170,11 +170,11 @@ class EventTest extends AbstractTestCase
         $mockedPassThreadControl = $this->createMock(PassThreadControl::class);
         $event = new PassThreadControlEvent('sender_id', 'recipient_id', 123456, $mockedPassThreadControl);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedPassThreadControl, $event->getPassThreadControl());
-        $this->assertSame('pass_thread_control', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedPassThreadControl, $event->getPassThreadControl());
+        self::assertSame('pass_thread_control', $event->getName());
     }
 
     public function testRequestThreadControl(): void
@@ -182,11 +182,11 @@ class EventTest extends AbstractTestCase
         $mockedRequestThreadControl = $this->createMock(RequestThreadControl::class);
         $event = new RequestThreadControlEvent('sender_id', 'recipient_id', 123456, $mockedRequestThreadControl);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedRequestThreadControl, $event->getRequestThreadControl());
-        $this->assertSame('request_thread_control', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedRequestThreadControl, $event->getRequestThreadControl());
+        self::assertSame('request_thread_control', $event->getName());
     }
 
     public function testTakeThreadControl(): void
@@ -194,11 +194,11 @@ class EventTest extends AbstractTestCase
         $mockedTakeThreadControl = $this->createMock(TakeThreadControl::class);
         $event = new TakeThreadControlEvent('sender_id', 'recipient_id', 123456, $mockedTakeThreadControl);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedTakeThreadControl, $event->getTakeThreadControl());
-        $this->assertSame('take_thread_control', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedTakeThreadControl, $event->getTakeThreadControl());
+        self::assertSame('take_thread_control', $event->getName());
     }
 
     public function testPolicyEnforcement(): void
@@ -206,11 +206,11 @@ class EventTest extends AbstractTestCase
         $mockedPolicyEnforcement = $this->createMock(PolicyEnforcement::class);
         $event = new PolicyEnforcementEvent('sender_id', 'recipient_id', 123456, $mockedPolicyEnforcement);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedPolicyEnforcement, $event->getPolicyEnforcement());
-        $this->assertSame('policy_enforcement', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedPolicyEnforcement, $event->getPolicyEnforcement());
+        self::assertSame('policy_enforcement', $event->getName());
     }
 
     public function testAppRoles(): void
@@ -218,11 +218,11 @@ class EventTest extends AbstractTestCase
         $mockedAppRoles = $this->createMock(AppRoles::class);
         $event = new AppRolesEvent('sender_id', 'recipient_id', 123456, $mockedAppRoles);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedAppRoles, $event->getAppRoles());
-        $this->assertSame('app_roles', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedAppRoles, $event->getAppRoles());
+        self::assertSame('app_roles', $event->getName());
     }
 
     public function testGamePlay(): void
@@ -230,21 +230,21 @@ class EventTest extends AbstractTestCase
         $mockedGamePlay = $this->createMock(GamePlay::class);
         $event = new GamePlayEvent('sender_id', 'recipient_id', 123456, $mockedGamePlay);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedGamePlay, $event->getGamePlay());
-        $this->assertSame('game_play', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedGamePlay, $event->getGamePlay());
+        self::assertSame('game_play', $event->getName());
     }
 
     public function testRawEvent(): void
     {
         $event = new RawEvent('sender_id', 'recipient_id', ['payload' => 'PAYLOAD']);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(['payload' => 'PAYLOAD'], $event->getRaw());
-        $this->assertSame('raw', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(['payload' => 'PAYLOAD'], $event->getRaw());
+        self::assertSame('raw', $event->getName());
     }
 
     public function testReferralEvent(): void
@@ -252,11 +252,11 @@ class EventTest extends AbstractTestCase
         $mockedReferral = $this->createMock(Referral::class);
         $event = new ReferralEvent('sender_id', 'recipient_id', 123456, $mockedReferral);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedReferral, $event->getReferral());
-        $this->assertSame('referral', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedReferral, $event->getReferral());
+        self::assertSame('referral', $event->getName());
     }
 
     public function testReactionEvent(): void
@@ -264,10 +264,10 @@ class EventTest extends AbstractTestCase
         $mockedReaction = $this->createMock(Reaction::class);
         $event = new ReactionEvent('sender_id', 'recipient_id', 123456, $mockedReaction);
 
-        $this->assertSame('sender_id', $event->getSenderId());
-        $this->assertSame('recipient_id', $event->getRecipientId());
-        $this->assertSame(123456, $event->getTimestamp());
-        $this->assertSame($mockedReaction, $event->getReaction());
-        $this->assertSame('reaction', $event->getName());
+        self::assertSame('sender_id', $event->getSenderId());
+        self::assertSame('recipient_id', $event->getRecipientId());
+        self::assertSame(123456, $event->getTimestamp());
+        self::assertSame($mockedReaction, $event->getReaction());
+        self::assertSame('reaction', $event->getName());
     }
 }

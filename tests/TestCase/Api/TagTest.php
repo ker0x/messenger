@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -10,8 +10,9 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Tag;
 use Kerox\Messenger\Model\Data;
+use PHPUnit\Framework\TestCase;
 
-class TagTest extends AbstractTestCase
+class TagTest extends TestCase
 {
     /**
      * @var \Kerox\Messenger\Api\Tag
@@ -37,13 +38,13 @@ class TagTest extends AbstractTestCase
     {
         $response = $this->tagApi->get();
 
-        $this->assertContainsOnlyInstancesOf(Data::class, $response->getData());
-        $this->assertEquals($this->getData(), $response->getData());
+        self::assertContainsOnlyInstancesOf(Data::class, $response->getData());
+        self::assertEquals($this->getData(), $response->getData());
     }
 
     private function getData()
     {
-        $datas = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Tag/tag.json'), true);
+        $datas = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Tag/tag.json'), true, 512, JSON_THROW_ON_ERROR);
 
         $tags = [];
         foreach ($datas['data'] as $data) {
