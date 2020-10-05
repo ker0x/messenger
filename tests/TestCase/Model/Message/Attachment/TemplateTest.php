@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment;
+namespace Kerox\Messenger\Tests\TestCase\Model\Message\Attachment;
 
 use Kerox\Messenger\Model\Common\Address;
 use Kerox\Messenger\Model\Common\Button\Postback;
@@ -32,9 +32,9 @@ use Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class TemplateTest extends AbstractTestCase
+class TemplateTest extends TestCase
 {
     public function testTemplateAirlineBoardingPass(): void
     {
@@ -78,7 +78,7 @@ class TemplateTest extends AbstractTestCase
         $airlineBoardingPass = AirlineBoardingPassTemplate::create('You are checked in.', 'en_US', $boardingPass)
             ->setThemeColor('#FF0000');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineBoardingPass));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineBoardingPass, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateAirlineCheckIn(): void
@@ -95,7 +95,7 @@ class TemplateTest extends AbstractTestCase
 
         $airlineCheckIn = AirlineCheckInTemplate::create('Check-in is available now.', 'en_US', 'ABCDEF', $flightInto, 'https://www.airline.com/check-in');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineCheckIn));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineCheckIn, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateAirlineItinerary(): void
@@ -137,7 +137,7 @@ class TemplateTest extends AbstractTestCase
             ->setBasePrice('12206')
             ->setTax('200');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineItinerary));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineItinerary, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateAirlineUpdate(): void
@@ -153,7 +153,7 @@ class TemplateTest extends AbstractTestCase
         $airlineUpdate = AirlineUpdateTemplate::create(AirlineUpdateTemplate::UPDATE_TYPE_DELAY, 'en_US', 'CF23G2', $updateFlightInfo)
             ->setIntroMessage('Your flight is delayed');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineUpdate));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($airlineUpdate, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateButton(): void
@@ -165,7 +165,7 @@ class TemplateTest extends AbstractTestCase
             Postback::create('Start Chatting', 'USER_DEFINED_PAYLOAD'),
         ], true);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($button));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($button, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateGeneric(): void
@@ -188,7 +188,7 @@ class TemplateTest extends AbstractTestCase
 
         $generic = GenericTemplate::create([$element]);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($generic));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($generic, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateGenericSquareImage(): void
@@ -211,7 +211,7 @@ class TemplateTest extends AbstractTestCase
 
         $generic = GenericTemplate::create([$element], GenericTemplate::IMAGE_RATIO_SQUARE);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($generic));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($generic, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateList(): void
@@ -288,7 +288,7 @@ class TemplateTest extends AbstractTestCase
                 Postback::create('View More', 'payload'),
             ]);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($liste));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($liste, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateReceipt(): void
@@ -325,7 +325,7 @@ class TemplateTest extends AbstractTestCase
                     ->setAmount(10),
             ]);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($receipt));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($receipt, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateOpenGraph(): void
@@ -341,7 +341,7 @@ class TemplateTest extends AbstractTestCase
 
         $openGraph = OpenGraphTemplate::create($elements);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($openGraph));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($openGraph, JSON_THROW_ON_ERROR));
     }
 
     public function testTemplateMedia(): void
@@ -357,6 +357,6 @@ class TemplateTest extends AbstractTestCase
 
         $media = MediaTemplate::create($elements);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($media));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($media, JSON_THROW_ON_ERROR));
     }
 }

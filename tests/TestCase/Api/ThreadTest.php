@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -10,8 +10,9 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Model\ThreadControl;
+use PHPUnit\Framework\TestCase;
 
-class ThreadTest extends AbstractTestCase
+class ThreadTest extends TestCase
 {
     /**
      * @var \Kerox\Messenger\Api\Thread
@@ -40,7 +41,7 @@ class ThreadTest extends AbstractTestCase
 
         $response = $this->threadApi->pass($passThreadControl);
 
-        $this->assertTrue($response->isSuccess());
+        self::assertTrue($response->isSuccess());
     }
 
     public function testTakeThreadControl(): void
@@ -50,7 +51,7 @@ class ThreadTest extends AbstractTestCase
 
         $response = $this->threadApi->take($takeThreadControl);
 
-        $this->assertTrue($response->isSuccess());
+        self::assertTrue($response->isSuccess());
     }
 
     public function testRequestThreadControl(): void
@@ -60,6 +61,6 @@ class ThreadTest extends AbstractTestCase
 
         $response = $this->threadApi->request($requestThreadControl);
 
-        $this->assertTrue($response->isSuccess());
+        self::assertTrue($response->isSuccess());
     }
 }

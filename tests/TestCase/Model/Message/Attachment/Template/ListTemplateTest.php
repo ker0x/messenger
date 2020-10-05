@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template;
+namespace Kerox\Messenger\Tests\TestCase\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Button\Postback;
 use Kerox\Messenger\Model\Common\Button\WebUrl;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ListTemplateTest extends AbstractTestCase
+class ListTemplateTest extends TestCase
 {
     public function testInvalidTopElementStyle(): void
     {
@@ -50,7 +50,7 @@ class ListTemplateTest extends AbstractTestCase
                     ->setFallbackUrl('https://peterssendreceiveapp.ngrok.io/'),
             ]);
 
-        $liste = ListTemplate::create([$element1, $element2])
+        ListTemplate::create([$element1, $element2])
             ->setTopElementStyle('x-large')
             ->setButtons([
                 Postback::create('View More', 'payload'),

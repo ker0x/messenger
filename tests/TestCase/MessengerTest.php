@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase;
+namespace Kerox\Messenger\Tests\TestCase;
 
 use Kerox\Messenger\Api\Broadcast;
 use Kerox\Messenger\Api\Code;
@@ -16,8 +16,9 @@ use Kerox\Messenger\Api\Thread;
 use Kerox\Messenger\Api\User;
 use Kerox\Messenger\Api\Webhook;
 use Kerox\Messenger\Messenger;
+use PHPUnit\Framework\TestCase;
 
-class MessengerTest extends AbstractTestCase
+class MessengerTest extends TestCase
 {
     /**
      * @var Messenger
@@ -31,17 +32,17 @@ class MessengerTest extends AbstractTestCase
 
     public function testGetInstanceOfApi(): void
     {
-        $this->assertInstanceOf(Send::class, $this->messenger->send());
-        $this->assertInstanceOf(User::class, $this->messenger->user());
-        $this->assertInstanceOf(Webhook::class, $this->messenger->webhook());
-        $this->assertInstanceOf(Code::class, $this->messenger->code());
-        $this->assertInstanceOf(Insights::class, $this->messenger->insights());
-        $this->assertInstanceOf(Profile::class, $this->messenger->profile());
-        $this->assertInstanceOf(Tag::class, $this->messenger->tag());
-        $this->assertInstanceOf(Thread::class, $this->messenger->thread());
-        $this->assertInstanceOf(Nlp::class, $this->messenger->nlp());
-        $this->assertInstanceOf(Broadcast::class, $this->messenger->broadcast());
-        $this->assertInstanceOf(Persona::class, $this->messenger->persona());
+        self::assertInstanceOf(Send::class, $this->messenger->send());
+        self::assertInstanceOf(User::class, $this->messenger->user());
+        self::assertInstanceOf(Webhook::class, $this->messenger->webhook());
+        self::assertInstanceOf(Code::class, $this->messenger->code());
+        self::assertInstanceOf(Insights::class, $this->messenger->insights());
+        self::assertInstanceOf(Profile::class, $this->messenger->profile());
+        self::assertInstanceOf(Tag::class, $this->messenger->tag());
+        self::assertInstanceOf(Thread::class, $this->messenger->thread());
+        self::assertInstanceOf(Nlp::class, $this->messenger->nlp());
+        self::assertInstanceOf(Broadcast::class, $this->messenger->broadcast());
+        self::assertInstanceOf(Persona::class, $this->messenger->persona());
     }
 
     public function tearDown(): void

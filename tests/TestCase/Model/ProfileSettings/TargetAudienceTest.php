@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\ProfileSettings;
+namespace Kerox\Messenger\Tests\TestCase\Model\ProfileSettings;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\ProfileSettings\TargetAudience;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class TargetAudienceTest extends AbstractTestCase
+class TargetAudienceTest extends TestCase
 {
     public function testInvalidTargetAudienceType(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('audienceType must be either "all, custom, none".');
-        $targetAudience = TargetAudience::create('partial');
+        TargetAudience::create('partial');
     }
 }

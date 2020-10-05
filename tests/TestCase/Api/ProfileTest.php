@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Api;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -12,9 +12,9 @@ use Kerox\Messenger\Api\Profile;
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\ProfileSettings;
 use Kerox\Messenger\Model\ProfileSettings\Greeting;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ProfileTest extends AbstractTestCase
+class ProfileTest extends TestCase
 {
     /**
      * @var \Kerox\Messenger\Api\Profile
@@ -45,21 +45,21 @@ class ProfileTest extends AbstractTestCase
 
         $response = $this->profileApi->add($profileSettings);
 
-        $this->assertSame('success', $response->getResult());
+        self::assertSame('success', $response->getResult());
     }
 
     public function testGetSettings(): void
     {
         $response = $this->profileApi->get(['greeting', 'get_started']);
 
-        $this->assertSame('success', $response->getResult());
+        self::assertSame('success', $response->getResult());
     }
 
     public function testDeleteSetting(): void
     {
         $response = $this->profileApi->delete(['greeting', 'get_started']);
 
-        $this->assertSame('success', $response->getResult());
+        self::assertSame('success', $response->getResult());
     }
 
     public function testInvalidField(): void

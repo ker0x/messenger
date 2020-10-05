@@ -20,7 +20,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.3.0",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^6.2",
     "psr/http-message": "^1.0"
@@ -37,7 +37,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Kerox\\Messenger\\Test\\": "tests"
+      "Kerox\\Messenger\\Tests\\": "tests"
     }
   },
   "scripts": {

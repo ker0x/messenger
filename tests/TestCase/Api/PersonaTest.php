@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Api;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -11,9 +11,9 @@ use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Persona;
 use Kerox\Messenger\Model\Data;
 use Kerox\Messenger\Model\PersonaSettings;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class PersonaTest extends AbstractTestCase
+class PersonaTest extends TestCase
 {
     public function testAdd(): void
     {
@@ -31,11 +31,11 @@ class PersonaTest extends AbstractTestCase
 
         $response = $personaApi->add(PersonaSettings::create('John Mathew', 'https://facebook.com/john_image.jpg'));
 
-        $this->assertSame('<PERSONA_ID>', $response->getId());
-        $this->assertNull($response->getName());
-        $this->assertNull($response->getProfilePictureUrl());
-        $this->assertEmpty($response->getData());
-        $this->assertFalse($response->isSuccess());
+        self::assertSame('<PERSONA_ID>', $response->getId());
+        self::assertNull($response->getName());
+        self::assertNull($response->getProfilePictureUrl());
+        self::assertEmpty($response->getData());
+        self::assertFalse($response->isSuccess());
     }
 
     public function testGet(): void
@@ -54,11 +54,11 @@ class PersonaTest extends AbstractTestCase
 
         $response = $personaApi->get('<PERSONA_ID>');
 
-        $this->assertSame('<PERSONA_ID>', $response->getId());
-        $this->assertSame('John Mathew', $response->getName());
-        $this->assertSame('https://facebook.com/john_image.jpg', $response->getProfilePictureUrl());
-        $this->assertEmpty($response->getData());
-        $this->assertFalse($response->isSuccess());
+        self::assertSame('<PERSONA_ID>', $response->getId());
+        self::assertSame('John Mathew', $response->getName());
+        self::assertSame('https://facebook.com/john_image.jpg', $response->getProfilePictureUrl());
+        self::assertEmpty($response->getData());
+        self::assertFalse($response->isSuccess());
     }
 
     public function testGetAll(): void
@@ -77,11 +77,11 @@ class PersonaTest extends AbstractTestCase
 
         $response = $personaApi->getAll();
 
-        $this->assertNull($response->getId());
-        $this->assertNull($response->getName());
-        $this->assertNull($response->getProfilePictureUrl());
-        $this->assertFalse($response->isSuccess());
-        $this->assertEquals($this->getData(), $response->getData());
+        self::assertNull($response->getId());
+        self::assertNull($response->getName());
+        self::assertNull($response->getProfilePictureUrl());
+        self::assertFalse($response->isSuccess());
+        self::assertEquals($this->getData(), $response->getData());
     }
 
     public function testDelete(): void
@@ -100,11 +100,11 @@ class PersonaTest extends AbstractTestCase
 
         $response = $personaApi->delete('<PERSONA_ID>');
 
-        $this->assertNull($response->getId());
-        $this->assertNull($response->getName());
-        $this->assertNull($response->getProfilePictureUrl());
-        $this->assertEmpty($response->getData());
-        $this->assertTrue($response->isSuccess());
+        self::assertNull($response->getId());
+        self::assertNull($response->getName());
+        self::assertNull($response->getProfilePictureUrl());
+        self::assertEmpty($response->getData());
+        self::assertTrue($response->isSuccess());
     }
 
     /**
@@ -112,7 +112,7 @@ class PersonaTest extends AbstractTestCase
      */
     private function getData(): array
     {
-        $datas = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/get_all.json'), true);
+        $datas = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/get_all.json'), true, 512, JSON_THROW_ON_ERROR);
 
         $tags = [];
         foreach ($datas['data'] as $data) {

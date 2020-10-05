@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Common;
+namespace Kerox\Messenger\Tests\TestCase\Model\Common;
 
 use Kerox\Messenger\Model\Common\Address;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class AddressTest extends AbstractTestCase
+class AddressTest extends TestCase
 {
     public function testAddress(): void
     {
@@ -19,6 +19,6 @@ class AddressTest extends AbstractTestCase
             ->setAdditionalStreet('3rd floor')
             ->setId(1234);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($address));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($address, JSON_THROW_ON_ERROR));
     }
 }

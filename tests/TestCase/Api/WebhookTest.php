@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Api;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -13,9 +13,9 @@ use Kerox\Messenger\Api\Webhook;
 use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Model\Callback\Message;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class WebhookTest extends AbstractTestCase
+class WebhookTest extends TestCase
 {
     /**
      * @var \Kerox\Messenger\Api\Webhook
@@ -53,7 +53,7 @@ class WebhookTest extends AbstractTestCase
     {
         $response = $this->webhookApi->subscribe();
 
-        $this->assertTrue($response->isSuccess());
+        self::assertTrue($response->isSuccess());
     }
 
     public function testWebhookVerification(): void
@@ -69,13 +69,13 @@ class WebhookTest extends AbstractTestCase
 
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
 
-        $this->assertTrue($webhook->isValidToken());
-        $this->assertSame('1234abcd', $webhook->challenge());
+        self::assertTrue($webhook->isValidToken());
+        self::assertSame('1234abcd', $webhook->challenge());
     }
 
     public function testIsValidCallback(): void
     {
-        $this->assertTrue($this->webhookApi->isValidCallback());
+        self::assertTrue($this->webhookApi->isValidCallback());
     }
 
     public function testGetDecodedBody(): void
@@ -108,7 +108,7 @@ class WebhookTest extends AbstractTestCase
             ],
         ];
 
-        $this->assertSame($body, $this->webhookApi->getDecodedBody());
+        self::assertSame($body, $this->webhookApi->getDecodedBody());
     }
 
     public function testGetCallbackEntries(): void
@@ -140,7 +140,7 @@ class WebhookTest extends AbstractTestCase
 
         $entries = $this->webhookApi->getCallbackEntries();
 
-        $this->assertEquals([$entry], $entries);
+        self::assertEquals([$entry], $entries);
     }
 
     public function testGetCallbackEvents(): void
@@ -149,7 +149,7 @@ class WebhookTest extends AbstractTestCase
 
         $events = $this->webhookApi->getCallbackEvents();
 
-        $this->assertEquals([$event], $events);
+        self::assertEquals([$event], $events);
     }
 
     public function testStandbyEntry(): void
@@ -181,7 +181,7 @@ class WebhookTest extends AbstractTestCase
         $webhookApi = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
         $events = $webhookApi->getCallbackEvents();
 
-        $this->assertEquals([$event], $events);
+        self::assertEquals([$event], $events);
     }
 
     public function testWebhookVerificationWithInvalidRequestMethod(): void
@@ -197,7 +197,7 @@ class WebhookTest extends AbstractTestCase
 
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
 
-        $this->assertFalse($webhook->isValidToken());
+        self::assertFalse($webhook->isValidToken());
     }
 
     public function testWebhookVerificationWithMissingParam(): void
@@ -213,7 +213,7 @@ class WebhookTest extends AbstractTestCase
 
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
 
-        $this->assertFalse($webhook->isValidToken());
+        self::assertFalse($webhook->isValidToken());
     }
 
     public function testWebhookWithMissingHeaders(): void
@@ -239,7 +239,7 @@ class WebhookTest extends AbstractTestCase
 
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
 
-        $this->assertFalse($webhook->isValidCallback());
+        self::assertFalse($webhook->isValidCallback());
     }
 
     public function testWebhookWithInvalidCallback(): void
@@ -268,7 +268,7 @@ class WebhookTest extends AbstractTestCase
 
         $webhook = new Webhook($appSecret, $verifyToken, $pageToken, $client, $request);
 
-        $this->assertSame([], $webhook->getDecodedBody());
+        self::assertSame([], $webhook->getDecodedBody());
     }
 
     public function tearDown(): void

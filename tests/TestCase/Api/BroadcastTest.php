@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Api;
+namespace Kerox\Messenger\Tests\TestCase\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Api\Broadcast;
-use Kerox\Messenger\Response\BroadcastResponse;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class BroadcastTest extends AbstractTestCase
+class BroadcastTest extends TestCase
 {
     public function testBroadcastCreate(): void
     {
@@ -30,7 +29,7 @@ class BroadcastTest extends AbstractTestCase
 
         $response = $broadcastApi->create('Hello World');
 
-        $this->assertSame('0123456789', $response->getMessageCreativeId());
+        self::assertSame('0123456789', $response->getMessageCreativeId());
     }
 
     public function testBroadcastSend(): void
@@ -49,6 +48,6 @@ class BroadcastTest extends AbstractTestCase
 
         $response = $broadcastApi->send('0123456789');
 
-        $this->assertSame('0123456789', $response->getBroadcastId());
+        self::assertSame('0123456789', $response->getBroadcastId());
     }
 }

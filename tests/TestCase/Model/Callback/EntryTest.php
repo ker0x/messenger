@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Callback;
+namespace Kerox\Messenger\Tests\TestCase\Model\Callback;
 
 use Kerox\Messenger\Event\MessageEvent;
 use Kerox\Messenger\Model\Callback\Entry;
 use Kerox\Messenger\Model\Callback\Message;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class EntryTest extends AbstractTestCase
+class EntryTest extends TestCase
 {
     public function testEntryCallback(): void
     {
@@ -39,8 +39,8 @@ class EntryTest extends AbstractTestCase
         $messageEvent = new MessageEvent('USER_ID', 'PAGE_ID', 1458692752478, new Message('mid.1457764197618:41d102a3e1ae206a38', 'hello, world!', 'DEVELOPER_DEFINED_PAYLOAD'));
         $entry = Entry::create($payload);
 
-        $this->assertSame('PAGE_ID', $entry->getId());
-        $this->assertSame(1458692752478, $entry->getTime());
-        $this->assertEquals([$messageEvent], $entry->getEvents());
+        self::assertSame('PAGE_ID', $entry->getId());
+        self::assertSame(1458692752478, $entry->getTime());
+        self::assertEquals([$messageEvent], $entry->getEvents());
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model;
+namespace Kerox\Messenger\Tests\TestCase\Model;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Address;
@@ -12,16 +12,16 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
 use Kerox\Messenger\Model\Message\QuickReply;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class MessageTest extends AbstractTestCase
+class MessageTest extends TestCase
 {
     public function testMessageWithText(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Message/text.json');
         $message = Message::create('hello, world!');
 
-        $this->assertJsonStringEqualsJsonString($json, json_encode($message));
+        self::assertJsonStringEqualsJsonString($json, json_encode($message));
     }
 
     public function testMessageWithReceipt(): void
@@ -60,7 +60,7 @@ class MessageTest extends AbstractTestCase
         $json = file_get_contents(__DIR__ . '/../../Mocks/Message/receipt.json');
         $message = Message::create($receipt);
 
-        $this->assertJsonStringEqualsJsonString($json, json_encode($message));
+        self::assertJsonStringEqualsJsonString($json, json_encode($message));
     }
 
     public function testMessageWithQuickReplies(): void
@@ -81,7 +81,7 @@ class MessageTest extends AbstractTestCase
             ->addQuickReply(QuickReply::create(QuickReply::CONTENT_TYPE_LOCATION))
             ->setMetadata('some metadata');
 
-        $this->assertJsonStringEqualsJsonString($json, json_encode($message));
+        self::assertJsonStringEqualsJsonString($json, json_encode($message));
     }
 
     public function testMessageWithQuickRepliesUsingOnlyAddQuickReply(): void
@@ -101,21 +101,21 @@ class MessageTest extends AbstractTestCase
             ->addQuickReply(QuickReply::create(QuickReply::CONTENT_TYPE_LOCATION))
             ->setMetadata('some metadata');
 
-        $this->assertJsonStringEqualsJsonString($json, json_encode($message));
+        self::assertJsonStringEqualsJsonString($json, json_encode($message));
     }
 
     public function testMessageWithInvalidArgument(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('message must be a string or an instance of Kerox\Messenger\Model\Message\Attachment.');
-        $message = new Message(123456);
+        Message::create(123456);
     }
 
     public function testMessageWithInvalidQuickReplies(): void
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('Array can only contain instance of Kerox\Messenger\Model\Message\QuickReply.');
-        $message = Message::create('Pick a color:')
+        Message::create('Pick a color:')
             ->setQuickReplies([
                 QuickReply::create()
                     ->setTitle('Red')
@@ -133,7 +133,7 @@ class MessageTest extends AbstractTestCase
     {
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('The minimum number of items for this array is 1.');
-        $message = Message::create('Pick a color:')
+        Message::create('Pick a color:')
             ->setQuickReplies([]);
     }
 
@@ -149,7 +149,7 @@ class MessageTest extends AbstractTestCase
 
         $this->expectException(MessengerException::class);
         $this->expectExceptionMessage('The maximum number of items for this array is 11.');
-        $message = Message::create('Pick a color:')
+        Message::create('Pick a color:')
             ->setQuickReplies($quickReplies)
             ->addQuickReply(QuickReply::create(QuickReply::CONTENT_TYPE_LOCATION));
     }

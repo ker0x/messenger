@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model\Message\Attachment\Template\Airline;
+namespace Kerox\Messenger\Tests\TestCase\Model\Message\Attachment\Template\Airline;
 
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\Airport;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\BoardingPass;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightSchedule;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class BoardingPassTest extends AbstractTestCase
+class BoardingPassTest extends TestCase
 {
     /**
      * @var BoardingPass
@@ -38,7 +38,7 @@ class BoardingPassTest extends AbstractTestCase
         $flightInfo = FlightInfo::create('KL0642', $departureAirport, $arrivalAirport, $flightSchedule);
 
         $boardingPass = BoardingPass::create('Smith Nicolas', 'CG4X7U', 'https://www.example.com/en/logo.png', 'https://www.example.com/barcode.jpg', 'https://www.example.com/en/PLAT.png', $flightInfo);
-        $this->assertJsonStringEqualsJsonString('{"passenger_name":"Smith Nicolas","pnr_number":"CG4X7U","logo_image_url":"https://www.example.com/en/logo.png","barcode_image_url":"https://www.example.com/barcode.jpg","above_bar_code_image_url":"https://www.example.com/en/PLAT.png","flight_info":{"flight_number":"KL0642","departure_airport":{"airport_code":"JFK","city":"New York","terminal":"T1","gate":"D57"},"arrival_airport":{"airport_code":"AMS","city":"Amsterdam"},"flight_schedule":{"departure_time":"2016-01-02T19:05","arrival_time":"2016-01-05T17:30"}}}', json_encode($boardingPass));
+        self::assertJsonStringEqualsJsonString('{"passenger_name":"Smith Nicolas","pnr_number":"CG4X7U","logo_image_url":"https://www.example.com/en/logo.png","barcode_image_url":"https://www.example.com/barcode.jpg","above_bar_code_image_url":"https://www.example.com/en/PLAT.png","flight_info":{"flight_number":"KL0642","departure_airport":{"airport_code":"JFK","city":"New York","terminal":"T1","gate":"D57"},"arrival_airport":{"airport_code":"AMS","city":"Amsterdam"},"flight_schedule":{"departure_time":"2016-01-02T19:05","arrival_time":"2016-01-05T17:30"}}}', json_encode($boardingPass));
     }
 
     public function testTravelClass(): void

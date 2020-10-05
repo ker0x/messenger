@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Response;
+namespace Kerox\Messenger\Tests\TestCase\Response;
 
 use GuzzleHttp\Psr7\Response;
 use Kerox\Messenger\Response\SendResponse;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class SendResponseTest extends AbstractTestCase
+class SendResponseTest extends TestCase
 {
     public function testResponse(): void
     {
@@ -17,14 +17,14 @@ class SendResponseTest extends AbstractTestCase
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
 
-        $this->assertSame('1008372609250235', $sendResponse->getRecipientId());
-        $this->assertSame('mid.1456970487936:c34767dfe57ee6e339', $sendResponse->getMessageId());
-        $this->assertNull($sendResponse->getAttachmentId());
-        $this->assertNull($sendResponse->getErrorMessage());
-        $this->assertNull($sendResponse->getErrorType());
-        $this->assertNull($sendResponse->getErrorCode());
-        $this->assertNull($sendResponse->getErrorSubcode());
-        $this->assertNull($sendResponse->getErrorFbtraceId());
+        self::assertSame('1008372609250235', $sendResponse->getRecipientId());
+        self::assertSame('mid.1456970487936:c34767dfe57ee6e339', $sendResponse->getMessageId());
+        self::assertNull($sendResponse->getAttachmentId());
+        self::assertNull($sendResponse->getErrorMessage());
+        self::assertNull($sendResponse->getErrorType());
+        self::assertNull($sendResponse->getErrorCode());
+        self::assertNull($sendResponse->getErrorSubcode());
+        self::assertNull($sendResponse->getErrorFbtraceId());
     }
 
     public function testResponseWithAttachmentId(): void
@@ -34,14 +34,14 @@ class SendResponseTest extends AbstractTestCase
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
 
-        $this->assertSame('1008372609250235', $sendResponse->getRecipientId());
-        $this->assertSame('mid.1456970487936:c34767dfe57ee6e339', $sendResponse->getMessageId());
-        $this->assertSame('1745504518999123', $sendResponse->getAttachmentId());
-        $this->assertNull($sendResponse->getErrorMessage());
-        $this->assertNull($sendResponse->getErrorType());
-        $this->assertNull($sendResponse->getErrorCode());
-        $this->assertNull($sendResponse->getErrorSubcode());
-        $this->assertNull($sendResponse->getErrorFbtraceId());
+        self::assertSame('1008372609250235', $sendResponse->getRecipientId());
+        self::assertSame('mid.1456970487936:c34767dfe57ee6e339', $sendResponse->getMessageId());
+        self::assertSame('1745504518999123', $sendResponse->getAttachmentId());
+        self::assertNull($sendResponse->getErrorMessage());
+        self::assertNull($sendResponse->getErrorType());
+        self::assertNull($sendResponse->getErrorCode());
+        self::assertNull($sendResponse->getErrorSubcode());
+        self::assertNull($sendResponse->getErrorFbtraceId());
     }
 
     public function testResponseWithError(): void
@@ -51,14 +51,14 @@ class SendResponseTest extends AbstractTestCase
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
 
-        $this->assertNull($sendResponse->getRecipientId());
-        $this->assertNull($sendResponse->getMessageId());
-        $this->assertNull($sendResponse->getAttachmentId());
-        $this->assertSame('Invalid OAuth access token.', $sendResponse->getErrorMessage());
-        $this->assertSame('OAuthException', $sendResponse->getErrorType());
-        $this->assertSame(190, $sendResponse->getErrorCode());
-        $this->assertSame(1234567, $sendResponse->getErrorSubcode());
-        $this->assertSame('BLBz/WZt8dN', $sendResponse->getErrorFbtraceId());
+        self::assertNull($sendResponse->getRecipientId());
+        self::assertNull($sendResponse->getMessageId());
+        self::assertNull($sendResponse->getAttachmentId());
+        self::assertSame('Invalid OAuth access token.', $sendResponse->getErrorMessage());
+        self::assertSame('OAuthException', $sendResponse->getErrorType());
+        self::assertSame(190, $sendResponse->getErrorCode());
+        self::assertSame(1234567, $sendResponse->getErrorSubcode());
+        self::assertSame('BLBz/WZt8dN', $sendResponse->getErrorFbtraceId());
     }
 
     public function testRawResponse(): void
@@ -68,7 +68,7 @@ class SendResponseTest extends AbstractTestCase
         $response = new Response(200, [], $body);
         $sendResponse = new SendResponse($response);
 
-        $this->assertSame(200, $sendResponse->getResponse()->getStatusCode());
-        $this->assertSame($body, $sendResponse->getResponse()->getBody()->__toString());
+        self::assertSame(200, $sendResponse->getResponse()->getStatusCode());
+        self::assertSame($body, $sendResponse->getResponse()->getBody()->__toString());
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kerox\Messenger\Test\TestCase\Model;
+namespace Kerox\Messenger\Tests\TestCase\Model;
 
 use Kerox\Messenger\Model\Common\Button\Nested;
 use Kerox\Messenger\Model\Common\Button\Postback;
@@ -14,9 +14,9 @@ use Kerox\Messenger\Model\ProfileSettings\IceBreakers;
 use Kerox\Messenger\Model\ProfileSettings\PaymentSettings;
 use Kerox\Messenger\Model\ProfileSettings\PersistentMenu;
 use Kerox\Messenger\Model\ProfileSettings\TargetAudience;
-use Kerox\Messenger\Test\TestCase\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ProfileSettingsTest extends AbstractTestCase
+class ProfileSettingsTest extends TestCase
 {
     /**
      * @var ProfileSettings
@@ -46,7 +46,7 @@ class ProfileSettingsTest extends AbstractTestCase
             PersistentMenu::create('zh_CN'),
         ]);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($persistentMenus));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($persistentMenus));
     }
 
     public function testStartButton(): void
@@ -54,7 +54,7 @@ class ProfileSettingsTest extends AbstractTestCase
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/get_started.json');
         $startButton = $this->profileSettings->addStartButton('GET_STARTED_PAYLOAD');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($startButton));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($startButton));
     }
 
     public function testGreeting(): void
@@ -65,7 +65,7 @@ class ProfileSettingsTest extends AbstractTestCase
             Greeting::create('Timeless apparel for the masses.', 'en_US'),
         ]);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($greetings));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($greetings));
     }
 
     public function testIceBreakers(): void
@@ -78,7 +78,7 @@ class ProfileSettingsTest extends AbstractTestCase
             IceBreakers::create('What services do you offer?', 'SERVICES_POSTBACK_PAYLOAD'),
         ]);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($iceBreakers));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($iceBreakers));
     }
 
     public function testWhitelistedDomains(): void
@@ -88,7 +88,7 @@ class ProfileSettingsTest extends AbstractTestCase
             'https://petersfancyapparel.com',
         ]);
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($whitelistedDomains));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($whitelistedDomains));
     }
 
     public function testAccountLinkingUrl(): void
@@ -96,7 +96,7 @@ class ProfileSettingsTest extends AbstractTestCase
         $expectedJson = file_get_contents(__DIR__ . '/../../Mocks/ProfileSettings/account_linking_url.json');
         $accountLinkingUrl = $this->profileSettings->addAccountLinkingUrl('https://www.example.com/oauth?response_type=code&client_id=1234567890&scope=basic');
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($accountLinkingUrl));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($accountLinkingUrl));
     }
 
     public function testPaymentSettings(): void
@@ -109,7 +109,7 @@ class ProfileSettingsTest extends AbstractTestCase
                 ->addTestUser(12345678)
         );
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($paymentSettings));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($paymentSettings));
     }
 
     public function testHomeUrl(): void
@@ -121,7 +121,7 @@ class ProfileSettingsTest extends AbstractTestCase
             'show'
         ));
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($homeUrl));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($homeUrl));
     }
 
     public function testTargetAudience(): void
@@ -133,7 +133,7 @@ class ProfileSettingsTest extends AbstractTestCase
                 ->addBlacklistCountry('IT')
         );
 
-        $this->assertJsonStringEqualsJsonString($expectedJson, json_encode($targetAudience));
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($targetAudience));
     }
 
     public function tearDown(): void

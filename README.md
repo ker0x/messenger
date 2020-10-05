@@ -9,7 +9,7 @@
         <img src="https://img.shields.io/scrutinizer/g/ker0x/messenger.svg?style=for-the-badge" alt="Code Quality">
     </a>
     <a href="https://php.net" title="PHP Version">
-        <img src="https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=for-the-badge" alt="PHP Version">
+        <img src="https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=for-the-badge" alt="PHP Version">
     </a>
     <a href="https://packagist.org/packages/kerox/messenger" title="Downloads">
         <img src="https://img.shields.io/packagist/dt/kerox/messenger.svg?style=for-the-badge" alt="Downloads">
