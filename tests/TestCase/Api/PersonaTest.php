@@ -107,9 +107,6 @@ class PersonaTest extends TestCase
         self::assertTrue($response->isSuccess());
     }
 
-    /**
-     * @return array
-     */
     private function getData(): array
     {
         $datas = json_decode(file_get_contents(__DIR__ . '/../../Mocks/Response/Persona/get_all.json'), true, 512, JSON_THROW_ON_ERROR);

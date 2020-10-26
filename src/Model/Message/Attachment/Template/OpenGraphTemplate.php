@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 
 /**
  * @deprecated Since version 3.2.0 and will be removed in version 4.0.0.
  */
-class OpenGraphTemplate extends Template
+class OpenGraphTemplate extends AbstractTemplate
 {
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement[]
@@ -33,7 +33,7 @@ class OpenGraphTemplate extends Template
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate
      */
@@ -47,7 +47,7 @@ class OpenGraphTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_OPEN_GRAPH,
+                'template_type' => AbstractTemplate::TYPE_OPEN_GRAPH,
                 'elements' => $this->elements,
             ],
         ];

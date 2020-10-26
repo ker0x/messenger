@@ -8,7 +8,7 @@ use Kerox\Messenger\Exception\InvalidOptionException;
 use Kerox\Messenger\Exception\InvalidRecipientException;
 use Kerox\Messenger\Exception\InvalidTypeException;
 use Kerox\Messenger\Helper\ValidatorTrait;
-use Kerox\Messenger\Model\Message\Attachment;
+use Kerox\Messenger\Model\Message\AbstractAttachment;
 use Kerox\Messenger\Request\SendRequest;
 use Kerox\Messenger\Response\SendResponse;
 use Kerox\Messenger\SendInterface;
@@ -55,7 +55,7 @@ class Send extends AbstractApi implements SendInterface
     /**
      * @throws \Exception
      */
-    public function attachment(Attachment $attachment): SendResponse
+    public function attachment(AbstractAttachment $attachment): SendResponse
     {
         $message = $this->isValidMessage($attachment);
 

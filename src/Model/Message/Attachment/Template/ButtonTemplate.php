@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 
-class ButtonTemplate extends Template
+class ButtonTemplate extends AbstractTemplate
 {
     /**
      * @var string
@@ -53,7 +53,7 @@ class ButtonTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_BUTTON,
+                'template_type' => AbstractTemplate::TYPE_BUTTON,
                 'text' => $this->text,
                 'buttons' => $this->buttons,
                 'sharable' => $this->sharable,

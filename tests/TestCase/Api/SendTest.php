@@ -71,7 +71,7 @@ class SendTest extends TestCase
         $message = $this->getReceipt();
 
         $response = $this->sendApi->message('1008372609250235', $message, [
-            'persona_id' => '1254477777772919'
+            'persona_id' => '1254477777772919',
         ]);
 
         self::assertEquals('1008372609250235', $response->getRecipientId());
@@ -105,7 +105,7 @@ class SendTest extends TestCase
     public function testInvalidMessage(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('"message" must be a string or an instance of "Kerox\Messenger\Model\Message" or "Kerox\Messenger\Model\Message\Attachment".');
+        $this->expectExceptionMessage('"message" must be a string or an instance of "Kerox\Messenger\Model\Message" or "Kerox\Messenger\Model\Message\AbstractAttachment".');
         $this->sendApi->message('1008372609250235', 1234);
     }
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment;
 
-use Kerox\Messenger\Model\Message\Attachment;
+use Kerox\Messenger\Model\Message\AbstractAttachment;
 
 class Image extends File
 {
@@ -19,7 +19,7 @@ class Image extends File
     {
         $this->isValidExtension($url, $this->getAllowedExtensions());
 
-        parent::__construct($url, $reusable, Attachment::TYPE_IMAGE);
+        parent::__construct($url, $reusable, AbstractAttachment::TYPE_IMAGE);
     }
 
     /**

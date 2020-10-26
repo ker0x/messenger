@@ -1,0 +1,14 @@
+{
+  "type": "template",
+  "payload": {
+    "template_type": "product",
+    "elements": [
+      {
+        "id": "<PRODUCT_ID_1>"
+      },
+      {
+        "id": "<PRODUCT_ID_2>"
+      }
+    ]
+  }
+}

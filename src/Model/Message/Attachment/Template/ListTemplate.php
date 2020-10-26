@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Exception\InvalidKeyException;
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 
 /**
  * @deprecated Since version 3.2.0 and will be removed in version 4.0.0.
  */
-class ListTemplate extends Template
+class ListTemplate extends AbstractTemplate
 {
     public const TOP_ELEMENT_STYLE_LARGE = 'large';
     public const TOP_ELEMENT_STYLE_COMPACT = 'compact';
@@ -47,7 +47,7 @@ class ListTemplate extends Template
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
      */
@@ -57,7 +57,7 @@ class ListTemplate extends Template
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
      */
@@ -73,7 +73,7 @@ class ListTemplate extends Template
     /**
      * @param \Kerox\Messenger\Model\Common\Button\AbstractButton[] $buttons
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate
      */
@@ -110,7 +110,7 @@ class ListTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_LIST,
+                'template_type' => AbstractTemplate::TYPE_LIST,
                 'top_element_style' => $this->topElementStyle,
                 'elements' => $this->elements,
                 'buttons' => $this->buttons,

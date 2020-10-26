@@ -60,11 +60,6 @@ class EventFactoryTest extends TestCase
         self::assertEquals($expectedEvent, $event);
     }
 
-    public function testEntryEvent(): void
-    {
-
-    }
-
     public function testMessageEvent(): void
     {
         $json = file_get_contents(__DIR__ . '/../../Mocks/Event/message.json');
@@ -86,11 +81,11 @@ class EventFactoryTest extends TestCase
         self::assertTrue($message->hasEntities());
         self::assertSame([
             'datetime' => [
-                ['confidence' => 0.97249440664957, 'values' => ['...'], 'value' => '2017-05-10T14:00:00.000-07:00', 'grain' => 'hour', 'type' => 'value']
+                ['confidence' => 0.97249440664957, 'values' => ['...'], 'value' => '2017-05-10T14:00:00.000-07:00', 'grain' => 'hour', 'type' => 'value'],
             ],
             'greetings' => [
-                ['confidence' => 1, 'value' => 'true']
-            ]
+                ['confidence' => 1, 'value' => 'true'],
+            ],
         ], $message->getEntities());
     }
 
@@ -360,7 +355,6 @@ class EventFactoryTest extends TestCase
         $policyEnforcement = $event->getPolicyEnforcement();
         self::assertSame('block', $policyEnforcement->getAction());
         self::assertSame('The bot violated our Platform Policies (https://developers.facebook.com/policy/#messengerplatform). Common violations include sending out excessive spammy messages or being non-functional.', $policyEnforcement->getReason());
-
     }
 
     public function testAppRolesEvent(): void
@@ -424,7 +418,7 @@ class EventFactoryTest extends TestCase
 
         $reaction = $event->getReaction();
         self::assertSame('smile', $reaction->getReaction());
-        self::assertSame("❤️", $reaction->getEmoji());
+        self::assertSame('❤️', $reaction->getEmoji());
         self::assertSame('react', $reaction->getAction());
         self::assertSame('<MID>', $reaction->getMid());
     }

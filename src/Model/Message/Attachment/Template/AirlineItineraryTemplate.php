@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 
 class AirlineItineraryTemplate extends AbstractAirlineTemplate
 {
@@ -114,9 +114,9 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
     /**
      * @param string $currency
      *
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
+     *@return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineItineraryTemplate
      */
     public function addPriceInfo(string $title, string $amount, ?string $currency = null): self
     {
@@ -162,7 +162,7 @@ class AirlineItineraryTemplate extends AbstractAirlineTemplate
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_AIRLINE_ITINERARY,
+                'template_type' => AbstractTemplate::TYPE_AIRLINE_ITINERARY,
                 'intro_message' => $this->introMessage,
                 'locale' => $this->locale,
                 'theme_color' => $this->themeColor,

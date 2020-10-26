@@ -107,7 +107,7 @@ class MessageTest extends TestCase
     public function testMessageWithInvalidArgument(): void
     {
         $this->expectException(MessengerException::class);
-        $this->expectExceptionMessage('message must be a string or an instance of Kerox\Messenger\Model\Message\Attachment.');
+        $this->expectExceptionMessage('message must be a string or an instance of Kerox\Messenger\Model\Message\AbstractAttachment.');
         Message::create(123456);
     }
 
@@ -140,7 +140,7 @@ class MessageTest extends TestCase
     public function testMessageWithToManyQuickReplies(): void
     {
         $quickReplies = [];
-        for ($i = 0; $i <= 11; $i++) {
+        for ($i = 0; $i <= 11; ++$i) {
             $quickReplies[] = QuickReply::create()
                 ->setTitle('Red')
                 ->setPayload('DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED')

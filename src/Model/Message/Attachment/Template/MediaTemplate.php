@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Exception\InvalidClassException;
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement;
 
-class MediaTemplate extends Template
+class MediaTemplate extends AbstractTemplate
 {
     /**
      * @var \Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement[]
@@ -30,7 +30,7 @@ class MediaTemplate extends Template
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\MediaTemplate
      */
@@ -57,7 +57,7 @@ class MediaTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_MEDIA,
+                'template_type' => AbstractTemplate::TYPE_MEDIA,
                 'elements' => $this->elements,
             ],
         ];

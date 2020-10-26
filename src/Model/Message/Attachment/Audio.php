@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment;
 
-use Kerox\Messenger\Model\Message\Attachment;
+use Kerox\Messenger\Model\Message\AbstractAttachment;
 
 class Audio extends File
 {
@@ -15,7 +15,7 @@ class Audio extends File
      */
     public function __construct(string $url, ?bool $reusable = null)
     {
-        parent::__construct($url, $reusable, Attachment::TYPE_AUDIO);
+        parent::__construct($url, $reusable, AbstractAttachment::TYPE_AUDIO);
     }
 
     /**
