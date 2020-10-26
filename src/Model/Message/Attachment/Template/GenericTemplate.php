@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 
-class GenericTemplate extends Template
+class GenericTemplate extends AbstractTemplate
 {
     public const IMAGE_RATIO_HORIZONTAL = 'horizontal';
     public const IMAGE_RATIO_SQUARE = 'square';
@@ -39,7 +39,7 @@ class GenericTemplate extends Template
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate
      */
@@ -53,7 +53,7 @@ class GenericTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_GENERIC,
+                'template_type' => AbstractTemplate::TYPE_GENERIC,
                 'elements' => $this->elements,
                 'image_aspect_ratio' => $this->imageRatio,
             ],

@@ -24,11 +24,13 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ListElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\MediaElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\OpenGraphElement;
+use Kerox\Messenger\Model\Message\Attachment\Template\Element\ProductElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\Element\ReceiptElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\ListTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\MediaTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\OpenGraphTemplate;
+use Kerox\Messenger\Model\Message\Attachment\Template\ProductTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Adjustment;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 use Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate;
@@ -358,5 +360,19 @@ class TemplateTest extends TestCase
         $media = MediaTemplate::create($elements);
 
         self::assertJsonStringEqualsJsonString($expectedJson, json_encode($media, JSON_THROW_ON_ERROR));
+    }
+
+    public function testTemplateProduct(): void
+    {
+        $expectedJson = file_get_contents(__DIR__ . '/../../../../Mocks/Message/Template/product.json');
+
+        $elements = [
+            ProductElement::create('<PRODUCT_ID_1>'),
+            ProductElement::create('<PRODUCT_ID_2>'),
+        ];
+
+        $product = ProductTemplate::create($elements);
+
+        self::assertJsonStringEqualsJsonString($expectedJson, json_encode($product, JSON_THROW_ON_ERROR));
     }
 }

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Model\Common\Address;
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Receipt\Summary;
 
-class ReceiptTemplate extends Template
+class ReceiptTemplate extends AbstractTemplate
 {
     /**
      * @var string
@@ -88,7 +88,7 @@ class ReceiptTemplate extends Template
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate
      */
@@ -114,7 +114,7 @@ class ReceiptTemplate extends Template
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\ReceiptTemplate
      */
@@ -154,7 +154,7 @@ class ReceiptTemplate extends Template
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_RECEIPT,
+                'template_type' => AbstractTemplate::TYPE_RECEIPT,
                 'recipient_name' => $this->recipientName,
                 'order_number' => $this->orderNumber,
                 'currency' => $this->currency,

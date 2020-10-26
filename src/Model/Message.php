@@ -7,7 +7,7 @@ namespace Kerox\Messenger\Model;
 use Kerox\Messenger\Exception\InvalidClassException;
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Helper\ValidatorTrait;
-use Kerox\Messenger\Model\Message\Attachment;
+use Kerox\Messenger\Model\Message\AbstractAttachment;
 use Kerox\Messenger\Model\Message\QuickReply;
 
 class Message implements \JsonSerializable
@@ -23,7 +23,7 @@ class Message implements \JsonSerializable
     protected $type;
 
     /**
-     * @var \Kerox\Messenger\Model\Message\Attachment|string
+     * @var \Kerox\Messenger\Model\Message\AbstractAttachment|string
      */
     protected $message;
 
@@ -40,7 +40,7 @@ class Message implements \JsonSerializable
     /**
      * Message constructor.
      *
-     * @param \Kerox\Messenger\Model\Message\Attachment|string $message
+     * @param \Kerox\Messenger\Model\Message\AbstractAttachment|string $message
      *
      * @throws \Exception
      */
@@ -49,17 +49,17 @@ class Message implements \JsonSerializable
         if (\is_string($message)) {
             $this->isValidString($message, 640);
             $this->type = self::TYPE_TEXT;
-        } elseif ($message instanceof Attachment) {
+        } elseif ($message instanceof AbstractAttachment) {
             $this->type = self::TYPE_ATTACHMENT;
         } else {
-            throw new MessengerException(sprintf('message must be a string or an instance of %s.', Attachment::class));
+            throw new MessengerException(sprintf('message must be a string or an instance of %s.', AbstractAttachment::class));
         }
 
         $this->message = $message;
     }
 
     /**
-     * @param \Kerox\Messenger\Model\Message\Attachment|string $message
+     * @param \Kerox\Messenger\Model\Message\AbstractAttachment|string $message
      *
      * @throws \Exception
      *

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 
 class AirlineCheckInTemplate extends AbstractAirlineTemplate
 {
@@ -49,9 +49,9 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckInTemplate
+     *@return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineCheckInTemplate
      */
     public static function create(
         string $introMessage,
@@ -68,7 +68,7 @@ class AirlineCheckInTemplate extends AbstractAirlineTemplate
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_AIRLINE_CHECKIN,
+                'template_type' => AbstractTemplate::TYPE_AIRLINE_CHECKIN,
                 'intro_message' => $this->introMessage,
                 'locale' => $this->locale,
                 'theme_color' => $this->themeColor,

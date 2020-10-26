@@ -19,7 +19,7 @@ use Kerox\Messenger\Exception\InvalidUrlException;
 use Kerox\Messenger\Exception\MessengerException;
 use Kerox\Messenger\Model\Common\Button\AbstractButton;
 use Kerox\Messenger\Model\Message;
-use Kerox\Messenger\Model\Message\Attachment;
+use Kerox\Messenger\Model\Message\AbstractAttachment;
 use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 use Kerox\Messenger\SendInterface;
 
@@ -158,11 +158,11 @@ trait ValidatorTrait
             return $message;
         }
 
-        if (\is_string($message) || $message instanceof Attachment) {
+        if (\is_string($message) || $message instanceof AbstractAttachment) {
             return Message::create($message);
         }
 
-        throw new MessengerException(sprintf('"message" must be a string or an instance of "%s" or "%s".', Message::class, Attachment::class));
+        throw new MessengerException(sprintf('"message" must be a string or an instance of "%s" or "%s".', Message::class, AbstractAttachment::class));
     }
 
     /**

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Helper\ValidatorTrait;
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 
-abstract class AbstractAirlineTemplate extends Template
+abstract class AbstractAirlineTemplate extends AbstractTemplate
 {
     use ValidatorTrait;
 
@@ -36,7 +36,7 @@ abstract class AbstractAirlineTemplate extends Template
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
      * @return \Kerox\Messenger\Model\Message\Attachment\Template\AbstractAirlineTemplate
      */

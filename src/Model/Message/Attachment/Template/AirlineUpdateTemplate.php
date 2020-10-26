@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kerox\Messenger\Model\Message\Attachment\Template;
 
 use Kerox\Messenger\Exception\InvalidTypeException;
-use Kerox\Messenger\Model\Message\Attachment\Template;
+use Kerox\Messenger\Model\Message\Attachment\AbstractTemplate;
 use Kerox\Messenger\Model\Message\Attachment\Template\Airline\FlightInfo;
 
 class AirlineUpdateTemplate extends AbstractAirlineTemplate
@@ -51,9 +51,9 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
     }
 
     /**
-     * @throws \Kerox\Messenger\Exception\MessengerException
+     *@throws \Kerox\Messenger\Exception\MessengerException
      *
-     * @return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
+     *@return \Kerox\Messenger\Model\Message\Attachment\Template\AirlineUpdateTemplate
      */
     public static function create(
         string $updateType,
@@ -99,7 +99,7 @@ class AirlineUpdateTemplate extends AbstractAirlineTemplate
         $array = parent::toArray();
         $array += [
             'payload' => [
-                'template_type' => Template::TYPE_AIRLINE_UPDATE,
+                'template_type' => AbstractTemplate::TYPE_AIRLINE_UPDATE,
                 'intro_message' => $this->introMessage,
                 'update_type' => $this->updateType,
                 'locale' => $this->locale,

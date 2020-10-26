@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Model\Message\Attachment;
 
-use Kerox\Messenger\Model\Message\Attachment;
+use Kerox\Messenger\Model\Message\AbstractAttachment;
 
-class File extends Attachment
+class File extends AbstractAttachment
 {
     /**
      * @var string|null
@@ -30,7 +30,7 @@ class File extends Attachment
      *
      * @throws \Kerox\Messenger\Exception\MessengerException
      */
-    public function __construct(string $url, ?bool $reusable = null, $type = Attachment::TYPE_FILE)
+    public function __construct(string $url, ?bool $reusable = null, $type = AbstractAttachment::TYPE_FILE)
     {
         parent::__construct($type);
 
