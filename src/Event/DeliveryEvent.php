@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Delivery;
 
-class DeliveryEvent extends AbstractEvent
+final class DeliveryEvent extends AbstractEvent
 {
     public const NAME = 'delivery';
 

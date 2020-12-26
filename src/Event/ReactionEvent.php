@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Reaction;
 
-class ReactionEvent extends AbstractEvent
+final class ReactionEvent extends AbstractEvent
 {
     public const NAME = 'reaction';
 

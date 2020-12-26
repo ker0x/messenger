@@ -1,12 +1,6 @@
 <div align="center">
-    <a href="https://travis-ci.org/ker0x/messenger" title="Build">
-        <img src="https://img.shields.io/travis/ker0x/messenger.svg?style=for-the-badge" alt="Build">
-    </a>
-    <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Coverage">
-        <img src="https://img.shields.io/scrutinizer/coverage/g/ker0x/messenger.svg?style=for-the-badge" alt="Coverage">
-    </a>
-    <a href="https://scrutinizer-ci.com/g/ker0x/messenger/" title="Code Quality">
-        <img src="https://img.shields.io/scrutinizer/g/ker0x/messenger.svg?style=for-the-badge" alt="Code Quality">
+    <a href="https://github.com/ker0x/messenger/actions?query=workflow%3Aci" title="CI">
+        <img src="https://img.shields.io/github/workflow/status/ker0x/messenger/ci?style=for-the-badge" alt="CI">
     </a>
     <a href="https://php.net" title="PHP Version">
         <img src="https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=for-the-badge" alt="PHP Version">

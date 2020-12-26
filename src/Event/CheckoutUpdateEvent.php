@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\CheckoutUpdate;
 
-class CheckoutUpdateEvent extends AbstractEvent
+final class CheckoutUpdateEvent extends AbstractEvent
 {
     public const NAME = 'checkout_update';
 

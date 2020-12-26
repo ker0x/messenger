@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\AppRoles;
 
-class AppRolesEvent extends AbstractEvent
+final class AppRolesEvent extends AbstractEvent
 {
     public const NAME = 'app_roles';
 

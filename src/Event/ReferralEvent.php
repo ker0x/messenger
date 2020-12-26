@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Referral;
 
-class ReferralEvent extends AbstractEvent
+final class ReferralEvent extends AbstractEvent
 {
     public const NAME = 'referral';
 

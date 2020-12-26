@@ -1,0 +1,59 @@
+name: ci
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: [ '7.3', '7.4' ]
+        allow-failure: [ false ]
+        composer-flags: [ '' ]
+        include:
+          - php-versions: '8.0'
+            allow-failure: true
+            composer-flags: '--ignore-platform-req php'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: php-setup
+        uses: shivammathur/setup-php@v2
+        with:
+          php-versions: ${{ matrix.php-versions }}
+
+      - name: composer-validate
+        run: composer-validate
+
+      - name: composer-cache
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-${{ matrix.php-versions }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.php-versions }}-composer-
+
+      - name: composer-install
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest ${{ matrix.composer-flags }}
+
+      - name: phpstan
+        run: vendor/bin/phpstan --level=max --memory-limit="-1" --no-progress analyze
+
+      - name: php-cs-fixer
+        continue-on-error: ${{ matrix.allow-failure }}
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: ${{ matrix.allow-failure }}
+        run: vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
+
+      - name: phpunit
+        run: vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml

@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Message;
 
-class MessageEvent extends AbstractEvent
+final class MessageEvent extends AbstractEvent
 {
     public const NAME = 'message';
 

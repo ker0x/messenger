@@ -22,13 +22,13 @@
   "require": {
     "php": ">=7.3.0",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "^6.2",
+    "guzzlehttp/guzzle": "^7.2",
     "psr/http-message": "^1.0"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.5",
-    "phpstan/phpstan": "^0.11.12",
-    "phpunit/phpunit": "^7.5"
+    "phpstan/phpstan": "^0.12",
+    "phpunit/phpunit": "^8.0"
   },
   "autoload": {
     "psr-4": {

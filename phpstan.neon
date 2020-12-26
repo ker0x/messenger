@@ -2,6 +2,8 @@ parameters:
 	paths:
 		- src
 
+	checkMissingIterableValueType: false
+
 	ignoreErrors:
 	    - '#Call to an undefined method GuzzleHttp\\ClientInterface::[a-zA-Z0-9_]+\(\)#'
 
