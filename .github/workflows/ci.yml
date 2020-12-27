@@ -14,11 +14,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: [ '7.3', '7.4' ]
+        php-version: [ '7.3', '7.4' ]
         allow-failure: [ false ]
         composer-flags: [ '' ]
         include:
-          - php-versions: '8.0'
+          - php-version: '8.0'
             allow-failure: true
             composer-flags: '--ignore-platform-req php'
 
@@ -28,19 +28,19 @@ jobs:
       - name: php-setup
         uses: shivammathur/setup-php@v2
         with:
-          php-versions: ${{ matrix.php-versions }}
+          php-versions: ${{ matrix.php-version }}
 
       - name: composer-validate
-        run: composer-validate
+        run: composer validate
 
       - name: composer-cache
         id: composer-cache
         uses: actions/cache@v2
         with:
           path: vendor
-          key: ${{ runner.os }}-${{ matrix.php-versions }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.php-versions }}-composer-
+            ${{ runner.os }}-${{ matrix.php-version }}-composer-
 
       - name: composer-install
         if: steps.composer-cache.outputs.cache-hit != 'true'
