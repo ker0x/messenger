@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kerox\Messenger\Event;
 
-class RawEvent extends AbstractEvent
+final class RawEvent extends AbstractEvent
 {
     public const NAME = 'raw';
 

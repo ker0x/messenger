@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\PolicyEnforcement;
 
-class PolicyEnforcementEvent extends AbstractEvent
+final class PolicyEnforcementEvent extends AbstractEvent
 {
     public const NAME = 'policy_enforcement';
 

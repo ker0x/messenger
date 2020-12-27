@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Read;
 
-class ReadEvent extends AbstractEvent
+final class ReadEvent extends AbstractEvent
 {
     public const NAME = 'read';
 

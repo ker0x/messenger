@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\RequestThreadControl;
 
-class RequestThreadControlEvent extends AbstractEvent
+final class RequestThreadControlEvent extends AbstractEvent
 {
     public const NAME = 'request_thread_control';
 

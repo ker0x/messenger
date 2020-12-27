@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Postback;
 
-class PostbackEvent extends AbstractEvent
+final class PostbackEvent extends AbstractEvent
 {
     public const NAME = 'postback';
 

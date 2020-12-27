@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\Optin;
 
-class OptinEvent extends AbstractEvent
+final class OptinEvent extends AbstractEvent
 {
     public const NAME = 'optin';
 

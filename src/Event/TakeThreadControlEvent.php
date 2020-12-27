@@ -6,7 +6,7 @@ namespace Kerox\Messenger\Event;
 
 use Kerox\Messenger\Model\Callback\TakeThreadControl;
 
-class TakeThreadControlEvent extends AbstractEvent
+final class TakeThreadControlEvent extends AbstractEvent
 {
     public const NAME = 'take_thread_control';
 
