@@ -4,6 +4,22 @@ The Messenger library follows [SemVer](http://semver.org/).
 
 ## 3.x
 
+**Changelog** (since [`3.4.0`](https://github.com/ker0x/messenger/compare/3.4.0...3.5.0))
+
+- 3.5.0 (2021-02)
+    - Bump Guzzle version to `7.2`
+    - Bump PHPUnit version to `8.`
+    - Replace `static` call with `self` on Event class
+    - Update `.gitattributes`
+    - Update CI workflow
+
+**Changelog** (since [`3.3.3`](https://github.com/ker0x/messenger/compare/3.3.3...3.4.0))
+
+- 3.4.0 (2020-11)
+    - Bump minimal PHP version to 7.3
+    - Add Product template & element
+    - Fix deprecation warning for composer 2.0 with tests namespace
+
 **Changelog** (since [`3.3.2`](https://github.com/ker0x/messenger/compare/3.3.2...3.3.3))
 
 - 3.3.3 (2020-08)

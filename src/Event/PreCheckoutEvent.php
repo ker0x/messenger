@@ -56,6 +56,6 @@ final class PreCheckoutEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $payment = PreCheckout::create($payload['pre_checkout']);
 
-        return new static($senderId, $recipientId, $timestamp, $payment);
+        return new self($senderId, $recipientId, $timestamp, $payment);
     }
 }

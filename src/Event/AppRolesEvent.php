@@ -56,6 +56,6 @@ final class AppRolesEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $appRoles = AppRoles::create($payload['app_roles']);
 
-        return new static($senderId, $recipientId, $timestamp, $appRoles);
+        return new self($senderId, $recipientId, $timestamp, $appRoles);
     }
 }

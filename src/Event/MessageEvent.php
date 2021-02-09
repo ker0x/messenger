@@ -61,6 +61,6 @@ final class MessageEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $message = Message::create($payload['message']);
 
-        return new static($senderId, $recipientId, $timestamp, $message);
+        return new self($senderId, $recipientId, $timestamp, $message);
     }
 }

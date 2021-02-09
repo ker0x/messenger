@@ -200,7 +200,7 @@ class BoardingPass implements \JsonSerializable, TravelClassInterface
 
     private function setCode(string $code): void
     {
-        if (filter_var($code, FILTER_VALIDATE_URL)) {
+        if (filter_var($code, \FILTER_VALIDATE_URL)) {
             $this->barcodeImageUrl = $code;
 
             return;

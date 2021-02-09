@@ -60,6 +60,6 @@ final class PassThreadControlEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $passThreadControl = PassThreadControl::create($payload['pass_thread_control']);
 
-        return new static($senderId, $recipientId, $timestamp, $passThreadControl);
+        return new self($senderId, $recipientId, $timestamp, $passThreadControl);
     }
 }

@@ -60,6 +60,6 @@ final class TakeThreadControlEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $takeThreadControl = TakeThreadControl::create($payload['take_thread_control']);
 
-        return new static($senderId, $recipientId, $timestamp, $takeThreadControl);
+        return new self($senderId, $recipientId, $timestamp, $takeThreadControl);
     }
 }

@@ -2,6 +2,9 @@
     <a href="https://github.com/ker0x/messenger/actions?query=workflow%3Aci" title="CI">
         <img src="https://img.shields.io/github/workflow/status/ker0x/messenger/ci?style=for-the-badge" alt="CI">
     </a>
+    <a href="https://codecov.io/gh/ker0x/messenger/" title="Coverage">
+        <img src="https://img.shields.io/codecov/c/gh/ker0x/messenger?style=for-the-badge" alt="Coverage">
+    </a>
     <a href="https://php.net" title="PHP Version">
         <img src="https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=for-the-badge" alt="PHP Version">
     </a>

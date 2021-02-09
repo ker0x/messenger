@@ -44,6 +44,6 @@ final class DeliveryEvent extends AbstractEvent
         $recipientId = $payload['recipient']['id'];
         $delivery = Delivery::create($payload['delivery']);
 
-        return new static($senderId, $recipientId, $delivery);
+        return new self($senderId, $recipientId, $delivery);
     }
 }

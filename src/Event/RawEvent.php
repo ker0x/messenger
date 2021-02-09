@@ -42,6 +42,6 @@ final class RawEvent extends AbstractEvent
         $recipientId = $payload['recipient']['id'];
         unset($payload['sender'], $payload['recipient']);
 
-        return new static($senderId, $recipientId, $payload);
+        return new self($senderId, $recipientId, $payload);
     }
 }

@@ -56,6 +56,6 @@ final class CheckoutUpdateEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $checkoutUpdate = CheckoutUpdate::create($payload['checkout_update']);
 
-        return new static($senderId, $recipientId, $timestamp, $checkoutUpdate);
+        return new self($senderId, $recipientId, $timestamp, $checkoutUpdate);
     }
 }
