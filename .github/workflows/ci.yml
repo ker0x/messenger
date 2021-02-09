@@ -31,7 +31,7 @@ jobs:
       - name: php-setup
         uses: shivammathur/setup-php@v2
         with:
-          php-versions: ${{ matrix.php-version }}
+          php-version: ${{ matrix.php-version }}
 
       - name: composer-validate
         run: composer validate
