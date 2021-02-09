@@ -60,6 +60,6 @@ final class PolicyEnforcementEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $policyEnforcement = PolicyEnforcement::create($payload['policy-enforcement']);
 
-        return new static($senderId, $recipientId, $timestamp, $policyEnforcement);
+        return new self($senderId, $recipientId, $timestamp, $policyEnforcement);
     }
 }

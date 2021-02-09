@@ -14,10 +14,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ '7.3', '7.4' ]
+        php-version: [ '7.4' ]
         allow-failure: [ false ]
+        coverage: [ false ]
         composer-flags: [ '' ]
         include:
+          - php-version: '7.3'
+            coverage: true
           - php-version: '8.0'
             allow-failure: true
             composer-flags: '--ignore-platform-req php'
@@ -53,7 +56,14 @@ jobs:
         continue-on-error: ${{ matrix.allow-failure }}
         env:
           PHP_CS_FIXER_IGNORE_ENV: ${{ matrix.allow-failure }}
-        run: vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --config=.php_cs.dist
 
       - name: phpunit
         run: vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml
+
+      - name: coverage
+        if: ${{ matrix.coverage }}
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./build

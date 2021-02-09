@@ -56,6 +56,6 @@ final class ReferralEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $referral = Referral::create($payload['referral']);
 
-        return new static($senderId, $recipientId, $timestamp, $referral);
+        return new self($senderId, $recipientId, $timestamp, $referral);
     }
 }

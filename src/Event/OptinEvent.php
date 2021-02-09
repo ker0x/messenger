@@ -56,6 +56,6 @@ final class OptinEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $optin = Optin::create($payload['optin']);
 
-        return new static($senderId, $recipientId, $timestamp, $optin);
+        return new self($senderId, $recipientId, $timestamp, $optin);
     }
 }

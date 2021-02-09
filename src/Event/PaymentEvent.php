@@ -56,6 +56,6 @@ final class PaymentEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $payment = Payment::create($payload['payment']);
 
-        return new static($senderId, $recipientId, $timestamp, $payment);
+        return new self($senderId, $recipientId, $timestamp, $payment);
     }
 }

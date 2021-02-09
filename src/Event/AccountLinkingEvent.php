@@ -56,6 +56,6 @@ final class AccountLinkingEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $accountLinking = AccountLinking::create($payload['account_linking']);
 
-        return new static($senderId, $recipientId, $timestamp, $accountLinking);
+        return new self($senderId, $recipientId, $timestamp, $accountLinking);
     }
 }

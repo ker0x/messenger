@@ -53,6 +53,6 @@ final class ReactionEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $reaction = Reaction::create($payload['reaction']);
 
-        return new static($senderId, $recipientId, $timestamp, $reaction);
+        return new self($senderId, $recipientId, $timestamp, $reaction);
     }
 }

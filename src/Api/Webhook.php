@@ -124,7 +124,7 @@ class Webhook extends AbstractApi
     {
         if ($this->decodedBody === null) {
             $decodedBody = json_decode($this->getBody(), true);
-            if ($decodedBody === null || json_last_error() !== JSON_ERROR_NONE) {
+            if ($decodedBody === null || json_last_error() !== \JSON_ERROR_NONE) {
                 $decodedBody = [];
             }
 

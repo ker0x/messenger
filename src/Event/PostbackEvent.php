@@ -56,6 +56,6 @@ final class PostbackEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $postback = Postback::create($payload['postback']);
 
-        return new static($senderId, $recipientId, $timestamp, $postback);
+        return new self($senderId, $recipientId, $timestamp, $postback);
     }
 }

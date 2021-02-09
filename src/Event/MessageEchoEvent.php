@@ -56,6 +56,6 @@ final class MessageEchoEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $message = MessageEcho::create($payload['message']);
 
-        return new static($senderId, $recipientId, $timestamp, $message);
+        return new self($senderId, $recipientId, $timestamp, $message);
     }
 }

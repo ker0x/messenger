@@ -60,6 +60,6 @@ final class RequestThreadControlEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $requestThreadControl = RequestThreadControl::create($payload['request_thread_control']);
 
-        return new static($senderId, $recipientId, $timestamp, $requestThreadControl);
+        return new self($senderId, $recipientId, $timestamp, $requestThreadControl);
     }
 }

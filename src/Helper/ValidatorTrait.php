@@ -122,7 +122,7 @@ trait ValidatorTrait
      */
     protected function isValidExtension(string $filename, array $allowedExtension): void
     {
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $ext = pathinfo($filename, \PATHINFO_EXTENSION);
         if (empty($ext) || !\in_array($ext, $allowedExtension, true)) {
             throw new InvalidExtensionException(sprintf('"%s" does not have a valid extension. Allowed extensions are "%s".', $filename, implode(', ', $allowedExtension)));
         }
@@ -210,7 +210,7 @@ trait ValidatorTrait
                     SendInterface::TAG_ACCOUNT_UPDATE,
                 ])
             );
-            @trigger_error($message, E_USER_DEPRECATED);
+            @trigger_error($message, \E_USER_DEPRECATED);
         }
 
         if ($tag === SendInterface::TAG_ISSUE_RESOLUTION && $message !== null && !$message instanceof GenericTemplate) {

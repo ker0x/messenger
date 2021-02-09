@@ -56,6 +56,6 @@ final class ReadEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $read = Read::create($payload['read']);
 
-        return new static($senderId, $recipientId, $timestamp, $read);
+        return new self($senderId, $recipientId, $timestamp, $read);
     }
 }

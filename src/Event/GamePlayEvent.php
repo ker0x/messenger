@@ -56,6 +56,6 @@ final class GamePlayEvent extends AbstractEvent
         $timestamp = $payload['timestamp'];
         $gamePlay = GamePlay::create($payload['game_play']);
 
-        return new static($senderId, $recipientId, $timestamp, $gamePlay);
+        return new self($senderId, $recipientId, $timestamp, $gamePlay);
     }
 }
