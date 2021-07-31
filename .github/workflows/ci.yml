@@ -2,9 +2,9 @@ name: ci
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -14,14 +14,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ '7.4' ]
+        php-version: [ '7.4', '8.0' ]
         allow-failure: [ false ]
         coverage: [ false ]
         composer-flags: [ '' ]
         include:
           - php-version: '7.3'
             coverage: true
-          - php-version: '8.0'
+          - php-version: '8.1'
             allow-failure: true
             composer-flags: '--ignore-platform-req php'
 
