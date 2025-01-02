@@ -1,8 +1,6 @@
 name: ci
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -14,19 +12,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ '7.4', '8.0' ]
+        php-version: [ '7.4', '8.0', '8.1', '8.2', '8.3' ]
         allow-failure: [ false ]
         coverage: [ false ]
         composer-flags: [ '' ]
         include:
           - php-version: '7.3'
             coverage: true
-          - php-version: '8.1'
+          - php-version: '8.4'
             allow-failure: true
             composer-flags: '--ignore-platform-req php'
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: php-setup
         uses: shivammathur/setup-php@v2
@@ -38,7 +36,7 @@ jobs:
 
       - name: composer-cache
         id: composer-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: vendor
           key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -63,7 +61,7 @@ jobs:
 
       - name: coverage
         if: ${{ matrix.coverage }}
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./build
+          directory: ./.coverage/coverage.xml
