@@ -1,4 +1,4 @@
-[![Tests](https://img.shields.io/github/actions/workflow/status/ker0x/messenger/ci.yml?label=tests&style=for-the-badge)](https://github.com/ker0x/fcm/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/ker0x/messenger/ci.yml?label=tests&style=for-the-badge)](https://github.com/ker0x/messenger/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/codecov/c/gh/ker0x/messenger?style=for-the-badge)](https://codecov.io/gh/ker0x/messenger/)
 ![PHP Version](https://img.shields.io/badge/php->=7.3-4f5b93.svg?style=for-the-badge)
 [![Download](https://img.shields.io/packagist/dt/kerox/messenger.svg?style=for-the-badge)](https://packagist.org/packages/kerox/messenger)
