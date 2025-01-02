@@ -239,6 +239,7 @@ trait ValidatorTrait
     protected function getAllowedTag(): array
     {
         return [
+            SendInterface::TAG_HUMAN_AGENT,
             SendInterface::TAG_CONFIRMED_EVENT_UPDATE,
             SendInterface::TAG_POST_PURCHASE_UPDATE,
             SendInterface::TAG_ACCOUNT_UPDATE,
